@@ -1,3 +1,13 @@
+.canvas_three {
+    width: 600px;
+    height: 500px;
+    border: 1px solid white;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+
 .container {
     width: 100vw;
     height: 100vh;
@@ -22,16 +32,20 @@
         height: 50pt;
         margin-top: 0;
     }
+
     25% {
         height: 4pt;
         margin-top: 23pt;
     }
+
     50% {
         width: 4pt;
     }
+
     75% {
         width: 50pt;
     }
+
     100% {
         width: 50pt;
         height: 50pt;
