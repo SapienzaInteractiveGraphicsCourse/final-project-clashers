@@ -3,9 +3,11 @@
 //import * as THREE from './build/three.module.js';
 
 function init() {
-    const canvas = document.querySelector('#c');
+    //const canvas = document.querySelector('#c');
+    var container = document.getElementById('game');
+    
     renderer = new THREE.WebGLRenderer({
-        canvas
+        antialias: true
     }); //controllare se serve l'antialias
 
     const fov = 75;
