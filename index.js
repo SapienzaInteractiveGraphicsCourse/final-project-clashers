@@ -5,10 +5,12 @@
 function init() {
     //const canvas = document.querySelector('#c');
     var container = document.getElementById('game');
-    
+
     renderer = new THREE.WebGLRenderer({
         antialias: true
     }); //controllare se serve l'antialias
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
     const fov = 75;
     const aspect = 2;
@@ -46,7 +48,7 @@ function init() {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    
+
 
 
     //var ambientLight = new THREE.AmbientLight(color, intensity);
