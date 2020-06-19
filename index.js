@@ -4,13 +4,14 @@
 
 function init() {
     //const canvas = document.querySelector('#c');
-    var container = document.getElementById('game');
 
+    var container = document.getElementById('game'); //-> controllare a che serve
     renderer = new THREE.WebGLRenderer({
         antialias: true
     }); //controllare se serve l'antialias
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+
+    
 
     const fov = 75;
     const aspect = 2;
@@ -21,10 +22,17 @@ function init() {
     const cameraY = 0;
     const cameraZ = 2;
 
-    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    //camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(cameraX, cameraY, cameraZ);
 
-    //var container = document.getElementById('game'); -> controllare a che serve
+    window.addEventListener('resize', function () {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }, false);
+
+    container.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
 
