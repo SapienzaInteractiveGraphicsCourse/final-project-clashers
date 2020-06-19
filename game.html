@@ -5,10 +5,33 @@
     <title>Marell scelgo te!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="./loading.css">
 </head>
 
-<body>
+<body onload="loadingFunction()">
     <h1>Prova</h1>
+
+    <div class="container" id='loading'>
+        <div class="flex">
+            <div class="loader">
+            </div>
+        </div>
+        <div class="load-text">
+            Loading...
+        </div>
+    </div>
+    <div class='canvas_three' id='game' style="display:none"></div>
+
+
+    <script>
+        function loadingFunction() {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById('game').style.display = 'initial';
+        }
+    </script>
+
+    <script src="./index.js"></script>
+
 </body>
 
 </html>
