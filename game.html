@@ -9,6 +9,7 @@
 </head>
 
 <body onload="loadingFunction()">
+    <canvas id="c"></canvas>
     <h1>Prova</h1>
 
     <div class="container" id='loading'>
@@ -31,8 +32,15 @@
 
     <script src="build/three.js"></script>
     <script src="build/three.min.js"></script>
+    <script src="build/three.module.js"></script>
 
-    <script type="module" src="./index.js"></script>
+    <!--
+    <script type="module">
+        import * as THREE from './build/three.module.js';
+    </script>
+    -->
+
+    <script src="./index.js"></script>
 </body>
 
 </html>
