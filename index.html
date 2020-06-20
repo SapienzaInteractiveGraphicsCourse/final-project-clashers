@@ -2,90 +2,94 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Crash Bandicoot</title>
-    <link rel="icon" type="image/png" href="img/crashfavicon.png"/>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <link rel="icon" type="image/png" href="img/crashfavicon.png" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
-    <script src="build/three.js"></script> <!-- CONTROLLARE SE VIENE USATO -->
+  <body>
+    <script src="build/three.js"></script>
+    <!-- CONTROLLARE SE VIENE USATO -->
     <script src="build/three.min.js"></script>
     <div class="container">
-        <div align="center">
-            <h1 class="title">Crash Bandicoot</h1>
+      <div align="center">
+        <h1 class="title">Crash Bandicoot</h1>
+      </div>
+      <div class="buttonContainer">
+        <div>
+          <button id="playButton" onclick="loadGame()" class="btn btn1">
+            PLAY!
+          </button>
         </div>
-        <div class="buttonContainer">
-            <div>
-                <button id="playButton" onclick="loadGame()" class="btn btn1">PLAY!</button>
-            </div>
-            <br>
-            <div>
-                <button id="controlsButton" class="btn btn1">Controls</button>
-            </div>
+        <br />
+        <div>
+          <button id="controlsButton" class="btn btn1">Controls</button>
         </div>
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div style="float:left; margin: 20px" align="right">
-                    <p>
-                        Move Forward <br>
-                        Move Left <br>
-                        Move Backward <br>
-                        Move Right <br>
-                        Jump
-                    </p>
-                </div>
-                <div style="float:left; margin: 20px" align="left">
-                    <p>
-                        W <br>
-                        A <br>
-                        S <br>
-                        D <br>
-                        SPACE
-                    </p>
-                </div>
-                <div style="clear:both;"></div>
-            </div>
+      </div>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div style="float: left; margin: 20px;" align="right">
+            <p>
+              Move Forward <br />
+              Move Left <br />
+              Move Backward <br />
+              Move Right <br />
+              Jump
+            </p>
+          </div>
+          <div style="float: left; margin: 20px;" align="left">
+            <p>
+              W <br />
+              A <br />
+              S <br />
+              D <br />
+              SPACE
+            </p>
+          </div>
+          <div style="clear: both;"></div>
         </div>
+      </div>
     </div>
 
     <script type="text/javascript">
-        function loadGame() {
-            window.location.href = "./game.html";
-        }
+      function loadGame() {
+        window.location.href = "./game.html";
+      }
     </script>
 
     <script type="text/javascript">
-        // Get the modal
-        var modal = document.getElementById("myModal");
+      // Get the modal
+      var modal = document.getElementById("myModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("controlsButton");
+      // Get the button that opens the modal
+      var btn = document.getElementById("controlsButton");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks the button, open the modal 
-        btn.onclick = function () {
-            modal.style.display = "block";
+      // When the user clicks the button, open the modal
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
         }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+      };
     </script>
-</body>
-
+  </body>
 </html>
