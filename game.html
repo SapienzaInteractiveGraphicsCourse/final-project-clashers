@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Marell scelgo te!</title>
     <link rel="icon" type="image/png" href="img/crashfavicon.png" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="./loading.css">
-</head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="stylesheet" href="./loading.css" />
+  </head>
 
-<body onload="loadingFunction()">
-    <div class="container" id='loading'>
-        <div class="flex">
-            <div class="loader">
-            </div>
-        </div>
-        <div class="load-text">
-            Loading...
-        </div>
+  <body onload="loadingFunction()">
+    <div class="container" id="loading">
+      <div class="flex">
+        <div class="loader"></div>
+      </div>
+      <div class="load-text">
+        Loading...
+      </div>
     </div>
-    <div class='canvas_three' id='game' style="display:none"></div>
+    <div class="canvas_three" id="game" style="display: none;"></div>
 
     <script>
-        function loadingFunction() {
-            document.getElementById("loading").style.display = "none";
-            document.getElementById('game').style.display = 'initial';
-        }
+      function loadingFunction() {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("game").style.display = "initial";
+      }
     </script>
 
-    <script src="build/three.js"></script>
+    <!--<script src="build/three.js"></script>
     <script src="build/three.min.js"></script>
     <script src="build/three.module.js"></script>
-    <!--<script type="module" src="build/GLTFLoader.js"></script> -->
-    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+    <script type="module" src="build/GLTFLoader.js"></script> -->
+    <!--<script src="https://unpkg.com/three@0.87.1/examples/js/loaders/GLTFLoader.js"></script>-->
 
     <!--
     <script type="module">
@@ -40,7 +41,6 @@
     </script>
     -->
 
-    <script src="./index.js"></script>
-</body>
-
+    <script type="module" src="index.js"></script>
+  </body>
 </html>
