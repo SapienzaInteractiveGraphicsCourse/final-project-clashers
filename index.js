@@ -2,7 +2,7 @@
 
 //import * as THREE from './build/three.module.js';
 
-function loadModel() {
+/*function loadModel() {
     // Instantiate a loader
     var loader = new THREE.GLTFLoader();
 
@@ -29,7 +29,7 @@ function loadModel() {
             console.log("An error happened");
         }
     );
-}
+}*/
 
 function init() {
     //const canvas = document.querySelector('#c');
