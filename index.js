@@ -12,8 +12,8 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const cameraX = 0;
-  const cameraY = 0;
-  const cameraZ = 2;
+  const cameraY = 10;
+  const cameraZ = 50;
 
   //camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   var camera = new THREE.PerspectiveCamera(
@@ -41,22 +41,23 @@ function init() {
 
   {
     const color = 0xffffff;
-    const intensity = 5;
+    const intensity = 2;
     const dirLight = new THREE.DirectionalLight(color, intensity);
     dirLight.position.set(-1, 2, 4);
     scene.add(dirLight);
-    const ambientLight = new THREE.AmbientLight(color, intensity);
-    scene.add(ambientLight);
+    //const ambientLight = new THREE.AmbientLight(color, intensity);
+    //scene.add(ambientLight);
   }
 
   var root = new THREE.Scene();
 
   {
     const gltfLoader = new GLTFLoader();
-    const url = "models/toothless_test_animation/scene.gltf";
+    const url = "models/yoshi_mario_party_10/scene.gltf";
     gltfLoader.load(url, (gltf) => {
       root = gltf.scene;
       scene.add(root);
+      console.log(dumpObject(root).join("\n"));
       root.traverse((obj) => {
         if (obj.castShadow !== undefined) {
           obj.castShadow = true;
