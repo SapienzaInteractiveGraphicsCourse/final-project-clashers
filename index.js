@@ -3,6 +3,8 @@
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
 import { GLTFLoader } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/GLTFLoader.js";
 
+var head;
+
 function init() {
   //const canvas = document.querySelector('#c');
   var container = document.getElementById("game"); //-> controllare a che serve
@@ -56,7 +58,10 @@ function init() {
     const url = "models/yoshi_mario_party_10/scene.gltf";
     gltfLoader.load(url, (gltf) => {
       root = gltf.scene;
+      root.name = "yoshi";
+      root.position.set(0, 0, -0.75);
       scene.add(root);
+      head = root.getBoneByName("head_05");
       console.log(dumpObject(root).join("\n"));
       root.traverse((obj) => {
         if (obj.castShadow !== undefined) {
@@ -71,6 +76,7 @@ function init() {
   //scene.add(ambientLight);
   function render(time) {
     time *= 0.001; // convert time to seconds
+    head.rotation.y = time;
 
     renderer.render(scene, camera);
 
