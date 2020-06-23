@@ -38,7 +38,7 @@ function init() {
 
   container.appendChild(renderer.domElement);
 
-  const scene = new THREE.Scene();
+  var scene = new THREE.Scene();
   scene.background = new THREE.Color(0xffffff);
 
   {
@@ -60,8 +60,9 @@ function init() {
       root = gltf.scene;
       root.name = "yoshi";
       root.position.set(0, 0, -0.75);
-      scene.add(root);
-      head = root.getBoneByName("head_05");
+
+      head = root.getObjectByName(yoshi_dic.Testa);
+
       console.log(dumpObject(root).join("\n"));
       root.traverse((obj) => {
         if (obj.castShadow !== undefined) {
@@ -69,20 +70,21 @@ function init() {
           obj.receiveShadow = true;
         }
       });
+      scene.add(root);
+      requestAnimationFrame(render);
+      console.log(head);
     });
   }
 
   //var ambientLight = new THREE.AmbientLight(color, intensity);
   //scene.add(ambientLight);
   function render(time) {
-    time *= 0.001; // convert time to seconds
+    time *= 0.001;
     head.rotation.y = time;
-
     renderer.render(scene, camera);
-
     requestAnimationFrame(render);
   }
-  requestAnimationFrame(render);
+  //requestAnimationFrame(render);
 }
 
 init();
