@@ -13,7 +13,7 @@ function init() {
 
   const cameraX = 0;
   const cameraY = 0;
-  const cameraZ = 15;
+  const cameraZ = 2;
 
   //camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   var camera = new THREE.PerspectiveCamera(
@@ -37,23 +37,32 @@ function init() {
   container.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xffffff);
 
   {
     const color = 0xffffff;
-    const intensity = 1;
+    const intensity = 5;
     const dirLight = new THREE.DirectionalLight(color, intensity);
     dirLight.position.set(-1, 2, 4);
     scene.add(dirLight);
+    const ambientLight = new THREE.AmbientLight(color, intensity);
+    scene.add(ambientLight);
   }
 
   var root = new THREE.Scene();
 
   {
     const gltfLoader = new GLTFLoader();
-    const url = "models/crash/scene.gltf";
+    const url = "models/toothless_test_animation/scene.gltf";
     gltfLoader.load(url, (gltf) => {
       root = gltf.scene;
       scene.add(root);
+      root.traverse((obj) => {
+        if (obj.castShadow !== undefined) {
+          obj.castShadow = true;
+          obj.receiveShadow = true;
+        }
+      });
     });
   }
 
@@ -67,8 +76,6 @@ function init() {
     requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
-
-  //loadModel();
 }
 
 init();
