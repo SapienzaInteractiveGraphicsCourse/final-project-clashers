@@ -4,7 +4,7 @@
 }
 
 .container {
-    background-image: url(./img/superMario.jpg);
+    background-image: url(./img/wallpaperMario.jpg);
     height: auto;
     width: 100%;
     max-width: 100%;
@@ -28,7 +28,7 @@
 
 .buttonContainer {
     margin-top: 20%;
-    margin-left: 50%;
+    margin-left: 20px;
 }
 
 .btn {
