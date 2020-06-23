@@ -24,19 +24,28 @@
     <div class="container">
       <div align="left">
         <h1 class="title">
-          <font color="#009fde">S</font><font color="#fed302">U</font><font color="#e42910">P</font><font color="#46af38">E</font><font color="#fed302">R </font>
-          <font color="#e42910">M</font><font color="#46af38">A</font><font color="#fed302">R</font><font color="#009fde">I</font><font color="#46af38">O</font></h1>
+          <font color="#009fde">S</font><font color="#fed302">U</font
+          ><font color="#e42910">P</font><font color="#46af38">E</font
+          ><font color="#fed302">R </font> <font color="#e42910">M</font
+          ><font color="#46af38">A</font><font color="#fed302">R</font
+          ><font color="#009fde">I</font><font color="#46af38">O</font>
+        </h1>
       </div>
       <div class="buttonContainer">
         <div>
           <button id="playButton" onclick="loadGame()" class="btn btn1">
-            <font color="#009fde">P</font><font color="#fed302">L</font><font color="#e42910">A</font><font color="#46af38">Y</font><font color="#fed302">!</font>
+            <font color="#009fde">P</font><font color="#fed302">L</font
+            ><font color="#e42910">A</font><font color="#46af38">Y</font
+            ><font color="#fed302">!</font>
           </button>
         </div>
         <br />
         <div>
           <button id="controlsButton" class="btn btn1">
-            <font color="#009fde">C</font><font color="#fed302">O</font><font color="#e42910">N</font><font color="#46af38">T</font><font color="#fed302">R</font><font color="#e42910">O</font><font color="#46af38">L</font><font color="#fed302">S</font>
+            <font color="#009fde">C</font><font color="#fed302">O</font
+            ><font color="#e42910">N</font><font color="#46af38">T</font
+            ><font color="#fed302">R</font><font color="#e42910">O</font
+            ><font color="#46af38">L</font><font color="#fed302">S</font>
           </button>
         </div>
       </div>
@@ -97,6 +106,23 @@
         if (event.target == modal) {
           modal.style.display = "none";
         }
+      };
+    </script>
+    <script type="module" type="text/javascript">
+      import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
+      var listener = new THREE.AudioListener();
+      listener.autoplay = true;
+      var sound = new THREE.Audio(listener);
+      var audioLoader = new THREE.AudioLoader();
+      window.onload = function () {
+        audioLoader.load("audio/Super Mario Bros. Soundtrack.mp3", function (
+          buffer
+        ) {
+          sound.setBuffer(buffer);
+          sound.setLoop(true);
+          sound.setVolume(0.5);
+          sound.play();
+        });
       };
     </script>
   </body>
