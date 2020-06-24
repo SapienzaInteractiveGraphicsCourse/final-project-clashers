@@ -14,9 +14,15 @@
   </head>
 
   <body>
-    <audio autoplay loop>
+    <iframe
+      src="250-milliseconds-of-silence.mp3"
+      allow="autoplay"
+      id="audio"
+      style="display: none;"
+    ></iframe>
+    <audio id="playerAudio" autoplay loop>
       <!--NON FUNZIONA L'AUTOPLAY SU CHROME, CONTROLLARE-->
-      <!--<source src="audio/CrashBandicootTheme.mp3" />-->
+      <source src="audio/Super Mario Bros. Soundtrack.mp3" type="audio/mp3" />
     </audio>
     <script src="build/three.js"></script>
     <!-- CONTROLLARE SE VIENE USATO -->
@@ -108,13 +114,8 @@
         }
       };
     </script>
-    <iframe
-      src="250-milliseconds-of-silence.mp3"
-      allow="autoplay"
-      id="audio"
-      style="display: none;"
-    ></iframe>
-    <script type="module" type="text/javascript">
+
+    <!--<script type="module" type="text/javascript">
       import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
       var listener = new THREE.AudioListener();
       var sound = new THREE.Audio(listener);
@@ -129,6 +130,6 @@
           sound.play();
         });
       };
-    </script>
+    </script>-->
   </body>
 </html>
