@@ -104,7 +104,7 @@ function init() {
       world = gltf.scene;
       world.name = "world";
       world.position.set(0, 0, -0.75);
-      world.castShadow = false;
+      world.castShadow = true;
       world.receiveShadow = true;
       scene.add(world);
       //requestAnimationFrame(render);
