@@ -54,7 +54,7 @@ function init() {
     const color = 0xffffff;
     const intensity = 1;
     var dirLight = new THREE.DirectionalLight(color, intensity);
-    dirLight.position.set(-1, 2, 4);
+    dirLight.position.set(-1, 2, 10);
     dirLight.castShadow = true;
     scene.add(dirLight);
 
@@ -64,14 +64,15 @@ function init() {
     dirLight.shadow.camera.far = 500; // default
 
     var ambientLight = new THREE.AmbientLight(color, intensity);
-    ambientLight.castShadow = true;
+    //ambientLight.castShadow = true;
     scene.add(ambientLight);
 
     //Set up shadow properties for the light
-    ambientLight.shadow.mapSize.width = 512; // default
+    /*ambientLight.shadow.mapSize.width = 512; // default
     ambientLight.shadow.mapSize.height = 512; // default
     ambientLight.shadow.camera.near = 0.5; // default
     ambientLight.shadow.camera.far = 500; // default
+    */
   }
 
   var yoshi = new THREE.Scene();
@@ -87,6 +88,8 @@ function init() {
       yoshi.name = "yoshi";
       yoshi.position.set(0, 0, -0.75);
       yoshi.scale.set(0.3, 0.3, 0.3);
+      yoshi.castShadow = true;
+      yoshi.receiveShadow = false;
 
       head = yoshi.getObjectByName(yoshi_dic.Testa);
 
@@ -101,6 +104,7 @@ function init() {
       world = gltf.scene;
       world.name = "world";
       world.position.set(0, 0, -0.75);
+      world.castShadow = false;
       world.receiveShadow = true;
       scene.add(world);
       //requestAnimationFrame(render);
