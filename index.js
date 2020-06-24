@@ -2,6 +2,7 @@
 
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
 import { GLTFLoader } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js";
 
 var head;
 
@@ -11,6 +12,9 @@ function init() {
   var renderer = new THREE.WebGLRenderer({
     antialias: true,
   }); //controllare se serve l'antialias
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const cameraX = 0;
@@ -24,7 +28,12 @@ function init() {
     0.1,
     1000
   );
+
+  var controls = new OrbitControls(camera, renderer.domElement);
+
+  //controls.update() must be called after any manual changes to the camera's transform
   camera.position.set(cameraX, cameraY, cameraZ);
+  controls.update();
 
   window.addEventListener(
     "resize",
@@ -43,44 +52,66 @@ function init() {
 
   {
     const color = 0xffffff;
-    const intensity = 2;
-    const dirLight = new THREE.DirectionalLight(color, intensity);
+    const intensity = 1;
+    var dirLight = new THREE.DirectionalLight(color, intensity);
     dirLight.position.set(-1, 2, 4);
+    dirLight.castShadow = true;
     scene.add(dirLight);
-    //const ambientLight = new THREE.AmbientLight(color, intensity);
-    //scene.add(ambientLight);
+
+    dirLight.shadow.mapSize.width = 512; // default
+    dirLight.shadow.mapSize.height = 512; // default
+    dirLight.shadow.camera.near = 0.5; // default
+    dirLight.shadow.camera.far = 500; // default
+
+    var ambientLight = new THREE.AmbientLight(color, intensity);
+    ambientLight.castShadow = true;
+    scene.add(ambientLight);
+
+    //Set up shadow properties for the light
+    ambientLight.shadow.mapSize.width = 512; // default
+    ambientLight.shadow.mapSize.height = 512; // default
+    ambientLight.shadow.camera.near = 0.5; // default
+    ambientLight.shadow.camera.far = 500; // default
   }
 
-  var root = new THREE.Scene();
+  var yoshi = new THREE.Scene();
+  var world = new THREE.Scene();
 
   {
     const gltfLoader = new GLTFLoader();
-    const url = "models/yoshi_mario_party_10/scene.gltf";
-    gltfLoader.load(url, (gltf) => {
-      root = gltf.scene;
-      root.name = "yoshi";
-      root.position.set(0, 0, -0.75);
+    const url_yoshi = "models/yoshi_mario_party_10/scene.gltf";
+    const url_world = "models/world/scene.gltf";
 
-      head = root.getObjectByName(yoshi_dic.Testa);
+    gltfLoader.load(url_yoshi, (gltf) => {
+      yoshi = gltf.scene;
+      yoshi.name = "yoshi";
+      yoshi.position.set(0, 0, -0.75);
+      yoshi.scale.set(0.3, 0.3, 0.3);
 
-      console.log(dumpObject(root).join("\n"));
-      root.traverse((obj) => {
-        if (obj.castShadow !== undefined) {
-          obj.castShadow = true;
-          obj.receiveShadow = true;
-        }
-      });
-      scene.add(root);
+      head = yoshi.getObjectByName(yoshi_dic.Testa);
+
+      console.log(dumpObject(yoshi).join("\n"));
+
+      scene.add(yoshi);
       requestAnimationFrame(render);
       console.log(head);
     });
+
+    gltfLoader.load(url_world, (gltf) => {
+      world = gltf.scene;
+      world.name = "world";
+      world.position.set(0, 0, -0.75);
+      world.receiveShadow = true;
+      scene.add(world);
+      //requestAnimationFrame(render);
+      //console.log(head);
+    });
   }
 
-  //var ambientLight = new THREE.AmbientLight(color, intensity);
-  //scene.add(ambientLight);
   function render(time) {
     time *= 0.001;
     head.rotation.y = time;
+    controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(render);
   }
