@@ -14,19 +14,22 @@
   </head>
 
   <body>
-    <iframe
+    <!--<iframe
       src="audio/250-milliseconds-of-silence.mp3"
       allow="autoplay"
       id="audio"
       style="display: none;"
-    ></iframe>
-    <audio id="playerAudio" autoplay loop>
-      <!--NON FUNZIONA L'AUTOPLAY SU CHROME, CONTROLLARE-->
-      <source
-        src="audio/[Super Mario Bros] Invincibility Theme Sound Effect [Free Ringtone Download] .mp3"
-        type="audio/mp3"
-      />
-    </audio>
+    ></iframe>-->
+    <div style="visibility: hidden;">
+      <audio id="playerAudio" autoplay loop onload="playAudio()">
+        <!--NON FUNZIONA L'AUTOPLAY SU CHROME, CONTROLLARE-->
+        <source
+          src="audio/[Super Mario Bros] Invincibility Theme Sound Effect [Free Ringtone Download] .mp3"
+          type="audio/mp3"
+        />
+      </audio>
+    </div>
+
     <script src="build/three.js"></script>
     <!-- CONTROLLARE SE VIENE USATO -->
     <script src="build/three.min.js"></script>
@@ -134,5 +137,10 @@
         });
       };
     </script>-->
+    <script>
+      function playAudio() {
+        var audio = document.getElementById("playerAudio").autoplay;
+      }
+    </script>
   </body>
 </html>
