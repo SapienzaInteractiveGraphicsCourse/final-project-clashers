@@ -108,6 +108,7 @@ function init() {
       upperArm_right.rotation.z = 45;
       upperArm_left.rotation.z = 45;
       upperLeg_right.rotation.x = 45;
+      console.log(upperArm_right.rotation);
 
       scene.add(yoshi);
 
@@ -125,7 +126,7 @@ function init() {
           yoshi.position.z -= 0.5;
         }
       }
-
+      animate();
       requestAnimationFrame(render);
     });
   }
@@ -160,9 +161,47 @@ function CreateLandscape() {
   scene.add(landscape.mesh);
 }
 
+function animateVector3(vectorToAnimate, target, options) {
+  options = options || {};
+  // get targets from options or set to defaults
+  var to = target || THREE.Vector3(),
+    easing = options.easing || TWEEN.Easing.Quadratic.In,
+    duration = options.duration || 2000;
+  // create the tween
+  var tweenVector3 = new TWEEN.Tween(vectorToAnimate)
+    .to({ x: to.x, y: to.y, z: to.z }, duration)
+    .easing(easing)
+    .onUpdate(function (d) {
+      if (options.update) {
+        options.update(d);
+      }
+    })
+    .onComplete(function () {
+      if (options.callback) options.callback();
+    });
+  // start the tween
+  tweenVector3.start();
+  // return the tween in case we want to manipulate it later on
+  return tweenVector3;
+}
+
 function animate() {
-  // movement - please calibrate these values
+  var target = new THREE.Vector3(10, -20, 20); // create on init
+  animateVector3(upperLeg_left.rotation, target, {
+    duration: 5000,
+
+    easing: TWEEN.Easing.Quadratic.InOut,
+
+    update: function (d) {
+      console.log("Updating: " + d);
+    },
+
+    callback: function () {
+      console.log("Completed");
+    },
+  });
+  requestAnimationFrame(animate);
 }
 
 init();
-animate();
+//animate();
