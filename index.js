@@ -1,5 +1,6 @@
 //file js
 
+import TWEEN from "https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js";
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
 import { GLTFLoader } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js";
@@ -126,8 +127,9 @@ function init() {
           yoshi.position.z -= 0.5;
         }
       }
-      animate();
+      //animate();
       requestAnimationFrame(render);
+      requestAnimationFrame(animate);
     });
   }
 
@@ -140,6 +142,7 @@ function init() {
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(render);
+    //TWEEN.update(time);
   }
 }
 
@@ -185,10 +188,11 @@ function animateVector3(vectorToAnimate, target, options) {
   return tweenVector3;
 }
 
-function animate() {
-  var target = new THREE.Vector3(10, -20, 20); // create on init
+function animate(time) {
+  time = 1000;
+  var target = new THREE.Vector3(25, 0, 0); // create on init
   animateVector3(upperLeg_left.rotation, target, {
-    duration: 5000,
+    duration: 1000,
 
     easing: TWEEN.Easing.Quadratic.InOut,
 
@@ -200,7 +204,9 @@ function animate() {
       console.log("Completed");
     },
   });
+  console.log(upperLeg_left.rotation);
   requestAnimationFrame(animate);
+  TWEEN.update(time);
 }
 
 init();

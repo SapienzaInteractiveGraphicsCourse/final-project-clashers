@@ -29,10 +29,6 @@
         />
       </audio>
     </div>
-
-    <script src="build/three.js"></script>
-    <!-- CONTROLLARE SE VIENE USATO -->
-    <script src="build/three.min.js"></script>
     <div class="container">
       <div align="left">
         <h1 class="title">
@@ -120,23 +116,6 @@
         }
       };
     </script>
-
-    <!--<script type="module" type="text/javascript">
-      import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
-      var listener = new THREE.AudioListener();
-      var sound = new THREE.Audio(listener);
-      var audioLoader = new THREE.AudioLoader();
-      window.onload = function () {
-        audioLoader.load("audio/Super Mario Bros. Soundtrack.mp3", function (
-          buffer
-        ) {
-          sound.setBuffer(buffer);
-          sound.setLoop(true);
-          sound.setVolume(0.5);
-          sound.play();
-        });
-      };
-    </script>-->
     <script>
       function playAudio() {
         var audio = document.getElementById("playerAudio").autoplay;
