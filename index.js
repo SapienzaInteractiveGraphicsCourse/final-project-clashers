@@ -6,8 +6,6 @@ import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources
 
 var head;
 var scene;
-var xSpeed = 0.0001;
-var ySpeed = 0.0001;
 
 function init() {
   //const canvas = document.querySelector('#c');
