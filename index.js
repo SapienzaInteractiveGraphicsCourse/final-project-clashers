@@ -6,6 +6,8 @@ import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources
 
 var head;
 var scene;
+var xSpeed = 0.0001;
+var ySpeed = 0.0001;
 
 function init() {
   //const canvas = document.querySelector('#c');
@@ -106,6 +108,21 @@ function init() {
       upperLeg_right.rotation.x = 45;
 
       scene.add(yoshi);
+
+      document.addEventListener("keydown", onDocumentKeyDown, false);
+      function onDocumentKeyDown(event) {
+        var keyCode = event.keyCode;
+        if (keyCode == 65) {
+          yoshi.position.x += 0.5;
+        } else if (keyCode == 68) {
+          yoshi.position.x -= 0.5;
+        } else if (keyCode == 87) {
+          yoshi.position.z += 0.5;
+        } else if (keyCode == 83) {
+          yoshi.position.z -= 0.5;
+        }
+      }
+
       requestAnimationFrame(render);
     });
   }
@@ -140,4 +157,9 @@ function CreateLandscape() {
   scene.add(landscape.mesh);
 }
 
+function animate() {
+  // movement - please calibrate these values
+}
+
 init();
+animate();
