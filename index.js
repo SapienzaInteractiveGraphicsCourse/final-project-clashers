@@ -6,6 +6,10 @@ import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources
 
 var head;
 var scene;
+var upperArm_right;
+var upperArm_left;
+var upperLeg_right;
+var upperLeg_left;
 
 function init() {
   //const canvas = document.querySelector('#c');
@@ -97,10 +101,10 @@ function init() {
       var head = yoshi.getObjectByName(yoshi_dic.Head);
       //var spine = yoshi.getObjectByName(yoshi_dic.Spine);
       console.log(dumpObject(yoshi).join("\n"));
-      var upperArm_right = yoshi.getObjectByName(yoshi_dic.UpperArm_right);
-      var upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
-      var upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
-      var upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
+      upperArm_right = yoshi.getObjectByName(yoshi_dic.UpperArm_right);
+      upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
+      upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
+      upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
       upperArm_right.rotation.z = 45;
       upperArm_left.rotation.z = 45;
       upperLeg_right.rotation.x = 45;
@@ -116,6 +120,7 @@ function init() {
           yoshi.position.x -= 0.5;
         } else if (keyCode == 87) {
           yoshi.position.z += 0.5;
+          upperLeg_left.rotation.x += 5;
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
         }
