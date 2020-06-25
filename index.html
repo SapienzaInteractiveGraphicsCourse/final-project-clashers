@@ -20,15 +20,10 @@
       id="audio"
       style="display: none;"
     ></iframe>-->
-    <div style="visibility: hidden;">
-      <audio id="playerAudio" autoplay loop onload="playAudio()">
-        <!--NON FUNZIONA L'AUTOPLAY SU CHROME, CONTROLLARE-->
-        <source
-          src="audio/[Super Mario Bros] Invincibility Theme Sound Effect [Free Ringtone Download] .mp3"
-          type="audio/mp3"
-        />
-      </audio>
-    </div>
+    <audio id="music" autoplay loop>
+      <!--NON FUNZIONA L'AUTOPLAY SU CHROME, CONTROLLARE-->
+      <source src="audio/supermariobrossoundtrack.mp3" />
+    </audio>
     <div class="container">
       <div align="left">
         <h1 class="title">
@@ -54,6 +49,14 @@
             ><font color="#e42910">N</font><font color="#46af38">T</font
             ><font color="#fed302">R</font><font color="#e42910">O</font
             ><font color="#46af38">L</font><font color="#fed302">S</font>
+          </button>
+        </div>
+        <div>
+          <button
+            id="audioButton"
+            onclick="document.getElementById('music').play()"
+          >
+            AUDIO
           </button>
         </div>
       </div>
@@ -115,11 +118,27 @@
           modal.style.display = "none";
         }
       };
-    </script>
-    <script>
-      function playAudio() {
-        var audio = document.getElementById("playerAudio").autoplay;
-      }
+      /*window.onload = function () {
+        /*var audio = document.getElementById("music");
+        /*if (audio > 1) {
+          document.getElementById("music").play();
+          document.getElementById("music").muted = false;
+        }
+        audio.play();
+        var audio = document.getElementById("music");
+        var promise = audio.play();
+
+        if (promise !== undefined) {
+          promise
+            .then((_) => {
+              // Autoplay started!
+            })
+            .catch((error) => {
+              // Autoplay was prevented.
+              // Show a "Play" button so that user can start playback.
+            });
+        }
+      };*/
     </script>
   </body>
 </html>
