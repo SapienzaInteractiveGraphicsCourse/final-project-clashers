@@ -109,7 +109,7 @@ function init() {
       upperArm_right.rotation.z = 45;
       upperArm_left.rotation.z = 45;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
-      upperLeg_left.rotation.x = (180 * Math.PI) / 180;
+      upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
       console.log(upperArm_right.rotation);
 
       scene.add(yoshi);
