@@ -111,13 +111,17 @@
 }
 
 .fas {
-  font-size: 50px;
+  font-family: superMarioFont;
+  font-size: 7vmin;
   cursor: pointer;
   user-select: none;
-  margin-right: 20px;
-  margin-top: -80px;
+  color: #009fde;
+  -webkit-text-stroke: 2px black;
+  text-shadow: 4px 4px 8px black;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .fas:hover {
-  color: yellow;
+  text-shadow: 4px 4px 8px white;
 }
