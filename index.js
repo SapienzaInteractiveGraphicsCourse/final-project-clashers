@@ -11,9 +11,11 @@ var upperArm_right;
 var upperArm_left;
 var upperLeg_right;
 var upperLeg_left;
+var tweenStartScale;
+var tweenGoalScale;
+var tweenBackScale;
 
 function init() {
-  //const canvas = document.querySelector('#c');
   var container = document.getElementById("game"); //-> controllare a che serve
 
   var camera = new THREE.PerspectiveCamera(
@@ -62,10 +64,10 @@ function init() {
     dirLight.position.set(0, 100, 0);
     dirLight.castShadow = true;
 
-    dirLight.shadow.mapSize.width = 512; // default
-    dirLight.shadow.mapSize.height = 512; // default
-    dirLight.shadow.camera.near = 0.5; // default
-    dirLight.shadow.camera.far = 500; // default
+    dirLight.shadow.mapSize.width = 512;
+    dirLight.shadow.mapSize.height = 512;
+    dirLight.shadow.camera.near = 0.5;
+    dirLight.shadow.camera.far = 500;
     dirLight.shadow.camera.fov = 50;
     dirLight.shadow.bias = 0.0039;
     dirLight.shadow.camera.left = -d;
@@ -100,7 +102,6 @@ function init() {
       yoshi.receiveShadow = true;
 
       var head = yoshi.getObjectByName(yoshi_dic.Head);
-      //var spine = yoshi.getObjectByName(yoshi_dic.Spine);
       console.log(dumpObject(yoshi).join("\n"));
       upperArm_right = yoshi.getObjectByName(yoshi_dic.UpperArm_right);
       upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
@@ -123,41 +124,24 @@ function init() {
           yoshi.position.x -= 0.5;
         } else if (keyCode == 87) {
           yoshi.position.z += 0.5;
-          //upperLeg_left.rotation.x += 5;
-          //performAnimation();
+          performAnimation();
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
         }
       }
-      //animate();
       setAnimationParameters();
-      //animate();
       requestAnimationFrame(animate);
-      //requestAnimationFrame(animate);
     });
   }
 
   scene.add(camera);
   CreateLandscape();
 
-  /* function render(time) {
-    time *= 0.001;
-    //head.rotation.y = time;
+  function animate() {
     controls.update();
     renderer.render(scene, camera);
-    requestAnimationFrame(render);
     requestAnimationFrame(animate);
-    TWEEN.update(time);
-  }*/
-
-  function animate(time) {
-    //time *= 0.001;
-    controls.update();
-    renderer.render(scene, camera);
-    //performAnimation();
-    requestAnimationFrame(animate);
-    //if (time < 2000) console.log(time);
-    TWEEN.update(time);
+    TWEEN.update();
   }
   requestAnimationFrame(animate);
 }
@@ -180,43 +164,27 @@ function CreateLandscape() {
   scene.add(landscape.mesh);
 }
 
-// @input vec3 startScale = {1.0, 1.0, 1.0}
-// @input vec3 goalScale = {2.0, 2.0, 2.0}
-// @input float time = 1.0
-
-var tweenStartScale;
-var tweenGoalScale;
-var tweenBackScale;
-//var tween;
-
 function setAnimationParameters() {
   tweenStartScale = {
     x_left: upperLeg_left.rotation.x,
     x_right: upperLeg_right.rotation.x,
-    //y: upperLeg_left.rotation.y,
-    //z: upperLeg_left.rotation.z,
   };
   tweenGoalScale = {
     x_left: (-225 * Math.PI) / 180,
     x_right: (45 * Math.PI) / 180,
-    //y: upperLeg_left.rotation.y,
-    //z: upperLeg_left.rotation.z,
   };
   tweenBackScale = {
     x_left: (-135 * Math.PI) / 180,
     x_right: (-45 * Math.PI) / 180,
   };
-  performAnimation();
+  //performAnimation();
 }
 
-// Tween that moves from start scale <-> end scale
-// Bouncing back and forth infinitely
 function performAnimation() {
   var tween = new TWEEN.Tween(tweenStartScale)
     .to(tweenGoalScale, 1000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
-      //updateRotation(tweenStartScale);
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
     })
@@ -226,79 +194,12 @@ function performAnimation() {
     .to(tweenBackScale, 1000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
-      //updateRotation(tweenStartScale);
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
-
-      //console.log("function:animate, tweenStartScale is " + tweenStartScale.x);
     })
     .yoyo(true)
     .repeat(Infinity);
   tween.chain(tweenBack);
 }
-// Here's were the values returned by the tween are used
-// to drive the transform of the SceneObject
-function updateRotation(scale) {
-  console.log("i'm in updateRotation function");
-  upperLeg_left.rotation.x = scale.x;
-  console.log("upperLeg_left is " + upperLeg_left.rotation.x);
-  //upperLeg_left.rotation.y = scale.y;
-  //upperLeg_left.rotation.z = scale.z;
-}
-
-// On update, update the Tween engine
-/*function onUpdateEvent() {
-  TWEEN.update();
-}
-
-// Bind an update event
-var updateEvent = script.createEvent("UpdateEvent");
-updateEvent.bind(onUpdateEvent);
-*/
-/*function animateVector3(vectorToAnimate, target, options) {
-  options = options || {};
-  // get targets from options or set to defaults
-  var to = target || THREE.Vector3(),
-    easing = options.easing || TWEEN.Easing.Quadratic.In,
-    duration = options.duration || 2000;
-  // create the tween
-  var tweenVector3 = new TWEEN.Tween(vectorToAnimate)
-    .to({ x: to.x, y: to.y, z: to.z }, duration)
-    .easing(easing)
-    .onUpdate(function (d) {
-      if (options.update) {
-        options.update(d);
-      }
-    })
-    .onComplete(function () {
-      if (options.callback) options.callback();
-    });
-  // start the tween
-  tweenVector3.start();
-  // return the tween in case we want to manipulate it later on
-  return tweenVector3;
-}
-
-function animate(time) {
-  time = 1000;
-  var target = new THREE.Vector3(25, 0, 0); // create on init
-  animateVector3(upperLeg_left.rotation, target, {
-    duration: 1000,
-
-    easing: TWEEN.Easing.Quadratic.InOut,
-
-    update: function (d) {
-      console.log("Updating: " + d);
-    },
-
-    callback: function () {
-      console.log("Completed");
-    },
-  });
-  console.log(upperLeg_left.rotation);
-  requestAnimationFrame(animate);
-  TWEEN.update(time);
-}*/
 
 init();
-//animate();
