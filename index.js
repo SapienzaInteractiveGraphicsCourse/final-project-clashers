@@ -108,7 +108,8 @@ function init() {
       upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
       upperArm_right.rotation.z = 45;
       upperArm_left.rotation.z = 45;
-      upperLeg_right.rotation.x = 45;
+      upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+      upperLeg_left.rotation.x = (180 * Math.PI) / 180;
       console.log(upperArm_right.rotation);
 
       scene.add(yoshi);
@@ -122,28 +123,43 @@ function init() {
           yoshi.position.x -= 0.5;
         } else if (keyCode == 87) {
           yoshi.position.z += 0.5;
-          upperLeg_left.rotation.x += 5;
+          //upperLeg_left.rotation.x += 5;
+          //performAnimation();
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
         }
       }
       //animate();
-      requestAnimationFrame(render);
+      setAnimationParameters();
+      //animate();
       requestAnimationFrame(animate);
+      //requestAnimationFrame(animate);
     });
   }
 
   scene.add(camera);
   CreateLandscape();
 
-  function render() {
-    //time *= 0.001;
+  /* function render(time) {
+    time *= 0.001;
     //head.rotation.y = time;
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(render);
-    //TWEEN.update(time);
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+  }*/
+
+  function animate(time) {
+    //time *= 0.001;
+    controls.update();
+    renderer.render(scene, camera);
+    //performAnimation();
+    requestAnimationFrame(animate);
+    //if (time < 2000) console.log(time);
+    TWEEN.update(time);
   }
+  requestAnimationFrame(animate);
 }
 
 var Landscape = function () {
@@ -164,7 +180,82 @@ function CreateLandscape() {
   scene.add(landscape.mesh);
 }
 
-function animateVector3(vectorToAnimate, target, options) {
+// @input vec3 startScale = {1.0, 1.0, 1.0}
+// @input vec3 goalScale = {2.0, 2.0, 2.0}
+// @input float time = 1.0
+
+var tweenStartScale;
+var tweenGoalScale;
+var tweenBackScale;
+//var tween;
+
+function setAnimationParameters() {
+  tweenStartScale = {
+    x_left: upperLeg_left.rotation.x,
+    x_right: upperLeg_right.rotation.x,
+    //y: upperLeg_left.rotation.y,
+    //z: upperLeg_left.rotation.z,
+  };
+  tweenGoalScale = {
+    x_left: (-225 * Math.PI) / 180,
+    x_right: (45 * Math.PI) / 180,
+    //y: upperLeg_left.rotation.y,
+    //z: upperLeg_left.rotation.z,
+  };
+  tweenBackScale = {
+    x_left: (-135 * Math.PI) / 180,
+    x_right: (-45 * Math.PI) / 180,
+  };
+  performAnimation();
+}
+
+// Tween that moves from start scale <-> end scale
+// Bouncing back and forth infinitely
+function performAnimation() {
+  var tween = new TWEEN.Tween(tweenStartScale)
+    .to(tweenGoalScale, 1000)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      //updateRotation(tweenStartScale);
+      upperLeg_left.rotation.x = tweenStartScale.x_left;
+      upperLeg_right.rotation.x = tweenStartScale.x_right;
+    })
+    .start();
+
+  var tweenBack = new TWEEN.Tween(tweenStartScale)
+    .to(tweenBackScale, 1000)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      //updateRotation(tweenStartScale);
+      upperLeg_left.rotation.x = tweenStartScale.x_left;
+      upperLeg_right.rotation.x = tweenStartScale.x_right;
+
+      //console.log("function:animate, tweenStartScale is " + tweenStartScale.x);
+    })
+    .yoyo(true)
+    .repeat(Infinity);
+  tween.chain(tweenBack);
+}
+// Here's were the values returned by the tween are used
+// to drive the transform of the SceneObject
+function updateRotation(scale) {
+  console.log("i'm in updateRotation function");
+  upperLeg_left.rotation.x = scale.x;
+  console.log("upperLeg_left is " + upperLeg_left.rotation.x);
+  //upperLeg_left.rotation.y = scale.y;
+  //upperLeg_left.rotation.z = scale.z;
+}
+
+// On update, update the Tween engine
+/*function onUpdateEvent() {
+  TWEEN.update();
+}
+
+// Bind an update event
+var updateEvent = script.createEvent("UpdateEvent");
+updateEvent.bind(onUpdateEvent);
+*/
+/*function animateVector3(vectorToAnimate, target, options) {
   options = options || {};
   // get targets from options or set to defaults
   var to = target || THREE.Vector3(),
@@ -207,7 +298,7 @@ function animate(time) {
   console.log(upperLeg_left.rotation);
   requestAnimationFrame(animate);
   TWEEN.update(time);
-}
+}*/
 
 init();
 //animate();
