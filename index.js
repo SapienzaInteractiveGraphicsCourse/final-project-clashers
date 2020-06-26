@@ -164,7 +164,6 @@ function CreateLandscape() {
   scene.add(landscape.mesh);
 }
 
-//prova
 function setAnimationParameters() {
   tweenStartScale = {
     x_left: upperLeg_left.rotation.x,
