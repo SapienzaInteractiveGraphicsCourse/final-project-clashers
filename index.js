@@ -197,8 +197,8 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
     })
-    .yoyo(true)
-    .repeat(Infinity);
+    .yoyo(true);
+  //.repeat(Infinity);
   tween.chain(tweenBack);
 }
 
