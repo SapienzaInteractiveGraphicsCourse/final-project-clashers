@@ -11,9 +11,17 @@ var upperArm_right;
 var upperArm_left;
 var upperLeg_right;
 var upperLeg_left;
+var spine;
+var hand_left;
+var hand_right;
+
 var tweenStartScale;
 var tweenGoalScale;
 var tweenBackScale;
+var tweenIdle;
+var tween;
+
+var upPressed = false;
 
 function init() {
   var container = document.getElementById("game"); //-> controllare a che serve
@@ -101,17 +109,27 @@ function init() {
       yoshi.castShadow = true;
       yoshi.receiveShadow = true;
 
-      var head = yoshi.getObjectByName(yoshi_dic.Head);
+      head = yoshi.getObjectByName(yoshi_dic.Head);
       console.log(dumpObject(yoshi).join("\n"));
       upperArm_right = yoshi.getObjectByName(yoshi_dic.UpperArm_right);
       upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
       upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
       upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
-      upperArm_right.rotation.z = 45;
-      upperArm_left.rotation.z = 45;
+      spine = yoshi.getObjectByName(yoshi_dic.Spine);
+      hand_left = yoshi.getObjectByName(yoshi_dic.Hand_left);
+      hand_right = yoshi.getObjectByName(yoshi_dic.Hand_right);
+
+      upperArm_right.rotation.z = (55 * Math.PI) / 180;
+      upperArm_left.rotation.z = (55 * Math.PI) / 180;
+      upperArm_right.rotation.x = (-45 * Math.PI) / 180;
+      upperArm_left.rotation.x = (-45 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
-      console.log(upperArm_right.rotation);
+      hand_left.rotation.y = (0 * Math.PI) / 180;
+      hand_right.rotation.y = (0 * Math.PI) / 180;
+
+      spine.rotation.x = (30 * Math.PI) / 180;
+      head.rotation.x = (-30 * Math.PI) / 180;
 
       scene.add(yoshi);
 
@@ -123,12 +141,29 @@ function init() {
         } else if (keyCode == 68) {
           yoshi.position.x -= 0.5;
         } else if (keyCode == 87) {
-          yoshi.position.z += 0.5;
-          performAnimation();
+          yoshi.position.z += 0.3;
+          if (!upPressed) {
+            performAnimation();
+          }
+          upPressed = true;
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
         }
       }
+
+      document.addEventListener("keyup", onDocumentKeyUp, false);
+      function onDocumentKeyUp(event) {
+        var keyCode = event.keyCode;
+        if (keyCode == 87) {
+          upPressed = false;
+          yoshi.position.z += 0.5;
+          tween.stop();
+          setIdlePosition();
+        } else if (keyCode == 83) {
+          yoshi.position.z -= 0.5;
+        }
+      }
+
       setAnimationParameters();
       requestAnimationFrame(animate);
     });
@@ -177,11 +212,15 @@ function setAnimationParameters() {
     x_left: (-135 * Math.PI) / 180,
     x_right: (-45 * Math.PI) / 180,
   };
+  tweenIdle = {
+    x_left: (-180 * Math.PI) / 180,
+    x_right: (0 * Math.PI) / 180,
+  };
   //performAnimation();
 }
 
 function performAnimation() {
-  var tween = new TWEEN.Tween(tweenStartScale)
+  tween = new TWEEN.Tween(tweenStartScale)
     .to(tweenGoalScale, 1000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -196,10 +235,27 @@ function performAnimation() {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+      if (upperLeg_left.rotation.x == tweenBackScale.x_left) {
+        //tween_idle.start();
+      }
     })
     .yoyo(true);
   //.repeat(Infinity);
   tween.chain(tweenBack);
+}
+
+var tween_idle;
+
+function setIdlePosition() {
+  console.log("i'm in setIdlePosition function");
+  tween_idle = new TWEEN.Tween(tweenStartScale)
+    .to(tweenIdle, 1000)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      upperLeg_left.rotation.x = tweenStartScale.x_left;
+      upperLeg_right.rotation.x = tweenStartScale.x_right;
+    })
+    .start();
 }
 
 init();
