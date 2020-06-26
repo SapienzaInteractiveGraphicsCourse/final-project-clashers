@@ -55,14 +55,6 @@
             ><font color="#46af38">L</font><font color="#fed302">S</font>
           </button>
         </div>
-        <div>
-          <button
-            id="audioButton"
-            onclick="document.getElementById('music').play()"
-          >
-            AUDIO
-          </button>
-        </div>
       </div>
       <div id="myModal" class="modal">
         <div class="modal-content">
@@ -147,8 +139,21 @@
 
     <!-- Audio script -->
     <script>
+      var isPlaying = false;
       function myFunction(x) {
         x.classList.toggle("fa-volume-up");
+        if (!isPlaying) {
+          isPlaying = true;
+        } else {
+          isPlaying = false;
+        }
+        var audio = document.getElementById("music");
+        if (isPlaying) {
+          audio.volume = 0.5;
+          audio.play();
+        } else {
+          audio.volume = 0;
+        }
       }
     </script>
   </body>
