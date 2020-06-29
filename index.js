@@ -1,4 +1,5 @@
 //file js
+"use strict";
 
 import TWEEN from "https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js";
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
@@ -20,6 +21,9 @@ var tweenGoalScale;
 var tweenBackScale;
 var tweenIdle;
 var tween;
+var tweenBack;
+var camTarget;
+var yoshi;
 
 var upPressed = false;
 
@@ -27,7 +31,7 @@ function init() {
   var container = document.getElementById("game"); //-> controllare a che serve
 
   var camera = new THREE.PerspectiveCamera(
-    75,
+    50,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
@@ -41,9 +45,9 @@ function init() {
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const cameraX = 0;
+  const cameraX = -100;
   const cameraY = 10;
-  const cameraZ = 50;
+  const cameraZ = 0;
 
   var controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -62,6 +66,7 @@ function init() {
   container.appendChild(renderer.domElement);
 
   scene = new THREE.Scene();
+  camera.lookAt(scene.position);
   scene.background = new THREE.Color(0xffffff);
 
   {
@@ -89,7 +94,7 @@ function init() {
     scene.add(ambientLight);
   }
 
-  var yoshi = new THREE.Scene();
+  yoshi = new THREE.Scene();
   {
     const gltfLoader = new GLTFLoader();
     const url_yoshi = "models/yoshi_mario_party_10/scene.gltf";
@@ -99,6 +104,7 @@ function init() {
       yoshi.name = "yoshi";
       yoshi.position.set(0, -5.75, -0.75);
       yoshi.scale.set(0.3, 0.3, 0.3);
+
       yoshi.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
           child.castShadow = true;
@@ -141,7 +147,10 @@ function init() {
         } else if (keyCode == 68) {
           yoshi.position.x -= 0.5;
         } else if (keyCode == 87) {
-          yoshi.position.z += 0.3;
+          //yoshi.position.z += 0.3;
+          //camera.position.x += 0.3;
+          //yoshi.position.z += 0.5;
+
           if (!upPressed) {
             performAnimation();
           }
@@ -149,6 +158,7 @@ function init() {
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
         }
+        //camTarget = yoshi.position.clone();
       }
 
       document.addEventListener("keyup", onDocumentKeyUp, false);
@@ -156,8 +166,9 @@ function init() {
         var keyCode = event.keyCode;
         if (keyCode == 87) {
           upPressed = false;
-          yoshi.position.z += 0.5;
+          //yoshi.position.z += 0.5;
           tween.stop();
+          tweenBack.stop();
           setIdlePosition();
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
@@ -173,8 +184,18 @@ function init() {
   CreateLandscape();
 
   function animate() {
+    var camTarget1 = new THREE.Vector3(
+      yoshi.position.x,
+      yoshi.position.y,
+      yoshi.position.z
+    );
+    var camTargetTween = new TWEEN.Tween(camTarget1);
+    camTargetTween.onUpdate(function () {
+      camera.lookAt(camTarget1);
+    });
     controls.update();
     renderer.render(scene, camera);
+    //camera.lookAt(camTarget1);
     requestAnimationFrame(animate);
     TWEEN.update();
   }
@@ -226,21 +247,20 @@ function performAnimation() {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+      yoshi.position.z += 0.02;
     })
     .start();
 
-  var tweenBack = new TWEEN.Tween(tweenStartScale)
+  tweenBack = new TWEEN.Tween(tweenStartScale)
     .to(tweenBackScale, 1000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
-      if (upperLeg_left.rotation.x == tweenBackScale.x_left) {
-        //tween_idle.start();
-      }
+      yoshi.position.z += 0.02;
     })
-    .yoyo(true);
-  //.repeat(Infinity);
+    .yoyo(true)
+    .repeat(Infinity);
   tween.chain(tweenBack);
 }
 
