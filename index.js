@@ -127,17 +127,17 @@ function init() {
       hand_left = yoshi.getObjectByName(yoshi_dic.Hand_left);
       hand_right = yoshi.getObjectByName(yoshi_dic.Hand_right);
 
-      upperArm_right.rotation.z = (55 * Math.PI) / 180;
-      upperArm_left.rotation.z = (55 * Math.PI) / 180;
-      upperArm_right.rotation.x = (-45 * Math.PI) / 180;
-      upperArm_left.rotation.x = (-45 * Math.PI) / 180;
+      upperArm_right.rotation.z = (45 * Math.PI) / 180;
+      upperArm_left.rotation.z = (45 * Math.PI) / 180;
+      upperArm_right.rotation.x = (0 * Math.PI) / 180;
+      upperArm_left.rotation.x = (0 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
-      hand_left.rotation.y = (0 * Math.PI) / 180;
-      hand_right.rotation.y = (0 * Math.PI) / 180;
+      //hand_left.rotation.y = (10 * Math.PI) / 180;
+      //hand_right.rotation.y = (10 * Math.PI) / 180;
 
-      spine.rotation.x = (30 * Math.PI) / 180;
-      head.rotation.x = (-30 * Math.PI) / 180;
+      //spine.rotation.x = (30 * Math.PI) / 180;
+      //head.rotation.x = (-30 * Math.PI) / 180;
 
       //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
       scene.add(yoshi);
@@ -214,18 +214,26 @@ function setAnimationParameters() {
   tweenStartScale = {
     x_left: upperLeg_left.rotation.x,
     x_right: upperLeg_right.rotation.x,
+    x_leftArm: upperArm_left.rotation.x,
+    x_rightArm: upperArm_right.rotation.x,
   };
   tweenGoalScale = {
     x_left: (-225 * Math.PI) / 180,
     x_right: (45 * Math.PI) / 180,
+    x_leftArm: (45 * Math.PI) / 180,
+    x_rightArm: (-45 * Math.PI) / 180,
   };
   tweenBackScale = {
     x_left: (-135 * Math.PI) / 180,
     x_right: (-45 * Math.PI) / 180,
+    x_leftArm: (-45 * Math.PI) / 180,
+    x_rightArm: (45 * Math.PI) / 180,
   };
   tweenIdle = {
     x_left: (-180 * Math.PI) / 180,
     x_right: (0 * Math.PI) / 180,
+    x_leftArm: (0 * Math.PI) / 180,
+    x_rightArm: (0 * Math.PI) / 180,
   };
 }
 
@@ -236,6 +244,8 @@ function performAnimation() {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+      upperArm_left.rotation.x = tweenStartScale.x_leftArm;
+      upperArm_right.rotation.x = tweenStartScale.x_rightArm;
       yoshi.position.z += 0.02;
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
       //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
@@ -249,6 +259,9 @@ function performAnimation() {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+      upperArm_left.rotation.x = tweenStartScale.x_leftArm;
+      upperArm_right.rotation.x = tweenStartScale.x_rightArm;
+
       yoshi.position.z += 0.02;
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
       //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
@@ -269,6 +282,8 @@ function setIdlePosition() {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+      upperArm_left.rotation.x = tweenStartScale.x_leftArm;
+      upperArm_right.rotation.x = tweenStartScale.x_rightArm;
       //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     })
     .start();
