@@ -52,6 +52,7 @@ function init() {
 
   var controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
+  camera.updateProjectionMatrix();
   controls.update();
 
   window.addEventListener(
@@ -138,6 +139,7 @@ function init() {
       spine.rotation.x = (30 * Math.PI) / 180;
       head.rotation.x = (-30 * Math.PI) / 180;
 
+      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
       scene.add(yoshi);
 
       document.addEventListener("keydown", onDocumentKeyDown, false);
@@ -180,6 +182,7 @@ function init() {
 
   function animate() {
     TWEEN.update();
+    camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     controls.update();
@@ -231,7 +234,9 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       yoshi.position.z += 0.02;
-      camera.position.x += (yoshi.position.z - camera.position.x) * 0.1;
+      //camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
+      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+      //camera.updateProjectionMatrix();
     })
     .start();
 
@@ -242,7 +247,9 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       yoshi.position.z += 0.02;
-      camera.position.x += (yoshi.position.z - camera.position.x) * 0.1;
+      //camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
+      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+      //camera.updateProjectionMatrix();
     })
     .yoyo(true)
     .repeat(Infinity);
@@ -259,6 +266,7 @@ function setIdlePosition() {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     })
     .start();
 }
