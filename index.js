@@ -24,13 +24,14 @@ var tween;
 var tweenBack;
 var camTarget;
 var yoshi;
+var camera;
 
 var upPressed = false;
 
 function init() {
-  var container = document.getElementById("game"); //-> controllare a che serve
+  var container = document.getElementById("game");
 
-  var camera = new THREE.PerspectiveCamera(
+  camera = new THREE.PerspectiveCamera(
     50,
     window.innerWidth / window.innerHeight,
     0.1,
@@ -39,9 +40,9 @@ function init() {
 
   var renderer = new THREE.WebGLRenderer({
     antialias: true,
-  }); //controllare se serve l'antialias
+  });
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -66,7 +67,7 @@ function init() {
   container.appendChild(renderer.domElement);
 
   scene = new THREE.Scene();
-  camera.lookAt(scene.position);
+  //camera.lookAt(scene.position);
   scene.background = new THREE.Color(0xffffff);
 
   {
@@ -147,10 +148,6 @@ function init() {
         } else if (keyCode == 68) {
           yoshi.position.x -= 0.5;
         } else if (keyCode == 87) {
-          //yoshi.position.z += 0.3;
-          //camera.position.x += 0.3;
-          //yoshi.position.z += 0.5;
-
           if (!upPressed) {
             performAnimation();
           }
@@ -158,7 +155,6 @@ function init() {
         } else if (keyCode == 83) {
           yoshi.position.z -= 0.5;
         }
-        //camTarget = yoshi.position.clone();
       }
 
       document.addEventListener("keyup", onDocumentKeyUp, false);
@@ -166,7 +162,6 @@ function init() {
         var keyCode = event.keyCode;
         if (keyCode == 87) {
           upPressed = false;
-          //yoshi.position.z += 0.5;
           tween.stop();
           tweenBack.stop();
           setIdlePosition();
@@ -184,22 +179,11 @@ function init() {
   CreateLandscape();
 
   function animate() {
-    var camTarget1 = new THREE.Vector3(
-      yoshi.position.x,
-      yoshi.position.y,
-      yoshi.position.z
-    );
-    var camTargetTween = new TWEEN.Tween(camTarget1);
-    camTargetTween.onUpdate(function () {
-      camera.lookAt(camTarget1);
-    });
-    controls.update();
-    renderer.render(scene, camera);
-    //camera.lookAt(camTarget1);
-    requestAnimationFrame(animate);
     TWEEN.update();
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+    controls.update();
   }
-  requestAnimationFrame(animate);
 }
 
 var Landscape = function () {
@@ -237,7 +221,6 @@ function setAnimationParameters() {
     x_left: (-180 * Math.PI) / 180,
     x_right: (0 * Math.PI) / 180,
   };
-  //performAnimation();
 }
 
 function performAnimation() {
@@ -248,6 +231,7 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       yoshi.position.z += 0.02;
+      camera.position.x += (yoshi.position.z - camera.position.x) * 0.1;
     })
     .start();
 
@@ -258,6 +242,7 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       yoshi.position.z += 0.02;
+      camera.position.x += (yoshi.position.z - camera.position.x) * 0.1;
     })
     .yoyo(true)
     .repeat(Infinity);
