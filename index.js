@@ -177,6 +177,9 @@ function init() {
     });
   }
 
+  //const cameraHelper = new THREE.CameraHelper(camera);
+  //scene.add(cameraHelper);
+
   scene.add(camera);
   CreateLandscape();
 
@@ -234,7 +237,7 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       yoshi.position.z += 0.02;
-      //camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
+      camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
       //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
       //camera.updateProjectionMatrix();
     })
@@ -247,7 +250,7 @@ function performAnimation() {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       yoshi.position.z += 0.02;
-      //camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
+      camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
       //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
       //camera.updateProjectionMatrix();
     })
