@@ -1,10 +1,10 @@
 //file js
 "use strict";
 
-import TWEEN from "https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js";
-import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
-import { GLTFLoader } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/GLTFLoader.js";
-import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "./build/three.js-master/build/three.module.js";
+import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
+import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 
 var head;
 var scene;
@@ -16,7 +16,6 @@ var spine;
 var torso;
 var hand_left;
 var hand_right;
-
 var tween_idle;
 var tweenStartScale;
 var tweenGoalScale;
@@ -32,7 +31,6 @@ var tween;
 var tweenBack;
 var yoshi;
 var camera;
-
 var dPressed = false;
 var aPressed = false;
 var isRotatedRight = true;
@@ -78,7 +76,6 @@ function init() {
   container.appendChild(renderer.domElement);
 
   scene = new THREE.Scene();
-  //camera.lookAt(scene.position);
   scene.background = new THREE.Color(0xffffff);
 
   {
@@ -146,14 +143,6 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
-      //torso.rotation.y = (180 * Math.PI) / 180;
-      //hand_left.rotation.y = (10 * Math.PI) / 180;
-      //hand_right.rotation.y = (10 * Math.PI) / 180;
-
-      //spine.rotation.x = (30 * Math.PI) / 180;
-      //head.rotation.x = (-30 * Math.PI) / 180;
-
-      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
       scene.add(yoshi);
 
       document.addEventListener("keydown", onDocumentKeyDown, false);
@@ -163,30 +152,26 @@ function init() {
         if (keyCode == 68) {
           isWalking = true;
           if (!isRotatedRight) {
+            TWEEN.removeAll();
             rotateTorso("right");
-
             isRotatedRight = true;
           }
           if (!dPressed && isWalking) {
             performAnimation();
           }
           dPressed = true;
-          console.log("dpressed:" + dPressed);
-          console.log("iswalking:" + isWalking);
           //A
         } else if (keyCode == 65) {
           isWalking = true;
           if (isRotatedRight) {
+            TWEEN.removeAll();
             rotateTorso("left");
-
             isRotatedRight = false;
           }
           if (!aPressed && isWalking) {
             performAnimation();
           }
           aPressed = true;
-          console.log("apressed:" + aPressed);
-          console.log("iswalking:" + isWalking);
         }
       }
 
@@ -199,27 +184,18 @@ function init() {
           tween.stop();
           tweenBack.stop();
           setIdlePosition();
-          console.log("dpressed:" + dPressed);
-          console.log("iswalking:" + isWalking);
         } else if (keyCode == 65) {
-          //yoshi.position.z -= 0.5;
           aPressed = false;
           isWalking = false;
           tween.stop();
           tweenBack.stop();
           setIdlePosition();
-          console.log("apressed:" + aPressed);
-          console.log("iswalking:" + isWalking);
         }
       }
-
       setAnimationParameters();
       requestAnimationFrame(animate);
     });
   }
-
-  //const cameraHelper = new THREE.CameraHelper(camera);
-  //scene.add(cameraHelper);
 
   scene.add(camera);
   CreateLandscape();
@@ -276,19 +252,6 @@ function setAnimationParameters() {
     x_leftArm: (0 * Math.PI) / 180,
     x_rightArm: (0 * Math.PI) / 180,
   };
-
-  /*tweenStartLeft = {
-    y_leftRotation: torso.rotation.y,
-  };
-  tweenGoalLeft = {
-    y_leftRotation: (-180 * Math.PI) / 180,
-  };
-  tweenStartRight = {
-    y_rightRotation: torso.rotation.y,
-  };
-  tweenGoalRight = {
-    y_rightRotation: (0 * Math.PI) / 180,
-  };*/
 }
 
 function performAnimation() {
@@ -302,8 +265,6 @@ function performAnimation() {
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
       yoshi.position.z += 0.02;
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
-      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
-      //camera.updateProjectionMatrix();
     })
     .start();
 
@@ -318,8 +279,6 @@ function performAnimation() {
 
       yoshi.position.z += 0.02;
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
-      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
-      //camera.updateProjectionMatrix();
     })
     .yoyo(true)
     .repeat(Infinity);
@@ -355,14 +314,12 @@ function rotateTorso(direction) {
       .easing(TWEEN.Easing.Linear.None)
       .onUpdate(function () {
         torso.rotation.y = tweenStartRight.y_rightRotation;
-        console.log("ciao");
       })
       .start();
   }
 }
 
 function setIdlePosition() {
-  //tween.stop();
   tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 1000)
     .easing(TWEEN.Easing.Linear.None)
@@ -371,7 +328,6 @@ function setIdlePosition() {
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-      //camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     })
     .start();
 }
