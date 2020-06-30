@@ -1,5 +1,6 @@
 const yoshi_dic = {
   Head: "head_05",
+  Torso: "NDcha_pos_02",
   Spine: "spine00_04",
   UpperArm_right: "R_upperarm_038",
   UpperArm_left: "L_upperarm_024",

@@ -13,20 +13,29 @@ var upperArm_left;
 var upperLeg_right;
 var upperLeg_left;
 var spine;
+var torso;
 var hand_left;
 var hand_right;
 
+var tween_idle;
 var tweenStartScale;
 var tweenGoalScale;
 var tweenBackScale;
+var tweenLeft;
+var tweenRight;
+var tweenStartRight;
+var tweenGoalRight;
+var tweenStartLeft;
+var tweenGoalLeft;
 var tweenIdle;
 var tween;
 var tweenBack;
-var camTarget;
 var yoshi;
 var camera;
 
-var upPressed = false;
+var dPressed = false;
+var aPressed = false;
+var isRotatedRight = true;
 
 function init() {
   var container = document.getElementById("game");
@@ -117,8 +126,10 @@ function init() {
       yoshi.castShadow = true;
       yoshi.receiveShadow = true;
 
-      head = yoshi.getObjectByName(yoshi_dic.Head);
       console.log(dumpObject(yoshi).join("\n"));
+
+      head = yoshi.getObjectByName(yoshi_dic.Head);
+      torso = yoshi.getObjectByName(yoshi_dic.Torso);
       upperArm_right = yoshi.getObjectByName(yoshi_dic.UpperArm_right);
       upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
       upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
@@ -133,6 +144,8 @@ function init() {
       upperArm_left.rotation.x = (0 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
+
+      //torso.rotation.y = (180 * Math.PI) / 180;
       //hand_left.rotation.y = (10 * Math.PI) / 180;
       //hand_right.rotation.y = (10 * Math.PI) / 180;
 
@@ -145,30 +158,43 @@ function init() {
       document.addEventListener("keydown", onDocumentKeyDown, false);
       function onDocumentKeyDown(event) {
         var keyCode = event.keyCode;
-        if (keyCode == 65) {
-          yoshi.position.x += 0.5;
-        } else if (keyCode == 68) {
-          yoshi.position.x -= 0.5;
-        } else if (keyCode == 87) {
-          if (!upPressed) {
+        //D
+        if (keyCode == 68) {
+          if (!isRotatedRight) {
+            rotateTorso("right");
+            isRotatedRight = true;
+          }
+          if (!dPressed) {
             performAnimation();
           }
-          upPressed = true;
-        } else if (keyCode == 83) {
-          yoshi.position.z -= 0.5;
+          dPressed = true;
+          //A
+        } else if (keyCode == 65) {
+          if (isRotatedRight) {
+            rotateTorso("left");
+            isRotatedRight = false;
+          }
+          if (!aPressed) {
+            performAnimation();
+          }
+          aPressed = true;
         }
       }
 
       document.addEventListener("keyup", onDocumentKeyUp, false);
       function onDocumentKeyUp(event) {
         var keyCode = event.keyCode;
-        if (keyCode == 87) {
-          upPressed = false;
+        if (keyCode == 68) {
+          dPressed = false;
           tween.stop();
           tweenBack.stop();
           setIdlePosition();
-        } else if (keyCode == 83) {
-          yoshi.position.z -= 0.5;
+        } else if (keyCode == 65) {
+          //yoshi.position.z -= 0.5;
+          aPressed = false;
+          tween.stop();
+          tweenBack.stop();
+          setIdlePosition();
         }
       }
 
@@ -193,7 +219,7 @@ function init() {
 }
 
 var Landscape = function () {
-  var geometry = new THREE.BoxGeometry(window.innerWidth, 1, window.innerWidth);
+  var geometry = new THREE.BoxGeometry(50, 20, window.innerWidth);
   var texture = new THREE.TextureLoader().load("img/desert.jpg");
   var material = new THREE.MeshPhongMaterial({
     map: texture,
@@ -206,7 +232,7 @@ var Landscape = function () {
 var landscape;
 function CreateLandscape() {
   landscape = new Landscape();
-  landscape.mesh.position.y = -6;
+  landscape.mesh.position.y = -15.5;
   scene.add(landscape.mesh);
 }
 
@@ -234,6 +260,19 @@ function setAnimationParameters() {
     x_right: (0 * Math.PI) / 180,
     x_leftArm: (0 * Math.PI) / 180,
     x_rightArm: (0 * Math.PI) / 180,
+  };
+
+  tweenStartLeft = {
+    y_leftRotation: torso.rotation.y,
+  };
+  tweenGoalLeft = {
+    y_leftRotation: (-180 * Math.PI) / 180,
+  };
+  tweenStartRight = {
+    y_righttRotation: torso.rotation.y,
+  };
+  tweenGoalRight = {
+    y_rightRotation: (0 * Math.PI) / 180,
   };
 }
 
@@ -272,10 +311,30 @@ function performAnimation() {
   tween.chain(tweenBack);
 }
 
-var tween_idle;
+function rotateTorso(direction) {
+  if (direction == "left") {
+    tweenLeft = new TWEEN.Tween(tweenStartLeft)
+      .to(tweenGoalLeft, 500)
+      .easing(TWEEN.Easing.Linear.None)
+      .onUpdate(function () {
+        torso.rotation.y = tweenStartLeft.y_leftRotation;
+      })
+      .start();
+  }
+
+  if (direction == "right") {
+    tweenRight = new TWEEN.Tween(tweenStartRight)
+      .to(tweenGoalRight, 500)
+      .easing(TWEEN.Easing.Linear.None)
+      .onUpdate(function () {
+        torso.rotation.y = tweenStartRight.y_rightRotation;
+        console.log("ciao");
+      })
+      .start();
+  }
+}
 
 function setIdlePosition() {
-  console.log("i'm in setIdlePosition function");
   tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 1000)
     .easing(TWEEN.Easing.Linear.None)
