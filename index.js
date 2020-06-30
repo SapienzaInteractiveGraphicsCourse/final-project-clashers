@@ -291,7 +291,7 @@ function performAnimation() {
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-      yoshi.position.z += 0.02;
+      yoshi.position.z += 0.2; //modificare quando torna indietro
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
     })
     .start();
@@ -305,7 +305,7 @@ function performAnimation() {
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
 
-      yoshi.position.z += 0.02;
+      yoshi.position.z += 0.2; //modificare quando torna indietro
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
     })
     .yoyo(true)
