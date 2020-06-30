@@ -36,6 +36,7 @@ var camera;
 var dPressed = false;
 var aPressed = false;
 var isRotatedRight = true;
+var isWalking = false;
 
 function init() {
   var container = document.getElementById("game");
@@ -160,24 +161,32 @@ function init() {
         var keyCode = event.keyCode;
         //D
         if (keyCode == 68) {
+          isWalking = true;
           if (!isRotatedRight) {
             rotateTorso("right");
+
             isRotatedRight = true;
           }
-          if (!dPressed) {
+          if (!dPressed && isWalking) {
             performAnimation();
           }
           dPressed = true;
+          console.log("dpressed:" + dPressed);
+          console.log("iswalking:" + isWalking);
           //A
         } else if (keyCode == 65) {
+          isWalking = true;
           if (isRotatedRight) {
             rotateTorso("left");
+
             isRotatedRight = false;
           }
-          if (!aPressed) {
+          if (!aPressed && isWalking) {
             performAnimation();
           }
           aPressed = true;
+          console.log("apressed:" + aPressed);
+          console.log("iswalking:" + isWalking);
         }
       }
 
@@ -186,15 +195,21 @@ function init() {
         var keyCode = event.keyCode;
         if (keyCode == 68) {
           dPressed = false;
+          isWalking = false;
           tween.stop();
           tweenBack.stop();
           setIdlePosition();
+          console.log("dpressed:" + dPressed);
+          console.log("iswalking:" + isWalking);
         } else if (keyCode == 65) {
           //yoshi.position.z -= 0.5;
           aPressed = false;
+          isWalking = false;
           tween.stop();
           tweenBack.stop();
           setIdlePosition();
+          console.log("apressed:" + aPressed);
+          console.log("iswalking:" + isWalking);
         }
       }
 
@@ -262,23 +277,23 @@ function setAnimationParameters() {
     x_rightArm: (0 * Math.PI) / 180,
   };
 
-  tweenStartLeft = {
+  /*tweenStartLeft = {
     y_leftRotation: torso.rotation.y,
   };
   tweenGoalLeft = {
     y_leftRotation: (-180 * Math.PI) / 180,
   };
   tweenStartRight = {
-    y_righttRotation: torso.rotation.y,
+    y_rightRotation: torso.rotation.y,
   };
   tweenGoalRight = {
     y_rightRotation: (0 * Math.PI) / 180,
-  };
+  };*/
 }
 
 function performAnimation() {
   tween = new TWEEN.Tween(tweenStartScale)
-    .to(tweenGoalScale, 1000)
+    .to(tweenGoalScale, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
@@ -293,7 +308,7 @@ function performAnimation() {
     .start();
 
   tweenBack = new TWEEN.Tween(tweenStartScale)
-    .to(tweenBackScale, 1000)
+    .to(tweenBackScale, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
@@ -312,6 +327,18 @@ function performAnimation() {
 }
 
 function rotateTorso(direction) {
+  tweenStartLeft = {
+    y_leftRotation: torso.rotation.y,
+  };
+  tweenGoalLeft = {
+    y_leftRotation: (-180 * Math.PI) / 180,
+  };
+  tweenStartRight = {
+    y_rightRotation: torso.rotation.y,
+  };
+  tweenGoalRight = {
+    y_rightRotation: (0 * Math.PI) / 180,
+  };
   if (direction == "left") {
     tweenLeft = new TWEEN.Tween(tweenStartLeft)
       .to(tweenGoalLeft, 500)
@@ -335,6 +362,7 @@ function rotateTorso(direction) {
 }
 
 function setIdlePosition() {
+  //tween.stop();
   tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 1000)
     .easing(TWEEN.Easing.Linear.None)
