@@ -211,11 +211,39 @@ function init() {
 
 var Landscape = function () {
   var geometry = new THREE.BoxGeometry(50, 20, window.innerWidth);
-  var texture = new THREE.TextureLoader().load("img/desert.jpg");
-  var material = new THREE.MeshPhongMaterial({
-    map: texture,
-    color: 0xd2b48c,
-  });
+
+  var texture = THREE.ImageUtils.loadTexture("img/grass_alb.png");
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(6.25, window.innerWidth / 8);
+
+  var material = [
+    new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      color: 0xd2b48c,
+    }),
+    new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      color: 0xd2b48c,
+    }),
+    new THREE.MeshPhongMaterial({
+      map: texture,
+      color: 0xd2b48c,
+    }),
+    new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      color: 0xd2b48c,
+    }),
+    new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      color: 0xd2b48c,
+    }),
+    new THREE.MeshPhongMaterial({
+      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      color: 0xd2b48c,
+    }),
+  ];
+
   this.mesh = new THREE.Mesh(geometry, material);
   this.mesh.receiveShadow = true;
 };
