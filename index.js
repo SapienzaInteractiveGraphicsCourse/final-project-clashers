@@ -27,6 +27,9 @@ var tweenGoalRight;
 var tweenStartLeft;
 var tweenGoalLeft;
 var tweenIdle;
+var tween_translation;
+var tweenStartTranslate;
+var tweenGoalTranslate;
 var tween;
 var tweenBack;
 var yoshi;
@@ -164,10 +167,12 @@ function init() {
           }
           if (!dPressed && isWalking) {
             performAnimation();
+            //translateTorso("right");
           }
           dPressed = true;
-          //A
-        } else if (keyCode == 65) {
+        }
+        //A
+        if (keyCode == 65) {
           isWalking = true;
           if (isRotatedRight) {
             TWEEN.removeAll();
@@ -176,24 +181,11 @@ function init() {
           }
           if (!aPressed && isWalking) {
             performAnimation();
+            //translateTorso("left");
           }
           aPressed = true;
         }
       }
-
-      /*const loader = new THREE.TextureLoader();
-      loader.load("img/sky.jpeg", function (texture) {
-        scene.background = texture;
-      });*/
-      /*var bgLoader = new THREE.TextureLoader();
-      var bgTexture = bgLoader.load("img/sky.jpeg", function (texture) {
-        var img = texture.image;
-        img.width = 50;
-        img.height = 50;
-      });
-      scene.background = bgTexture;*/
-      //bgTexture.wrapS = THREE.MirroredRepeatWrapping;
-      //bgTexture.wrapT = THREE.MirroredRepeatWrapping;
 
       document.addEventListener("keyup", onDocumentKeyUp, false);
       function onDocumentKeyUp(event) {
@@ -408,6 +400,31 @@ function rotateTorso(direction) {
       .start();
   }
 }
+
+/*function translateTorso(direction) {
+  tweenStartTranslate = {
+    z: yoshi.position.z,
+  };
+  if (direction == "right") {
+    tweenGoalTranslate = {
+      z: yoshi.position.z + 0.2,
+    };
+  }
+  if (direction == "left") {
+    tweenGoalTranslate = {
+      z: yoshi.position.z - 0.2,
+    };
+  }
+
+  tween_translation = new TWEEN.Tween(tweenStartTranslate)
+    .to(tweenGoalTranslate, 500)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      yoshi.position.z = tweenStartTranslate.z;
+    })
+    .repeat(Infinity)
+    .start();
+}*/
 
 function setIdlePosition() {
   tween_idle = new TWEEN.Tween(tweenStartScale)
