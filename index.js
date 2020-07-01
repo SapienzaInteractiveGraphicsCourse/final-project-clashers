@@ -35,6 +35,7 @@ var dPressed = false;
 var aPressed = false;
 var isRotatedRight = true;
 var isWalking = false;
+var dirLight;
 
 function init() {
   var container = document.getElementById("game");
@@ -82,7 +83,7 @@ function init() {
     const d = 100;
     const color = 0xffffff;
     const intensity = 1;
-    var dirLight = new THREE.DirectionalLight(color, intensity, 100);
+    dirLight = new THREE.DirectionalLight(color, intensity, 100);
     dirLight.position.set(0, 100, 0);
     dirLight.castShadow = true;
 
@@ -96,8 +97,10 @@ function init() {
     dirLight.shadow.camera.right = d;
     dirLight.shadow.camera.top = d;
     dirLight.shadow.camera.bottom = -d;
-
     scene.add(dirLight);
+
+    var helper = new THREE.CameraHelper(dirLight.shadow.camera);
+    scene.add(helper);
 
     var ambientLight = new THREE.AmbientLight(color, intensity);
     scene.add(ambientLight);
@@ -143,6 +146,7 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
+      dirLight.target = yoshi;
       scene.add(yoshi);
 
       document.addEventListener("keydown", onDocumentKeyDown, false);
@@ -203,6 +207,8 @@ function init() {
   function animate() {
     TWEEN.update();
     camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+    //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
+    //dirLight.position.copy(yoshi.position);
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     controls.update();
@@ -291,7 +297,15 @@ function performAnimation() {
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-      yoshi.position.z += 0.2; //modificare quando torna indietro
+      if (dPressed) {
+        yoshi.position.z += 0.2;
+        dirLight.position.z += 0.2;
+      }
+      if (aPressed) {
+        yoshi.position.z -= 0.2;
+        dirLight.position.z -= 0.2;
+      }
+      //yoshi.position.z += 0.2; //modificare quando torna indietro
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
     })
     .start();
@@ -304,8 +318,15 @@ function performAnimation() {
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-
-      yoshi.position.z += 0.2; //modificare quando torna indietro
+      //yoshi.position.z += 0.2; //modificare quando torna indietro
+      if (dPressed) {
+        yoshi.position.z += 0.2;
+        dirLight.position.z += 0.2;
+      }
+      if (aPressed) {
+        yoshi.position.z -= 0.2;
+        dirLight.position.z -= 0.2;
+      }
       camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
     })
     .yoyo(true)
