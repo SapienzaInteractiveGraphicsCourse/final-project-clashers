@@ -47,6 +47,8 @@ function init() {
     1000
   );
 
+  const canvas = document.querySelector("canvas_three");
+
   var renderer = new THREE.WebGLRenderer({
     antialias: true,
   });
@@ -99,8 +101,8 @@ function init() {
     dirLight.shadow.camera.bottom = -d;
     scene.add(dirLight);
 
-    var helper = new THREE.CameraHelper(dirLight.shadow.camera);
-    scene.add(helper);
+    //var helper = new THREE.CameraHelper(dirLight.shadow.camera);
+    //scene.add(helper);
 
     var ambientLight = new THREE.AmbientLight(color, intensity);
     scene.add(ambientLight);
@@ -179,6 +181,20 @@ function init() {
         }
       }
 
+      /*const loader = new THREE.TextureLoader();
+      loader.load("img/sky.jpeg", function (texture) {
+        scene.background = texture;
+      });*/
+      /*var bgLoader = new THREE.TextureLoader();
+      var bgTexture = bgLoader.load("img/sky.jpeg", function (texture) {
+        var img = texture.image;
+        img.width = 50;
+        img.height = 50;
+      });
+      scene.background = bgTexture;*/
+      //bgTexture.wrapS = THREE.MirroredRepeatWrapping;
+      //bgTexture.wrapT = THREE.MirroredRepeatWrapping;
+
       document.addEventListener("keyup", onDocumentKeyUp, false);
       function onDocumentKeyUp(event) {
         var keyCode = event.keyCode;
@@ -203,12 +219,12 @@ function init() {
 
   scene.add(camera);
   CreateLandscape();
+  createBgSky();
 
   function animate() {
     TWEEN.update();
     camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
-    //dirLight.position.copy(yoshi.position);
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     controls.update();
@@ -259,6 +275,21 @@ function CreateLandscape() {
   landscape = new Landscape();
   landscape.mesh.position.y = -15.5;
   scene.add(landscape.mesh);
+}
+
+function createBgSky() {
+  var bgSky = new THREE.PlaneGeometry(
+    window.innerWidth,
+    window.innerHeight / 6
+  );
+  var bgSkyMaterial = new THREE.MeshPhongMaterial({
+    map: THREE.ImageUtils.loadTexture("img/sky.jpeg"),
+    shading: THREE.FlatShading,
+  });
+  var bg = new THREE.Mesh(bgSky, bgSkyMaterial);
+  bg.position.set(25, 100, 0);
+  bg.rotation.y = (-90 * Math.PI) / 180;
+  scene.add(bg);
 }
 
 function setAnimationParameters() {

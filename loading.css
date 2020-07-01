@@ -4,8 +4,6 @@
 }
 
 .canvas_three {
-  background-image: url(img/sky.jpeg);
-  background-repeat: repeat-x;
   width: 600px;
   height: 500px;
   border: 1px solid white;
