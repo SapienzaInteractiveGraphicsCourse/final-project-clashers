@@ -282,8 +282,13 @@ function createBgSky() {
     window.innerWidth,
     window.innerHeight / 6
   );
+  var skyTexture = THREE.ImageUtils.loadTexture("img/sky.png");
+  skyTexture.wrapS = THREE.RepeatWrapping;
+  skyTexture.wrapT = THREE.RepeatWrapping;
+  skyTexture.repeat.set(4, 1);
+
   var bgSkyMaterial = new THREE.MeshPhongMaterial({
-    map: THREE.ImageUtils.loadTexture("img/sky.jpeg"),
+    map: skyTexture,
     shading: THREE.FlatShading,
   });
   var bg = new THREE.Mesh(bgSky, bgSkyMaterial);
