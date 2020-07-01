@@ -238,14 +238,15 @@ var Landscape = function () {
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(6.25, window.innerWidth / 8);
+  var terrainTexture = THREE.ImageUtils.loadTexture("img/gake_alb.png");
 
   var material = [
     new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      map: terrainTexture,
       color: 0xd2b48c,
     }),
     new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      map: terrainTexture,
       color: 0xd2b48c,
     }),
     new THREE.MeshPhongMaterial({
@@ -253,15 +254,15 @@ var Landscape = function () {
       color: 0xd2b48c,
     }),
     new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      map: terrainTexture,
       color: 0xd2b48c,
     }),
     new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      map: terrainTexture,
       color: 0xd2b48c,
     }),
     new THREE.MeshPhongMaterial({
-      map: THREE.ImageUtils.loadTexture("img/treetrunk_alb.png"),
+      map: terrainTexture,
       color: 0xd2b48c,
     }),
   ];
