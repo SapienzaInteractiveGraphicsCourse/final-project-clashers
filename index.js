@@ -238,7 +238,11 @@ var Landscape = function () {
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(6.25, window.innerWidth / 8);
+
   var terrainTexture = THREE.ImageUtils.loadTexture("img/gake_alb.png");
+  //terrainTexture.wrapS = THREE.RepeatWrapping;
+  //terrainTexture.wrapT = THREE.RepeatWrapping;
+  //terrainTexture.repeat.set(5, window.innerWidth / 4);
 
   var material = [
     new THREE.MeshPhongMaterial({
