@@ -109,7 +109,7 @@ function init() {
   yoshi = new THREE.Scene();
   {
     const gltfLoader = new GLTFLoader();
-    const url_yoshi = "models/yoshi_mario_party_10/scene.gltf";
+    const url_yoshi = "models/yoshi/scene.gltf";
 
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
