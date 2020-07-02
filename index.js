@@ -13,6 +13,7 @@ var upperArm_right;
 var upperArm_left;
 var upperLeg_right;
 var upperLeg_left;
+var handRight;
 var torso;
 var tweenStartScale;
 var tweenGoalScale;
@@ -131,13 +132,27 @@ function init() {
       upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
       upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
       upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
+      handRight = yoshi.getObjectByName(yoshi_dic.Hand_right);
+      thumb1_right = yoshi.getObjectByName(yoshi_dic.Thumb1_right);
+      thumb2_right = yoshi.getObjectByName(yoshi_dic.Thumb2_right);
+      finger1_right = yoshi.getObjectByName(yoshi_dic.Finger1_right);
+      finger1_2_right = yoshi.getObjectByName(yoshi_dic.Finger1_2_right);
+      finger2_right = yoshi.getObjectByName(yoshi_dic.Finger2_right);
+      finger2_2_right = yoshi.getObjectByName(yoshi_dic.Finger2_2_right);
+      finger3_right = yoshi.getObjectByName(yoshi_dic.Finger3_right);
+      finger3_2_right = yoshi.getObjectByName(yoshi_dic.Finger3_2_right);
 
-      upperArm_right.rotation.z = (45 * Math.PI) / 180;
+      upperArm_right.rotation.z = (45 * Math.PI) / 180; //-60
+      //handRight.rotation.y = (0 * Math.PI) / 180; -> deve tornare a 90 gradi
       upperArm_left.rotation.z = (45 * Math.PI) / 180;
-      upperArm_right.rotation.x = (180 * Math.PI) / 180;
+      upperArm_right.rotation.x = (0 * Math.PI) / 180; //0
       upperArm_left.rotation.x = (0 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
+      thumb1_right.rotation.x = (0 * Math.PI) / 180;
+      thumb2_right.rotation.x = (0 * Math.PI) / 180;
+      finger1_right.rotation.x = (0 * Math.PI) / 180;
+      finger1_right.rotation.x = (0 * Math.PI) / 180;
 
       camera.position.z += yoshi.position.z - camera.position.z;
       dirLight.target = yoshi;
@@ -251,7 +266,7 @@ function init() {
 }
 
 var landscapeFunction = function () {
-  var geometry = new THREE.BoxGeometry(50, 20, window.innerWidth);
+  var geometry = new THREE.BoxGeometry(50, 20, 1500);
 
   var texture = THREE.ImageUtils.loadTexture("img/grass_alb.png");
   texture.wrapS = THREE.RepeatWrapping;
@@ -302,11 +317,11 @@ function createLandscape() {
 }
 
 function createBgSky() {
-  var bgSky = new THREE.PlaneGeometry(window.innerWidth, 150);
+  var bgSky = new THREE.PlaneGeometry(1500, 150);
   var skyTexture = THREE.ImageUtils.loadTexture("img/sky.png");
   skyTexture.wrapS = THREE.RepeatWrapping;
   skyTexture.wrapT = THREE.RepeatWrapping;
-  skyTexture.repeat.set(4, 1);
+  skyTexture.repeat.set(6, 1);
 
   var bgSkyMaterial = new THREE.MeshPhongMaterial({
     map: skyTexture,
@@ -425,18 +440,26 @@ function rotateTorso(direction) {
 function jump() {
   var tweenStartJump = {
     y: yoshi.position.y,
+    rightArm_rotation_z: upperArm_right.rotation.z,
+    rightHand_rotation_y: handRight.rotation.y,
   };
   var tweenGoalJump = {
     y: -8,
+    rightArm_rotation_z: (-60 * Math.PI) / 180,
+    rightHand_rotation_y: (0 * Math.PI) / 180,
   };
   var tweenGoalJumpBack = {
     y: -14.1,
+    rightArm_rotation_z: (45 * Math.PI) / 180,
+    rightHand_rotation_y: (90 * Math.PI) / 180,
   };
   var tweenJump = new TWEEN.Tween(tweenStartJump)
     .to(tweenGoalJump, 500)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
+      upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+      handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
     })
     .start();
   var tweenJumpBack = new TWEEN.Tween(tweenStartJump)
@@ -444,6 +467,8 @@ function jump() {
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
+      upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+      handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
     });
   tweenJump.chain(tweenJumpBack);
 }
