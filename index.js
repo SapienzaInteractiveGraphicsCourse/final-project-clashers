@@ -106,7 +106,8 @@ function init() {
     scene.add(dirLight);
 
     //var helper = new THREE.CameraHelper(dirLight.shadow.camera);
-    //scene.add(helper);
+    var helper = new THREE.CameraHelper(camera);
+    scene.add(helper);
 
     ambientLight = new THREE.AmbientLight(color, intensity);
     scene.add(ambientLight);
@@ -158,14 +159,21 @@ function init() {
       upperArm_left.rotation.x = (0 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
-      thumb1_right.rotation.x = (90 * Math.PI) / 180;
+
+      thumb1_right.rotation.y = (135 * Math.PI) / 180;
+
+      /*thumb1_right.rotation.x = (110 * Math.PI) / 180;
       thumb2_right.rotation.x = (-90 * Math.PI) / 180;
+      thumb1_right.rotation.z = (180 * Math.PI) / 180;
       finger1_right.rotation.x = (-90 * Math.PI) / 180;
       finger1_2_right.rotation.x = (-90 * Math.PI) / 180;
       finger2_right.rotation.x = (-90 * Math.PI) / 180;
       finger2_2_right.rotation.x = (-90 * Math.PI) / 180;
       finger3_right.rotation.x = (-90 * Math.PI) / 180;
-      finger3_2_right.rotation.x = (-90 * Math.PI) / 180;
+      finger3_2_right.rotation.x = (-90 * Math.PI) / 180;*/
+      console.log("thumb x" + thumb1_right.rotation.x);
+      console.log("thumb z " + thumb1_right.rotation.z);
+      console.log("thumb2 x " + thumb2_right.rotation.z);
 
       camera.position.z += yoshi.position.z - camera.position.z;
       dirLight.target = yoshi;
@@ -455,16 +463,28 @@ function jump() {
     y: yoshi.position.y,
     rightArm_rotation_z: upperArm_right.rotation.z,
     rightHand_rotation_y: handRight.rotation.y,
+    finger_x: finger1_right.rotation.x,
+    thumb2_x: thumb2_right.rotation.x,
   };
   var tweenGoalJump = {
     y: -8,
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
+    finger_x: (-90 * Math.PI) / 180,
+    //SBAGLIATI
+    thumb1_x: (110 * Math.PI) / 180,
+    thumb1_z: (180 * Math.PI) / 180,
+    thumb2_x: (-90 * Math.PI) / 180,
   };
   var tweenGoalJumpBack = {
     y: -14.1,
     rightArm_rotation_z: (45 * Math.PI) / 180,
     rightHand_rotation_y: (90 * Math.PI) / 180,
+    finger_x: (0 * Math.PI) / 180,
+    //SBAGLIATI
+    thumb1_x: (90 * Math.PI) / 180,
+    thumb1_z: (-104 * Math.PI) / 180,
+    thumb2_x: (-341 * Math.PI) / 180,
   };
   var tweenJump = new TWEEN.Tween(tweenStartJump)
     .to(tweenGoalJump, 500)
@@ -473,6 +493,15 @@ function jump() {
       yoshi.position.y = tweenStartJump.y;
       upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
       handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
+      finger1_right.rotation.x = tweenStartJump.finger_x;
+      finger1_2_right.rotation.x = tweenStartJump.finger_x;
+      finger2_right.rotation.x = tweenStartJump.finger_x;
+      finger2_2_right.rotation.x = tweenStartJump.finger_x;
+      finger3_right.rotation.x = tweenStartJump.finger_x;
+      finger3_2_right.rotation.x = tweenStartJump.finger_x;
+      thumb2_right.rotation.x = tweenStartJump.finger_x;
+      thumb1_right.rotation.x = tweenStartJump.thumb1_x;
+      thumb1_right.rotation.z = tweenStartJump.thumb1_z;
     })
     .start();
   var tweenJumpBack = new TWEEN.Tween(tweenStartJump)
@@ -482,6 +511,15 @@ function jump() {
       yoshi.position.y = tweenStartJump.y;
       upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
       handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
+      finger1_right.rotation.x = tweenStartJump.finger_x;
+      finger1_2_right.rotation.x = tweenStartJump.finger_x;
+      finger2_right.rotation.x = tweenStartJump.finger_x;
+      finger2_2_right.rotation.x = tweenStartJump.finger_x;
+      finger3_right.rotation.x = tweenStartJump.finger_x;
+      finger3_2_right.rotation.x = tweenStartJump.finger_x;
+      thumb2_right.rotation.x = tweenStartJump.finger_x;
+      thumb1_right.rotation.x = tweenStartJump.thumb1_x;
+      thumb1_right.rotation.z = tweenStartJump.thumb1_z;
     });
   tweenJump.chain(tweenJumpBack);
 }
