@@ -221,7 +221,7 @@ function init() {
   }
 
   scene.add(camera);
-  CreateLandscape();
+  createLandscape();
   createBgSky();
 
   function animate() {
@@ -234,7 +234,7 @@ function init() {
   }
 }
 
-var Landscape = function () {
+var landscapeFunction = function () {
   var geometry = new THREE.BoxGeometry(50, 20, window.innerWidth);
 
   var texture = THREE.ImageUtils.loadTexture("img/grass_alb.png");
@@ -243,9 +243,9 @@ var Landscape = function () {
   texture.repeat.set(6.25, window.innerWidth / 8);
 
   var terrainTexture = THREE.ImageUtils.loadTexture("img/gake_alb.png");
-  //terrainTexture.wrapS = THREE.RepeatWrapping;
-  //terrainTexture.wrapT = THREE.RepeatWrapping;
-  //terrainTexture.repeat.set(5, window.innerWidth / 4);
+  terrainTexture.wrapS = THREE.RepeatWrapping;
+  terrainTexture.wrapT = THREE.RepeatWrapping;
+  terrainTexture.repeat.set(window.innerWidth / 10, 2);
 
   var material = [
     new THREE.MeshPhongMaterial({
@@ -279,17 +279,14 @@ var Landscape = function () {
 };
 
 var landscape;
-function CreateLandscape() {
-  landscape = new Landscape();
+function createLandscape() {
+  landscape = new landscapeFunction();
   landscape.mesh.position.y = -15.5;
   scene.add(landscape.mesh);
 }
 
 function createBgSky() {
-  var bgSky = new THREE.PlaneGeometry(
-    window.innerWidth,
-    window.innerHeight / 6
-  );
+  var bgSky = new THREE.PlaneGeometry(window.innerWidth, 150);
   var skyTexture = THREE.ImageUtils.loadTexture("img/sky.png");
   skyTexture.wrapS = THREE.RepeatWrapping;
   skyTexture.wrapT = THREE.RepeatWrapping;
@@ -300,7 +297,7 @@ function createBgSky() {
     shading: THREE.FlatShading,
   });
   var bg = new THREE.Mesh(bgSky, bgSkyMaterial);
-  bg.position.set(25, 100, 0);
+  bg.position.set(25, 69, 0);
   bg.rotation.y = (-90 * Math.PI) / 180;
   scene.add(bg);
 }
