@@ -25,12 +25,14 @@ var tweenIdle;
 var tween;
 var tweenBack;
 var yoshi;
+var brick;
 var camera;
 var dPressed = false;
 var aPressed = false;
 var isRotatedRight = true;
 var isWalking = false;
 var dirLight;
+var ambientLight;
 
 function init() {
   var container = document.getElementById("game");
@@ -72,14 +74,12 @@ function init() {
   container.appendChild(renderer.domElement);
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
-
   {
     const d = 100;
     const color = 0xffffff;
     const intensity = 1;
     dirLight = new THREE.DirectionalLight(color, intensity, 100);
-    dirLight.position.set(0, 100, 0);
+    dirLight.position.set(0, 100, -650);
     dirLight.castShadow = true;
 
     dirLight.shadow.mapSize.width = 512;
@@ -97,19 +97,19 @@ function init() {
     //var helper = new THREE.CameraHelper(dirLight.shadow.camera);
     //scene.add(helper);
 
-    var ambientLight = new THREE.AmbientLight(color, intensity);
+    ambientLight = new THREE.AmbientLight(color, intensity);
     scene.add(ambientLight);
   }
 
+  var gltfLoader = new GLTFLoader();
   yoshi = new THREE.Scene();
   {
-    const gltfLoader = new GLTFLoader();
     const url_yoshi = "models/yoshi/scene.gltf";
 
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.1, -0.75);
+      yoshi.position.set(0, -14.1, -650);
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -171,6 +171,9 @@ function init() {
           }
           aPressed = true;
         }
+        if (keyCode == 32) {
+          jump();
+        }
       }
 
       document.addEventListener("keyup", onDocumentKeyUp, false);
@@ -198,9 +201,34 @@ function init() {
             setIdlePosition();
           }
         }
+        if (keyCode == 32) {
+        }
       }
       setAnimationParameters();
       requestAnimationFrame(animate);
+    });
+  }
+
+  brick = new THREE.Scene();
+  {
+    //const url_brick = "models/brick_block/scene.gltf";
+    const url_brick = "models/brick_block/scene.gltf";
+    gltfLoader.load(url_brick, (gltf) => {
+      brick = gltf.scene;
+      brick.name = "brick";
+      brick.position.set(0, 0, -625);
+      brick.scale.set(0.007, 0.007, 0.007);
+
+      brick.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+        if (child.material) child.material.metalness = 0;
+      });
+      brick.castShadow = true;
+      brick.receiveShadow = true;
+      scene.add(brick);
     });
   }
 
@@ -379,7 +407,6 @@ function rotateTorso(direction) {
       })
       .start();
   }
-
   if (direction == "right") {
     var tweenRight = new TWEEN.Tween(tweenStartRight)
       .to(tweenGoalRight, 500)
@@ -391,30 +418,31 @@ function rotateTorso(direction) {
   }
 }
 
-/*function translateTorso(direction) {
-  tweenStartTranslate = {
-    z: yoshi.position.z,
+function jump() {
+  var tweenStartJump = {
+    y: yoshi.position.y,
   };
-  if (direction == "right") {
-    tweenGoalTranslate = {
-      z: yoshi.position.z + 0.2,
-    };
-  }
-  if (direction == "left") {
-    tweenGoalTranslate = {
-      z: yoshi.position.z - 0.2,
-    };
-  }
-
-  tween_translation = new TWEEN.Tween(tweenStartTranslate)
-    .to(tweenGoalTranslate, 500)
+  var tweenGoalJump = {
+    y: -8,
+  };
+  var tweenGoalJumpBack = {
+    y: -14.1,
+  };
+  var tweenJump = new TWEEN.Tween(tweenStartJump)
+    .to(tweenGoalJump, 500)
+    .easing(TWEEN.Easing.Quadratic.In)
+    .onUpdate(function () {
+      yoshi.position.y = tweenStartJump.y;
+    })
+    .start();
+  var tweenJumpBack = new TWEEN.Tween(tweenStartJump)
+    .to(tweenGoalJumpBack, 500)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
-      yoshi.position.z = tweenStartTranslate.z;
-    })
-    .repeat(Infinity)
-    .start();
-}*/
+      yoshi.position.y = tweenStartJump.y;
+    });
+  tweenJump.chain(tweenJumpBack);
+}
 
 function setIdlePosition() {
   var tween_idle = new TWEEN.Tween(tweenStartScale)
