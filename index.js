@@ -3,7 +3,7 @@
 
 import * as THREE from "./build/three.js-master/build/three.module.js";
 import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
-import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
+//import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 
 var head;
@@ -63,13 +63,13 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const cameraX = -100;
-  const cameraY = 10;
+  const cameraY = 0;
   const cameraZ = 0;
 
-  var controls = new OrbitControls(camera, renderer.domElement);
+  //var controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
   camera.updateProjectionMatrix();
-  controls.update();
+  //controls.update();
 
   window.addEventListener(
     "resize",
@@ -121,7 +121,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -5.75, -0.75);
+      yoshi.position.set(0, -14.1, -0.75);
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -153,6 +153,7 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
+      camera.position.z += yoshi.position.z - camera.position.z;
       dirLight.target = yoshi;
       scene.add(yoshi);
 
@@ -226,11 +227,11 @@ function init() {
 
   function animate() {
     TWEEN.update();
-    camera.lookAt(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+    camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    controls.update();
+    //controls.update();
   }
 }
 
@@ -281,7 +282,8 @@ var landscapeFunction = function () {
 var landscape;
 function createLandscape() {
   landscape = new landscapeFunction();
-  landscape.mesh.position.y = -15.5;
+  landscape.mesh.position.y = -24;
+  //landscape.mesh.rotation.x = (0 * Math.PI) / 180;
   scene.add(landscape.mesh);
 }
 
@@ -297,7 +299,7 @@ function createBgSky() {
     shading: THREE.FlatShading,
   });
   var bg = new THREE.Mesh(bgSky, bgSkyMaterial);
-  bg.position.set(25, 69, 0);
+  bg.position.set(25, 61, 0);
   bg.rotation.y = (-90 * Math.PI) / 180;
   scene.add(bg);
 }
@@ -376,7 +378,7 @@ function performAnimation() {
         }
       }
       //yoshi.position.z += 0.2; //modificare quando torna indietro
-      camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
+      camera.position.z += yoshi.position.z - camera.position.z;
     })
     .start();
 
@@ -397,7 +399,7 @@ function performAnimation() {
         yoshi.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
-      camera.position.z += (yoshi.position.z - camera.position.z) * 0.1;
+      camera.position.z += yoshi.position.z - camera.position.z;
     })
     .yoyo(true)
     .repeat(Infinity);
