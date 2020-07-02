@@ -3,7 +3,7 @@
 
 import * as THREE from "./build/three.js-master/build/three.module.js";
 import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
-//import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 
 var head;
@@ -29,6 +29,7 @@ var brick;
 var camera;
 var dPressed = false;
 var aPressed = false;
+var spacePressed = false;
 var isRotatedRight = true;
 var isWalking = false;
 var dirLight;
@@ -56,10 +57,10 @@ function init() {
   const cameraY = 0;
   const cameraZ = 0;
 
-  //var controls = new OrbitControls(camera, renderer.domElement);
+  var controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
   camera.updateProjectionMatrix();
-  //controls.update();
+  controls.update();
 
   window.addEventListener(
     "resize",
@@ -133,7 +134,7 @@ function init() {
 
       upperArm_right.rotation.z = (45 * Math.PI) / 180;
       upperArm_left.rotation.z = (45 * Math.PI) / 180;
-      upperArm_right.rotation.x = (0 * Math.PI) / 180;
+      upperArm_right.rotation.x = (180 * Math.PI) / 180;
       upperArm_left.rotation.x = (0 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
@@ -172,7 +173,10 @@ function init() {
           aPressed = true;
         }
         if (keyCode == 32) {
-          jump();
+          if (!spacePressed) {
+            jump();
+          }
+          spacePressed = true;
         }
       }
 
@@ -202,6 +206,7 @@ function init() {
           }
         }
         if (keyCode == 32) {
+          spacePressed = false;
         }
       }
       setAnimationParameters();
@@ -211,7 +216,6 @@ function init() {
 
   brick = new THREE.Scene();
   {
-    //const url_brick = "models/brick_block/scene.gltf";
     const url_brick = "models/brick_block/scene.gltf";
     gltfLoader.load(url_brick, (gltf) => {
       brick = gltf.scene;
@@ -242,7 +246,7 @@ function init() {
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    //controls.update();
+    controls.update();
   }
 }
 
