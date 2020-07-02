@@ -44,6 +44,7 @@ var isRotatedRight = true;
 var isWalking = false;
 var dirLight;
 var ambientLight;
+var controls;
 
 function init() {
   var container = document.getElementById("game");
@@ -58,16 +59,17 @@ function init() {
   var renderer = new THREE.WebGLRenderer({
     antialias: true,
   });
+
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const cameraX = -100;
-  const cameraY = 0;
-  const cameraZ = 0;
+  const cameraX = -100; //-100
+  const cameraY = 0; //0
+  const cameraZ = 0; //0
 
-  var controls = new OrbitControls(camera, renderer.domElement);
+  controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
   camera.updateProjectionMatrix();
   controls.update();
@@ -176,6 +178,8 @@ function init() {
       console.log("thumb2 x " + thumb2_right.rotation.z);
 
       camera.position.z += yoshi.position.z - camera.position.z;
+      controls.update();
+
       dirLight.target = yoshi;
       scene.add(yoshi);
 
@@ -281,8 +285,9 @@ function init() {
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
+    //controls.update(); //se lo metto qui la camera va in un posto sbagliato
     renderer.render(scene, camera);
-    controls.update();
+    controls.update(); //messo qui la camera è giusta ma i controlli tramite mouse sfaciolano
   }
 }
 
@@ -399,6 +404,7 @@ function performAnimation(direction) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += yoshi.position.z - camera.position.z;
+      controls.update();
     })
     .start();
 
@@ -419,6 +425,7 @@ function performAnimation(direction) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += yoshi.position.z - camera.position.z;
+      controls.update();
     })
     .yoyo(true)
     .repeat(Infinity);
