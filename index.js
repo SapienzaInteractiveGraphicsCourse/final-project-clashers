@@ -15,6 +15,15 @@ var upperLeg_right;
 var upperLeg_left;
 var handRight;
 var torso;
+var thumb1_right;
+var thumb2_right;
+var finger1_right;
+var finger1_2_right;
+var finger2_right;
+var finger2_2_right;
+var finger3_right;
+var finger3_2_right;
+
 var tweenStartScale;
 var tweenGoalScale;
 var tweenBackScale;
@@ -149,10 +158,14 @@ function init() {
       upperArm_left.rotation.x = (0 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
-      thumb1_right.rotation.x = (0 * Math.PI) / 180;
-      thumb2_right.rotation.x = (0 * Math.PI) / 180;
-      finger1_right.rotation.x = (0 * Math.PI) / 180;
-      finger1_right.rotation.x = (0 * Math.PI) / 180;
+      thumb1_right.rotation.x = (90 * Math.PI) / 180;
+      thumb2_right.rotation.x = (-90 * Math.PI) / 180;
+      finger1_right.rotation.x = (-90 * Math.PI) / 180;
+      finger1_2_right.rotation.x = (-90 * Math.PI) / 180;
+      finger2_right.rotation.x = (-90 * Math.PI) / 180;
+      finger2_2_right.rotation.x = (-90 * Math.PI) / 180;
+      finger3_right.rotation.x = (-90 * Math.PI) / 180;
+      finger3_2_right.rotation.x = (-90 * Math.PI) / 180;
 
       camera.position.z += yoshi.position.z - camera.position.z;
       dirLight.target = yoshi;
