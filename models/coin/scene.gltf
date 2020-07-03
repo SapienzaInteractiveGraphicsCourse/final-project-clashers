@@ -1,81 +1,193 @@
 {
   "accessors": [
     {
-      "bufferView": 1,
+      "bufferView": 2,
       "componentType": 5126,
-      "count": 637,
+      "count": 967,
       "max": [
-        6.286250114440918,
-        4.919069766998291,
-        4.9212799072265625
+        0.14013245701789856,
+        1.0000004768371582,
+        1.0000003576278687
       ],
       "min": [
-        -3.5563099384307861,
-        -4.919069766998291,
-        -4.9212799072265625
-      ],
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 1,
-      "byteOffset": 7644,
-      "componentType": 5126,
-      "count": 637,
-      "max": [
-        0.99564731121063232,
-        0.99564731121063232,
-        1
-      ],
-      "min": [
-        -0.99564731121063232,
-        -0.99564731121063232,
+        -0.21891409158706665,
+        -1.0000002384185791,
         -1
       ],
       "type": "VEC3"
     },
     {
+      "bufferView": 2,
+      "byteOffset": 11604,
+      "componentType": 5126,
+      "count": 967,
+      "max": [
+        0.99984878301620483,
+        1,
+        1
+      ],
+      "min": [
+        -0.99984878301620483,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 967,
+      "max": [
+        0.9715539813041687,
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -0.99119532108306885,
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 967,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 3444,
+      "count": 3588,
       "max": [
-        636
+        966
       ],
       "min": [
         0
       ],
       "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 37,
+      "max": [
+        1.25
+      ],
+      "min": [
+        0.041666667908430099
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 37,
+      "max": [
+        8.3312486478373174e-17,
+        0.99994134902954102,
+        8.3312486478373174e-17,
+        1
+      ],
+      "min": [
+        -8.658417108947761e-17,
+        -0.82768899202346802,
+        -8.658417108947761e-17,
+        -0.48743936419487
+      ],
+      "type": "VEC4"
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 5,
+            "path": "rotation"
+          }
+        }
+      ],
+      "name": "Take 001",
+      "samplers": [
+        {
+          "input": 5,
+          "interpolation": "LINEAR",
+          "output": 6
+        }
+      ]
     }
   ],
   "asset": {
     "extras": {
-      "author": "torchwurm (https://sketchfab.com/torchwurm)",
+      "author": "BranHelsing (https://sketchfab.com/BranHelsing)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/models/c49858b084e74f35b8631d9e2c2c2971",
-      "title": "Super Mario Bros - Coin"
+      "source": "https://sketchfab.com/3d-models/super-mario-bros-coin-aa97e093847a439f9feb064134813806",
+      "title": "Super Mario Bros Coin"
     },
-    "generator": "Sketchfab-3.29.4-rc3",
+    "generator": "Sketchfab-4.61.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 13776,
+      "byteLength": 14352,
       "byteOffset": 0,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 15288,
-      "byteOffset": 13776,
+      "byteLength": 7736,
+      "byteOffset": 14352,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 23208,
+      "byteOffset": 22088,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 15472,
+      "byteOffset": 45296,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 148,
+      "byteOffset": 60768,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteLength": 592,
+      "byteOffset": 60916,
+      "byteStride": 16,
+      "name": "floatBufferViews"
     }
   ],
   "buffers": [
     {
-      "byteLength": 29064,
+      "byteLength": 61508,
       "uri": "scene.bin"
     }
   ],
@@ -87,11 +199,11 @@
         0,
         0
       ],
-      "name": "Material",
+      "name": "CoinBlinn",
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.80000007149999997,
-          0.70594429970000006,
+          0.445264512,
+          0.18586377600000004,
           0,
           1
         ],
@@ -102,14 +214,16 @@
   ],
   "meshes": [
     {
-      "name": "Cylinder",
+      "name": "Coin_CoinBlinn_0",
       "primitives": [
         {
           "attributes": {
             "NORMAL": 1,
-            "POSITION": 0
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
           },
-          "indices": 2,
+          "indices": 4,
           "material": 0,
           "mode": 4
         }
@@ -139,35 +253,52 @@
       "children": [
         3
       ],
-      "name": "Root"
-    },
-    {
-      "children": [
-        4
-      ],
       "matrix": [
+        1,
         0,
         0,
-        -1,
+        0,
         0,
         0,
         1,
         0,
         0,
-        0.28062000000000004,
+        -1,
         0,
         0,
         0,
         0,
         0,
-        1.3685500000000002,
         1
       ],
-      "name": "Cylinder"
+      "name": "cf2e745973704dfdb6865cceff08da1f.fbx"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": ""
+    },
+    {
+      "children": [
+        5
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        6
+      ],
+      "name": "Coin",
+      "scale": [
+        0.42353996634483337,
+        0.42353996634483337,
+        0.42353996634483337
+      ]
     },
     {
       "mesh": 0,
-      "name": "Cylinder"
+      "name": "Coin_CoinBlinn_0"
     }
   ],
   "scene": 0,
