@@ -23,6 +23,15 @@ var finger2_right;
 var finger2_2_right;
 var finger3_right;
 var finger3_2_right;
+var handLeft;
+var thumb1_left;
+var thumb2_left;
+var finger1_left;
+var finger1_2_left;
+var finger2_left;
+var finger2_2_left;
+var finger3_left;
+var finger3_2_left;
 
 var tweenStartScale;
 var tweenGoalScale;
@@ -45,6 +54,7 @@ var isWalking = false;
 var dirLight;
 var ambientLight;
 var controls;
+var keysPressed = {};
 
 function init() {
   var container = document.getElementById("game");
@@ -108,8 +118,8 @@ function init() {
     scene.add(dirLight);
 
     //var helper = new THREE.CameraHelper(dirLight.shadow.camera);
-    var helper = new THREE.CameraHelper(camera);
-    scene.add(helper);
+    //var helper = new THREE.CameraHelper(camera);
+    //scene.add(helper);
 
     ambientLight = new THREE.AmbientLight(color, intensity);
     scene.add(ambientLight);
@@ -144,6 +154,8 @@ function init() {
       upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
       upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
       upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
+
+      //right_arm related bones
       handRight = yoshi.getObjectByName(yoshi_dic.Hand_right);
       thumb1_right = yoshi.getObjectByName(yoshi_dic.Thumb1_right);
       thumb2_right = yoshi.getObjectByName(yoshi_dic.Thumb2_right);
@@ -154,6 +166,17 @@ function init() {
       finger3_right = yoshi.getObjectByName(yoshi_dic.Finger3_right);
       finger3_2_right = yoshi.getObjectByName(yoshi_dic.Finger3_2_right);
 
+      //left_arm related bones
+      handLeft = yoshi.getObjectByName(yoshi_dic.Hand_left);
+      thumb1_left = yoshi.getObjectByName(yoshi_dic.Thumb1_left);
+      thumb2_left = yoshi.getObjectByName(yoshi_dic.Thumb2_left);
+      finger1_left = yoshi.getObjectByName(yoshi_dic.Finger1_left);
+      finger1_2_left = yoshi.getObjectByName(yoshi_dic.Finger1_2_left);
+      finger2_left = yoshi.getObjectByName(yoshi_dic.Finger2_left);
+      finger2_2_left = yoshi.getObjectByName(yoshi_dic.Finger2_2_left);
+      finger3_left = yoshi.getObjectByName(yoshi_dic.Finger3_left);
+      finger3_2_left = yoshi.getObjectByName(yoshi_dic.Finger3_2_left);
+
       upperArm_right.rotation.z = (45 * Math.PI) / 180; //-60
       //handRight.rotation.y = (0 * Math.PI) / 180; -> deve tornare a 90 gradi
       upperArm_left.rotation.z = (45 * Math.PI) / 180;
@@ -162,28 +185,13 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
-      // thumb1_right.rotation.y = (135 * Math.PI) / 180;
-
-      /*thumb1_right.rotation.x = (110 * Math.PI) / 180;
-      thumb2_right.rotation.x = (-90 * Math.PI) / 180;
-      thumb1_right.rotation.z = (180 * Math.PI) / 180;
-      finger1_right.rotation.x = (-90 * Math.PI) / 180;
-      finger1_2_right.rotation.x = (-90 * Math.PI) / 180;
-      finger2_right.rotation.x = (-90 * Math.PI) / 180;
-      finger2_2_right.rotation.x = (-90 * Math.PI) / 180;
-      finger3_right.rotation.x = (-90 * Math.PI) / 180;
-      finger3_2_right.rotation.x = (-90 * Math.PI) / 180;*/
-      console.log("thumb x" + thumb1_right.rotation.x);
-      console.log("thumb z " + thumb1_right.rotation.z);
-      console.log("thumb2 x " + thumb2_right.rotation.z);
-
       //camera.position.z += yoshi.position.z - camera.position.z;
       //controls.update();
 
       dirLight.target = yoshi;
       scene.add(yoshi);
 
-      document.addEventListener("keydown", onDocumentKeyDown, false);
+      /*document.addEventListener("keydown", onDocumentKeyDown, false);
       function onDocumentKeyDown(event) {
         var keyCode = event.keyCode;
         //D
@@ -191,6 +199,7 @@ function init() {
           isWalking = true;
           if (!isRotatedRight) {
             TWEEN.removeAll();
+            //tween.stop();
             rotateTorso("right");
             isRotatedRight = true;
           }
@@ -204,6 +213,7 @@ function init() {
           isWalking = true;
           if (isRotatedRight) {
             TWEEN.removeAll();
+            //tween.stop();
             rotateTorso("left");
             isRotatedRight = false;
           }
@@ -214,17 +224,22 @@ function init() {
         }
         if (keyCode == 32) {
           if (!spacePressed) {
+            //TWEEN.removeAll();
+            //tween.stop();
+            setIdlePosition();
             jump();
           }
           spacePressed = true;
         }
-      }
+      }*/
 
-      document.addEventListener("keyup", onDocumentKeyUp, false);
+      /*document.addEventListener("keyup", onDocumentKeyUp, false);
       function onDocumentKeyUp(event) {
         var keyCode = event.keyCode;
         if (keyCode == 68) {
+          //D
           if (aPressed) {
+            //isRotatedRight = false;
             dPressed = false;
           } else {
             dPressed = false;
@@ -235,8 +250,10 @@ function init() {
           }
         }
         if (keyCode == 65) {
+          //A
           if (dPressed) {
             aPressed = false;
+            //isRotatedRight = true;
           } else {
             aPressed = false;
             isWalking = false;
@@ -248,7 +265,83 @@ function init() {
         if (keyCode == 32) {
           spacePressed = false;
         }
-      }
+      }*/
+
+      document.addEventListener("keydown", (event) => {
+        keysPressed[event.keyCode] = true;
+
+        if (event.keyCode == 68) {
+          isWalking = true;
+          if (!isRotatedRight) {
+            TWEEN.removeAll();
+            //tween.stop();
+            rotateTorso("right");
+            isRotatedRight = true;
+          }
+          if (!dPressed && isWalking) {
+            performAnimation("right");
+          }
+          dPressed = true;
+        }
+
+        //A
+        if (event.keyCode == 65) {
+          isWalking = true;
+          if (isRotatedRight) {
+            TWEEN.removeAll();
+            //tween.stop();
+            rotateTorso("left");
+            isRotatedRight = false;
+          }
+          if (!aPressed && isWalking) {
+            performAnimation("left");
+          }
+          aPressed = true;
+        }
+        if (event.keyCode == 32) {
+          if (!spacePressed) {
+            //TWEEN.removeAll();
+            //tween.stop();
+            setIdlePosition();
+            jump();
+          }
+          spacePressed = true;
+        }
+      });
+      document.addEventListener("keyup", (event) => {
+        delete keysPressed[event.keyCode];
+
+        if (event.keyCode == 68) {
+          //D
+          if (aPressed) {
+            //isRotatedRight = false;
+            dPressed = false;
+          } else {
+            dPressed = false;
+            isWalking = false;
+            tween.stop();
+            tweenBack.stop();
+            setIdlePosition();
+          }
+        }
+        if (event.keyCode == 65) {
+          //A
+          if (dPressed) {
+            aPressed = false;
+            //isRotatedRight = true;
+          } else {
+            aPressed = false;
+            isWalking = false;
+            tween.stop();
+            tweenBack.stop();
+            setIdlePosition();
+          }
+        }
+        if (event.keyCode == 32) {
+          spacePressed = false;
+        }
+      });
+
       setAnimationParameters();
       requestAnimationFrame(animate);
     });
@@ -468,7 +561,9 @@ function rotateTorso(direction) {
 function jump() {
   var tweenStartJump = {
     y: yoshi.position.y,
-    rightArm_rotation_z: upperArm_right.rotation.z,
+    //rightArm_rotation_z: upperArm_right.rotation.z,
+    rightArm_rotation_z: (45 * Math.PI) / 180,
+    //rightArm_rotation_x: (0 * Math.PI) / 180,
     rightHand_rotation_y: handRight.rotation.y,
     finger_x: finger1_right.rotation.x,
     thumb1_y: thumb1_right.rotation.y,
@@ -491,37 +586,68 @@ function jump() {
     thumb2_x: (0 * Math.PI) / 180,
   };
   var tweenJump = new TWEEN.Tween(tweenStartJump)
-    .to(tweenGoalJump, 2000)
+    .to(tweenGoalJump, 500)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
-      upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
-      handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
-      finger1_right.rotation.x = tweenStartJump.finger_x;
-      finger1_2_right.rotation.x = tweenStartJump.finger_x;
-      finger2_right.rotation.x = tweenStartJump.finger_x;
-      finger2_2_right.rotation.x = tweenStartJump.finger_x;
-      finger3_right.rotation.x = tweenStartJump.finger_x;
-      finger3_2_right.rotation.x = tweenStartJump.finger_x;
-      thumb2_right.rotation.x = tweenStartJump.finger_x;
-      thumb1_right.rotation.y = tweenStartJump.thumb1_y;
+      if (isRotatedRight) {
+        upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+        handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
+        finger1_right.rotation.x = tweenStartJump.finger_x;
+        finger1_2_right.rotation.x = tweenStartJump.finger_x;
+        finger2_right.rotation.x = tweenStartJump.finger_x;
+        finger2_2_right.rotation.x = tweenStartJump.finger_x;
+        finger3_right.rotation.x = tweenStartJump.finger_x;
+        finger3_2_right.rotation.x = tweenStartJump.finger_x;
+        thumb2_right.rotation.x = tweenStartJump.finger_x;
+        thumb1_right.rotation.y = tweenStartJump.thumb1_y;
+      } else {
+        upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
+        handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
+        finger1_left.rotation.x = tweenStartJump.finger_x;
+        finger1_2_left.rotation.x = tweenStartJump.finger_x;
+        finger2_left.rotation.x = tweenStartJump.finger_x;
+        finger2_2_left.rotation.x = tweenStartJump.finger_x;
+        finger3_left.rotation.x = tweenStartJump.finger_x;
+        finger3_2_left.rotation.x = tweenStartJump.finger_x;
+        thumb2_left.rotation.x = tweenStartJump.finger_x;
+        thumb1_left.rotation.y = tweenStartJump.thumb1_y;
+      }
+
+      //fix arm x rotation
+      //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     })
     .start();
   var tweenJumpBack = new TWEEN.Tween(tweenStartJump)
-    .to(tweenGoalJumpBack, 2000)
+    .to(tweenGoalJumpBack, 500)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
-      upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
-      handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
-      finger1_right.rotation.x = tweenStartJump.finger_x;
-      finger1_2_right.rotation.x = tweenStartJump.finger_x;
-      finger2_right.rotation.x = tweenStartJump.finger_x;
-      finger2_2_right.rotation.x = tweenStartJump.finger_x;
-      finger3_right.rotation.x = tweenStartJump.finger_x;
-      finger3_2_right.rotation.x = tweenStartJump.finger_x;
-      thumb2_right.rotation.x = tweenStartJump.finger_x;
-      thumb1_right.rotation.y = tweenStartJump.thumb1_y;
+      if (isRotatedRight) {
+        upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+        handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
+        finger1_right.rotation.x = tweenStartJump.finger_x;
+        finger1_2_right.rotation.x = tweenStartJump.finger_x;
+        finger2_right.rotation.x = tweenStartJump.finger_x;
+        finger2_2_right.rotation.x = tweenStartJump.finger_x;
+        finger3_right.rotation.x = tweenStartJump.finger_x;
+        finger3_2_right.rotation.x = tweenStartJump.finger_x;
+        thumb2_right.rotation.x = tweenStartJump.finger_x;
+        thumb1_right.rotation.y = tweenStartJump.thumb1_y;
+      } else {
+        upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
+        handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
+        finger1_left.rotation.x = tweenStartJump.finger_x;
+        finger1_2_left.rotation.x = tweenStartJump.finger_x;
+        finger2_left.rotation.x = tweenStartJump.finger_x;
+        finger2_2_left.rotation.x = tweenStartJump.finger_x;
+        finger3_left.rotation.x = tweenStartJump.finger_x;
+        finger3_2_left.rotation.x = tweenStartJump.finger_x;
+        thumb2_left.rotation.x = tweenStartJump.finger_x;
+        thumb1_left.rotation.y = tweenStartJump.thumb1_y;
+      }
+
+      //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     });
   tweenJump.chain(tweenJumpBack);
 }
