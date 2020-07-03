@@ -162,7 +162,7 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
-      thumb1_right.rotation.y = (135 * Math.PI) / 180;
+      // thumb1_right.rotation.y = (135 * Math.PI) / 180;
 
       /*thumb1_right.rotation.x = (110 * Math.PI) / 180;
       thumb2_right.rotation.x = (-90 * Math.PI) / 180;
@@ -471,6 +471,7 @@ function jump() {
     rightArm_rotation_z: upperArm_right.rotation.z,
     rightHand_rotation_y: handRight.rotation.y,
     finger_x: finger1_right.rotation.x,
+    thumb1_y: thumb1_right.rotation.y,
     thumb2_x: thumb2_right.rotation.x,
   };
   var tweenGoalJump = {
@@ -478,23 +479,19 @@ function jump() {
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
-    //SBAGLIATI
-    thumb1_x: (110 * Math.PI) / 180,
-    thumb1_z: (180 * Math.PI) / 180,
-    thumb2_x: (-90 * Math.PI) / 180,
+    thumb1_y: (135 * Math.PI) / 180,
+    thumb2_x: (90 * Math.PI) / 180,
   };
   var tweenGoalJumpBack = {
     y: -14.1,
     rightArm_rotation_z: (45 * Math.PI) / 180,
     rightHand_rotation_y: (90 * Math.PI) / 180,
     finger_x: (0 * Math.PI) / 180,
-    //SBAGLIATI
-    thumb1_x: (90 * Math.PI) / 180,
-    thumb1_z: (-104 * Math.PI) / 180,
-    thumb2_x: (-341 * Math.PI) / 180,
+    thumb1_y: (66.5 * Math.PI) / 180,
+    thumb2_x: (0 * Math.PI) / 180,
   };
   var tweenJump = new TWEEN.Tween(tweenStartJump)
-    .to(tweenGoalJump, 500)
+    .to(tweenGoalJump, 2000)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
@@ -507,12 +504,11 @@ function jump() {
       finger3_right.rotation.x = tweenStartJump.finger_x;
       finger3_2_right.rotation.x = tweenStartJump.finger_x;
       thumb2_right.rotation.x = tweenStartJump.finger_x;
-      thumb1_right.rotation.x = tweenStartJump.thumb1_x;
-      thumb1_right.rotation.z = tweenStartJump.thumb1_z;
+      thumb1_right.rotation.y = tweenStartJump.thumb1_y;
     })
     .start();
   var tweenJumpBack = new TWEEN.Tween(tweenStartJump)
-    .to(tweenGoalJumpBack, 500)
+    .to(tweenGoalJumpBack, 2000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
@@ -525,8 +521,7 @@ function jump() {
       finger3_right.rotation.x = tweenStartJump.finger_x;
       finger3_2_right.rotation.x = tweenStartJump.finger_x;
       thumb2_right.rotation.x = tweenStartJump.finger_x;
-      thumb1_right.rotation.x = tweenStartJump.thumb1_x;
-      thumb1_right.rotation.z = tweenStartJump.thumb1_z;
+      thumb1_right.rotation.y = tweenStartJump.thumb1_y;
     });
   tweenJump.chain(tweenJumpBack);
 }
