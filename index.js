@@ -279,6 +279,7 @@ function init() {
         keysPressed[event.keyCode] = true;
 
         if (event.keyCode == 68) {
+          //D
           isWalking = true;
           if (!isRotatedRight) {
             TWEEN.removeAll();
@@ -307,6 +308,7 @@ function init() {
           aPressed = true;
         }
         if (event.keyCode == 32) {
+          //SPACE
           if (!spacePressed) {
             //TWEEN.removeAll();
             //tween.stop();
@@ -321,9 +323,21 @@ function init() {
 
         if (event.keyCode == 68) {
           //D
-          if (aPressed) {
+          /*if (aPressed) {
             //isRotatedRight = false;
             dPressed = false;
+          } else {
+            dPressed = false;
+            isWalking = false;
+            tween.stop();
+            tweenBack.stop();
+            setIdlePosition();
+          }*/
+          if (keysPressed[65]) {
+            if (isRotatedRight) {
+              rotateTorso("left");
+              //performAnimation("left");
+            }
           } else {
             dPressed = false;
             isWalking = false;
@@ -334,9 +348,21 @@ function init() {
         }
         if (event.keyCode == 65) {
           //A
-          if (dPressed) {
+          /*if (dPressed) {
             aPressed = false;
             //isRotatedRight = true;
+          } else {
+            aPressed = false;
+            isWalking = false;
+            tween.stop();
+            tweenBack.stop();
+            setIdlePosition();
+          }*/
+          if (keysPressed[68]) {
+            if (!isRotatedRight) {
+              rotateTorso("right");
+              //performAnimation("right");
+            }
           } else {
             aPressed = false;
             isWalking = false;
