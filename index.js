@@ -67,7 +67,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = 0; //0
+  const cameraZ = -650; //0
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -177,8 +177,8 @@ function init() {
       console.log("thumb z " + thumb1_right.rotation.z);
       console.log("thumb2 x " + thumb2_right.rotation.z);
 
-      camera.position.z += yoshi.position.z - camera.position.z;
-      controls.update();
+      //camera.position.z += yoshi.position.z - camera.position.z;
+      //controls.update();
 
       dirLight.target = yoshi;
       scene.add(yoshi);
@@ -285,9 +285,9 @@ function init() {
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
-    //controls.update(); //se lo metto qui la camera va in un posto sbagliato
+    controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+    controls.update();
     renderer.render(scene, camera);
-    controls.update(); //messo qui la camera è giusta ma i controlli tramite mouse sfaciolano
   }
 }
 
