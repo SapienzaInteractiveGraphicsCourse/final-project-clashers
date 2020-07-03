@@ -59,10 +59,15 @@ var aPressed = false;
 var spacePressed = false;
 var isRotatedRight = true;
 var isWalking = false;
+var isJumpingLeft = false;
+var isJumpingRight = false;
 var dirLight;
 var ambientLight;
 var controls;
 var keysPressed = {};
+var groupRun = new TWEEN.Group();
+var groupJump = new TWEEN.Group();
+var groupRotate = new TWEEN.Group();
 
 function init() {
   var container = document.getElementById("game");
@@ -282,8 +287,10 @@ function init() {
           //D
           isWalking = true;
           if (!isRotatedRight) {
-            TWEEN.removeAll();
+            //TWEEN.removeAll();
+            groupRun.removeAll();
             //tween.stop();
+            groupRotate.removeAll();
             rotateTorso("right");
             isRotatedRight = true;
           }
@@ -297,8 +304,10 @@ function init() {
         if (event.keyCode == 65) {
           isWalking = true;
           if (isRotatedRight) {
-            TWEEN.removeAll();
+            //TWEEN.removeAll();
+            groupRun.removeAll();
             //tween.stop();
+            groupRotate.removeAll();
             rotateTorso("left");
             isRotatedRight = false;
           }
@@ -309,12 +318,23 @@ function init() {
         }
         if (event.keyCode == 32) {
           //SPACE
+          if (isRotatedRight) {
+            isJumpingRight = true;
+          } else {
+            isJumpingLeft = true;
+          }
+
           if (!spacePressed) {
-            //TWEEN.removeAll();
-            //tween.stop();
+            groupJump.removeAll();
             setIdlePosition();
             jump();
           }
+
+          //non funge -> risolvere il problema che quando salta e si gira rimane il braccio alzato
+          /*if (!(isJumpingLeft && isJumpingRight)) {
+            setIdlePosition(); 
+          }*/
+
           spacePressed = true;
         }
       });
@@ -323,7 +343,7 @@ function init() {
 
         if (event.keyCode == 68) {
           //D
-          /*if (aPressed) {
+          if (aPressed) {
             //isRotatedRight = false;
             dPressed = false;
           } else {
@@ -331,9 +351,10 @@ function init() {
             isWalking = false;
             tween.stop();
             tweenBack.stop();
-            setIdlePosition();
-          }*/
-          if (keysPressed[65]) {
+            //setIdlePosition();
+          }
+          setIdlePosition();
+          /*if (keysPressed[65]) {
             if (isRotatedRight) {
               rotateTorso("left");
               //performAnimation("left");
@@ -344,11 +365,11 @@ function init() {
             tween.stop();
             tweenBack.stop();
             setIdlePosition();
-          }
+          }*/
         }
         if (event.keyCode == 65) {
           //A
-          /*if (dPressed) {
+          if (dPressed) {
             aPressed = false;
             //isRotatedRight = true;
           } else {
@@ -356,8 +377,10 @@ function init() {
             isWalking = false;
             tween.stop();
             tweenBack.stop();
-            setIdlePosition();
-          }*/
+            //setIdlePosition();
+          }
+          setIdlePosition();
+          /*
           if (keysPressed[68]) {
             if (!isRotatedRight) {
               rotateTorso("right");
@@ -369,10 +392,11 @@ function init() {
             tween.stop();
             tweenBack.stop();
             setIdlePosition();
-          }
+          }*/
         }
         if (event.keyCode == 32) {
           spacePressed = false;
+          setIdlePosition();
         }
       });
 
@@ -570,6 +594,9 @@ function init() {
 
   function animate() {
     TWEEN.update();
+    groupRun.update();
+    groupJump.update();
+    groupRotate.update();
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
@@ -675,7 +702,7 @@ function setAnimationParameters() {
 }
 
 function performAnimation(direction) {
-  tween = new TWEEN.Tween(tweenStartScale)
+  tween = new TWEEN.Tween(tweenStartScale, groupRun)
     .to(tweenGoalScale, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -696,7 +723,7 @@ function performAnimation(direction) {
     })
     .start();
 
-  tweenBack = new TWEEN.Tween(tweenStartScale)
+  tweenBack = new TWEEN.Tween(tweenStartScale, groupRun)
     .to(tweenBackScale, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -734,7 +761,7 @@ function rotateTorso(direction) {
     y_rightRotation: (0 * Math.PI) / 180,
   };
   if (direction == "left") {
-    var tweenLeft = new TWEEN.Tween(tweenStartLeft)
+    var tweenLeft = new TWEEN.Tween(tweenStartLeft, groupRotate)
       .to(tweenGoalLeft, 500)
       .easing(TWEEN.Easing.Linear.None)
       .onUpdate(function () {
@@ -743,7 +770,7 @@ function rotateTorso(direction) {
       .start();
   }
   if (direction == "right") {
-    var tweenRight = new TWEEN.Tween(tweenStartRight)
+    var tweenRight = new TWEEN.Tween(tweenStartRight, groupRotate)
       .to(tweenGoalRight, 500)
       .easing(TWEEN.Easing.Linear.None)
       .onUpdate(function () {
@@ -780,12 +807,12 @@ function jump() {
     thumb1_y: (66.5 * Math.PI) / 180,
     thumb2_x: (0 * Math.PI) / 180,
   };
-  var tweenJump = new TWEEN.Tween(tweenStartJump)
-    .to(tweenGoalJump, 500)
+  var tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
+    .to(tweenGoalJump, 3000)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
-      if (isRotatedRight) {
+      if (isRotatedRight && isJumpingRight) {
         upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
         handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
         finger1_right.rotation.x = tweenStartJump.finger_x;
@@ -796,7 +823,8 @@ function jump() {
         finger3_2_right.rotation.x = tweenStartJump.finger_x;
         thumb2_right.rotation.x = tweenStartJump.finger_x;
         thumb1_right.rotation.y = tweenStartJump.thumb1_y;
-      } else {
+      }
+      if (!isRotatedRight && isJumpingLeft) {
         upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
         finger1_left.rotation.x = tweenStartJump.finger_x;
@@ -813,12 +841,12 @@ function jump() {
       //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     })
     .start();
-  var tweenJumpBack = new TWEEN.Tween(tweenStartJump)
-    .to(tweenGoalJumpBack, 500)
+  var tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
+    .to(tweenGoalJumpBack, 3000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
-      if (isRotatedRight) {
+      if (isRotatedRight && isJumpingRight) {
         upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
         handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
         finger1_right.rotation.x = tweenStartJump.finger_x;
@@ -829,7 +857,8 @@ function jump() {
         finger3_2_right.rotation.x = tweenStartJump.finger_x;
         thumb2_right.rotation.x = tweenStartJump.finger_x;
         thumb1_right.rotation.y = tweenStartJump.thumb1_y;
-      } else {
+      }
+      if (!isRotatedRight && isJumpingLeft) {
         upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
         finger1_left.rotation.x = tweenStartJump.finger_x;
@@ -843,19 +872,25 @@ function jump() {
       }
 
       //upperArm_right.rotation.x = (0 * Math.PI) / 180;
+    })
+    .onComplete(function () {
+      isJumpingLeft = false;
+      isJumpingRight = false;
+      //setIdlePosition();
     });
   tweenJump.chain(tweenJumpBack);
 }
 
 function setIdlePosition() {
   var tween_idle = new TWEEN.Tween(tweenStartScale)
-    .to(tweenIdle, 1000)
+    .to(tweenIdle, 500)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
+      //mettere a posto anche le dita
     })
     .start();
 }
