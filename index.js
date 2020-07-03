@@ -507,7 +507,7 @@ function init() {
 
       scene.add(powerUp);
     });
-  }
+  } 
 
   //FLAGPOLE
 
@@ -519,8 +519,8 @@ function init() {
     gltfLoader.load(url_flagpole, (gltf) => {
       flagpole = gltf.scene;
       flagpole.name = "flagpole";
-      flagpole.position.set(0, 0, -650);
-      flagpole.scale.set(10, 10, 10);
+      flagpole.position.set(0, 10, -630);
+      flagpole.scale.set(1000, 1000, 1000);
 
       flagpole.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
@@ -532,7 +532,7 @@ function init() {
       flagpole.castShadow = true;
       flagpole.receiveShadow = true;
 
-      flagpole.rotation.x = (-90 * Math.PI) / 180;
+      flagpole.rotation.z = (-45 * Math.PI) / 180;
 
       scene.add(flagpole);
     });
