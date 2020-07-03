@@ -45,6 +45,8 @@ var tween;
 var tweenBack;
 
 var yoshi;
+var mario;
+var luigi;
 var brick;
 var castle;
 var pipe;
@@ -139,6 +141,7 @@ function init() {
   }
 
   var gltfLoader = new GLTFLoader();
+
   yoshi = new THREE.Scene();
   {
     const url_yoshi = "models/yoshi/scene.gltf";
@@ -404,6 +407,92 @@ function init() {
       requestAnimationFrame(animate);
     });
   }
+
+  /*
+  //MARIO
+
+  mario = new THREE.Scene();
+  {
+    const url_mario = "models/mario/scene.gltf";
+    gltfLoader.load(url_mario, (gltf) => {
+      mario = gltf.scene;
+      mario.name = "mario";
+      mario.position.set(0, -14.1, -620);
+      mario.scale.set(7, 7, 7);
+
+      mario.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+        //if (child.material) child.material.metalness = 0;
+      });
+      mario.castShadow = true;
+      mario.receiveShadow = true;
+
+      //console.log(dumpObject(mario).join("\n"));
+
+      head = mario.getObjectByName(yoshi_dic.Head);
+      torso = mario.getObjectByName(yoshi_dic.Torso);
+      upperArm_right = mario.getObjectByName(yoshi_dic.UpperArm_right);
+      upperArm_left = mario.getObjectByName(yoshi_dic.UpperArm_left);
+      upperLeg_right = mario.getObjectByName(yoshi_dic.UpperLeg_right);
+      upperLeg_left = mario.getObjectByName(yoshi_dic.UpperLeg_left);
+      handRight = mario.getObjectByName(yoshi_dic.Hand_right);
+
+      upperArm_right.rotation.z = (45 * Math.PI) / 180;
+      upperArm_left.rotation.z = (45 * Math.PI) / 180;
+      upperArm_right.rotation.x = (0 * Math.PI) / 180;
+      upperArm_left.rotation.x = (0 * Math.PI) / 180;
+      upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+      upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
+
+      scene.add(mario);
+    });
+  }
+
+  //LUIGI
+
+  luigi = new THREE.Scene();
+  {
+    const url_luigi = "models/luigi/scene.gltf";
+    gltfLoader.load(url_luigi, (gltf) => {
+      luigi = gltf.scene;
+      luigi.name = "luigi";
+      luigi.position.set(0, -14.1, -640);
+      luigi.scale.set(0.8, 0.8, 0.8);
+
+      luigi.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+        //if (child.material) child.material.metalness = 0;
+      });
+      luigi.castShadow = true;
+      luigi.receiveShadow = true;
+
+      console.log(dumpObject(luigi).join("\n"));
+
+      head = luigi.getObjectByName(yoshi_dic.Head);
+      torso = luigi.getObjectByName(yoshi_dic.Torso);
+      upperArm_right = luigi.getObjectByName(yoshi_dic.UpperArm_right);
+      upperArm_left = luigi.getObjectByName(yoshi_dic.UpperArm_left);
+      upperLeg_right = luigi.getObjectByName(yoshi_dic.UpperLeg_right);
+      upperLeg_left = luigi.getObjectByName(yoshi_dic.UpperLeg_left);
+      handRight = luigi.getObjectByName(yoshi_dic.Hand_right);
+      thumb1_right = luigi.getObjectByName(yoshi_dic.Thumb1_right);
+      thumb2_right = luigi.getObjectByName(yoshi_dic.Thumb2_right);
+      finger1_right = luigi.getObjectByName(yoshi_dic.Finger1_right);
+      finger1_2_right = luigi.getObjectByName(yoshi_dic.Finger1_2_right);
+      finger2_right = luigi.getObjectByName(yoshi_dic.Finger2_right);
+      finger2_2_right = luigi.getObjectByName(yoshi_dic.Finger2_2_right);
+      finger3_right = luigi.getObjectByName(yoshi_dic.Finger3_right);
+      finger3_2_right = luigi.getObjectByName(yoshi_dic.Finger3_2_right);
+
+      scene.add(luigi);
+    });
+  } */
 
   brick = new THREE.Scene();
   {
