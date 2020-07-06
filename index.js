@@ -769,6 +769,12 @@ function setAnimationParameters() {
     x_right: upperLeg_right.rotation.x,
     x_leftArm: upperArm_left.rotation.x,
     x_rightArm: upperArm_right.rotation.x,
+    rightArm_rotation_z: (45 * Math.PI) / 180,
+    //rightArm_rotation_x: (0 * Math.PI) / 180,
+    rightHand_rotation_y: handRight.rotation.y,
+    finger_x: finger1_right.rotation.x,
+    thumb1_y: thumb1_right.rotation.y,
+    thumb2_x: thumb2_right.rotation.x,
   };
   tweenGoalScale = {
     x_left: (-225 * Math.PI) / 180,
@@ -787,6 +793,12 @@ function setAnimationParameters() {
     x_right: (0 * Math.PI) / 180,
     x_leftArm: (0 * Math.PI) / 180,
     x_rightArm: (0 * Math.PI) / 180,
+
+    rightArm_rotation_z: (45 * Math.PI) / 180,
+    rightHand_rotation_y: (90 * Math.PI) / 180,
+    finger_x: (0 * Math.PI) / 180,
+    thumb1_y: (66.5 * Math.PI) / 180,
+    thumb2_x: (0 * Math.PI) / 180,
   };
 }
 
@@ -897,7 +909,7 @@ function jump() {
     thumb2_x: (0 * Math.PI) / 180,
   };
   var tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJump, 3000)
+    .to(tweenGoalJump, 500)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
@@ -931,7 +943,7 @@ function jump() {
     })
     .start();
   var tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJumpBack, 3000)
+    .to(tweenGoalJumpBack, 500)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
@@ -980,6 +992,28 @@ function setIdlePosition() {
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
       //mettere a posto anche le dita
+
+      upperArm_right.rotation.z = tweenStartScale.rightArm_rotation_z;
+      handRight.rotation.y = tweenStartScale.rightHand_rotation_y;
+      finger1_right.rotation.x = tweenStartScale.finger_x;
+      finger1_2_right.rotation.x = tweenStartScale.finger_x;
+      finger2_right.rotation.x = tweenStartScale.finger_x;
+      finger2_2_right.rotation.x = tweenStartScale.finger_x;
+      finger3_right.rotation.x = tweenStartScale.finger_x;
+      finger3_2_right.rotation.x = tweenStartScale.finger_x;
+      thumb2_right.rotation.x = tweenStartScale.finger_x;
+      thumb1_right.rotation.y = tweenStartScale.thumb1_y;
+
+      upperArm_left.rotation.z = tweenStartScale.rightArm_rotation_z;
+      handLeft.rotation.y = tweenStartScale.rightHand_rotation_y;
+      finger1_left.rotation.x = tweenStartScale.finger_x;
+      finger1_2_left.rotation.x = tweenStartScale.finger_x;
+      finger2_left.rotation.x = tweenStartScale.finger_x;
+      finger2_2_left.rotation.x = tweenStartScale.finger_x;
+      finger3_left.rotation.x = tweenStartScale.finger_x;
+      finger3_2_left.rotation.x = tweenStartScale.finger_x;
+      thumb2_left.rotation.x = tweenStartScale.finger_x;
+      thumb1_left.rotation.y = tweenStartScale.thumb1_y;
     })
     .start();
 }
