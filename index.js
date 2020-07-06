@@ -283,7 +283,7 @@ function init() {
         }
       }*/
 
-      document.addEventListener("keydown", (event) => {
+      /*document.addEventListener("keydown", (event) => {
         keysPressed[event.keyCode] = true;
 
         if (event.keyCode == 68) {
@@ -333,10 +333,6 @@ function init() {
             jump();
           }
 
-          //non funge -> risolvere il problema che quando salta e si gira rimane il braccio alzato
-          /*if (!(isJumpingLeft && isJumpingRight)) {
-            setIdlePosition(); 
-          }*/
 
           spacePressed = true;
         }
@@ -353,23 +349,12 @@ function init() {
             dPressed = false;
             aPressed = false;
             isWalking = false;
-            tween.stop();
-            tweenBack.stop();
+            //tween.stop();
+            //tweenBack.stop();
             //setIdlePosition();
           }
           setIdlePosition();
-          /*if (keysPressed[65]) {
-            if (isRotatedRight) {
-              rotateTorso("left");
-              //performAnimation("left");
-            }
-          } else {
-            dPressed = false;
-            isWalking = false;
-            tween.stop();
-            tweenBack.stop();
-            setIdlePosition();
-          }*/
+      
         }
         if (event.keyCode == 65) {
           //A
@@ -380,28 +365,127 @@ function init() {
             aPressed = false;
             dPressed = false;
             isWalking = false;
-            tween.stop();
-            tweenBack.stop();
+            //tween.stop();
+            //tweenBack.stop();
             //setIdlePosition();
           }
           setIdlePosition();
-          /*
-          if (keysPressed[68]) {
-            if (!isRotatedRight) {
-              rotateTorso("right");
-              //performAnimation("right");
-            }
-          } else {
-            aPressed = false;
-            isWalking = false;
-            tween.stop();
-            tweenBack.stop();
-            setIdlePosition();
-          }*/
+   
         }
         if (event.keyCode == 32) {
           spacePressed = false;
           setIdlePosition();
+        }
+      });
+
+      setAnimationParameters();
+      requestAnimationFrame(animate);
+    });
+  }*/
+
+      document.addEventListener("keydown", (event) => {
+        keysPressed[event.keyCode] = true;
+        switch (event.which) {
+          case 68:
+            isWalking = true;
+            if (!isRotatedRight) {
+              //TWEEN.removeAll();
+              groupRun.removeAll();
+              //tween.stop();
+              groupRotate.removeAll();
+              rotateTorso("right");
+              isRotatedRight = true;
+            }
+            if (!dPressed && isWalking) {
+              performAnimation("right");
+            }
+            dPressed = true;
+            console.log("dPressed = " + dPressed);
+            break;
+
+          case 65:
+            isWalking = true;
+            if (isRotatedRight) {
+              //TWEEN.removeAll();
+              groupRun.removeAll();
+              //tween.stop();
+              groupRotate.removeAll();
+              rotateTorso("left");
+              isRotatedRight = false;
+            }
+            if (!aPressed && isWalking) {
+              performAnimation("left");
+            }
+            aPressed = true;
+            break;
+
+          case 32:
+            //SPACE
+            if (isRotatedRight) {
+              isJumpingRight = true;
+            } else {
+              isJumpingLeft = true;
+            }
+
+            if (!spacePressed) {
+              groupJump.removeAll();
+              setIdlePosition();
+              jump();
+            }
+            spacePressed = true;
+            break;
+        }
+      });
+
+      document.addEventListener("keyup", (event) => {
+        delete keysPressed[event.keyCode];
+        switch (event.which) {
+          case 68:
+            //D
+            groupRun.removeAll();
+            if (aPressed) {
+              //isRotatedRight = false;
+              dPressed = false;
+            } else {
+              dPressed = false;
+              aPressed = false;
+              isWalking = false;
+              //groupRun.removeAll();
+              //tween.stop();
+              //tweenBack.stop();
+              //setIdlePosition();
+            }
+            setIdlePosition();
+            console.log("(inside keyUp(D)) keysPressed[D] " + keysPressed[68]);
+            break;
+
+          case 65:
+            //A
+            groupRun.removeAll();
+
+            if (dPressed) {
+              aPressed = false;
+              //isRotatedRight = true;
+            } else {
+              aPressed = false;
+              //dPressed = false;
+              isWalking = false;
+              //groupRun.removeAll();
+              //tween.stop();
+              //tweenBack.stop();
+              //setIdlePosition();
+            }
+            dPressed = false;
+            console.log("(inside keyup(A)) dPressed = " + dPressed);
+            console.log(isWalking);
+            console.log("keyPressed[D] " + keysPressed[68]);
+            setIdlePosition();
+            break;
+
+          case 32:
+            spacePressed = false;
+            setIdlePosition();
+            break;
         }
       });
 
@@ -985,7 +1069,7 @@ function jump() {
 }
 
 function setIdlePosition() {
-  groupRun.removeAll();
+  //groupRun.removeAll();
   var tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 500)
     .easing(TWEEN.Easing.Linear.None)
