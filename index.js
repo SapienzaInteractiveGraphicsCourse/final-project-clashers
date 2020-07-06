@@ -61,6 +61,7 @@ var aPressed = false;
 var spacePressed = false;
 var isRotatedRight = true;
 var isWalking = false;
+var isJumping = false;
 var isJumpingLeft = false;
 var isJumpingRight = false;
 var dirLight;
@@ -427,10 +428,11 @@ function init() {
               isJumpingLeft = true;
             }
 
-            if (!spacePressed) {
+            if (!spacePressed && !isJumping) {
               groupJump.removeAll();
               setIdlePosition();
               jump();
+              isJumping = true;
             }
             spacePressed = true;
             break;
@@ -512,6 +514,7 @@ function init() {
 
           case 32:
             spacePressed = false;
+            //isJumping = false;
             setIdlePosition();
             break;
         }
@@ -1089,8 +1092,8 @@ function jump() {
       //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     })
     .onComplete(function () {
-      isJumpingLeft = false;
       isJumpingRight = false;
+      isJumpingLeft = false;
       //setIdlePosition();
     });
   tweenJump.chain(tweenJumpBack);
