@@ -464,8 +464,8 @@ function init() {
               aPressed = false;
               isWalking = false;
               //groupRun.removeAll();
-              //tween.stop();
-              //tweenBack.stop();
+              tween.stop();
+              tweenBack.stop();
               //setIdlePosition();
             }
             setIdlePosition();
@@ -498,8 +498,8 @@ function init() {
               //dPressed = false;
               isWalking = false;
               //groupRun.removeAll();
-              //tween.stop();
-              //tweenBack.stop();
+              tween.stop();
+              tweenBack.stop();
               //setIdlePosition();
             }
             dPressed = false;
