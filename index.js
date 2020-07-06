@@ -468,6 +468,7 @@ function init() {
               tweenBack.stop();
               //setIdlePosition();
             }
+            aPressed = false;
             setIdlePosition();
             console.log("(inside keyUp(D)) keysPressed[D] " + keysPressed[68]);
             break;
