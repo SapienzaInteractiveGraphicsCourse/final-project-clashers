@@ -443,9 +443,22 @@ function init() {
           case 68:
             //D
             groupRun.removeAll();
-            if (aPressed) {
+            if (keysPressed[65]) {
               //isRotatedRight = false;
               dPressed = false;
+              isWalking = true;
+              if (isRotatedRight) {
+                //TWEEN.removeAll();
+                groupRun.removeAll();
+                //tween.stop();
+                groupRotate.removeAll();
+                rotateTorso("left");
+                isRotatedRight = false;
+              }
+              if (!aPressed && isWalking) {
+                performAnimation("left");
+              }
+              aPressed = true;
             } else {
               dPressed = false;
               aPressed = false;
@@ -463,8 +476,22 @@ function init() {
             //A
             groupRun.removeAll();
 
-            if (dPressed) {
+            if (keysPressed[68]) {
               aPressed = false;
+              //faccio ripartire la camminata verso destra
+              isWalking = true;
+              if (!isRotatedRight) {
+                //TWEEN.removeAll();
+                groupRun.removeAll();
+                //tween.stop();
+                groupRotate.removeAll();
+                rotateTorso("right");
+                isRotatedRight = true;
+              }
+              if (!dPressed && isWalking) {
+                performAnimation("right");
+              }
+              dPressed = true;
               //isRotatedRight = true;
             } else {
               aPressed = false;
