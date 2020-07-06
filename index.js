@@ -351,6 +351,7 @@ function init() {
             dPressed = false;
           } else {
             dPressed = false;
+            aPressed = false;
             isWalking = false;
             tween.stop();
             tweenBack.stop();
@@ -377,6 +378,7 @@ function init() {
             //isRotatedRight = true;
           } else {
             aPressed = false;
+            dPressed = false;
             isWalking = false;
             tween.stop();
             tweenBack.stop();
@@ -983,6 +985,7 @@ function jump() {
 }
 
 function setIdlePosition() {
+  groupRun.removeAll();
   var tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 500)
     .easing(TWEEN.Easing.Linear.None)
