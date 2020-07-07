@@ -5,6 +5,10 @@ import * as THREE from "./build/three.js-master/build/three.module.js";
 import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
+import * as Physijs from "./build/Physijs/physi.js";
+
+Physijs.scripts.worker = "./build/Physijs/physijs_worker.js";
+Physijs.scripts.ammo = "./build/Physijs/ammo.js";
 
 var head;
 var scene;
@@ -115,7 +119,8 @@ function init() {
 
   container.appendChild(renderer.domElement);
 
-  scene = new THREE.Scene();
+  //scene = new THREE.Scene();
+  scene = new Physijs.Scene();
   {
     const d = 100;
     const color = 0xffffff;
