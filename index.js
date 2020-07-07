@@ -1,14 +1,18 @@
 //file js
 "use strict";
 
-import * as THREE from "./build/three.js-master/build/three.module.js";
+//import * as THREE from "./build/three.js-master/build/three.module.js";
+/*import * as THREE from "./build/three.js-master/build/three.js";
 import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
-import * as Physijs from "./build/Physijs/physi.js";
+import * as Physijs from "./build/Physijs/physi.js";*/
+import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
+import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 
-Physijs.scripts.worker = "./build/Physijs/physijs_worker.js";
-Physijs.scripts.ammo = "./build/Physijs/ammo.js";
+Physijs.scripts.worker = "physijs_worker.js";
+Physijs.scripts.ammo = "ammo.js";
 
 var head;
 var scene;
