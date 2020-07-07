@@ -1,7 +1,7 @@
 //file js
 "use strict";
 
-//import * as THREE from "./build/three.js-master/build/three.module.js";
+import * as THREE from "./build/three.js-master/build/three.module.js";
 /*import * as THREE from "./build/three.js-master/build/three.js";
 import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
@@ -65,6 +65,7 @@ var flagpole;
 var coin;
 var powerUp;
 var questionBox;
+var ground;
 
 var camera;
 var dPressed = false;
@@ -99,6 +100,7 @@ function init() {
 
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  //renderer.shadowMapSoft = true; //aggiunto ora
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -125,6 +127,7 @@ function init() {
 
   //scene = new THREE.Scene();
   scene = new Physijs.Scene();
+  //scene.setGravity = new THREE.Vector3(0, -50, 0); //?
   {
     const d = 100;
     const color = 0xffffff;
@@ -156,6 +159,7 @@ function init() {
   var gltfLoader = new GLTFLoader();
 
   yoshi = new THREE.Scene();
+  //yoshi = new Physijs.Scene();
   {
     const url_yoshi = "models/yoshi/scene.gltf";
 
@@ -169,6 +173,7 @@ function init() {
         if (child instanceof THREE.Mesh) {
           child.castShadow = true;
           child.receiveShadow = true;
+          //child.layers.enable(1);
         }
       });
 
@@ -451,6 +456,7 @@ function init() {
   } */
 
   brick = new THREE.Scene();
+  //brick = new Physijs.Scene();
   {
     const url_brick = "models/brick_block/scene.gltf";
     gltfLoader.load(url_brick, (gltf) => {
@@ -664,6 +670,7 @@ var landscapeFunction = function () {
   terrainTexture.wrapT = THREE.RepeatWrapping;
   terrainTexture.repeat.set(window.innerWidth / 10, 2);
 
+  //var ground_material = Physijs.createMaterial(
   var material = [
     new THREE.MeshPhongMaterial({
       map: terrainTexture,
@@ -690,16 +697,22 @@ var landscapeFunction = function () {
       color: 0xd2b48c,
     }),
   ];
+  //);
 
-  this.mesh = new THREE.Mesh(geometry, material);
-  this.mesh.receiveShadow = true;
+  ground = new Physijs.BoxMesh(geometry, material, 0);
+  ground.receiveShadow = true;
+  //ground.layers.enable(1);
+  //this.mesh = new THREE.Mesh(geometry, material);
+  //this.mesh.receiveShadow = true;
 };
 
 function createLandscape() {
   landscape = new landscapeFunction();
-  landscape.mesh.position.y = -24;
+  ground.position.y = -24;
+  scene.add(ground);
+  //landscape.mesh.position.y = -24;
   //landscape.mesh.rotation.x = (0 * Math.PI) / 180;
-  scene.add(landscape.mesh);
+  //scene.add(landscape.mesh);
 }
 
 function createBgSky() {
