@@ -447,7 +447,7 @@ function init() {
     gltfLoader.load(url_brick, (gltf) => {
       brick = gltf.scene;
       brick.name = "brick";
-      brick.position.set(0, 0, -625);
+      brick.position.set(0, 4, -625);
       brick.scale.set(0.007, 0.007, 0.007);
 
       brick.traverse(function (child) {
@@ -867,7 +867,7 @@ function jump() {
     head: head.rotation.x,*/
     upperLeg_right: (-45 * Math.PI) / 180,
     upperLeg_left: (-225 * Math.PI) / 180,
-    lowerLeg: (45 * Math.PI) / 180,
+    lowerLeg: (75 * Math.PI) / 180,
     spine: (30 * Math.PI) / 180,
     head: (-15 * Math.PI) / 180,
   };
@@ -903,7 +903,7 @@ function jump() {
   var tweenGoalFlex = {
     upperLeg_right: (-45 * Math.PI) / 180,
     upperLeg_left: (-225 * Math.PI) / 180,
-    lowerLeg: (45 * Math.PI) / 180,
+    lowerLeg: (75 * Math.PI) / 180,
     spine: (30 * Math.PI) / 180,
     head: (-15 * Math.PI) / 180,
     y: -14.6,
@@ -917,7 +917,7 @@ function jump() {
     y: -14.3,
   };*/
   var tweenFlex = new TWEEN.Tween(tweenStartFlex, groupJump)
-    .to(tweenGoalFlex, 400)
+    .to(tweenGoalFlex, 200)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       upperLeg_right.rotation.x = tweenStartFlex.upperLeg_right;
@@ -944,9 +944,17 @@ function jump() {
   tweenFlex.chain(tweenFlexBack);*/
   var tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
     .to(tweenGoalJump, 400)
-    .easing(TWEEN.Easing.Linear.None)
+    .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
+      if (keysPressed[68]) {
+        yoshi.position.z += 0.3;
+        dirLight.position.z += 0.3;
+      }
+      if (keysPressed[65]) {
+        yoshi.position.z -= 0.3;
+        dirLight.position.z -= 0.3;
+      }
       upperLeg_right.rotation.x = tweenStartJump.upperLeg_right;
       upperLeg_left.rotation.x = tweenStartJump.upperLeg_left;
       lowerLeg_right.rotation.x = tweenStartJump.lowerLeg;
@@ -987,9 +995,17 @@ function jump() {
   tweenFlex.chain(tweenJump);
   var tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
     .to(tweenGoalJumpBack, 400)
-    .easing(TWEEN.Easing.Linear.None)
+    .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       yoshi.position.y = tweenStartJump.y;
+      if (keysPressed[68]) {
+        yoshi.position.z += 0.3;
+        dirLight.position.z += 0.3;
+      }
+      if (keysPressed[65]) {
+        yoshi.position.z -= 0.3;
+        dirLight.position.z -= 0.3;
+      }
       if (isRotatedRight && isJumpingRight) {
         upperArm_right.rotation.x = (0 * Math.PI) / 180;
         upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
