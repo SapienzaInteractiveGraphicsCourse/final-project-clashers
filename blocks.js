@@ -93,16 +93,16 @@ function createGroup4() {
   group4[2].position.set(0, 24, -240 + 5.5 * 2);
   group4[8].position.set(0, 25.2, -238 + 5.5 * 3);
 
-  group4[9].position.set(0, 25.2, -188);
+  group4[9].position.set(0, 25.2, -182);
 
   group4[3].position.set(0, 24, -142.5);
   group4[4].position.set(0, 24, -142.5 + 5.5);
   group4[5].position.set(0, 24, -142.5 + 5.5 * 2);
 
   group4[6].position.set(0, 24, -102.5);
-  group4[7].position.set(0, 24, -102.5 + 5.5 * 4.5);
-  group4[10].position.set(0, 25.2, -150 + 5.5 * 4.5 * 2);
-  group4[11].position.set(0, 25.2, -150 + 5.5 * 11);
+  group4[7].position.set(0, 24, -102.5 + 5.5 * 3.3);
+  group4[10].position.set(0, 25.2, -95);
+  group4[11].position.set(0, 25.2, -95 + 5.5);
 }
 
 function createGroup5() {
