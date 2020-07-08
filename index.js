@@ -391,7 +391,7 @@ function init() {
     gltfLoader.load(url_brick, (gltf) => {
       brick = gltf.scene;
       brick.name = "brick";
-      brick.position.set(0, 4, -625);
+      brick.position.set(0, 5, -625);
       brick.scale.set(0.007, 0.007, 0.007);
 
       brick.traverse(function (child) {
@@ -486,6 +486,7 @@ function init() {
       scene.add(coin);
     });
   }
+  */
 
   //QUESTION BOX
 
@@ -495,7 +496,7 @@ function init() {
     gltfLoader.load(url_questionBox, (gltf) => {
       questionBox = gltf.scene;
       questionBox.name = "questionBox";
-      questionBox.position.set(0, 1.3, -618);
+      questionBox.position.set(0, 6.3, -618);
       questionBox.scale.set(0.03, 0.03, 0.03);
 
       questionBox.traverse(function (child) {
@@ -511,7 +512,7 @@ function init() {
       scene.add(questionBox);
     });
   }
-
+  /*
   // POWER UP
 
   powerUp = new THREE.Scene();
@@ -823,7 +824,7 @@ function jump() {
     head: (-15 * Math.PI) / 180,
   };
   var tweenGoalJump = {
-    y: -2,
+    y: -3,
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
