@@ -95,7 +95,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, -620);
+      yoshi.position.set(0, -14.3, -320); //-620
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -405,6 +405,7 @@ function init() {
         brick.castShadow = true;
         brick.receiveShadow = true;
         //scene.add(brick);
+        createGroup3();
       });
     }
 
@@ -514,6 +515,9 @@ function init() {
 
         scene.add(questionBox);
         createGroup1();
+        createGroup2();
+        createGroup4();
+        createGroup5();
       });
     }
     /*
