@@ -520,6 +520,33 @@ function init() {
         createGroup5();
       });
     }
+
+    emptyBlock = new THREE.Scene();
+    {
+      const url_emptyBlock = "models/empty_block/scene.gltf";
+      gltfLoader.load(url_emptyBlock, (gltf) => {
+        emptyBlock = gltf.scene;
+        emptyBlock.name = "emptyBlock";
+        emptyBlock.position.set(0, -11.2, -60);
+        emptyBlock.scale.set(0.55, 0.55, 0.55);
+
+        emptyBlock.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            //child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        emptyBlock.castShadow = true;
+        emptyBlock.receiveShadow = true;
+
+        //scene.add(emptyBlock);
+        createGroupStairs(-60, 4);
+        createGroupStairsReverse(-30, 4);
+        createGroupStairs(20, 5);
+        createGroupStairsReverse(55, 5);
+      });
+    }
     /*
   // POWER UP
 

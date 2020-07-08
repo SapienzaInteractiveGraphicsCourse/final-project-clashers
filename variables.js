@@ -45,6 +45,7 @@ var yoshi;
 var mario;
 var luigi;
 var brick;
+var emptyBlock;
 var castle;
 var pipe;
 var flagpole;
