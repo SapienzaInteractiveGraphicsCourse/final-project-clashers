@@ -35,7 +35,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = -650; //0
+  const cameraZ = -620; //0
 
   //controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -95,7 +95,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, -650);
+      yoshi.position.set(0, -14.3, -620);
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
