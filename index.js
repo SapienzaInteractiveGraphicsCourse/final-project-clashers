@@ -37,10 +37,10 @@ function init() {
   const cameraY = 0; //0
   const cameraZ = -620; //0
 
-  //controls = new OrbitControls(camera, renderer.domElement);
+  controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
   camera.updateProjectionMatrix();
-  //controls.update();
+  controls.update();
 
   window.addEventListener(
     "resize",
@@ -62,7 +62,7 @@ function init() {
     const color = 0xffffff;
     const intensity = 1;
     dirLight = new THREE.DirectionalLight(color, intensity, 100);
-    dirLight.position.set(0, 100, -650);
+    dirLight.position.set(0, 100, -620);
     dirLight.castShadow = true;
 
     dirLight.shadow.mapSize.width = 512;
@@ -109,7 +109,7 @@ function init() {
       yoshi.castShadow = true;
       yoshi.receiveShadow = true;
 
-      console.log(dumpObject(yoshi).join("\n"));
+      //console.log(dumpObject(yoshi).join("\n"));
 
       head = yoshi.getObjectByName(yoshi_dic.Head);
       torso = yoshi.getObjectByName(yoshi_dic.Torso);
@@ -384,135 +384,139 @@ function init() {
     });
   } */
 
-  brick = new THREE.Scene();
-  //brick = new Physijs.Scene();
-  {
-    const url_brick = "models/brick_block/scene.gltf";
-    gltfLoader.load(url_brick, (gltf) => {
-      brick = gltf.scene;
-      brick.name = "brick";
-      brick.position.set(0, 5, -600);
-      brick.scale.set(0.007, 0.007, 0.007);
+  function loadModels() {
+    brick = new THREE.Scene();
+    //brick = new Physijs.Scene();
+    {
+      const url_brick = "models/brick_block/scene.gltf";
+      gltfLoader.load(url_brick, (gltf) => {
+        brick = gltf.scene;
+        brick.name = "brick";
+        //brick.position.set(0, 5, -570);
+        brick.scale.set(0.007, 0.007, 0.007);
 
-      brick.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        if (child.material) child.material.metalness = 0;
+        brick.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            //child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        brick.castShadow = true;
+        brick.receiveShadow = true;
+        //scene.add(brick);
       });
-      brick.castShadow = true;
-      brick.receiveShadow = true;
-      scene.add(brick);
-    });
-  }
+    }
 
-  //CASTLE
+    //CASTLE
 
-  castle = new THREE.Scene();
-  {
-    const url_castle = "models/castle/scene.gltf";
-    gltfLoader.load(url_castle, (gltf) => {
-      castle = gltf.scene;
-      castle.name = "castle";
-      castle.position.set(17, -14.1, 600);
-      castle.scale.set(0.01, 0.01, 0.01);
+    castle = new THREE.Scene();
+    {
+      const url_castle = "models/castle/scene.gltf";
+      gltfLoader.load(url_castle, (gltf) => {
+        castle = gltf.scene;
+        castle.name = "castle";
+        castle.position.set(17, -14.1, 600);
+        castle.scale.set(0.01, 0.01, 0.01);
 
-      castle.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        if (child.material) child.material.metalness = 0;
+        castle.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        castle.castShadow = true;
+        castle.receiveShadow = true;
+
+        castle.rotation.y = (-90 * Math.PI) / 180;
+
+        scene.add(castle);
       });
-      castle.castShadow = true;
-      castle.receiveShadow = true;
+    }
 
-      castle.rotation.y = (-90 * Math.PI) / 180;
+    //PIPE
 
-      scene.add(castle);
-    });
-  }
-  /*
-  //PIPE
+    pipe = new THREE.Scene();
+    {
+      const url_pipe = "models/pipe/scene.gltf";
+      gltfLoader.load(url_pipe, (gltf) => {
+        pipe = gltf.scene;
+        pipe.name = "pipe";
+        pipe.position.set(0, -14.1, -680);
+        pipe.scale.set(0.3, 0.3, 0.3);
 
-  pipe = new THREE.Scene();
-  {
-    const url_pipe = "models/pipe/scene.gltf";
-    gltfLoader.load(url_pipe, (gltf) => {
-      pipe = gltf.scene;
-      pipe.name = "pipe";
-      pipe.position.set(0, -14.1, -680);
-      pipe.scale.set(0.3, 0.3, 0.3);
+        pipe.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+          if (child.material) {
+            child.material.metalness = 0.2;
+            //child.material.shininess = 50.5;
+          }
+        });
+        pipe.castShadow = true;
+        pipe.receiveShadow = true;
 
-      pipe.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        if (child.material) child.material.metalness = 0.3;
+        //scene.add(pipe);
+        createGroupPipes();
       });
-      pipe.castShadow = true;
-      pipe.receiveShadow = true;
+    }
 
-      scene.add(pipe);
-    });
-  }
+    // COIN
 
-  // COIN
+    coin = new THREE.Scene();
+    {
+      const url_coin = "models/coin/scene.gltf";
+      gltfLoader.load(url_coin, (gltf) => {
+        coin = gltf.scene;
+        coin.name = "coin";
+        coin.position.set(0, 15, -570);
+        coin.scale.set(5, 5, 5);
 
-  coin = new THREE.Scene();
-  {
-    const url_coin = "models/coin/scene.gltf";
-    gltfLoader.load(url_coin, (gltf) => {
-      coin = gltf.scene;
-      coin.name = "coin";
-      coin.position.set(0, 10, -623.8);
-      coin.scale.set(5, 5, 5);
+        coin.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            //child.receiveShadow = true;
+          }
+          if (child.material) {
+            child.material.metalness = 0;
+          }
+        });
+        coin.castShadow = true;
+        coin.receiveShadow = true;
 
-      coin.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        if (child.material) {
-          child.material.metalness = 0;
-          child.material.specular = 0;
-        }
+        //scene.add(coin);
       });
-      coin.castShadow = true;
-      coin.receiveShadow = true;
+    }
 
-      scene.add(coin);
-    });
-  }
-  */
+    //QUESTION BOX
 
-  //QUESTION BOX
+    questionBox = new THREE.Scene();
+    {
+      const url_questionBox = "models/question_box/scene.gltf";
+      gltfLoader.load(url_questionBox, (gltf) => {
+        questionBox = gltf.scene;
+        questionBox.name = "questionBox";
+        questionBox.position.set(0, 6.2, -600);
+        questionBox.scale.set(0.031, 0.031, 0.031);
 
-  questionBox = new THREE.Scene();
-  {
-    const url_questionBox = "models/question_box/scene.gltf";
-    gltfLoader.load(url_questionBox, (gltf) => {
-      questionBox = gltf.scene;
-      questionBox.name = "questionBox";
-      questionBox.position.set(0, 6.2, -618);
-      questionBox.scale.set(0.031, 0.031, 0.031);
+        questionBox.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            //child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        questionBox.castShadow = true;
+        questionBox.receiveShadow = true;
 
-      questionBox.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        if (child.material) child.material.metalness = 0;
+        scene.add(questionBox);
+        createGroup1();
       });
-      questionBox.castShadow = true;
-      questionBox.receiveShadow = true;
-
-      scene.add(questionBox);
-    });
-  }
-  /*
+    }
+    /*
   // POWER UP
 
   powerUp = new THREE.Scene();
@@ -568,10 +572,12 @@ function init() {
       scene.add(flagpole);
     });
   } */
+  }
 
   scene.add(camera);
   createLandscape();
   createBgSky();
+  loadModels();
 
   function animate() {
     TWEEN.update();
@@ -581,11 +587,17 @@ function init() {
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
-    //controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
-    //controls.update();
+    controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+    controls.update();
     renderer.render(scene, camera);
   }
 }
+
+/*function createBlocks() {
+  var brickClone = brick.clone();
+  brickClone.position.set(0, 5, -550);
+  scene.add(brickClone);
+}*/
 
 var landscapeFunction = function () {
   var geometry = new THREE.BoxGeometry(50, 20, 1500);
@@ -734,7 +746,7 @@ function performAnimation(direction) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += yoshi.position.z - camera.position.z;
-      //controls.update();
+      controls.update();
     })
     .start();
 
@@ -758,7 +770,7 @@ function performAnimation(direction) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += yoshi.position.z - camera.position.z;
-      //controls.update();
+      controls.update();
     })
     .yoyo(true)
     .repeat(Infinity);
