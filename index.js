@@ -37,10 +37,10 @@ function init() {
   const cameraY = 0; //0
   const cameraZ = -650; //0
 
-  controls = new OrbitControls(camera, renderer.domElement);
+  //controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
   camera.updateProjectionMatrix();
-  controls.update();
+  //controls.update();
 
   window.addEventListener(
     "resize",
@@ -391,7 +391,7 @@ function init() {
     gltfLoader.load(url_brick, (gltf) => {
       brick = gltf.scene;
       brick.name = "brick";
-      brick.position.set(0, 5, -625);
+      brick.position.set(0, 5, -600);
       brick.scale.set(0.007, 0.007, 0.007);
 
       brick.traverse(function (child) {
@@ -496,8 +496,8 @@ function init() {
     gltfLoader.load(url_questionBox, (gltf) => {
       questionBox = gltf.scene;
       questionBox.name = "questionBox";
-      questionBox.position.set(0, 6.3, -618);
-      questionBox.scale.set(0.03, 0.03, 0.03);
+      questionBox.position.set(0, 6.2, -618);
+      questionBox.scale.set(0.031, 0.031, 0.031);
 
       questionBox.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
@@ -581,8 +581,8 @@ function init() {
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
-    controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
-    controls.update();
+    //controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+    //controls.update();
     renderer.render(scene, camera);
   }
 }
@@ -734,7 +734,7 @@ function performAnimation(direction) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += yoshi.position.z - camera.position.z;
-      controls.update();
+      //controls.update();
     })
     .start();
 
@@ -758,7 +758,7 @@ function performAnimation(direction) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += yoshi.position.z - camera.position.z;
-      controls.update();
+      //controls.update();
     })
     .yoyo(true)
     .repeat(Infinity);
