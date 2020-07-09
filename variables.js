@@ -70,3 +70,4 @@ var keysPressed = {};
 
 var yoshiBox;
 var questionBoxContainer;
+var geometryMaterial;

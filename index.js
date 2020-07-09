@@ -95,7 +95,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, -600); //-620
+      yoshi.position.set(0, -14.3, -620); //-620
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -298,7 +298,7 @@ function init() {
     });
   }
 
-  var geometryMaterial = new THREE.MeshBasicMaterial({
+  geometryMaterial = new THREE.MeshBasicMaterial({
     transparent: true,
     opacity: 0.5,
   });
@@ -315,7 +315,7 @@ function init() {
     scene.add(yoshiBox);
   }
 
-  function setQuestionBoxGeometry() {
+  /* function setQuestionBoxGeometry(questionBoxElem) {
     var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
     questionBoxContainer = new Physijs.BoxMesh(
       questionBoxGeometry,
@@ -323,12 +323,12 @@ function init() {
       0
     );
     questionBoxContainer.position.set(
-      questionBox.position.x,
-      questionBox.position.y + 3.1,
-      questionBox.position.z
+      questionBoxElem.position.x,
+      questionBoxElem.position.y + 3.1,
+      questionBoxElem.position.z
     );
     scene.add(questionBoxContainer);
-  }
+  } */
 
   /*
   //MARIO
@@ -579,7 +579,7 @@ function init() {
         createGroup4();
         createGroup5();
         createGroup6();
-        setQuestionBoxGeometry();
+        setQuestionBoxGeometry(questionBox);
       });
     }
 

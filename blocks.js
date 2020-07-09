@@ -16,12 +16,15 @@ function createGroup1() {
     brickClone.position.set(0, 5, -570 + 5.5 * 2.25 * i);
     scene.add(brickClone);
     group1.push(brickClone);
+    setBrickGeometry(brickClone);
   }
+
   for (var i = 0; i < 2; i++) {
     questionBoxClone = questionBox.clone();
     questionBoxClone.position.set(0, 6.2, -562.5 + 5.5 * 2.25 * i);
     scene.add(questionBoxClone);
     group1.push(questionBoxClone);
+    setQuestionBoxGeometry(questionBoxClone);
   }
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
@@ -43,6 +46,8 @@ function createGroupPipes() {
   pipes[1].scale.set(0.3, 0.3, 0.3);
   pipes[2].scale.set(0.3, 0.4, 0.3);
   pipes[3].scale.set(0.3, 0.5, 0.3);
+
+  setPipeGeometry(pipes[0]);
 }
 
 function createGroup2() {
@@ -53,12 +58,14 @@ function createGroup2() {
     brickClone.position.set(0, 5, -320 + 5.5 * 2.25 * i);
     scene.add(brickClone);
     group2.push(brickClone);
+    setBrickGeometry(brickClone);
   }
   for (var i = 0; i < 2; i++) {
     questionBoxClone = questionBox.clone();
     questionBoxClone.position.set(0, 6.2, -360.5 + 5.5 * 8.72 * i);
     scene.add(questionBoxClone);
     group2.push(questionBoxClone);
+    setQuestionBoxGeometry(questionBoxClone);
   }
 }
 
@@ -69,6 +76,7 @@ function createGroup3() {
     brickClone.position.set(0, 24, -300 + 5.5 * i);
     scene.add(brickClone);
     group3.push(brickClone);
+    setBrickGeometry(brickClone);
   }
 }
 
@@ -101,6 +109,14 @@ function createGroup4() {
   group4[7].position.set(0, 24, -102.5 + 18.15);
   group4[10].position.set(0, 25.2, -94.9);
   group4[11].position.set(0, 25.2, -94.9 + 5.5);
+
+  for (var i = 0; i < 8; i++) {
+    setBrickGeometry(group4[i]);
+  }
+
+  for (var i = 8; i < 12; i++) {
+    setQuestionBoxGeometry(group4[i]);
+  }
 }
 
 function createGroup5() {
@@ -125,6 +141,13 @@ function createGroup5() {
 
   group5[1].position.set(0, 5, -95.5);
   group5[2].position.set(0, 5, -95.5 + 5.5);
+
+  for (var i = 0; i < 3; i++) {
+    setBrickGeometry(group5[i]);
+  }
+  for (var i = 3; i < 6; i++) {
+    setQuestionBoxGeometry(group5[i]);
+  }
 }
 
 function createGroupStairs(start, width) {
@@ -506,4 +529,47 @@ function createGroup6() {
   questionBoxClone.position.set(0, 6.2, 148);
   scene.add(questionBoxClone);
   group6.push(questionBoxClone);
+
+  for (var i = 0; i < 3; i++) {
+    setBrickGeometry(group6[i]);
+  }
+
+  setQuestionBoxGeometry(questionBoxClone);
+}
+
+function setQuestionBoxGeometry(questionBoxElem) {
+  var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
+  questionBoxContainer = new Physijs.BoxMesh(
+    questionBoxGeometry,
+    geometryMaterial,
+    0
+  );
+  questionBoxContainer.position.set(
+    questionBoxElem.position.x,
+    questionBoxElem.position.y + 3.1,
+    questionBoxElem.position.z
+  );
+  scene.add(questionBoxContainer);
+}
+
+function setBrickGeometry(brickElem) {
+  var brickGeometry = new THREE.BoxGeometry(6.3, 6.2, 5.8);
+  brickContainer = new Physijs.BoxMesh(brickGeometry, geometryMaterial, 0);
+  brickContainer.position.set(
+    brickElem.position.x,
+    brickElem.position.y + 4.3,
+    brickElem.position.z + 1.2
+  );
+  scene.add(brickContainer);
+}
+
+function setPipeGeometry(pipeElem) {
+  var pipeGeometry = new THREE.BoxGeometry(6.3, 6.2, 5.8);
+  pipeContainer = new Physijs.BoxMesh(pipeGeometry, geometryMaterial, 0);
+  pipeContainer.position.set(
+    pipeElem.position.x,
+    pipeElem.position.y + 4.3,
+    pipeElem.position.z + 1.2
+  );
+  scene.add(pipeContainer);
 }
