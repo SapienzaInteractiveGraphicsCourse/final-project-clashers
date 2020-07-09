@@ -322,7 +322,6 @@ function init() {
       geometryMaterial,
       0
     );
-    //yoshiBox.position.set(0, -9.3, -600);
     questionBoxContainer.position.set(
       questionBox.position.x,
       questionBox.position.y + 3.1,
@@ -711,7 +710,7 @@ function init() {
 
         scene.add(flagpole);
 
-        console.log(dumpObject(flagpole).join("\n"));
+        //console.log(dumpObject(flagpole).join("\n"));
       });
     }
   }
