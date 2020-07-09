@@ -67,3 +67,6 @@ var dirLight;
 var ambientLight;
 var controls;
 var keysPressed = {};
+
+var yoshiBox;
+var questionBoxContainer;

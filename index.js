@@ -87,15 +87,15 @@ function init() {
 
   var gltfLoader = new GLTFLoader();
 
-  yoshi = new THREE.Scene();
-  //yoshi = new Physijs.Scene();
+  //yoshi = new THREE.Scene();
+  yoshi = new Physijs.Scene();
   {
     const url_yoshi = "models/yoshi/scene.gltf";
 
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, -620); //-620
+      yoshi.position.set(0, -14.3, -600); //-620
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -292,10 +292,43 @@ function init() {
             break;
         }
       });
-
+      setYoshiGeometry();
       setAnimationParameters();
       requestAnimationFrame(animate);
     });
+  }
+
+  var geometryMaterial = new THREE.MeshBasicMaterial({
+    transparent: true,
+    opacity: 0.5,
+  });
+
+  function setYoshiGeometry() {
+    var yoshiGeometry = new THREE.BoxGeometry(7.5, 10.2, 6.3);
+    yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 0);
+    //yoshiBox.position.set(0, -9.3, -600);
+    yoshiBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 5,
+      yoshi.position.z
+    );
+    scene.add(yoshiBox);
+  }
+
+  function setQuestionBoxGeometry() {
+    var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
+    questionBoxContainer = new Physijs.BoxMesh(
+      questionBoxGeometry,
+      geometryMaterial,
+      0
+    );
+    //yoshiBox.position.set(0, -9.3, -600);
+    questionBoxContainer.position.set(
+      questionBox.position.x,
+      questionBox.position.y + 3.1,
+      questionBox.position.z
+    );
+    scene.add(questionBoxContainer);
   }
 
   /*
@@ -494,7 +527,7 @@ function init() {
 
     //QUESTION BOX
 
-    questionBox = new THREE.Scene();
+    /*questionBox = new THREE.Scene();
     {
       const url_questionBox = "models/question_box/scene.gltf";
       gltfLoader.load(url_questionBox, (gltf) => {
@@ -520,7 +553,44 @@ function init() {
         createGroup5();
         createGroup6();
       });
+    }*/
+
+    questionBox = new Physijs.Scene();
+    {
+      const url_questionBox = "models/question_box/scene.gltf";
+      gltfLoader.load(url_questionBox, (gltf) => {
+        questionBox = gltf.scene;
+        questionBox.name = "questionBox";
+        questionBox.position.set(0, 6.2, -600);
+        questionBox.scale.set(0.031, 0.031, 0.031);
+
+        questionBox.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            //child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        questionBox.castShadow = true;
+        questionBox.receiveShadow = true;
+
+        scene.add(questionBox);
+        createGroup1();
+        createGroup2();
+        createGroup4();
+        createGroup5();
+        createGroup6();
+        setQuestionBoxGeometry();
+      });
     }
+
+    var stoneGeom = new THREE.CubeGeometry(0.6, 6, 2);
+    var questionBox_container = new Physijs.BoxMesh(
+      stoneGeom,
+      new THREE.MeshPhongMaterial({ color: 0xff0000 })
+    );
+    questionBox_container.position.set(0, 6.2, -600);
+    scene.add(questionBox_container);
 
     emptyBlock = new THREE.Scene();
     {
@@ -657,11 +727,17 @@ function init() {
     groupJump.update();
     groupRotate.update();
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
+    yoshiBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 5,
+      yoshi.position.z
+    );
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     controls.update();
     renderer.render(scene, camera);
+    scene.simulate();
   }
 }
 
