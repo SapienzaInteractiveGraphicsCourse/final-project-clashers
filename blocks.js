@@ -47,7 +47,10 @@ function createGroupPipes() {
   pipes[2].scale.set(0.3, 0.4, 0.3);
   pipes[3].scale.set(0.3, 0.5, 0.3);
 
-  setPipeGeometry(pipes[0]);
+  setPipeGeometry(pipes[0], 9.7);
+  setPipeGeometry(pipes[1], 17.2);
+  setPipeGeometry(pipes[2], 25.2);
+  setPipeGeometry(pipes[3], 33);
 }
 
 function createGroup2() {
@@ -178,6 +181,12 @@ function createGroupStairs(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
   for (var i = 1; i < width; i++) {
     emptyBlockClone1 = emptyBlock.clone();
@@ -200,6 +209,12 @@ function createGroupStairs(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
   for (var i = 2; i < width; i++) {
     emptyBlockClone1 = emptyBlock.clone();
@@ -222,6 +237,12 @@ function createGroupStairs(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
   if (width == 4) {
     emptyBlockClone1 = emptyBlock.clone();
@@ -244,6 +265,12 @@ function createGroupStairs(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
 
   if (width == 5) {
@@ -268,6 +295,12 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
   }
 
@@ -293,6 +326,12 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
     for (var i = 4; i < width; i++) {
       emptyBlockClone1 = emptyBlock.clone();
@@ -315,6 +354,12 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
     for (var i = 5; i < width; i++) {
       emptyBlockClone1 = emptyBlock.clone();
@@ -337,6 +382,12 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
     for (var i = 6; i < width; i++) {
       emptyBlockClone1 = emptyBlock.clone();
@@ -359,6 +410,12 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
     for (var i = 7; i < width; i++) {
       emptyBlockClone1 = emptyBlock.clone();
@@ -381,6 +438,12 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
   }
 }
@@ -413,6 +476,12 @@ function createGroupStairsReverse(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
   for (var i = 0; i < width - 1; i++) {
     emptyBlockClone1 = emptyBlock.clone();
@@ -435,6 +504,12 @@ function createGroupStairsReverse(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
   for (var i = 0; i < width - 2; i++) {
     emptyBlockClone1 = emptyBlock.clone();
@@ -457,6 +532,12 @@ function createGroupStairsReverse(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
 
   if (width == 4) {
@@ -480,6 +561,12 @@ function createGroupStairsReverse(start, width) {
     stairs.push(emptyBlockClone3);
     stairs.push(emptyBlockClone4);
     stairs.push(emptyBlockClone5);
+
+    setEmptyBlockGeometry(emptyBlockClone1);
+    setEmptyBlockGeometry(emptyBlockClone2);
+    setEmptyBlockGeometry(emptyBlockClone3);
+    setEmptyBlockGeometry(emptyBlockClone4);
+    setEmptyBlockGeometry(emptyBlockClone5);
   }
 
   if (width == 5) {
@@ -504,6 +591,12 @@ function createGroupStairsReverse(start, width) {
       stairs.push(emptyBlockClone3);
       stairs.push(emptyBlockClone4);
       stairs.push(emptyBlockClone5);
+
+      setEmptyBlockGeometry(emptyBlockClone1);
+      setEmptyBlockGeometry(emptyBlockClone2);
+      setEmptyBlockGeometry(emptyBlockClone3);
+      setEmptyBlockGeometry(emptyBlockClone4);
+      setEmptyBlockGeometry(emptyBlockClone5);
     }
   }
 }
@@ -517,6 +610,7 @@ function createGroup6() {
     pipeClone.position.set(-5.25, -14.1, 120 + 80 * i);
     scene.add(pipeClone);
     pipes.push(pipeClone);
+    setPipeGeometry(pipeClone, 17.2);
   }
   for (var i = 0; i < 3; i++) {
     brickClone = brick.clone();
@@ -563,13 +657,28 @@ function setBrickGeometry(brickElem) {
   scene.add(brickContainer);
 }
 
-function setPipeGeometry(pipeElem) {
-  var pipeGeometry = new THREE.BoxGeometry(6.3, 6.2, 5.8);
+function setPipeGeometry(pipeElem, y) {
+  var pipeGeometry = new THREE.BoxGeometry(10.5, y, 10.7);
   pipeContainer = new Physijs.BoxMesh(pipeGeometry, geometryMaterial, 0);
   pipeContainer.position.set(
-    pipeElem.position.x,
-    pipeElem.position.y + 4.3,
-    pipeElem.position.z + 1.2
+    pipeElem.position.x + 5,
+    pipeElem.position.y + 3.2,
+    pipeElem.position.z - 5.3
   );
   scene.add(pipeContainer);
+}
+
+function setEmptyBlockGeometry(emptyBlockElem) {
+  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 5.7, 5.7);
+  emptyBlockContainer = new Physijs.BoxMesh(
+    emptyBlockGeometry,
+    geometryMaterial,
+    0
+  );
+  emptyBlockContainer.position.set(
+    emptyBlockElem.position.x,
+    emptyBlockElem.position.y,
+    emptyBlockElem.position.z
+  );
+  scene.add(emptyBlockContainer);
 }
