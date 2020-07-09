@@ -635,15 +635,15 @@ function setQuestionBoxGeometry(questionBoxElem) {
   var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
-    geometryMaterial,
-    0
-  );
+    geometryMaterial
+  ); //mass 0
   questionBoxContainer.position.set(
     questionBoxElem.position.x,
     questionBoxElem.position.y + 3.1,
     questionBoxElem.position.z
   );
   scene.add(questionBoxContainer);
+  //questionBoxContainer.addEventListener("collision", onCollision);
 }
 
 function setBrickGeometry(brickElem) {

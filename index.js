@@ -35,7 +35,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = 260; //-620
+  const cameraZ = -620; //-620
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -95,7 +95,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, 260); //-620
+      yoshi.position.set(0, -14.3, -620); //-620
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -305,7 +305,7 @@ function init() {
 
   function setYoshiGeometry() {
     var yoshiGeometry = new THREE.BoxGeometry(7.5, 10.2, 6.3);
-    yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 0);
+    yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial); //mass 0
     //yoshiBox.position.set(0, -9.3, -600);
     yoshiBox.position.set(
       yoshi.position.x,
@@ -583,13 +583,13 @@ function init() {
       });
     }
 
-    var stoneGeom = new THREE.CubeGeometry(0.6, 6, 2);
+    /*var stoneGeom = new THREE.CubeGeometry(0.6, 6, 2);
     var questionBox_container = new Physijs.BoxMesh(
       stoneGeom,
       new THREE.MeshPhongMaterial({ color: 0xff0000 })
     );
     questionBox_container.position.set(0, 6.2, -600);
-    scene.add(questionBox_container);
+    scene.add(questionBox_container);*/
 
     emptyBlock = new THREE.Scene();
     {
@@ -731,6 +731,7 @@ function init() {
       yoshi.position.y + 5,
       yoshi.position.z
     );
+    questionBoxContainer.addEventListener("collision", onCollision);
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
