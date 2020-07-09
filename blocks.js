@@ -3,6 +3,7 @@ var group2 = new Array();
 var group3 = new Array();
 var group4 = new Array();
 var group5 = new Array();
+var group6 = new Array();
 var stairs = new Array();
 var pipes = new Array();
 
@@ -246,6 +247,119 @@ function createGroupStairs(start, width) {
       stairs.push(emptyBlockClone5);
     }
   }
+
+  if (width == 9) {
+    for (var i = 3; i < width; i++) {
+      emptyBlockClone1 = emptyBlock.clone();
+      emptyBlockClone2 = emptyBlock.clone();
+      emptyBlockClone3 = emptyBlock.clone();
+      emptyBlockClone4 = emptyBlock.clone();
+      emptyBlockClone5 = emptyBlock.clone();
+      emptyBlockClone1.position.set(0, -11.2 + 5.5 * 3, start + 5.5 * i);
+      emptyBlockClone2.position.set(-5.5, -11.2 + 5.5 * 3, start + 5.5 * i);
+      emptyBlockClone3.position.set(5.5, -11.2 + 5.5 * 3, start + 5.5 * i);
+      emptyBlockClone4.position.set(-11, -11.2 + 5.5 * 3, start + 5.5 * i);
+      emptyBlockClone5.position.set(11, -11.2 + 5.5 * 3, start + 5.5 * i);
+      scene.add(emptyBlockClone1);
+      scene.add(emptyBlockClone2);
+      scene.add(emptyBlockClone3);
+      scene.add(emptyBlockClone4);
+      scene.add(emptyBlockClone5);
+      stairs.push(emptyBlockClone1);
+      stairs.push(emptyBlockClone2);
+      stairs.push(emptyBlockClone3);
+      stairs.push(emptyBlockClone4);
+      stairs.push(emptyBlockClone5);
+    }
+    for (var i = 4; i < width; i++) {
+      emptyBlockClone1 = emptyBlock.clone();
+      emptyBlockClone2 = emptyBlock.clone();
+      emptyBlockClone3 = emptyBlock.clone();
+      emptyBlockClone4 = emptyBlock.clone();
+      emptyBlockClone5 = emptyBlock.clone();
+      emptyBlockClone1.position.set(0, -11.2 + 5.5 * 4, start + 5.5 * i);
+      emptyBlockClone2.position.set(-5.5, -11.2 + 5.5 * 4, start + 5.5 * i);
+      emptyBlockClone3.position.set(5.5, -11.2 + 5.5 * 4, start + 5.5 * i);
+      emptyBlockClone4.position.set(-11, -11.2 + 5.5 * 4, start + 5.5 * i);
+      emptyBlockClone5.position.set(11, -11.2 + 5.5 * 4, start + 5.5 * i);
+      scene.add(emptyBlockClone1);
+      scene.add(emptyBlockClone2);
+      scene.add(emptyBlockClone3);
+      scene.add(emptyBlockClone4);
+      scene.add(emptyBlockClone5);
+      stairs.push(emptyBlockClone1);
+      stairs.push(emptyBlockClone2);
+      stairs.push(emptyBlockClone3);
+      stairs.push(emptyBlockClone4);
+      stairs.push(emptyBlockClone5);
+    }
+    for (var i = 5; i < width; i++) {
+      emptyBlockClone1 = emptyBlock.clone();
+      emptyBlockClone2 = emptyBlock.clone();
+      emptyBlockClone3 = emptyBlock.clone();
+      emptyBlockClone4 = emptyBlock.clone();
+      emptyBlockClone5 = emptyBlock.clone();
+      emptyBlockClone1.position.set(0, -11.2 + 5.5 * 5, start + 5.5 * i);
+      emptyBlockClone2.position.set(-5.5, -11.2 + 5.5 * 5, start + 5.5 * i);
+      emptyBlockClone3.position.set(5.5, -11.2 + 5.5 * 5, start + 5.5 * i);
+      emptyBlockClone4.position.set(-11, -11.2 + 5.5 * 5, start + 5.5 * i);
+      emptyBlockClone5.position.set(11, -11.2 + 5.5 * 5, start + 5.5 * i);
+      scene.add(emptyBlockClone1);
+      scene.add(emptyBlockClone2);
+      scene.add(emptyBlockClone3);
+      scene.add(emptyBlockClone4);
+      scene.add(emptyBlockClone5);
+      stairs.push(emptyBlockClone1);
+      stairs.push(emptyBlockClone2);
+      stairs.push(emptyBlockClone3);
+      stairs.push(emptyBlockClone4);
+      stairs.push(emptyBlockClone5);
+    }
+    for (var i = 6; i < width; i++) {
+      emptyBlockClone1 = emptyBlock.clone();
+      emptyBlockClone2 = emptyBlock.clone();
+      emptyBlockClone3 = emptyBlock.clone();
+      emptyBlockClone4 = emptyBlock.clone();
+      emptyBlockClone5 = emptyBlock.clone();
+      emptyBlockClone1.position.set(0, -11.2 + 5.5 * 6, start + 5.5 * i);
+      emptyBlockClone2.position.set(-5.5, -11.2 + 5.5 * 6, start + 5.5 * i);
+      emptyBlockClone3.position.set(5.5, -11.2 + 5.5 * 6, start + 5.5 * i);
+      emptyBlockClone4.position.set(-11, -11.2 + 5.5 * 6, start + 5.5 * i);
+      emptyBlockClone5.position.set(11, -11.2 + 5.5 * 6, start + 5.5 * i);
+      scene.add(emptyBlockClone1);
+      scene.add(emptyBlockClone2);
+      scene.add(emptyBlockClone3);
+      scene.add(emptyBlockClone4);
+      scene.add(emptyBlockClone5);
+      stairs.push(emptyBlockClone1);
+      stairs.push(emptyBlockClone2);
+      stairs.push(emptyBlockClone3);
+      stairs.push(emptyBlockClone4);
+      stairs.push(emptyBlockClone5);
+    }
+    for (var i = 7; i < width; i++) {
+      emptyBlockClone1 = emptyBlock.clone();
+      emptyBlockClone2 = emptyBlock.clone();
+      emptyBlockClone3 = emptyBlock.clone();
+      emptyBlockClone4 = emptyBlock.clone();
+      emptyBlockClone5 = emptyBlock.clone();
+      emptyBlockClone1.position.set(0, -11.2 + 5.5 * 7, start + 5.5 * i);
+      emptyBlockClone2.position.set(-5.5, -11.2 + 5.5 * 7, start + 5.5 * i);
+      emptyBlockClone3.position.set(5.5, -11.2 + 5.5 * 7, start + 5.5 * i);
+      emptyBlockClone4.position.set(-11, -11.2 + 5.5 * 7, start + 5.5 * i);
+      emptyBlockClone5.position.set(11, -11.2 + 5.5 * 7, start + 5.5 * i);
+      scene.add(emptyBlockClone1);
+      scene.add(emptyBlockClone2);
+      scene.add(emptyBlockClone3);
+      scene.add(emptyBlockClone4);
+      scene.add(emptyBlockClone5);
+      stairs.push(emptyBlockClone1);
+      stairs.push(emptyBlockClone2);
+      stairs.push(emptyBlockClone3);
+      stairs.push(emptyBlockClone4);
+      stairs.push(emptyBlockClone5);
+    }
+  }
 }
 
 function createGroupStairsReverse(start, width) {
@@ -369,4 +483,27 @@ function createGroupStairsReverse(start, width) {
       stairs.push(emptyBlockClone5);
     }
   }
+}
+
+function createGroup6() {
+  var pipeClone;
+  var brickClone;
+  var questionBoxClone;
+  for (var i = 0; i < 2; i++) {
+    pipeClone = pipe.clone();
+    pipeClone.position.set(-5.25, -14.1, 120 + 80 * i);
+    scene.add(pipeClone);
+    pipes.push(pipeClone);
+  }
+  for (var i = 0; i < 3; i++) {
+    brickClone = brick.clone();
+    brickClone.position.set(0, 5, 135 + 5.5 * i);
+    scene.add(brickClone);
+    group6.push(brickClone);
+  }
+  group6[2].position.set(0, 5, 153);
+  questionBoxClone = questionBox.clone();
+  questionBoxClone.position.set(0, 6.2, 148);
+  scene.add(questionBoxClone);
+  group6.push(questionBoxClone);
 }

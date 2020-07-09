@@ -417,7 +417,7 @@ function init() {
       gltfLoader.load(url_castle, (gltf) => {
         castle = gltf.scene;
         castle.name = "castle";
-        castle.position.set(17, -14.1, 600);
+        castle.position.set(17, -14.1, 450);
         castle.scale.set(0.01, 0.01, 0.01);
 
         castle.traverse(function (child) {
@@ -518,6 +518,7 @@ function init() {
         createGroup2();
         createGroup4();
         createGroup5();
+        createGroup6();
       });
     }
 
@@ -545,6 +546,7 @@ function init() {
         createGroupStairsReverse(-30, 4);
         createGroupStairs(20, 5);
         createGroupStairsReverse(55, 5);
+        createGroupStairs(220, 9);
       });
     }
 
@@ -606,36 +608,42 @@ function init() {
 
       scene.add(powerUp);
     });
-  } 
-
-  //FLAGPOLE
-
-  //Non funziona
-
-  flagpole = new THREE.Scene();
-  {
-    const url_flagpole = "models/flagpole/scene.gltf";
-    gltfLoader.load(url_flagpole, (gltf) => {
-      flagpole = gltf.scene;
-      flagpole.name = "flagpole";
-      flagpole.position.set(0, 10, -630);
-      flagpole.scale.set(1000, 1000, 1000);
-
-      flagpole.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        if (child.material) child.material.metalness = 0;
-      });
-      flagpole.castShadow = true;
-      flagpole.receiveShadow = true;
-
-      flagpole.rotation.z = (-45 * Math.PI) / 180;
-
-      scene.add(flagpole);
-    });
   } */
+
+    //FLAGPOLE
+
+    //Non funziona
+
+    flagpole = new THREE.Scene();
+    {
+      const url_flagpole = "models/flagpole/scene.gltf";
+      gltfLoader.load(url_flagpole, (gltf) => {
+        flagpole = gltf.scene;
+        flagpole.name = "flagpole";
+        flagpole.position.set(0, 10, 300);
+        flagpole.scale.set(10, 10, 10);
+
+        flagpole.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+            flagpole.layers.enable(32);
+          }
+          if (child.material) {
+            child.material.metalness = 0;
+            child.material.roughness = 0;
+          }
+        });
+        flagpole.castShadow = true;
+        flagpole.receiveShadow = true;
+
+        //flagpole.rotation.z = (-45 * Math.PI) / 180;
+
+        scene.add(flagpole);
+
+        console.log(dumpObject(flagpole).join("\n"));
+      });
+    }
   }
 
   scene.add(camera);
