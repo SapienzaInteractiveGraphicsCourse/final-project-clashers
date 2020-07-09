@@ -52,6 +52,7 @@ var flagpole;
 var coin;
 var powerUp;
 var questionBox;
+var goomba;
 
 var camera;
 var dPressed = false;

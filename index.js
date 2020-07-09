@@ -547,6 +547,39 @@ function init() {
         createGroupStairsReverse(55, 5);
       });
     }
+
+    //GOOMBA
+    /*
+    goomba = new THREE.Scene();
+    {
+      const url_goomba = "models/goomba/scene.gltf";
+      gltfLoader.load(url_goomba, (gltf) => {
+        goomba = gltf.scene;
+        goomba.name = "goomba";
+        goomba.position.set(0, -13.3, -640);
+        goomba.scale.set(0.07, 0.07, 0.07);
+
+        goomba.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        goomba.castShadow = true;
+        goomba.receiveShadow = true;
+
+        console.log(dumpObject(goomba).join("\n"));
+
+        //var left_foot = goomba.getObjectByName("Left_Foot");
+        //left_foot.rotation.x = (90 * Math.PI) / 180;
+
+        //goomba.rotation.y = (180 * Math.PI) / 180;
+
+        scene.add(goomba);
+      });
+    } */
+
     /*
   // POWER UP
 
@@ -555,7 +588,7 @@ function init() {
     const url_powerUp = "models/power-up/scene.gltf";
     gltfLoader.load(url_powerUp, (gltf) => {
       powerUp = gltf.scene;
-      powerUp.name = "questionBox";
+      powerUp.name = "powerUp";
       powerUp.position.set(0, -12, -640);
       powerUp.scale.set(2.3, 2.3, 2.3);
 
