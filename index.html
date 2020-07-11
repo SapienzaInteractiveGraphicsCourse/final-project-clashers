@@ -15,16 +15,6 @@
   </head>
 
   <body>
-    <!--<iframe
-      src="audio/250-milliseconds-of-silence.mp3"
-      allow="autoplay"
-      id="audio"
-      style="display: none;"
-    ></iframe>-->
-    <audio id="music" loop>
-      <!--NON FUNZIONA L'AUTOPLAY SU CHROME, CONTROLLARE-->
-      <source src="audio/supermariobrossoundtrack.mp3" />
-    </audio>
     <div class="container">
       <div align="left">
         <h1 class="title">
@@ -37,13 +27,15 @@
       </div>
       <div class="buttonContainer">
         <div>
-          <button id="playButton" onclick="loadGame()" class="btn btn1">
+          <button id="playButton" class="btn btn1">
             <font color="#009fde">P</font><font color="#fed302">L</font
             ><font color="#e42910">A</font><font color="#46af38">Y</font
             ><font color="#fed302">!</font>
           </button>
         </div>
+
         <br />
+
         <div>
           <button id="controlsButton" class="btn btn1">
             <font color="#009fde">C</font><font color="#fed302">O</font
@@ -52,13 +44,69 @@
             ><font color="#46af38">L</font><font color="#fed302">S</font>
           </button>
         </div>
+
+        <audio id="music" loop>
+          <source src="audio/supermariobrossoundtrack.mp3" />
+        </audio>
         <div>
-          <i onclick="myFunction(this)" class="fas fa-volume-mute"></i>
+          <i onclick="loadMusic(this)" class="fas fa-volume-mute"></i>
         </div>
       </div>
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
+
+      <!--Modal del bottone play-->
+      <div id="myModalPlay" class="modal-play">
+        <div class="modal-content-play">
+          <span class="close-play">&times;</span>
+          <br />
+
+          <div>
+            <div class="card" style="float: left; margin-right: 10px;">
+              <img src="./img/luigi.png" alt="Avatar" class="img" />
+              <div class="container-btn" align="center">
+                <button class="btn_card" id="luigi" onclick="loadGame()">
+                  <font color="#009fde">L</font><font color="#fed302">U</font
+                  ><font color="#e42910">I</font><font color="#46af38">G</font
+                  ><font color="#fed302">I </font>
+                </button>
+              </div>
+            </div>
+            <div
+              class="card"
+              style="float: left; margin-left: 10px; margin-right: 10px;"
+            >
+              <img src="./img/mario.png" alt="Avatar" class="img" />
+              <div class="container-btn" align="center">
+                <button class="btn_card" id="mario" onclick="loadGame()">
+                  <font color="#009fde">M</font><font color="#fed302">A</font
+                  ><font color="#e42910">R</font><font color="#46af38">I</font
+                  ><font color="#fed302">O </font>
+                </button>
+              </div>
+            </div>
+            <div class="card" style="float: left; margin-left: 10px;">
+              <img
+                src="./img/yoshi.png"
+                alt="Avatar"
+                class="img"
+                style="margin-top: -5px;"
+              />
+              <div class="container-btn" align="center">
+                <button class="btn_card" id="yoshi" onclick="loadGame()">
+                  <font color="#009fde">Y</font><font color="#fed302">O</font
+                  ><font color="#e42910">S</font><font color="#46af38">H</font
+                  ><font color="#fed302">I</font>
+                </button>
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--Modal del bottone control-->
+      <div id="myModalControls" class="modal-controls">
+        <div class="modal-content-controls">
+          <span class="close-controls">&times;</span>
           <div style="float: left; margin: 20px;" align="right">
             <p>
               Move Forward <br />
@@ -83,64 +131,49 @@
     </div>
 
     <script type="text/javascript">
+      var modalPlay = document.getElementById("myModalPlay");
+      var btnPlay = document.getElementById("playButton");
+      var spanPlay = document.getElementsByClassName("close-play")[0];
+      btnPlay.onclick = function () {
+        modalPlay.style.display = "block";
+      };
+      spanPlay.onclick = function () {
+        modalPlay.style.display = "none";
+      };
+      window.onclick = function (event) {
+        if (event.target == modalPlay) {
+          modalPlay.style.display = "none";
+        }
+      };
+    </script>
+
+    <script type="text/javascript">
       function loadGame() {
         window.location.href = "./game.html";
       }
     </script>
 
     <script type="text/javascript">
-      // Get the modal
-      var modal = document.getElementById("myModal");
-
-      // Get the button that opens the modal
-      var btn = document.getElementById("controlsButton");
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-
-      // When the user clicks the button, open the modal
-      btn.onclick = function () {
-        modal.style.display = "block";
+      var modalControls = document.getElementById("myModalControls");
+      var btnControls = document.getElementById("controlsButton");
+      var spanControls = document.getElementsByClassName("close-controls")[0];
+      btnControls.onclick = function () {
+        modalControls.style.display = "block";
       };
-
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function () {
-        modal.style.display = "none";
+      spanControls.onclick = function () {
+        modalControls.style.display = "none";
       };
-
-      // When the user clicks anywhere outside of the modal, close it
       window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
+        if (event.target == modalControls) {
+          modalControls.style.display = "none";
         }
       };
-      /*window.onload = function () {
-        /*var audio = document.getElementById("music");
-        /*if (audio > 1) {
-          document.getElementById("music").play();
-          document.getElementById("music").muted = false;
-        }
-        audio.play();
-        var audio = document.getElementById("music");
-        var promise = audio.play();
-
-        if (promise !== undefined) {
-          promise
-            .then((_) => {
-              // Autoplay started!
-            })
-            .catch((error) => {
-              // Autoplay was prevented.
-              // Show a "Play" button so that user can start playback.
-            });
-        }
-      };*/
     </script>
 
     <!-- Audio script -->
     <script>
       var isPlaying = false;
-      function myFunction(x) {
+      function loadMusic(x) {
         x.classList.toggle("fa-volume-up");
         if (!isPlaying) {
           isPlaying = true;

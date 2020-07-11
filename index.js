@@ -35,7 +35,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = -620; //-620
+  const cameraZ = -120; //-620
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -95,7 +95,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, -620); //-620
+      yoshi.position.set(0, -14.3, -120); //-620
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -437,7 +437,7 @@ function init() {
         brick.castShadow = true;
         brick.receiveShadow = true;
         //scene.add(brick);
-        createGroup3();
+        //createGroup3();
       });
     }
 
@@ -493,7 +493,7 @@ function init() {
         pipe.receiveShadow = true;
 
         //scene.add(pipe);
-        createGroupPipes();
+        //createGroupPipes();
       });
     }
 
@@ -554,6 +554,39 @@ function init() {
       });
     }*/
 
+    //GOOMBA
+    goomba = new THREE.Scene();
+    {
+      const url_goomba = "models/goomba/scene.gltf";
+      gltfLoader.load(url_goomba, (gltf) => {
+        goomba = gltf.scene;
+        goomba.name = "goomba";
+        goomba.position.set(0, -13.3, -562.5);
+        goomba.scale.set(0.07, 0.07, 0.07);
+
+        goomba.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+          if (child.material) child.material.metalness = 0;
+        });
+        goomba.castShadow = true;
+        goomba.receiveShadow = true;
+
+        console.log(dumpObject(goomba).join("\n"));
+
+        //var left_foot = goomba.getObjectByName("Left_Foot");
+        //left_foot.rotation.x = (90 * Math.PI) / 180;
+
+        goomba.rotation.y = (-90 * Math.PI) / 180;
+
+        createGroupPipes();
+        createGroup3();
+        //scene.add(goomba);
+      });
+    }
+
     questionBox = new Physijs.Scene();
     {
       const url_questionBox = "models/question_box/scene.gltf";
@@ -573,13 +606,13 @@ function init() {
         questionBox.castShadow = true;
         questionBox.receiveShadow = true;
 
-        scene.add(questionBox);
-        createGroup1();
-        createGroup2();
-        createGroup4();
+        //scene.add(questionBox);
+        //createGroup1();
+        //createGroup2();
+        //createGroup4();
         createGroup5();
         createGroup6();
-        setQuestionBoxGeometry(questionBox);
+        //setQuestionBoxGeometry(questionBox);
       });
     }
 
@@ -590,6 +623,36 @@ function init() {
     );
     questionBox_container.position.set(0, 6.2, -600);
     scene.add(questionBox_container);*/
+
+    // POWER UP
+
+    powerUp = new THREE.Scene();
+    {
+      const url_powerUp = "models/power-up/scene.gltf";
+      gltfLoader.load(url_powerUp, (gltf) => {
+        powerUp = gltf.scene;
+        powerUp.name = "powerUp";
+        powerUp.position.set(0, 16.5, -562.5);
+        powerUp.scale.set(2.3, 2.3, 2.3);
+
+        powerUp.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+          //if (child.material) child.material.metalness = 0;
+        });
+        powerUp.castShadow = true;
+        powerUp.receiveShadow = true;
+
+        powerUp.rotation.y = (180 * Math.PI) / 180;
+
+        //scene.add(powerUp);
+        createGroup1();
+        createGroup2();
+        createGroup4();
+      });
+    }
 
     emptyBlock = new THREE.Scene();
     {
@@ -618,66 +681,6 @@ function init() {
         createGroupStairs(220, 9);
       });
     }
-
-    //GOOMBA
-    /*
-    goomba = new THREE.Scene();
-    {
-      const url_goomba = "models/goomba/scene.gltf";
-      gltfLoader.load(url_goomba, (gltf) => {
-        goomba = gltf.scene;
-        goomba.name = "goomba";
-        goomba.position.set(0, -13.3, -640);
-        goomba.scale.set(0.07, 0.07, 0.07);
-
-        goomba.traverse(function (child) {
-          if (child instanceof THREE.Mesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-          }
-          if (child.material) child.material.metalness = 0;
-        });
-        goomba.castShadow = true;
-        goomba.receiveShadow = true;
-
-        console.log(dumpObject(goomba).join("\n"));
-
-        //var left_foot = goomba.getObjectByName("Left_Foot");
-        //left_foot.rotation.x = (90 * Math.PI) / 180;
-
-        //goomba.rotation.y = (180 * Math.PI) / 180;
-
-        scene.add(goomba);
-      });
-    } */
-
-    /*
-  // POWER UP
-
-  powerUp = new THREE.Scene();
-  {
-    const url_powerUp = "models/power-up/scene.gltf";
-    gltfLoader.load(url_powerUp, (gltf) => {
-      powerUp = gltf.scene;
-      powerUp.name = "powerUp";
-      powerUp.position.set(0, -12, -640);
-      powerUp.scale.set(2.3, 2.3, 2.3);
-
-      powerUp.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        //if (child.material) child.material.metalness = 0;
-      });
-      powerUp.castShadow = true;
-      powerUp.receiveShadow = true;
-
-      powerUp.rotation.y = (180 * Math.PI) / 180;
-
-      scene.add(powerUp);
-    });
-  } */
 
     //FLAGPOLE
 
@@ -731,7 +734,7 @@ function init() {
       yoshi.position.y + 5,
       yoshi.position.z
     );
-    questionBoxContainer.addEventListener("collision", onCollision);
+    questionBoxContainer.addEventListener("collision", onCollision); //Spostare listener perchè a volte da errore
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);

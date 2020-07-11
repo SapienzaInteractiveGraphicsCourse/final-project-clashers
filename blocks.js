@@ -5,12 +5,14 @@ var group4 = new Array();
 var group5 = new Array();
 var group6 = new Array();
 var stairs = new Array();
-var pipes = new Array();
+var groupPipes = new Array();
 
 function createGroup1() {
   var brickClone;
   var questionBoxClone;
   var coinClone;
+  var powerUpClone;
+  var goombaClone;
   for (var i = 0; i < 3; i++) {
     brickClone = brick.clone();
     brickClone.position.set(0, 5, -570 + 5.5 * 2.25 * i);
@@ -19,38 +21,61 @@ function createGroup1() {
     setBrickGeometry(brickClone);
   }
 
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 4; i++) {
     questionBoxClone = questionBox.clone();
-    questionBoxClone.position.set(0, 6.2, -562.5 + 5.5 * 2.25 * i);
+    questionBoxClone.position.set(0, 6.2, -562.5 + 5.5 * 2.25 * i); //-562.5 + 5.5 * 2.25 * i
     scene.add(questionBoxClone);
     group1.push(questionBoxClone);
-    setQuestionBoxGeometry(questionBoxClone);
+  }
+  group1[5].position.set(0, 25.2, -556);
+  group1[6].position.set(0, 6.2, -600);
+  for (var i = 3; i < 7; i++) {
+    setQuestionBoxGeometry(group1[i]);
   }
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 8.5, -568.8 + 5.5 * 2.25 * i);
+    coinClone.position.set(0, 16.5, -600 + 50 * i); //8.5
     scene.add(coinClone);
     group1.push(coinClone);
   }
+  group1[9].position.set(0, 35, -556);
+
+  powerUpClone = powerUp.clone();
+  powerUpClone.position.set(0, 16.5, -562.5); //16.5
+  scene.add(powerUpClone);
+  group1.push(powerUpClone);
+
+  goombaClone = goomba.clone();
+  goombaClone.position.set(0, -13.3, -562.5);
+  scene.add(goombaClone);
+  group1.push(goombaClone);
 }
 
 function createGroupPipes() {
   var pipeClone;
+  var goombaClone;
   for (var i = 0; i < 4; i++) {
     pipeClone = pipe.clone();
     pipeClone.position.set(-5.25, -14.1, -510 + 40 * i);
     scene.add(pipeClone);
-    pipes.push(pipeClone);
+    groupPipes.push(pipeClone);
   }
-  pipes[0].scale.set(0.3, 0.2, 0.3);
-  pipes[1].scale.set(0.3, 0.3, 0.3);
-  pipes[2].scale.set(0.3, 0.4, 0.3);
-  pipes[3].scale.set(0.3, 0.5, 0.3);
+  for (var i = 0; i < 3; i++) {
+    goombaClone = goomba.clone();
+    goombaClone.position.set(-5.25, -13.3, -460 + 45 * i);
+    scene.add(goombaClone);
+    groupPipes.push(goombaClone);
+  }
+  groupPipes[6].position.set(-5.25, -13.3, -410);
+  groupPipes[0].scale.set(0.3, 0.2, 0.3);
+  groupPipes[1].scale.set(0.3, 0.3, 0.3);
+  groupPipes[2].scale.set(0.3, 0.4, 0.3);
+  groupPipes[3].scale.set(0.3, 0.5, 0.3);
 
-  setPipeGeometry(pipes[0], 9.7);
-  setPipeGeometry(pipes[1], 17.2);
-  setPipeGeometry(pipes[2], 25.2);
-  setPipeGeometry(pipes[3], 33);
+  setPipeGeometry(groupPipes[0], 9.7);
+  setPipeGeometry(groupPipes[1], 17.2);
+  setPipeGeometry(groupPipes[2], 25.2);
+  setPipeGeometry(groupPipes[3], 33);
 }
 
 function createGroup2() {
@@ -65,11 +90,21 @@ function createGroup2() {
   }
   for (var i = 0; i < 2; i++) {
     questionBoxClone = questionBox.clone();
-    questionBoxClone.position.set(0, 6.2, -360.5 + 5.5 * 8.72 * i);
+    questionBoxClone.position.set(0, 6.2, -360.5 + 47.96 * i);
     scene.add(questionBoxClone);
     group2.push(questionBoxClone);
     setQuestionBoxGeometry(questionBoxClone);
   }
+
+  coinClone = coin.clone();
+  coinClone.position.set(0, 16.5, -360.5);
+  scene.add(coinClone);
+  group2.push(coinClone);
+
+  powerUpClone = powerUp.clone();
+  powerUpClone.position.set(0, 16.5, -312.5);
+  scene.add(powerUpClone);
+  group2.push(powerUpClone);
 }
 
 function createGroup3() {
@@ -80,6 +115,12 @@ function createGroup3() {
     scene.add(brickClone);
     group3.push(brickClone);
     setBrickGeometry(brickClone);
+  }
+  for (var i = 0; i < 2; i++) {
+    goombaClone = goomba.clone();
+    goombaClone.position.set(0, 32.5, -292 + 10 * i);
+    scene.add(goombaClone);
+    group3.push(goombaClone);
   }
 }
 
@@ -109,9 +150,9 @@ function createGroup4() {
   group4[5].position.set(0, 24, -142.5 + 5.5 * 2);
 
   group4[6].position.set(0, 24, -102.5);
-  group4[7].position.set(0, 24, -102.5 + 18.15);
-  group4[10].position.set(0, 25.2, -94.9);
-  group4[11].position.set(0, 25.2, -94.9 + 5.5);
+  group4[7].position.set(0, 24, -84);
+  group4[10].position.set(0, 25.2, -94.8);
+  group4[11].position.set(0, 25.2, -94.8 + 5.8);
 
   for (var i = 0; i < 8; i++) {
     setBrickGeometry(group4[i]);
@@ -120,6 +161,19 @@ function createGroup4() {
   for (var i = 8; i < 12; i++) {
     setQuestionBoxGeometry(group4[i]);
   }
+
+  for (var i = 0; i < 3; i++) {
+    coinClone = coin.clone();
+    coinClone.position.set(0, 35, -221.5 + 126.7 * i); //8.5
+    scene.add(coinClone);
+    group4.push(coinClone);
+  }
+  group4[14].position.set(0, 35, -89.3);
+
+  powerUpClone = powerUp.clone();
+  powerUpClone.position.set(0, 35, -182);
+  scene.add(powerUpClone);
+  group4.push(powerUpClone);
 }
 
 function createGroup5() {
@@ -142,8 +196,30 @@ function createGroup5() {
   group5[4].position.set(0, 6.2, -182);
   group5[5].position.set(0, 6.2, -167);
 
-  group5[1].position.set(0, 5, -95.5);
-  group5[2].position.set(0, 5, -95.5 + 5.5);
+  group5[1].position.set(0, 5, -95.8);
+  group5[2].position.set(0, 5, -95.8 + 5.5);
+
+  for (var i = 0; i < 4; i++) {
+    coinClone = coin.clone();
+    coinClone.position.set(0, 16.5, -220.25 + 23.25 * i); //8.5
+    scene.add(coinClone);
+    group5.push(coinClone);
+  }
+
+  group5[8].position.set(0, 16.5, -182);
+  group5[9].position.set(0, 16.5, -167);
+
+  for (var i = 0; i < 6; i++) {
+    goombaClone = goomba.clone();
+    goombaClone.position.set(0, -13.3, -220 + 10 * i);
+    scene.add(goombaClone);
+    group5.push(goombaClone);
+  }
+
+  group5[12].position.set(0, -13.3, -120);
+  group5[13].position.set(0, -13.3, -110);
+  group5[14].position.set(0, -13.3, -100);
+  group5[15].position.set(0, -13.3, -90);
 
   for (var i = 0; i < 3; i++) {
     setBrickGeometry(group5[i]);
@@ -609,7 +685,7 @@ function createGroup6() {
     pipeClone = pipe.clone();
     pipeClone.position.set(-5.25, -14.1, 120 + 80 * i);
     scene.add(pipeClone);
-    pipes.push(pipeClone);
+    group6.push(pipeClone);
     setPipeGeometry(pipeClone, 17.2);
   }
   for (var i = 0; i < 3; i++) {
@@ -618,13 +694,26 @@ function createGroup6() {
     scene.add(brickClone);
     group6.push(brickClone);
   }
-  group6[2].position.set(0, 5, 153);
+  group6[4].position.set(0, 5, 153);
+
   questionBoxClone = questionBox.clone();
   questionBoxClone.position.set(0, 6.2, 148);
   scene.add(questionBoxClone);
   group6.push(questionBoxClone);
 
-  for (var i = 0; i < 3; i++) {
+  coinClone = coin.clone();
+  coinClone.position.set(0, 16.5, 148); //8.5
+  scene.add(coinClone);
+  group6.push(coinClone);
+
+  for (var i = 0; i < 2; i++) {
+    goombaClone = goomba.clone();
+    goombaClone.position.set(0, -13.3, 170 + 10 * i);
+    scene.add(goombaClone);
+    group6.push(goombaClone);
+  }
+
+  for (var i = 2; i < 5; i++) {
     setBrickGeometry(group6[i]);
   }
 
