@@ -333,13 +333,13 @@ function init() {
   /*
   //MARIO
 
-  mario = new THREE.Scene();
+ mario = new THREE.Scene();
   {
     const url_mario = "models/mario/scene.gltf";
     gltfLoader.load(url_mario, (gltf) => {
       mario = gltf.scene;
       mario.name = "mario";
-      mario.position.set(0, -14.1, -620);
+      mario.position.set(0, -14.1, -600);
       mario.scale.set(7, 7, 7);
 
       mario.traverse(function (child) {
@@ -354,20 +354,20 @@ function init() {
 
       //console.log(dumpObject(mario).join("\n"));
 
-      head = mario.getObjectByName(yoshi_dic.Head);
-      torso = mario.getObjectByName(yoshi_dic.Torso);
-      upperArm_right = mario.getObjectByName(yoshi_dic.UpperArm_right);
-      upperArm_left = mario.getObjectByName(yoshi_dic.UpperArm_left);
-      upperLeg_right = mario.getObjectByName(yoshi_dic.UpperLeg_right);
-      upperLeg_left = mario.getObjectByName(yoshi_dic.UpperLeg_left);
-      handRight = mario.getObjectByName(yoshi_dic.Hand_right);
+      head = mario.getObjectByName(mario_dic.Head);
+      //torso = mario.getObjectByName(mario_dic.Torso);
+      upperArm_right = mario.getObjectByName(mario_dic.UpperArm_right);
+      upperArm_left = mario.getObjectByName(mario_dic.UpperArm_left);
+      upperLeg_right = mario.getObjectByName(mario_dic.UpperLeg_right);
+      upperLeg_left = mario.getObjectByName(mario_dic.UpperLeg_left);
+      handRight = mario.getObjectByName(mario_dic.Hand_right);
 
-      upperArm_right.rotation.z = (45 * Math.PI) / 180;
-      upperArm_left.rotation.z = (45 * Math.PI) / 180;
-      upperArm_right.rotation.x = (0 * Math.PI) / 180;
-      upperArm_left.rotation.x = (0 * Math.PI) / 180;
+      //upperArm_right.rotation.z = (45 * Math.PI) / 180;
+      //upperArm_left.rotation.z = (45 * Math.PI) / 180;
+      upperArm_right.rotation.x = (45 * Math.PI) / 180;
+      upperArm_left.rotation.x = (45 * Math.PI) / 180;
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
-      upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
+      upperLeg_left.rotation.x = (0 * Math.PI) / 180;
 
       scene.add(mario);
     });
@@ -382,7 +382,7 @@ function init() {
       luigi = gltf.scene;
       luigi.name = "luigi";
       luigi.position.set(0, -14.1, -640);
-      luigi.scale.set(0.8, 0.8, 0.8);
+      luigi.scale.set(0.9, 0.9, 0.9);
 
       luigi.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
@@ -394,26 +394,33 @@ function init() {
       luigi.castShadow = true;
       luigi.receiveShadow = true;
 
-      console.log(dumpObject(luigi).join("\n"));
+      //console.log(dumpObject(luigi).join("\n"));
 
-      head = luigi.getObjectByName(yoshi_dic.Head);
-      torso = luigi.getObjectByName(yoshi_dic.Torso);
-      upperArm_right = luigi.getObjectByName(yoshi_dic.UpperArm_right);
-      upperArm_left = luigi.getObjectByName(yoshi_dic.UpperArm_left);
-      upperLeg_right = luigi.getObjectByName(yoshi_dic.UpperLeg_right);
-      upperLeg_left = luigi.getObjectByName(yoshi_dic.UpperLeg_left);
-      handRight = luigi.getObjectByName(yoshi_dic.Hand_right);
-      thumb1_right = luigi.getObjectByName(yoshi_dic.Thumb1_right);
-      thumb2_right = luigi.getObjectByName(yoshi_dic.Thumb2_right);
-      finger1_right = luigi.getObjectByName(yoshi_dic.Finger1_right);
-      finger1_2_right = luigi.getObjectByName(yoshi_dic.Finger1_2_right);
-      finger2_right = luigi.getObjectByName(yoshi_dic.Finger2_right);
-      finger2_2_right = luigi.getObjectByName(yoshi_dic.Finger2_2_right);
-      finger3_right = luigi.getObjectByName(yoshi_dic.Finger3_right);
-      finger3_2_right = luigi.getObjectByName(yoshi_dic.Finger3_2_right);
+      head = luigi.getObjectByName(luigi_dic.Head);
+      torso = luigi.getObjectByName(luigi_dic.Torso);
+      upperArm_right = luigi.getObjectByName(luigi_dic.UpperArm_right);
+      upperArm_left = luigi.getObjectByName(luigi_dic.UpperArm_left);
+      upperLeg_right = luigi.getObjectByName(luigi_dic.UpperLeg_right);
+      upperLeg_left = luigi.getObjectByName(luigi_dic.UpperLeg_left);
+      handRight = luigi.getObjectByName(luigi_dic.Hand_right);
+      thumb1_right = luigi.getObjectByName(luigi_dic.Thumb1_right);
+      thumb2_right = luigi.getObjectByName(luigi_dic.Thumb2_right);
+      finger1_right = luigi.getObjectByName(luigi_dic.Finger1_right);
+      finger1_2_right = luigi.getObjectByName(luigi_dic.Finger1_2_right);
+      finger2_right = luigi.getObjectByName(luigi_dic.Finger2_right);
+      finger2_2_right = luigi.getObjectByName(luigi_dic.Finger2_2_right);
+      finger3_right = luigi.getObjectByName(luigi_dic.Finger3_right);
+      finger3_2_right = luigi.getObjectByName(luigi_dic.Finger3_2_right);
+
+      upperArm_right.rotation.z = (45 * Math.PI) / 180; //-60
+      upperArm_left.rotation.z = (45 * Math.PI) / 180;
+      upperArm_right.rotation.x = (0 * Math.PI) / 180; //0
+      upperArm_left.rotation.x = (0 * Math.PI) / 180;
+      upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+      upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
       scene.add(luigi);
-    });
+    }); 
   } */
 
   function loadModels() {
