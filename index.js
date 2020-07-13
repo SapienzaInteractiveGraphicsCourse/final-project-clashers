@@ -518,7 +518,7 @@ function init() {
         coin = gltf.scene;
         coin.name = "coin";
         coin.position.set(0, 15, -570);
-        coin.scale.set(5, 5, 5);
+        coin.scale.set(1.8, 1.8, 1.8);
 
         coin.traverse(function (child) {
           if (child instanceof THREE.Mesh) {
@@ -535,6 +535,8 @@ function init() {
         });
         coin.castShadow = true;
         coin.receiveShadow = true;
+
+        coin.rotation.y = (90 * Math.PI) / 180;
 
         //scene.add(coin);
       });

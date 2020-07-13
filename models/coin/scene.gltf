@@ -3,31 +3,31 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 967,
+      "count": 1002,
       "max": [
-        0.14013245701789856,
-        1.0000004768371582,
-        1.0000003576278687
+        1,
+        0.1600009948015213,
+        1
       ],
       "min": [
-        -0.21891409158706665,
-        -1.0000002384185791,
+        -1,
+        -0.1600009948015213,
         -1
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 11604,
+      "byteOffset": 12024,
       "componentType": 5126,
-      "count": 967,
+      "count": 1002,
       "max": [
-        0.99984878301620483,
+        1,
         1,
         1
       ],
       "min": [
-        -0.99984878301620483,
+        -1,
         -1,
         -1
       ],
@@ -36,17 +36,17 @@
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 967,
+      "count": 1002,
       "max": [
-        0.9715539813041687,
         1,
         1,
+        0.98078405857086182,
         1
       ],
       "min": [
-        -0.99119532108306885,
+        0,
         -1,
-        -1,
+        -0.98078405857086182,
         -1
       ],
       "type": "VEC4"
@@ -54,167 +54,118 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 967,
+      "count": 1002,
       "max": [
         1,
         1
       ],
       "min": [
         0,
-        0
+        -0
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 3588,
+      "count": 3216,
       "max": [
-        966
+        1001
       ],
       "min": [
         0
       ],
       "type": "SCALAR"
-    },
-    {
-      "bufferView": 4,
-      "componentType": 5126,
-      "count": 37,
-      "max": [
-        1.25
-      ],
-      "min": [
-        0.041666667908430099
-      ],
-      "type": "SCALAR"
-    },
-    {
-      "bufferView": 5,
-      "componentType": 5126,
-      "count": 37,
-      "max": [
-        8.3312486478373174e-17,
-        0.99994134902954102,
-        8.3312486478373174e-17,
-        1
-      ],
-      "min": [
-        -8.658417108947761e-17,
-        -0.82768899202346802,
-        -8.658417108947761e-17,
-        -0.48743936419487
-      ],
-      "type": "VEC4"
-    }
-  ],
-  "animations": [
-    {
-      "channels": [
-        {
-          "sampler": 0,
-          "target": {
-            "node": 5,
-            "path": "rotation"
-          }
-        }
-      ],
-      "name": "Take 001",
-      "samplers": [
-        {
-          "input": 5,
-          "interpolation": "LINEAR",
-          "output": 6
-        }
-      ]
     }
   ],
   "asset": {
     "extras": {
-      "author": "BranHelsing (https://sketchfab.com/BranHelsing)",
+      "author": "Jakob Henerey (https://sketchfab.com/hellonintendo8)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/super-mario-bros-coin-aa97e093847a439f9feb064134813806",
-      "title": "Super Mario Bros Coin"
+      "source": "https://sketchfab.com/models/2d814553c1f64fbd9550d4f7af25dd32",
+      "title": "Coin"
     },
-    "generator": "Sketchfab-4.61.0",
+    "generator": "Sketchfab-3.42.2",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 14352,
+      "byteLength": 12864,
       "byteOffset": 0,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 7736,
-      "byteOffset": 14352,
+      "byteLength": 8016,
+      "byteOffset": 12864,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 23208,
-      "byteOffset": 22088,
+      "byteLength": 24048,
+      "byteOffset": 20880,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 15472,
-      "byteOffset": 45296,
+      "byteLength": 16032,
+      "byteOffset": 44928,
       "byteStride": 16,
       "name": "floatBufferViews",
       "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 148,
-      "byteOffset": 60768,
-      "name": "floatBufferViews"
-    },
-    {
-      "buffer": 0,
-      "byteLength": 592,
-      "byteOffset": 60916,
-      "byteStride": 16,
-      "name": "floatBufferViews"
     }
   ],
   "buffers": [
     {
-      "byteLength": 61508,
+      "byteLength": 60960,
       "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/coin_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/coin_baseColor.png"
     }
   ],
   "materials": [
     {
-      "doubleSided": true,
-      "emissiveFactor": [
-        0,
-        0,
-        0
-      ],
-      "name": "CoinBlinn",
+      "doubleSided": false,
+      "name": "coin",
+      "occlusionTexture": {
+        "index": 0,
+        "strength": 1,
+        "texCoord": 0
+      },
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.445264512,
-          0.18586377600000004,
-          0,
+          1,
+          1,
+          1,
           1
         ],
-        "metallicFactor": 0,
-        "roughnessFactor": 0.59999999999999998
+        "baseColorTexture": {
+          "index": 1,
+          "texCoord": 0
+        },
+        "metallicFactor": 1,
+        "metallicRoughnessTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "roughnessFactor": 1
       }
     }
   ],
   "meshes": [
     {
-      "name": "Coin_CoinBlinn_0",
       "primitives": [
         {
           "attributes": {
@@ -253,52 +204,19 @@
       "children": [
         3
       ],
-      "matrix": [
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1
-      ],
-      "name": "cf2e745973704dfdb6865cceff08da1f.fbx"
-    },
-    {
-      "children": [
-        4
-      ],
-      "name": ""
-    },
-    {
-      "children": [
-        5
-      ],
-      "name": "RootNode"
-    },
-    {
-      "children": [
-        6
-      ],
-      "name": "Coin",
-      "scale": [
-        0.42353996634483337,
-        0.42353996634483337,
-        0.42353996634483337
-      ]
+      "name": "coin.obj.cleaner.materialmerger.gles"
     },
     {
       "mesh": 0,
-      "name": "Coin_CoinBlinn_0"
+      "name": ""
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
     }
   ],
   "scene": 0,
@@ -308,6 +226,16 @@
       "nodes": [
         0
       ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
     }
   ]
 }
