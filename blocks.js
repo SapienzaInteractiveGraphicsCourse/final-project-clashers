@@ -724,7 +724,8 @@ function setQuestionBoxGeometry(questionBoxElem) {
   var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
-    geometryMaterial
+    geometryMaterial,
+    0
   ); //mass 0
   questionBoxContainer.position.set(
     questionBoxElem.position.x,
@@ -732,7 +733,9 @@ function setQuestionBoxGeometry(questionBoxElem) {
     questionBoxElem.position.z
   );
   scene.add(questionBoxContainer);
-  questionBoxContainer.addEventListener("collision", onCollision);
+  questionBoxContainer.__dirtyPosition = true;
+  questionBoxContainer.__dirtyRotation = false;
+  //questionBoxContainer.addEventListener("collision", onCollision);
 }
 
 function setBrickGeometry(brickElem) {

@@ -305,7 +305,7 @@ function init() {
 
   function setYoshiGeometry() {
     var yoshiGeometry = new THREE.BoxGeometry(7.5, 10.2, 6.3);
-    yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial); //mass 0
+    yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
     //yoshiBox.position.set(0, -9.3, -600);
     yoshiBox.position.set(
       yoshi.position.x,
@@ -313,6 +313,11 @@ function init() {
       yoshi.position.z
     );
     scene.add(yoshiBox);
+    yoshiBox.addEventListener("collision", onCollision);
+    //yoshiBox.__dirtyPosition = true;
+
+    //yoshiBox.__dirtyPosition = true;
+    //yoshiBox.__dirtyRotation = false;
   }
 
   /* function setQuestionBoxGeometry(questionBoxElem) {
@@ -746,6 +751,11 @@ function init() {
       yoshi.position.y + 5,
       yoshi.position.z
     );
+    var pos = yoshiBox.position.clone();
+    yoshiBox.position.copy(pos);
+    yoshiBox.rotation.set(0, 0, 0);
+    yoshiBox.__dirtyPosition = true;
+    yoshiBox.__dirtyRotation = true;
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
@@ -907,6 +917,8 @@ function performAnimation(direction) {
         yoshi.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
+      //yoshiBox.__dirtyPosition = true;
+      //yoshiBox.__dirtyRotation = false;
       camera.position.z += yoshi.position.z - camera.position.z;
       controls.update();
     })
@@ -931,6 +943,8 @@ function performAnimation(direction) {
         yoshi.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
+      //yoshiBox.__dirtyPosition = true;
+      //yoshiBox.__dirtyRotation = false;
       camera.position.z += yoshi.position.z - camera.position.z;
       controls.update();
     })
@@ -958,6 +972,8 @@ function rotateTorso(direction) {
       .easing(TWEEN.Easing.Linear.None)
       .onUpdate(function () {
         torso.rotation.y = tweenStartLeft.y_leftRotation;
+        //yoshiBox.__dirtyPosition = true;
+        //yoshiBox.__dirtyRotation = false;
       })
       .start();
   }
@@ -967,6 +983,8 @@ function rotateTorso(direction) {
       .easing(TWEEN.Easing.Linear.None)
       .onUpdate(function () {
         torso.rotation.y = tweenStartRight.y_rightRotation;
+        //yoshiBox.__dirtyPosition = true;
+        //yoshiBox.__dirtyRotation = false;
       })
       .start();
   }
@@ -998,7 +1016,7 @@ function jump() {
     head: (-15 * Math.PI) / 180,
   };
   var tweenGoalJump = {
-    y: -3,
+    y: 0, //-3
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
@@ -1053,6 +1071,8 @@ function jump() {
       spine.rotation.x = tweenStartFlex.spine;
       head.rotation.x = tweenStartFlex.head;
       yoshi.position.y = tweenStartFlex.y;
+      //yoshiBox.__dirtyPosition = true;
+      //yoshiBox.__dirtyRotation = false;
     })
     .start();
   /*var tweenFlexBack = new TWEEN.Tween(tweenStartFlex, groupJump)
@@ -1081,6 +1101,7 @@ function jump() {
         yoshi.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
+
       upperLeg_right.rotation.x = tweenStartJump.upperLeg_right;
       upperLeg_left.rotation.x = tweenStartJump.upperLeg_left;
       lowerLeg_right.rotation.x = tweenStartJump.lowerLeg;
@@ -1113,7 +1134,8 @@ function jump() {
         thumb2_left.rotation.x = tweenStartJump.finger_x;
         thumb1_left.rotation.y = tweenStartJump.thumb1_y;
       }
-
+      //yoshiBox.__dirtyPosition = true;
+      //yoshiBox.__dirtyRotation = false;
       //fix arm x rotation
       //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     });
@@ -1132,6 +1154,7 @@ function jump() {
         yoshi.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
+
       if (isRotatedRight && isJumpingRight) {
         upperArm_right.rotation.x = (0 * Math.PI) / 180;
         upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
@@ -1158,7 +1181,8 @@ function jump() {
         thumb2_left.rotation.x = tweenStartJump.finger_x;
         thumb1_left.rotation.y = tweenStartJump.thumb1_y;
       }
-
+      //yoshiBox.__dirtyPosition = true;
+      //yoshiBox.__dirtyRotation = false;
       //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     })
     .onComplete(function () {
@@ -1206,6 +1230,9 @@ function setIdlePosition() {
       finger3_2_left.rotation.x = tweenStartScale.finger_x;
       thumb2_left.rotation.x = tweenStartScale.finger_x;
       thumb1_left.rotation.y = tweenStartScale.thumb1_y;
+
+      //yoshiBox.__dirtyPosition = true;
+      //yoshiBox.__dirtyRotation = false;
     })
     .start();
 }
