@@ -38,6 +38,9 @@ var tweenGoalLeft;
 var tweenIdle;
 var tween;
 var tweenBack;
+var tweenJump;
+var tweenJumpBack;
+var tweenFlex;
 
 var ground;
 
@@ -71,3 +74,7 @@ var keysPressed = {};
 var yoshiBox;
 var questionBoxContainer;
 var geometryMaterial;
+var pipeContainer;
+
+var dir;
+var collision;

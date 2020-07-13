@@ -758,6 +758,7 @@ function setPipeGeometry(pipeElem, y) {
     pipeElem.position.z - 5.3
   );
   scene.add(pipeContainer);
+  pipeContainer.addEventListener("collision", onPipeCollision);
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {

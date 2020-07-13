@@ -176,12 +176,14 @@ function init() {
               isRotatedRight = true;
             }
             if (!dPressed && isWalking) {
+              //collision = false;
               performAnimation("right");
             }
             dPressed = true;
             break;
 
           case 65:
+            //collision = false;
             isWalking = true;
             if (isRotatedRight) {
               //TWEEN.removeAll();
@@ -217,10 +219,12 @@ function init() {
       });
 
       document.addEventListener("keyup", (event) => {
+        collision = false;
         delete keysPressed[event.keyCode];
         switch (event.which) {
           case 68:
             //D
+            //collision = false;
             groupRun.removeAll();
             if (keysPressed[65]) {
               //isRotatedRight = false;
@@ -902,6 +906,7 @@ function setAnimationParameters() {
 }
 
 function performAnimation(direction) {
+  dir = direction;
   setAnimationParameters(); //rinominare setTweenParameter!
 
   tween = new TWEEN.Tween(tweenStartScale, groupRun)
@@ -915,13 +920,15 @@ function performAnimation(direction) {
       //yoshi.position.y = tweenStartScale.y;
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
-      if (direction == "right") {
-        yoshi.position.z += 0.2;
-        dirLight.position.z += 0.2;
-      }
-      if (direction == "left") {
-        yoshi.position.z -= 0.2;
-        dirLight.position.z -= 0.2;
+      if (!collision) {
+        if (direction == "right") {
+          yoshi.position.z += 0.2;
+          dirLight.position.z += 0.2;
+        }
+        if (direction == "left") {
+          yoshi.position.z -= 0.2;
+          dirLight.position.z -= 0.2;
+        }
       }
       //yoshiBox.__dirtyPosition = true;
       //yoshiBox.__dirtyRotation = false;
@@ -941,13 +948,15 @@ function performAnimation(direction) {
       //yoshi.position.y = tweenStartScale.y;
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
-      if (direction == "right") {
-        yoshi.position.z += 0.2;
-        dirLight.position.z += 0.2;
-      }
-      if (direction == "left") {
-        yoshi.position.z -= 0.2;
-        dirLight.position.z -= 0.2;
+      if (!collision) {
+        if (direction == "right") {
+          yoshi.position.z += 0.2;
+          dirLight.position.z += 0.2;
+        }
+        if (direction == "left") {
+          yoshi.position.z -= 0.2;
+          dirLight.position.z -= 0.2;
+        }
       }
       //yoshiBox.__dirtyPosition = true;
       //yoshiBox.__dirtyRotation = false;
@@ -996,9 +1005,9 @@ function rotateTorso(direction) {
   }
 }
 
-function setTweenJumpParameters() {
+/*function setTweenJumpParameters() {
   //metterci tweenstartjump, tweengoaljump, tweengoaljumpback
-}
+}*/
 
 function jump() {
   var tweenStartJump = {
@@ -1066,7 +1075,7 @@ function jump() {
     upperLeg_left: (-180 * Math.PI) / 180,
     y: -14.3,
   };*/
-  var tweenFlex = new TWEEN.Tween(tweenStartFlex, groupJump)
+  tweenFlex = new TWEEN.Tween(tweenStartFlex, groupJump)
     .to(tweenGoalFlex, 200)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -1094,7 +1103,7 @@ function jump() {
       yoshi.position.y = tweenStartFlex.y;
     });
   tweenFlex.chain(tweenFlexBack);*/
-  var tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
+  tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
     .to(tweenGoalJump, 400)
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
@@ -1147,7 +1156,7 @@ function jump() {
     });
   //.start();
   tweenFlex.chain(tweenJump);
-  var tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
+  tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
     .to(tweenGoalJumpBack, 400)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {

@@ -15,3 +15,28 @@ function onCollision(
   this.__dirtyPosition = true;
   this.__dirtyRotation = true;*/
 }
+
+function onPipeCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  collision = true;
+  if (other_object instanceof Physijs.Mesh) {
+    console.log("collisione");
+
+    /*if (dir == "right") {
+      yoshi.position.z -= 0.2;
+      dirLight.position.z -= 0.2;
+    }
+    if (dir == "left") {
+      yoshi.position.z += 0.2;
+      dirLight.position.z += 0.2;
+    }*/
+  }
+  /*if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
+    collision = false;
+  }*/
+  console.log("collision " + collision);
+}
