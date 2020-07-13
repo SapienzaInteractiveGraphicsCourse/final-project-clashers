@@ -732,7 +732,7 @@ function setQuestionBoxGeometry(questionBoxElem) {
     questionBoxElem.position.z
   );
   scene.add(questionBoxContainer);
-  //questionBoxContainer.addEventListener("collision", onCollision);
+  questionBoxContainer.addEventListener("collision", onCollision);
 }
 
 function setBrickGeometry(brickElem) {
