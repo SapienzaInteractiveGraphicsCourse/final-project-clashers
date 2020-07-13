@@ -62,7 +62,7 @@ function init() {
     const color = 0xffffff;
     const intensity = 1;
     dirLight = new THREE.DirectionalLight(color, intensity, 100);
-    dirLight.position.set(0, 100, -620);
+    dirLight.position.set(0, 100, -620); //y = 100
     dirLight.castShadow = true;
 
     dirLight.shadow.mapSize.width = 512;
@@ -527,6 +527,10 @@ function init() {
           }
           if (child.material) {
             child.material.metalness = 0;
+            //child.material.diffuse = 0xd2b48c;
+            //child.material.specular = 50;
+            //child.material.shininess = 0;
+            //child.material.emissive = 0;
           }
         });
         coin.castShadow = true;
@@ -1016,7 +1020,7 @@ function jump() {
     head: (-15 * Math.PI) / 180,
   };
   var tweenGoalJump = {
-    y: 0, //-3
+    y: -3, //-3
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
