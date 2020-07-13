@@ -40,15 +40,21 @@ function createGroup1() {
   }
   group1[9].position.set(0, 35, -556);
 
+  for (var i = 7; i < 10; i++) {
+    setCoinGeometry(group1[i]);
+  }
+
   powerUpClone = powerUp.clone();
   powerUpClone.position.set(0, 16.5, -562.5); //16.5
   scene.add(powerUpClone);
   group1.push(powerUpClone);
+  setPowerUpGeometry(powerUpClone);
 
   goombaClone = goomba.clone();
   goombaClone.position.set(0, -13.3, -562.5);
   scene.add(goombaClone);
   group1.push(goombaClone);
+  setGoombaGeometry(goombaClone);
 }
 
 function createGroupPipes() {
@@ -60,6 +66,12 @@ function createGroupPipes() {
     scene.add(pipeClone);
     groupPipes.push(pipeClone);
   }
+
+  groupPipes[0].scale.set(0.3, 0.2, 0.3);
+  groupPipes[1].scale.set(0.3, 0.3, 0.3);
+  groupPipes[2].scale.set(0.3, 0.4, 0.3);
+  groupPipes[3].scale.set(0.3, 0.5, 0.3);
+
   for (var i = 0; i < 3; i++) {
     goombaClone = goomba.clone();
     goombaClone.position.set(-5.25, -13.3, -460 + 45 * i);
@@ -67,10 +79,10 @@ function createGroupPipes() {
     groupPipes.push(goombaClone);
   }
   groupPipes[6].position.set(-5.25, -13.3, -410);
-  groupPipes[0].scale.set(0.3, 0.2, 0.3);
-  groupPipes[1].scale.set(0.3, 0.3, 0.3);
-  groupPipes[2].scale.set(0.3, 0.4, 0.3);
-  groupPipes[3].scale.set(0.3, 0.5, 0.3);
+
+  for (var i = 4; i < 7; i++) {
+    setGoombaGeometry(groupPipes[i]);
+  }
 
   setPipeGeometry(groupPipes[0], 9.7);
   setPipeGeometry(groupPipes[1], 17.2);
@@ -100,11 +112,13 @@ function createGroup2() {
   coinClone.position.set(0, 16.5, -360.5);
   scene.add(coinClone);
   group2.push(coinClone);
+  setCoinGeometry(coinClone);
 
   powerUpClone = powerUp.clone();
   powerUpClone.position.set(0, 16.5, -312.5);
   scene.add(powerUpClone);
   group2.push(powerUpClone);
+  setPowerUpGeometry(powerUpClone);
 }
 
 function createGroup3() {
@@ -121,6 +135,7 @@ function createGroup3() {
     goombaClone.position.set(0, 32.5, -292 + 10 * i);
     scene.add(goombaClone);
     group3.push(goombaClone);
+    setGoombaGeometry(goombaClone);
   }
 }
 
@@ -170,10 +185,15 @@ function createGroup4() {
   }
   group4[14].position.set(0, 35, -89.3);
 
+  for (var i = 12; i < 15; i++) {
+    setCoinGeometry(group4[i]);
+  }
+
   powerUpClone = powerUp.clone();
   powerUpClone.position.set(0, 35, -182);
   scene.add(powerUpClone);
   group4.push(powerUpClone);
+  setPowerUpGeometry(powerUpClone);
 }
 
 function createGroup5() {
@@ -209,6 +229,10 @@ function createGroup5() {
   group5[8].position.set(0, 16.5, -182);
   group5[9].position.set(0, 16.5, -167);
 
+  for (var i = 6; i < 10; i++) {
+    setCoinGeometry(group5[i]);
+  }
+
   for (var i = 0; i < 6; i++) {
     goombaClone = goomba.clone();
     goombaClone.position.set(0, -13.3, -220 + 10 * i);
@@ -226,6 +250,10 @@ function createGroup5() {
   }
   for (var i = 3; i < 6; i++) {
     setQuestionBoxGeometry(group5[i]);
+  }
+
+  for (var i = 10; i < 16; i++) {
+    setGoombaGeometry(group5[i]);
   }
 }
 
@@ -705,12 +733,14 @@ function createGroup6() {
   coinClone.position.set(0, 16.5, 148); //8.5
   scene.add(coinClone);
   group6.push(coinClone);
+  setCoinGeometry(coinClone);
 
   for (var i = 0; i < 2; i++) {
     goombaClone = goomba.clone();
     goombaClone.position.set(0, -13.3, 170 + 10 * i);
     scene.add(goombaClone);
     group6.push(goombaClone);
+    setGoombaGeometry(goombaClone);
   }
 
   for (var i = 2; i < 5; i++) {
@@ -775,4 +805,37 @@ function setEmptyBlockGeometry(emptyBlockElem) {
     emptyBlockElem.position.z
   );
   scene.add(emptyBlockContainer);
+}
+
+function setCoinGeometry(coinElem) {
+  var coinGeometry = new THREE.BoxGeometry(2, 4, 4);
+  coinContainer = new Physijs.BoxMesh(coinGeometry, geometryMaterial, 0);
+  coinContainer.position.set(
+    coinElem.position.x,
+    coinElem.position.y,
+    coinElem.position.z
+  );
+  scene.add(coinContainer);
+}
+
+function setPowerUpGeometry(powerUpElem) {
+  var powerUpGeometry = new THREE.BoxGeometry(4.7, 4.5, 4.7);
+  powerUpContainer = new Physijs.BoxMesh(powerUpGeometry, geometryMaterial, 0);
+  powerUpContainer.position.set(
+    powerUpElem.position.x,
+    powerUpElem.position.y,
+    powerUpElem.position.z
+  );
+  scene.add(powerUpContainer);
+}
+
+function setGoombaGeometry(goombaElem) {
+  var goombaGeometry = new THREE.BoxGeometry(4.7, 5.2, 4.8);
+  goombaContainer = new Physijs.BoxMesh(goombaGeometry, geometryMaterial, 0);
+  goombaContainer.position.set(
+    goombaElem.position.x,
+    goombaElem.position.y + 1.8,
+    goombaElem.position.z
+  );
+  scene.add(goombaContainer);
 }
