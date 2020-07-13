@@ -758,6 +758,7 @@ function setPipeGeometry(pipeElem, y) {
     pipeElem.position.z - 5.3
   );
   scene.add(pipeContainer);
+  //pipeContainer.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", onPipeCollision);
 }
 

@@ -175,7 +175,7 @@ function init() {
               rotateTorso("right");
               isRotatedRight = true;
             }
-            if (!dPressed && isWalking) {
+            if (!dPressed && isWalking && !collision) {
               //collision = false;
               performAnimation("right");
             }
@@ -220,6 +220,7 @@ function init() {
 
       document.addEventListener("keyup", (event) => {
         collision = false;
+
         delete keysPressed[event.keyCode];
         switch (event.which) {
           case 68:
@@ -316,6 +317,7 @@ function init() {
       yoshi.position.y + 5,
       yoshi.position.z
     );
+    pipeContainer.setCcdMotionThreshold(1);
     scene.add(yoshiBox);
     yoshiBox.addEventListener("collision", onCollision);
     //yoshiBox.__dirtyPosition = true;

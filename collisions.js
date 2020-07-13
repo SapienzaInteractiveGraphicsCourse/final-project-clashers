@@ -22,7 +22,8 @@ function onPipeCollision(
   relative_rotation,
   contact_normal
 ) {
-  collision = true;
+  //collision = true;
+  collision = false;
   if (other_object instanceof Physijs.Mesh) {
     console.log("collisione");
 
@@ -35,8 +36,12 @@ function onPipeCollision(
       dirLight.position.z += 0.2;
     }*/
   }
-  /*if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
-    collision = false;
-  }*/
+  if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
+    collision = true;
+  }
+  console.log(
+    "riga strana: " +
+      pipeContainer._physijs.touches.indexOf(other_object._physijs.id)
+  );
   console.log("collision " + collision);
 }
