@@ -374,6 +374,7 @@ function init() {
             other_object._physijs.id
           );*/
           isCollided = false;
+          collidedTop = false; //?
           scene.removeEventListener("update", checkTouch);
         };
         scene.addEventListener("update", checkTouch);
@@ -1293,6 +1294,10 @@ function fall() {
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       yoshi.position.y = tweenStartFall.y;
+    })
+    .onComplete(function () {
+      collidedTop = false; //?
+      //setIdlePosition();
     })
     .start();
 }
