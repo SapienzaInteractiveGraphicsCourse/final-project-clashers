@@ -800,6 +800,43 @@ function setPipeGeometry(pipeElem, y, y_top) {
   pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", onPipeCollision);
   pipeContainerTop.addEventListener("collision", onPipeTopCollision);
+  /*pipeContainerTop.addEventListener("collision", function (
+    other_object,
+    relative_velocity,
+    relative_rotation,
+    contact_normal
+    //event
+  ) {
+    //otherObj = other_object;
+    //contactNormalY = contact_normal.y;
+    if (other_object instanceof Physijs.Mesh) {
+      console.log("pipeCollision Top");
+      collidedTop = true;
+    }
+
+    if (contact_normal.y == 1) {
+      isCollided = true;
+
+      var checkTouch = function () {
+        // see if we are still touching this object
+        var touches = pipeContainerTop._physijs.touches;
+        console.log(touches.length);
+        for (var i = 0; i < touches.length; i++) {
+          console.log("touches[i] " + touches[i]);
+          if (touches[i] == other_object._physijs.id) return;
+        }
+        console.log(
+          "no longer touching grounded object",
+          other_object._physijs.id
+        );
+        isCollided = false;
+        scene.removeEventListener("update", checkTouch);
+      };
+      scene.addEventListener("update", checkTouch);
+      console.log("iscollided " + isCollided);
+    }
+    //console.log("iscollided " + isCollided);
+  });*/
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {

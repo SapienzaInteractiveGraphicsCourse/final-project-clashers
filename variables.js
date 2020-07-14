@@ -42,6 +42,15 @@ var tweenJump;
 var tweenJumpBack;
 var tweenFlex;
 
+var tweenStartJump;
+var tweenGoalJump;
+var tweenGoalJumpBack;
+var tweenStartFlex;
+var tweenGoalFlex;
+var tweenStartFall;
+var tweenGoalFall;
+var tweenFall;
+
 var ground;
 
 var yoshi;
@@ -85,5 +94,6 @@ var collidedRight = false;
 var collidedTop = false;
 
 var isCollided = false;
+var isOnPipe = false;
 var otherObj;
 var contactNormalY;

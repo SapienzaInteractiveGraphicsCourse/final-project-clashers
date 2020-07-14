@@ -1,4 +1,4 @@
-function onCollision(
+/*function onCollision(
   other_object,
   relative_velocity,
   relative_rotation,
@@ -13,8 +13,8 @@ function onCollision(
   yoshiBox.position.copy(pos);
   yoshiBox.rotation.set(0, 0, 0);
   this.__dirtyPosition = true;
-  this.__dirtyRotation = true;*/
-}
+  this.__dirtyRotation = true;
+}*/
 
 function onPipeCollision(
   other_object,
@@ -50,21 +50,51 @@ function onPipeTopCollision(
   relative_velocity,
   relative_rotation,
   contact_normal
-  //event
 ) {
-  otherObj = other_object;
-  contactNormalY = contact_normal.y;
-  isCollided = true;
   if (other_object instanceof Physijs.Mesh) {
     console.log("pipeCollision Top");
     collidedTop = true;
   }
-  /*if (event.phase == "ended") {
-    console.log("ended: ");
-  }*/
-  console.log("contact_normal.y = " + contact_normal.y);
-  console.log("iscollided " + isCollided);
 }
+
+/*function onPipeTopCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+  //event
+) {
+  //otherObj = other_object;
+  //contactNormalY = contact_normal.y;
+  if (other_object instanceof Physijs.Mesh) {
+    console.log("pipeCollision Top");
+    collidedTop = true;
+  }
+
+  if (contact_normal <= -0.5) {
+    isCollided = true;
+
+    /*if (event.phase == "ended") {
+    console.log("ended: ");
+    }
+
+    var checkTouch = function () {
+      // see if we are still touching this object
+      var touches = yoshiBox._physijs.touches;
+      for (var i = 0; i < touches.length; i++) {
+        if (touches[i] == other_object._physijs.id) return;
+      }
+      console.log(
+        "no longer touching grounded object",
+        other_object._physijs.id
+      );
+      isCollided = false;
+      scene.removeEventListener("update", checkTouch);
+    };
+    scene.addEventListener("update", checkTouch);
+    console.log("iscollided " + isCollided);
+  }
+}*/
 
 /*Physijs.Scene.prototype._updateCollisions = function () {
  

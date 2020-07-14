@@ -56,20 +56,20 @@ function init() {
 
   //scene = new THREE.Scene();
   scene = new Physijs.Scene();
-  scene.addEventListener("update", function () {
+  /*scene.addEventListener("update", function () {
     /*if (otherObj._physijs.id != yoshiBox._physijs.id) {
       isCollided = false;
     }
     console.log("yoshi " + yoshiBox._physijs.id);
     console.log("other " + otherObj._physijs.id);*/
-    /*if (
+  /*if (
       yoshiBox._physijs.touches.indexOf(pipeContainerTop._physijs.id) === -1
     ) {
       isCollided = false;
     } else {
       isCollided = true;
       console.log("ciao amici");
-    }*/
+    }
     if (contactNormalY == 1) {
       isCollided = true;
     } else {
@@ -79,7 +79,7 @@ function init() {
     console.log("contactNormalY = " + contactNormalY);
 
     scene.simulate(undefined, 1);
-  });
+  });*/
   scene.setGravity = new THREE.Vector3(0, -50, 0); //?
   {
     const d = 100;
@@ -345,7 +345,42 @@ function init() {
     );
     yoshiBox.setCcdMotionThreshold(1);
     scene.add(yoshiBox);
-    yoshiBox.addEventListener("collision", onCollision);
+    yoshiBox.addEventListener("collision", function (
+      other_object,
+      relative_velocity,
+      relative_rotation,
+      contact_normal
+      //event
+    ) {
+      //otherObj = other_object;
+      //contactNormalY = contact_normal.y;
+      //console.log("normale su y " + contact_normal.y);
+      if (contact_normal.y == -1) {
+        isCollided = true;
+        isOnPipe = true;
+
+        var checkTouch = function () {
+          // see if we are still touching this object
+          var touches = yoshiBox._physijs.touches;
+          //console.log(touches.length);
+          for (var i = 0; i < touches.length; i++) {
+            //console.log("touches[i] " + touches[i]);
+            if (touches[i] == other_object._physijs.id) return;
+          }
+          isOnPipe = false;
+          fall();
+          /*console.log(
+            "no longer touching grounded object",
+            other_object._physijs.id
+          );*/
+          isCollided = false;
+          scene.removeEventListener("update", checkTouch);
+        };
+        scene.addEventListener("update", checkTouch);
+        //console.log("iscollided " + isCollided);
+      }
+      //console.log("iscollided " + isCollided);
+    });
     //yoshiBox.__dirtyPosition = true;
 
     //yoshiBox.__dirtyPosition = true;
@@ -1043,7 +1078,7 @@ function rotateTorso(direction) {
 }*/
 
 function jump() {
-  var tweenStartJump = {
+  tweenStartJump = {
     y: yoshi.position.y,
     //rightArm_rotation_z: upperArm_right.rotation.z,
     rightArm_rotation_z: (45 * Math.PI) / 180,
@@ -1063,7 +1098,7 @@ function jump() {
     spine: (30 * Math.PI) / 180,
     head: (-15 * Math.PI) / 180,
   };
-  var tweenGoalJump = {
+  tweenGoalJump = {
     y: 0, //-3
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
@@ -1076,7 +1111,7 @@ function jump() {
     head: (0 * Math.PI) / 180,
     upperLeg_left: (-180 * Math.PI) / 180,
   };
-  var tweenGoalJumpBack = {
+  tweenGoalJumpBack = {
     y: -14.3,
     rightArm_rotation_z: (45 * Math.PI) / 180,
     rightHand_rotation_y: (90 * Math.PI) / 180,
@@ -1084,7 +1119,7 @@ function jump() {
     thumb1_y: (66.5 * Math.PI) / 180,
     thumb2_x: (0 * Math.PI) / 180,
   };
-  var tweenStartFlex = {
+  tweenStartFlex = {
     upperLeg_right: upperLeg_right.rotation.x,
     upperLeg_left: upperLeg_left.rotation.x,
     lowerLeg: lowerLeg_right.rotation.x,
@@ -1092,7 +1127,7 @@ function jump() {
     head: head.rotation.x,
     y: yoshi.position.y,
   };
-  var tweenGoalFlex = {
+  tweenGoalFlex = {
     upperLeg_right: (-45 * Math.PI) / 180,
     upperLeg_left: (-225 * Math.PI) / 180,
     lowerLeg: (75 * Math.PI) / 180,
@@ -1244,6 +1279,22 @@ function jump() {
       //setIdlePosition();
     });
   tweenJump.chain(tweenJumpBack);
+}
+
+function fall() {
+  tweenStartFall = {
+    y: yoshi.position.y,
+  };
+  tweenGoalFall = {
+    y: -14.3,
+  };
+  tweenFall = new TWEEN.Tween(tweenStartFall)
+    .to(tweenGoalFall, 400)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      yoshi.position.y = tweenStartFall.y;
+    })
+    .start();
 }
 
 function setIdlePosition() {
