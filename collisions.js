@@ -27,14 +27,6 @@ function onPipeCollision(
   if (other_object instanceof Physijs.Mesh) {
     console.log("collisione");
 
-    /*if (dir == "right") {
-      yoshi.position.z -= 0.2;
-      dirLight.position.z -= 0.2;
-    }
-    if (dir == "left") {
-      yoshi.position.z += 0.2;
-      dirLight.position.z += 0.2;
-    }*/
     if (dir == "right") {
       collidedLeft = true;
     }
@@ -43,12 +35,29 @@ function onPipeCollision(
     }
   }
 
-  if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
+  /*if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
     collision = true;
   }
   console.log(
     "riga strana: " +
       pipeContainer._physijs.touches.indexOf(other_object._physijs.id)
   );
-  console.log("collision " + collision);
+  console.log("collision " + collision);*/
+}
+
+function onPipeTopCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+  //event
+) {
+  if (other_object instanceof Physijs.Mesh) {
+    console.log("pipeCollision Top");
+    collidedTop = true;
+  }
+  /*if (event.phase == "ended") {
+    console.log("ended: ");
+  }*/
+  return true;
 }

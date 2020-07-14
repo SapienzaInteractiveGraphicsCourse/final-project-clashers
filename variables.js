@@ -75,9 +75,11 @@ var yoshiBox;
 var questionBoxContainer;
 var geometryMaterial;
 var pipeContainer;
+var pipeContainerTop;
 
 var dir;
 var collision;
 
 var collidedLeft = false;
 var collidedRight = false;
+var collidedTop = false;

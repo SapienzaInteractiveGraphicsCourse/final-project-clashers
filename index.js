@@ -56,7 +56,7 @@ function init() {
 
   //scene = new THREE.Scene();
   scene = new Physijs.Scene();
-  //scene.setGravity = new THREE.Vector3(0, -50, 0); //?
+  scene.setGravity = new THREE.Vector3(0, -50, 0); //?
   {
     const d = 100;
     const color = 0xffffff;
@@ -770,6 +770,7 @@ function init() {
     yoshiBox.rotation.set(0, 0, 0);
     yoshiBox.__dirtyPosition = true;
     yoshiBox.__dirtyRotation = true;
+
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);
     controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
@@ -1035,7 +1036,7 @@ function jump() {
     head: (-15 * Math.PI) / 180,
   };
   var tweenGoalJump = {
-    y: -3, //-3
+    y: 0, //-3
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
@@ -1111,7 +1112,9 @@ function jump() {
     .to(tweenGoalJump, 400)
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
-      yoshi.position.y = tweenStartJump.y;
+      if (!collidedTop) {
+        yoshi.position.y = tweenStartJump.y;
+      }
       if (keysPressed[68]) {
         yoshi.position.z += 0.3;
         dirLight.position.z += 0.3;
@@ -1164,7 +1167,9 @@ function jump() {
     .to(tweenGoalJumpBack, 400)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
-      yoshi.position.y = tweenStartJump.y;
+      if (!collidedTop) {
+        yoshi.position.y = tweenStartJump.y;
+      }
       if (keysPressed[68]) {
         yoshi.position.z += 0.3;
         dirLight.position.z += 0.3;
