@@ -799,14 +799,10 @@ function setPipeGeometry(pipeElem, y, y_top) {
   scene.add(pipeContainerTop);
   //pipeContainer.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", onPipeCollision);
-  var ciao = pipeContainerTop.addEventListener(
+  pipeContainerTop.addEventListener(
     "collision",
     onPipeTopCollision,
-    true
   );
-  if (ciao) {
-    console.log("qualcosa");
-  }
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {

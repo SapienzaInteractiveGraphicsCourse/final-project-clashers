@@ -83,3 +83,6 @@ var collision;
 var collidedLeft = false;
 var collidedRight = false;
 var collidedTop = false;
+
+var isCollided = false;
+var otherObj;

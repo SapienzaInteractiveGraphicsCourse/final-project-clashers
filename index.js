@@ -56,6 +56,18 @@ function init() {
 
   //scene = new THREE.Scene();
   scene = new Physijs.Scene();
+  scene.addEventListener("update", function() {
+    /*if (otherObj._physijs.id != yoshiBox._physijs.id) {
+      isCollided = false;
+    }
+    console.log("yoshi " + yoshiBox._physijs.id);
+    console.log("other " + otherObj._physijs.id);*/
+    if (yoshiBox._physijs.touches.indexOf(pipeContainerTop._physijs.id) === -1) {
+      isCollided = false;
+    }
+    console.log("iscollided " + isCollided);
+    scene.simulate();
+  });
   scene.setGravity = new THREE.Vector3(0, -50, 0); //?
   {
     const d = 100;
@@ -770,6 +782,10 @@ function init() {
     yoshiBox.rotation.set(0, 0, 0);
     yoshiBox.__dirtyPosition = true;
     yoshiBox.__dirtyRotation = true;
+
+    
+    
+    //console.log("iscollided " + isCollided);
 
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
     requestAnimationFrame(animate);

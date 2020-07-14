@@ -52,6 +52,8 @@ function onPipeTopCollision(
   contact_normal
   //event
 ) {
+  otherObj = other_object;
+  isCollided = true;
   if (other_object instanceof Physijs.Mesh) {
     console.log("pipeCollision Top");
     collidedTop = true;
@@ -59,5 +61,7 @@ function onPipeTopCollision(
   /*if (event.phase == "ended") {
     console.log("ended: ");
   }*/
-  return true;
+  
+  
+  console.log("iscollided " + isCollided);
 }
