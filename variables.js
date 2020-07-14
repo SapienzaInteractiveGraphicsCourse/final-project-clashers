@@ -78,3 +78,6 @@ var pipeContainer;
 
 var dir;
 var collision;
+
+var collidedLeft = false;
+var collidedRight = false;

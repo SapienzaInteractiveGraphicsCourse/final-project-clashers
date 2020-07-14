@@ -166,6 +166,7 @@ function init() {
         keysPressed[event.keyCode] = true;
         switch (event.which) {
           case 68:
+            collidedRight = false;
             isWalking = true;
             if (!isRotatedRight) {
               //TWEEN.removeAll();
@@ -184,6 +185,7 @@ function init() {
 
           case 65:
             //collision = false;
+            collidedLeft = false;
             isWalking = true;
             if (isRotatedRight) {
               //TWEEN.removeAll();
@@ -922,16 +924,16 @@ function performAnimation(direction) {
       //yoshi.position.y = tweenStartScale.y;
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
-      if (!collision) {
-        if (direction == "right") {
-          yoshi.position.z += 0.2;
-          dirLight.position.z += 0.2;
-        }
-        if (direction == "left") {
-          yoshi.position.z -= 0.2;
-          dirLight.position.z -= 0.2;
-        }
+      //if (!collision) {
+      if (direction == "right" && !collidedLeft) {
+        yoshi.position.z += 0.2;
+        dirLight.position.z += 0.2;
       }
+      if (direction == "left" && !collidedRight) {
+        yoshi.position.z -= 0.2;
+        dirLight.position.z -= 0.2;
+      }
+      //}
       //yoshiBox.__dirtyPosition = true;
       //yoshiBox.__dirtyRotation = false;
       camera.position.z += yoshi.position.z - camera.position.z;
@@ -950,16 +952,16 @@ function performAnimation(direction) {
       //yoshi.position.y = tweenStartScale.y;
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
-      if (!collision) {
-        if (direction == "right") {
-          yoshi.position.z += 0.2;
-          dirLight.position.z += 0.2;
-        }
-        if (direction == "left") {
-          yoshi.position.z -= 0.2;
-          dirLight.position.z -= 0.2;
-        }
+      //if (!collision) {
+      if (direction == "right" && !collidedLeft) {
+        yoshi.position.z += 0.2;
+        dirLight.position.z += 0.2;
       }
+      if (direction == "left" && !collidedRight) {
+        yoshi.position.z -= 0.2;
+        dirLight.position.z -= 0.2;
+      }
+      //}
       //yoshiBox.__dirtyPosition = true;
       //yoshiBox.__dirtyRotation = false;
       camera.position.z += yoshi.position.z - camera.position.z;

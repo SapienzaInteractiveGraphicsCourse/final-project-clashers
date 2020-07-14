@@ -35,7 +35,14 @@ function onPipeCollision(
       yoshi.position.z += 0.2;
       dirLight.position.z += 0.2;
     }*/
+    if (dir == "right") {
+      collidedLeft = true;
+    }
+    if (dir == "left") {
+      collidedRight = true;
+    }
   }
+
   if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
     collision = true;
   }
