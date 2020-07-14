@@ -797,12 +797,9 @@ function setPipeGeometry(pipeElem, y, y_top) {
 
   scene.add(pipeContainer);
   scene.add(pipeContainerTop);
-  //pipeContainer.setCcdMotionThreshold(1);
+  pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", onPipeCollision);
-  pipeContainerTop.addEventListener(
-    "collision",
-    onPipeTopCollision,
-  );
+  pipeContainerTop.addEventListener("collision", onPipeTopCollision);
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {

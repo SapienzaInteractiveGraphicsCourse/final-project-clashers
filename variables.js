@@ -86,3 +86,4 @@ var collidedTop = false;
 
 var isCollided = false;
 var otherObj;
+var contactNormalY;

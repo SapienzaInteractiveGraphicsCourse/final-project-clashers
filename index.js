@@ -56,17 +56,29 @@ function init() {
 
   //scene = new THREE.Scene();
   scene = new Physijs.Scene();
-  scene.addEventListener("update", function() {
+  scene.addEventListener("update", function () {
     /*if (otherObj._physijs.id != yoshiBox._physijs.id) {
       isCollided = false;
     }
     console.log("yoshi " + yoshiBox._physijs.id);
     console.log("other " + otherObj._physijs.id);*/
-    if (yoshiBox._physijs.touches.indexOf(pipeContainerTop._physijs.id) === -1) {
+    /*if (
+      yoshiBox._physijs.touches.indexOf(pipeContainerTop._physijs.id) === -1
+    ) {
+      isCollided = false;
+    } else {
+      isCollided = true;
+      console.log("ciao amici");
+    }*/
+    if (contactNormalY == 1) {
+      isCollided = true;
+    } else {
       isCollided = false;
     }
     console.log("iscollided " + isCollided);
-    scene.simulate();
+    console.log("contactNormalY = " + contactNormalY);
+
+    scene.simulate(undefined, 1);
   });
   scene.setGravity = new THREE.Vector3(0, -50, 0); //?
   {
@@ -331,7 +343,7 @@ function init() {
       yoshi.position.y + 5,
       yoshi.position.z
     );
-    pipeContainer.setCcdMotionThreshold(1);
+    yoshiBox.setCcdMotionThreshold(1);
     scene.add(yoshiBox);
     yoshiBox.addEventListener("collision", onCollision);
     //yoshiBox.__dirtyPosition = true;
@@ -783,16 +795,16 @@ function init() {
     yoshiBox.__dirtyPosition = true;
     yoshiBox.__dirtyRotation = true;
 
-    
-    
     //console.log("iscollided " + isCollided);
 
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
-    requestAnimationFrame(animate);
+
     controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
     controls.update();
-    renderer.render(scene, camera);
+
     scene.simulate();
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
   }
 } //parentesi di init
 
@@ -1278,3 +1290,4 @@ function setIdlePosition() {
 }
 
 init();
+//window.onload = init;
