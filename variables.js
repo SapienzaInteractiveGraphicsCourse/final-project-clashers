@@ -89,6 +89,16 @@ var geometryMaterial1;
 var geometryMaterial2;
 var pipeContainer;
 var pipeContainerTop;
+var goombaContainer;
+var powerUpContainer;
+var coinContainer;
+var brickContainer;
+var emptyBlockContainer;
+var brickClone;
+var questionBoxClone;
+var coinClone;
+var powerUpClone;
+var goombaClone;
 
 var dir;
 var collision;

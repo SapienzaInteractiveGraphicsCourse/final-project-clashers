@@ -5,6 +5,8 @@ import * as THREE from "./build/three.js-master/build/three.module.js";
 import { GLTFLoader } from "./build/three.js-master/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "./build/three.js-master/examples/jsm/controls/OrbitControls.js";
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
+import * as collFunc from "./collisions.js";
+import * as blockFunc from "./blocks.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -355,30 +357,7 @@ function init() {
     );
     yoshiBox.setCcdMotionThreshold(1);
     scene.add(yoshiBox);
-    yoshiBox.addEventListener("collision", function (
-      other_object,
-      relative_velocity,
-      relative_rotation,
-      contact_normal
-    ) {
-      var checkCollision = function () {
-        if (other_object._physijs.id == pipeContainer._physijs.id) {
-          //collision = false;
-          if (other_object instanceof Physijs.Mesh) {
-            console.log("collisione");
-
-            if (dir == "right") {
-              collidedLeft = true;
-            }
-            if (dir == "left") {
-              collidedRight = true;
-            }
-          }
-        }
-        scene.removeEventListener("update", checkCollision);
-      };
-      scene.addEventListener("update", checkCollision);
-    });
+    yoshiBox.addEventListener("collision", collFunc.onYoshiCollision);
 
     var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
     yoshiUpperBox = new Physijs.BoxMesh(
@@ -407,49 +386,7 @@ function init() {
     );
     yoshiLowerBox.setCcdMotionThreshold(1);
     scene.add(yoshiLowerBox);
-    yoshiLowerBox.addEventListener("collision", function (
-      other_object,
-      relative_velocity,
-      relative_rotation,
-      contact_normal
-      //event
-    ) {
-      //otherObj = other_object;
-      //contactNormalY = contact_normal.y;
-      //console.log("normale su y " + contact_normal.y);
-
-      //if (other_object._physijs.id == pipeContainerTop._physijs.id) {
-      //collidedTop = true;
-      if (contact_normal.y == -1) {
-        isCollided = true;
-        isOnPipe = true;
-
-        var checkTouch = function () {
-          // see if we are still touching this object
-          var touches = yoshiLowerBox._physijs.touches;
-          //console.log(touches.length);
-
-          for (var i = 0; i < touches.length; i++) {
-            //console.log("touches[i] " + touches[i]);
-            if (touches[i] == other_object._physijs.id) return;
-          }
-          isOnPipe = false;
-          fall();
-          /*console.log(
-              "no longer touching grounded object",
-              other_object._physijs.id
-            );*/
-          isCollided = false;
-          collidedTop = false; //?
-          scene.removeEventListener("update", checkTouch);
-        };
-
-        scene.addEventListener("update", checkTouch);
-      }
-      //}
-      //console.log("iscollided " + isCollided);
-      //console.log("iscollided " + isCollided);
-    });
+    yoshiLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
   }
 
   function updateYoshiBoxPosition() {
@@ -766,8 +703,8 @@ function init() {
 
         goomba.rotation.y = (-90 * Math.PI) / 180;
 
-        createGroupPipes();
-        createGroup3();
+        blockFunc.createGroupPipes();
+        blockFunc.createGroup3();
         //scene.add(goomba);
       });
     }
@@ -795,8 +732,8 @@ function init() {
         //createGroup1();
         //createGroup2();
         //createGroup4();
-        createGroup5();
-        createGroup6();
+        blockFunc.createGroup5();
+        blockFunc.createGroup6();
         //setQuestionBoxGeometry(questionBox);
       });
     }
@@ -833,9 +770,9 @@ function init() {
         powerUp.rotation.y = (180 * Math.PI) / 180;
 
         //scene.add(powerUp);
-        createGroup1();
-        createGroup2();
-        createGroup4();
+        blockFunc.createGroup1();
+        blockFunc.createGroup2();
+        blockFunc.createGroup4();
       });
     }
 
@@ -859,11 +796,11 @@ function init() {
         emptyBlock.receiveShadow = true;
 
         //scene.add(emptyBlock);
-        createGroupStairs(-60, 4);
-        createGroupStairsReverse(-30, 4);
-        createGroupStairs(20, 5);
-        createGroupStairsReverse(55, 5);
-        createGroupStairs(220, 9);
+        blockFunc.createGroupStairs(-60, 4);
+        blockFunc.createGroupStairsReverse(-30, 4);
+        blockFunc.createGroupStairs(20, 5);
+        blockFunc.createGroupStairsReverse(55, 5);
+        blockFunc.createGroupStairs(220, 9);
       });
     }
 
@@ -1372,7 +1309,7 @@ function jump() {
   tweenJump.chain(tweenJumpBack);
 }
 
-function fall() {
+/*function fall() {
   tweenStartFall = {
     y: yoshi.position.y,
   };
@@ -1390,7 +1327,7 @@ function fall() {
       //setIdlePosition();
     })
     .start();
-}
+}*/
 
 function setIdlePosition() {
   //groupRun.removeAll();

@@ -1,3 +1,5 @@
+import * as collFunc from "./collisions.js";
+
 var group1 = new Array();
 var group2 = new Array();
 var group3 = new Array();
@@ -7,12 +9,12 @@ var group6 = new Array();
 var stairs = new Array();
 var groupPipes = new Array();
 
-function createGroup1() {
-  var brickClone;
-  var questionBoxClone;
-  var coinClone;
-  var powerUpClone;
-  var goombaClone;
+export function createGroup1() {
+  //var brickClone;
+  //var questionBoxClone;
+  //var coinClone;
+  //var powerUpClone;
+  //var goombaClone;
   for (var i = 0; i < 3; i++) {
     brickClone = brick.clone();
     brickClone.position.set(0, 5, -570 + 5.5 * 2.25 * i);
@@ -57,7 +59,7 @@ function createGroup1() {
   setGoombaGeometry(goombaClone);
 }
 
-function createGroupPipes() {
+export function createGroupPipes() {
   var pipeClone;
   var goombaClone;
   for (var i = 0; i < 4; i++) {
@@ -90,7 +92,7 @@ function createGroupPipes() {
   setPipeGeometry(groupPipes[3], 33, 7.6);
 }
 
-function createGroup2() {
+export function createGroup2() {
   var brickClone;
   var questionBoxClone;
   for (var i = 0; i < 2; i++) {
@@ -121,7 +123,7 @@ function createGroup2() {
   setPowerUpGeometry(powerUpClone);
 }
 
-function createGroup3() {
+export function createGroup3() {
   var brickClone;
   for (var i = 0; i < 8; i++) {
     brickClone = brick.clone();
@@ -139,7 +141,7 @@ function createGroup3() {
   }
 }
 
-function createGroup4() {
+export function createGroup4() {
   //livello in alto seconda parte
   var brickClone;
   var questionBoxClone;
@@ -196,7 +198,7 @@ function createGroup4() {
   setPowerUpGeometry(powerUpClone);
 }
 
-function createGroup5() {
+export function createGroup5() {
   //livello in basso seconda parte
   var brickClone;
   var questionBoxClone;
@@ -257,7 +259,7 @@ function createGroup5() {
   }
 }
 
-function createGroupStairs(start, width) {
+export function createGroupStairs(start, width) {
   //blocchi messi a scaletta
   var emptyBlockClone1;
   var emptyBlockClone2;
@@ -552,7 +554,7 @@ function createGroupStairs(start, width) {
   }
 }
 
-function createGroupStairsReverse(start, width) {
+export function createGroupStairsReverse(start, width) {
   //blocchi messi a scaletta
   var emptyBlockClone1;
   var emptyBlockClone2;
@@ -705,7 +707,7 @@ function createGroupStairsReverse(start, width) {
   }
 }
 
-function createGroup6() {
+export function createGroup6() {
   var pipeClone;
   var brickClone;
   var questionBoxClone;
@@ -798,8 +800,8 @@ function setPipeGeometry(pipeElem, y, y_top) {
   scene.add(pipeContainer);
   scene.add(pipeContainerTop);
   pipeContainerTop.setCcdMotionThreshold(1);
-  pipeContainer.addEventListener("collision", onPipeCollision);
-  pipeContainerTop.addEventListener("collision", onPipeTopCollision);
+  pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
+  pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {

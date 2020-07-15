@@ -1,29 +1,72 @@
-/*function onCollision(
+import { fall } from "./tween_functions.js";
+
+export function onYoshiCollision(
   other_object,
   relative_velocity,
   relative_rotation,
   contact_normal
 ) {
-  if (other_object instanceof Physijs.Mesh) {
-    console.log("collisione");
-  }
-  //this.position.copy(yoshi.position);
-  //this.rotation.copy(yoshi.rotation);
-  /*var pos = yoshiBox.position.clone();
-  yoshiBox.position.copy(pos);
-  yoshiBox.rotation.set(0, 0, 0);
-  this.__dirtyPosition = true;
-  this.__dirtyRotation = true;
-}*/
+  var checkCollision = function () {
+    if (other_object._physijs.id == pipeContainer._physijs.id) {
+      //collision = false;
+      if (other_object instanceof Physijs.Mesh) {
+        console.log("collisione");
 
-function onPipeCollision(
+        if (dir == "right") {
+          collidedLeft = true;
+        }
+        if (dir == "left") {
+          collidedRight = true;
+        }
+      }
+    }
+    scene.removeEventListener("update", checkCollision);
+  };
+  scene.addEventListener("update", checkCollision);
+}
+
+export function onYoshiLowerCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  if (contact_normal.y == -1) {
+    isCollided = true;
+    isOnPipe = true;
+
+    var checkTouch = function () {
+      // see if we are still touching this object
+      var touches = yoshiLowerBox._physijs.touches;
+      //console.log(touches.length);
+
+      for (var i = 0; i < touches.length; i++) {
+        //console.log("touches[i] " + touches[i]);
+        if (touches[i] == other_object._physijs.id) return;
+      }
+      isOnPipe = false;
+      fall();
+      /*console.log(
+          "no longer touching grounded object",
+          other_object._physijs.id
+        );*/
+      isCollided = false;
+      collidedTop = false; //?
+      scene.removeEventListener("update", checkTouch);
+    };
+
+    scene.addEventListener("update", checkTouch);
+  }
+}
+
+export function onPipeCollision(
   other_object,
   relative_velocity,
   relative_rotation,
   contact_normal
 ) {
   //collision = true;
-  if (other_object._physijs.id == yoshiBox._physijs.id) {
+  /*if (other_object._physijs.id == yoshiBox._physijs.id) {
     //collision = false;
     if (other_object instanceof Physijs.Mesh) {
       console.log("collisione");
@@ -35,8 +78,7 @@ function onPipeCollision(
         collidedRight = true;
       }
     }
-  }
-
+  }*/
   /*if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
     collision = true;
   }
@@ -47,7 +89,7 @@ function onPipeCollision(
   console.log("collision " + collision);*/
 }
 
-function onPipeTopCollision(
+export function onPipeTopCollision(
   other_object,
   relative_velocity,
   relative_rotation,
