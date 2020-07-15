@@ -23,15 +23,17 @@ function onPipeCollision(
   contact_normal
 ) {
   //collision = true;
-  collision = false;
-  if (other_object instanceof Physijs.Mesh) {
-    console.log("collisione");
+  if (other_object._physijs.id == yoshiBox._physijs.id) {
+    //collision = false;
+    if (other_object instanceof Physijs.Mesh) {
+      console.log("collisione");
 
-    if (dir == "right") {
-      collidedLeft = true;
-    }
-    if (dir == "left") {
-      collidedRight = true;
+      if (dir == "right") {
+        collidedLeft = true;
+      }
+      if (dir == "left") {
+        collidedRight = true;
+      }
     }
   }
 

@@ -787,7 +787,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
     pipeElem.position.y + 3.2,
     pipeElem.position.z - 5.3
   );
-  var pipeGeometryTop = new THREE.BoxGeometry(10, 1, 10);
+  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 10);
   pipeContainerTop = new Physijs.BoxMesh(pipeGeometryTop, geometryMaterial2, 0);
   pipeContainerTop.position.set(
     pipeElem.position.x + 5,

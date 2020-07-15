@@ -360,42 +360,26 @@ function init() {
       relative_velocity,
       relative_rotation,
       contact_normal
-      //event
     ) {
-      //otherObj = other_object;
-      //contactNormalY = contact_normal.y;
-      //console.log("normale su y " + contact_normal.y);
-      /*if (contact_normal.y == -1) {
-        isCollided = true;
-        //isOnPipe = true;
+      var checkCollision = function () {
+        if (other_object._physijs.id == pipeContainer._physijs.id) {
+          //collision = false;
+          if (other_object instanceof Physijs.Mesh) {
+            console.log("collisione");
 
-        var checkTouch = function () {
-          // see if we are still touching this object
-          var touches = yoshiBox._physijs.touches;
-          //console.log(touches.length);
-          for (var i = 0; i < touches.length; i++) {
-            //console.log("touches[i] " + touches[i]);
-            if (touches[i] == other_object._physijs.id) return;
+            if (dir == "right") {
+              collidedLeft = true;
+            }
+            if (dir == "left") {
+              collidedRight = true;
+            }
           }
-          //isOnPipe = false;
-          //fall();
-          /*console.log(
-            "no longer touching grounded object",
-            other_object._physijs.id
-          );
-          isCollided = false;
-          collidedTop = false; //?
-          scene.removeEventListener("update", checkTouch);
-        };
-        scene.addEventListener("update", checkTouch);
-        //console.log("iscollided " + isCollided);
-      }*/
-      //console.log("iscollided " + isCollided);
+        }
+        scene.removeEventListener("update", checkCollision);
+      };
+      scene.addEventListener("update", checkCollision);
     });
-    //yoshiBox.__dirtyPosition = true;
 
-    //yoshiBox.__dirtyPosition = true;
-    //yoshiBox.__dirtyRotation = false;
     var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
     yoshiUpperBox = new Physijs.BoxMesh(
       yoshiUpperGeometry,
@@ -434,34 +418,35 @@ function init() {
       //contactNormalY = contact_normal.y;
       //console.log("normale su y " + contact_normal.y);
 
-      if (other_object._physijs.id == pipeContainerTop._physijs.id) {
-        //collidedTop = true;
-        if (contact_normal.y == -1) {
-          isCollided = true;
-          isOnPipe = true;
+      //if (other_object._physijs.id == pipeContainerTop._physijs.id) {
+      //collidedTop = true;
+      if (contact_normal.y == -1) {
+        isCollided = true;
+        isOnPipe = true;
 
-          var checkTouch = function () {
-            // see if we are still touching this object
-            var touches = yoshiLowerBox._physijs.touches;
-            //console.log(touches.length);
+        var checkTouch = function () {
+          // see if we are still touching this object
+          var touches = yoshiLowerBox._physijs.touches;
+          //console.log(touches.length);
 
-            for (var i = 0; i < touches.length; i++) {
-              //console.log("touches[i] " + touches[i]);
-              if (touches[i] == other_object._physijs.id) return;
-            }
-            isOnPipe = false;
-            fall();
-            /*console.log(
+          for (var i = 0; i < touches.length; i++) {
+            //console.log("touches[i] " + touches[i]);
+            if (touches[i] == other_object._physijs.id) return;
+          }
+          isOnPipe = false;
+          fall();
+          /*console.log(
               "no longer touching grounded object",
               other_object._physijs.id
             );*/
-            isCollided = false;
-            collidedTop = false; //?
-            scene.removeEventListener("update", checkTouch);
-          };
-        }
+          isCollided = false;
+          collidedTop = false; //?
+          scene.removeEventListener("update", checkTouch);
+        };
+
         scene.addEventListener("update", checkTouch);
       }
+      //}
       //console.log("iscollided " + isCollided);
       //console.log("iscollided " + isCollided);
     });
