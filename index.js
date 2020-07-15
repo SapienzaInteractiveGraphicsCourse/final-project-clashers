@@ -186,7 +186,10 @@ function init() {
       //controls.update();
 
       dirLight.target = yoshi;
-      scene.add(yoshi);
+
+      if (sessionStorage.getItem("yoshiPressed") == "true") {
+        scene.add(yoshi);
+      }
 
       document.addEventListener("keydown", (event) => {
         keysPressed[event.keyCode] = true;
@@ -439,10 +442,9 @@ function init() {
     scene.add(questionBoxContainer);
   } */
 
-  /*
   //MARIO
 
- mario = new THREE.Scene();
+  mario = new THREE.Scene();
   {
     const url_mario = "models/mario/scene.gltf";
     gltfLoader.load(url_mario, (gltf) => {
@@ -478,7 +480,9 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (0 * Math.PI) / 180;
 
-      scene.add(mario);
+      if (sessionStorage.getItem("marioPressed") == "true") {
+        scene.add(mario);
+      }
     });
   }
 
@@ -528,9 +532,11 @@ function init() {
       upperLeg_right.rotation.x = (0 * Math.PI) / 180;
       upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
-      scene.add(luigi);
-    }); 
-  } */
+      if (sessionStorage.getItem("luigiPressed") == "true") {
+        scene.add(luigi);
+      }
+    });
+  }
 
   function loadModels() {
     brick = new THREE.Scene();
