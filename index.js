@@ -187,9 +187,9 @@ function init() {
 
       dirLight.target = yoshi;
 
-      if (sessionStorage.getItem("yoshiPressed") == "true") {
-        scene.add(yoshi);
-      }
+      //if (sessionStorage.getItem("yoshiPressed") == "true") {
+      scene.add(yoshi);
+      //}
 
       document.addEventListener("keydown", (event) => {
         keysPressed[event.keyCode] = true;
@@ -350,7 +350,7 @@ function init() {
   });
 
   function setYoshiGeometry() {
-    var yoshiGeometry = new THREE.BoxGeometry(7.5, 7.5, 6.3);
+    var yoshiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
     yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
     //yoshiBox.position.set(0, -9.3, -600);
     yoshiBox.position.set(
@@ -376,7 +376,7 @@ function init() {
     yoshiUpperBox.setCcdMotionThreshold(1);
     scene.add(yoshiUpperBox);
 
-    var yoshiLowerGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+    var yoshiLowerGeometry = new THREE.BoxGeometry(4, 1, 4);
     yoshiLowerBox = new Physijs.BoxMesh(
       yoshiLowerGeometry,
       geometryMaterial2,
@@ -442,6 +442,7 @@ function init() {
     scene.add(questionBoxContainer);
   } */
 
+  /*
   //MARIO
 
   mario = new THREE.Scene();
@@ -537,7 +538,7 @@ function init() {
       }
     });
   }
-
+*/
   function loadModels() {
     brick = new THREE.Scene();
     //brick = new Physijs.Scene();
@@ -1133,7 +1134,7 @@ function jump() {
     head: (-15 * Math.PI) / 180,
   };
   tweenGoalJump = {
-    y: 0, //-3
+    y: 15, //-3
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
@@ -1206,17 +1207,17 @@ function jump() {
     });
   tweenFlex.chain(tweenFlexBack);*/
   tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJump, 1000)
+    .to(tweenGoalJump, 1000) //400
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
       if (!collidedTop) {
         yoshi.position.y = tweenStartJump.y;
       }
-      if (keysPressed[68]) {
+      if (keysPressed[68] && !collidedLeft) {
         yoshi.position.z += 0.3;
         dirLight.position.z += 0.3;
       }
-      if (keysPressed[65]) {
+      if (keysPressed[65] && !collidedRight) {
         yoshi.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
@@ -1261,17 +1262,17 @@ function jump() {
   //.start();
   tweenFlex.chain(tweenJump);
   tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJumpBack, 1000)
+    .to(tweenGoalJumpBack, 1000) //400
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       if (!collidedTop) {
         yoshi.position.y = tweenStartJump.y;
       }
-      if (keysPressed[68]) {
+      if (keysPressed[68] && !collidedLeft) {
         yoshi.position.z += 0.3;
         dirLight.position.z += 0.3;
       }
-      if (keysPressed[65]) {
+      if (keysPressed[65] && !collidedRight) {
         yoshi.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
@@ -1310,6 +1311,8 @@ function jump() {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
+      collidedRight = false;
+      collidedLeft = false;
       //setIdlePosition();
     });
   tweenJump.chain(tweenJumpBack);

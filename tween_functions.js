@@ -15,6 +15,8 @@ export function fall() {
     })
     .onComplete(function () {
       collidedTop = false; //?
+      collidedLeft = false;
+      collidedRight = false;
       //setIdlePosition();
     })
     .start();

@@ -20,7 +20,7 @@ export function createGroup1() {
     brickClone.position.set(0, 5, -570 + 5.5 * 2.25 * i);
     scene.add(brickClone);
     group1.push(brickClone);
-    setBrickGeometry(brickClone);
+    // setBrickGeometry(brickClone);
   }
 
   for (var i = 0; i < 4; i++) {
@@ -32,7 +32,7 @@ export function createGroup1() {
   group1[5].position.set(0, 25.2, -556);
   group1[6].position.set(0, 6.2, -600);
   for (var i = 3; i < 7; i++) {
-    setQuestionBoxGeometry(group1[i]);
+    //setQuestionBoxGeometry(group1[i]);
   }
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
@@ -57,6 +57,8 @@ export function createGroup1() {
   scene.add(goombaClone);
   group1.push(goombaClone);
   setGoombaGeometry(goombaClone);
+
+  setGroupGeometry(6.3 * 5, 9.5, -556.3);
 }
 
 export function createGroupPipes() {
@@ -86,7 +88,7 @@ export function createGroupPipes() {
     setGoombaGeometry(groupPipes[i]);
   }
 
-  setPipeGeometry(groupPipes[0], 6, 7.6);
+  setPipeGeometry(groupPipes[0], 9, 7.6);
   setPipeGeometry(groupPipes[1], 17.2, 7.6);
   setPipeGeometry(groupPipes[2], 25.2, 7.6);
   setPipeGeometry(groupPipes[3], 33, 7.6);
@@ -756,7 +758,7 @@ function setQuestionBoxGeometry(questionBoxElem) {
   var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
-    geometryMaterial,
+    geometryMaterial1,
     0
   ); //mass 0
   questionBoxContainer.position.set(
@@ -765,20 +767,21 @@ function setQuestionBoxGeometry(questionBoxElem) {
     questionBoxElem.position.z
   );
   scene.add(questionBoxContainer);
-  questionBoxContainer.__dirtyPosition = true;
-  questionBoxContainer.__dirtyRotation = false;
-  //questionBoxContainer.addEventListener("collision", onCollision);
+  //questionBoxContainer.__dirtyPosition = true;
+  //questionBoxContainer.__dirtyRotation = false;
+  questionBoxContainer.addEventListener("collision", collFunc.onPipeCollision);
 }
 
 function setBrickGeometry(brickElem) {
   var brickGeometry = new THREE.BoxGeometry(6.3, 6.2, 5.8);
-  brickContainer = new Physijs.BoxMesh(brickGeometry, geometryMaterial, 0);
+  brickContainer = new Physijs.BoxMesh(brickGeometry, geometryMaterial1, 0);
   brickContainer.position.set(
     brickElem.position.x,
     brickElem.position.y + 4.3,
     brickElem.position.z + 1.2
   );
   scene.add(brickContainer);
+  brickContainer.addEventListener("collision", collFunc.onPipeCollision);
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {
@@ -798,10 +801,11 @@ function setPipeGeometry(pipeElem, y, y_top) {
   );
 
   scene.add(pipeContainer);
-  scene.add(pipeContainerTop);
-  pipeContainerTop.setCcdMotionThreshold(1);
+  //scene.add(pipeContainerTop);
+  //pipeContainerTop.setCcdMotionThreshold(1);
+  pipeContainer.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
-  pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
+  //pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {
@@ -850,4 +854,12 @@ function setGoombaGeometry(goombaElem) {
     goombaElem.position.z
   );
   scene.add(goombaContainer);
+}
+
+function setGroupGeometry(groupWidth, y, z) {
+  var groupGeometry = new THREE.BoxGeometry(6.3, 6, groupWidth);
+  groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 0);
+  groupContainer.position.set(0, y, z);
+  scene.add(groupContainer);
+  groupContainer.addEventListener("collision", collFunc.onPipeCollision);
 }

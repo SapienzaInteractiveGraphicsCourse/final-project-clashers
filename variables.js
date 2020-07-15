@@ -94,6 +94,7 @@ var powerUpContainer;
 var coinContainer;
 var brickContainer;
 var emptyBlockContainer;
+var groupContainer;
 var brickClone;
 var questionBoxClone;
 var coinClone;
@@ -106,8 +107,3 @@ var collision;
 var collidedLeft = false;
 var collidedRight = false;
 var collidedTop = false;
-
-var isCollided = false;
-var isOnPipe = false;
-var otherObj;
-var contactNormalY;
