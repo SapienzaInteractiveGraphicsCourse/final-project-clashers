@@ -333,14 +333,24 @@ function init() {
     transparent: true,
     opacity: 0.5,
   });
+  geometryMaterial1 = new THREE.MeshBasicMaterial({
+    transparent: true,
+    opacity: 0.5,
+    color: 0xeb4034,
+  });
+  geometryMaterial2 = new THREE.MeshBasicMaterial({
+    transparent: true,
+    opacity: 0.5,
+    color: 0x344feb,
+  });
 
   function setYoshiGeometry() {
-    var yoshiGeometry = new THREE.BoxGeometry(7.5, 10.2, 6.3);
+    var yoshiGeometry = new THREE.BoxGeometry(7.5, 9, 6.3);
     yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
     //yoshiBox.position.set(0, -9.3, -600);
     yoshiBox.position.set(
       yoshi.position.x,
-      yoshi.position.y + 5,
+      yoshi.position.y + 5.2,
       yoshi.position.z
     );
     yoshiBox.setCcdMotionThreshold(1);
@@ -355,9 +365,9 @@ function init() {
       //otherObj = other_object;
       //contactNormalY = contact_normal.y;
       //console.log("normale su y " + contact_normal.y);
-      if (contact_normal.y == -1) {
+      /*if (contact_normal.y == -1) {
         isCollided = true;
-        isOnPipe = true;
+        //isOnPipe = true;
 
         var checkTouch = function () {
           // see if we are still touching this object
@@ -367,25 +377,129 @@ function init() {
             //console.log("touches[i] " + touches[i]);
             if (touches[i] == other_object._physijs.id) return;
           }
-          isOnPipe = false;
-          fall();
+          //isOnPipe = false;
+          //fall();
           /*console.log(
             "no longer touching grounded object",
             other_object._physijs.id
-          );*/
+          );
           isCollided = false;
           collidedTop = false; //?
           scene.removeEventListener("update", checkTouch);
         };
         scene.addEventListener("update", checkTouch);
         //console.log("iscollided " + isCollided);
-      }
+      }*/
       //console.log("iscollided " + isCollided);
     });
     //yoshiBox.__dirtyPosition = true;
 
     //yoshiBox.__dirtyPosition = true;
     //yoshiBox.__dirtyRotation = false;
+    var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+    yoshiUpperBox = new Physijs.BoxMesh(
+      yoshiUpperGeometry,
+      geometryMaterial1,
+      50
+    );
+    yoshiUpperBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 10,
+      yoshi.position.z
+    );
+    yoshiUpperBox.setCcdMotionThreshold(1);
+    scene.add(yoshiUpperBox);
+
+    var yoshiLowerGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+    yoshiLowerBox = new Physijs.BoxMesh(
+      yoshiLowerGeometry,
+      geometryMaterial2,
+      50
+    );
+    yoshiLowerBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 0.5,
+      yoshi.position.z
+    );
+    yoshiLowerBox.setCcdMotionThreshold(1);
+    scene.add(yoshiLowerBox);
+    yoshiLowerBox.addEventListener("collision", function (
+      other_object,
+      relative_velocity,
+      relative_rotation,
+      contact_normal
+      //event
+    ) {
+      //otherObj = other_object;
+      //contactNormalY = contact_normal.y;
+      //console.log("normale su y " + contact_normal.y);
+
+      if (other_object._physijs.id == pipeContainerTop._physijs.id) {
+        //collidedTop = true;
+        if (contact_normal.y == -1) {
+          isCollided = true;
+          isOnPipe = true;
+
+          var checkTouch = function () {
+            // see if we are still touching this object
+            var touches = yoshiLowerBox._physijs.touches;
+            //console.log(touches.length);
+
+            for (var i = 0; i < touches.length; i++) {
+              //console.log("touches[i] " + touches[i]);
+              if (touches[i] == other_object._physijs.id) return;
+            }
+            isOnPipe = false;
+            fall();
+            /*console.log(
+              "no longer touching grounded object",
+              other_object._physijs.id
+            );*/
+            isCollided = false;
+            collidedTop = false; //?
+            scene.removeEventListener("update", checkTouch);
+          };
+        }
+        scene.addEventListener("update", checkTouch);
+      }
+      //console.log("iscollided " + isCollided);
+      //console.log("iscollided " + isCollided);
+    });
+  }
+
+  function updateYoshiBoxPosition() {
+    yoshiBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 5.2,
+      yoshi.position.z
+    );
+    yoshiUpperBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 10,
+      yoshi.position.z
+    );
+    yoshiLowerBox.position.set(
+      yoshi.position.x,
+      yoshi.position.y + 0.5,
+      yoshi.position.z
+    );
+    var yoshiBoxPos = yoshiBox.position.clone();
+    yoshiBox.position.copy(yoshiBoxPos);
+    yoshiBox.rotation.set(0, 0, 0);
+    yoshiBox.__dirtyPosition = true;
+    yoshiBox.__dirtyRotation = true;
+
+    var yoshiUpperBoxPos = yoshiUpperBox.position.clone();
+    yoshiUpperBox.position.copy(yoshiUpperBoxPos);
+    yoshiUpperBox.rotation.set(0, 0, 0);
+    yoshiUpperBox.__dirtyPosition = true;
+    yoshiUpperBox.__dirtyRotation = true;
+
+    var yoshiLowerBoxPos = yoshiLowerBox.position.clone();
+    yoshiLowerBox.position.copy(yoshiLowerBoxPos);
+    yoshiLowerBox.rotation.set(0, 0, 0);
+    yoshiLowerBox.__dirtyPosition = true;
+    yoshiLowerBox.__dirtyRotation = true;
   }
 
   /* function setQuestionBoxGeometry(questionBoxElem) {
@@ -820,16 +934,7 @@ function init() {
     groupJump.update();
     groupRotate.update();
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
-    yoshiBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 5,
-      yoshi.position.z
-    );
-    var pos = yoshiBox.position.clone();
-    yoshiBox.position.copy(pos);
-    yoshiBox.rotation.set(0, 0, 0);
-    yoshiBox.__dirtyPosition = true;
-    yoshiBox.__dirtyRotation = true;
+    updateYoshiBoxPosition();
 
     //console.log("iscollided " + isCollided);
 

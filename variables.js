@@ -81,8 +81,12 @@ var controls;
 var keysPressed = {};
 
 var yoshiBox;
+var yoshiUpperBox;
+var yoshiLowerBox;
 var questionBoxContainer;
 var geometryMaterial;
+var geometryMaterial1;
+var geometryMaterial2;
 var pipeContainer;
 var pipeContainerTop;
 

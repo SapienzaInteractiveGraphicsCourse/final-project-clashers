@@ -51,9 +51,11 @@ function onPipeTopCollision(
   relative_rotation,
   contact_normal
 ) {
-  if (other_object instanceof Physijs.Mesh) {
-    console.log("pipeCollision Top");
-    collidedTop = true;
+  if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
+    if (other_object instanceof Physijs.Mesh) {
+      console.log("pipeCollision Top");
+      collidedTop = true;
+    }
   }
 }
 
