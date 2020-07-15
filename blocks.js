@@ -58,7 +58,9 @@ export function createGroup1() {
   group1.push(goombaClone);
   setGoombaGeometry(goombaClone);
 
-  setGroupGeometry(6.3 * 5, 9.5, -556.3);
+  //setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
+  setGroupGeometry(6.2 * 5, 9.5, -556.3);
+  //setGroupGeometry(6.5, 28.5, -556.1);
 }
 
 export function createGroupPipes() {
@@ -123,6 +125,9 @@ export function createGroup2() {
   scene.add(powerUpClone);
   group2.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
+
+  //setGroupGeometry(6.5, 9.5, -360.5);
+  //setGroupGeometry(6.3 * 3, 9.5, -312.5);
 }
 
 export function createGroup3() {
@@ -141,6 +146,8 @@ export function createGroup3() {
     group3.push(goombaClone);
     setGoombaGeometry(goombaClone);
   }
+
+  //setGroupGeometry(5.6 * 8, 28.5, -279.5);
 }
 
 export function createGroup4() {
@@ -198,6 +205,11 @@ export function createGroup4() {
   scene.add(powerUpClone);
   group4.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
+
+  //setGroupGeometry(6.1 * 4, 28.5, -230);
+  //setGroupGeometry(6.5, 28.5, -182);
+  //setGroupGeometry(5.6 * 3, 28.5, -135.8);
+  //setGroupGeometry(6.3 * 4, 28.5, -92);
 }
 
 export function createGroup5() {
@@ -259,6 +271,12 @@ export function createGroup5() {
   for (var i = 10; i < 16; i++) {
     setGoombaGeometry(group5[i]);
   }
+  /*
+  setGroupGeometry(6, 9.5, -220);
+  setGroupGeometry(6.5, 9.5, -197);
+  setGroupGeometry(6.5, 9.5, -182);
+  setGroupGeometry(6.5, 9.5, -167);
+  setGroupGeometry(5.7 * 2, 9.5, -92); */
 }
 
 export function createGroupStairs(start, width) {
@@ -752,6 +770,8 @@ export function createGroup6() {
   }
 
   setQuestionBoxGeometry(questionBoxClone);
+
+  //setGroupGeometry(6.1 * 4, 9.5, 145.3);
 }
 
 function setQuestionBoxGeometry(questionBoxElem) {
@@ -821,6 +841,8 @@ function setEmptyBlockGeometry(emptyBlockElem) {
     emptyBlockElem.position.z
   );
   scene.add(emptyBlockContainer);
+
+  //emptyBlockContainer.addEventListener("collision", collFunc.onPipeCollision);
 }
 
 function setCoinGeometry(coinElem) {
