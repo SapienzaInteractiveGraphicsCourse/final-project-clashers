@@ -6,23 +6,23 @@ export function onYoshiCollision(
   relative_rotation,
   contact_normal
 ) {
-  var checkCollision = function () {
-    if (other_object._physijs.id == pipeContainer._physijs.id) {
-      //collision = false;
-      if (other_object instanceof Physijs.Mesh) {
-        console.log("collisione");
+  /*var checkCollision = function () {
+  if (other_object._physijs.id == pipeContainer._physijs.id) {
+    //collision = false;
+    if (other_object instanceof Physijs.Mesh) {
+      console.log("collisione");
 
-        if (dir == "right") {
-          collidedLeft = true;
-        }
-        if (dir == "left") {
-          collidedRight = true;
-        }
+      if (dir == "right") {
+        collidedLeft = true;
+      }
+      if (dir == "left") {
+        collidedRight = true;
       }
     }
-    scene.removeEventListener("update", checkCollision);
-  };
-  scene.addEventListener("update", checkCollision);
+  }
+  //scene.removeEventListener("update", checkCollision);
+  // };
+  //scene.addEventListener("update", checkCollision);*/
 }
 
 export function onYoshiLowerCollision(
@@ -66,19 +66,19 @@ export function onPipeCollision(
   contact_normal
 ) {
   //collision = true;
-  /*if (other_object._physijs.id == yoshiBox._physijs.id) {
+  if (other_object._physijs.id == yoshiBox._physijs.id) {
     //collision = false;
     if (other_object instanceof Physijs.Mesh) {
       console.log("collisione");
 
-      if (dir == "right") {
+      if (dir == "right" && !collidedTop) {
         collidedLeft = true;
       }
-      if (dir == "left") {
+      if (dir == "left" && !collidedTop) {
         collidedRight = true;
       }
     }
-  }*/
+  }
   /*if (pipeContainer._physijs.touches.indexOf(other_object._physijs.id) === -1) {
     collision = true;
   }

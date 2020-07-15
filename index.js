@@ -347,7 +347,7 @@ function init() {
   });
 
   function setYoshiGeometry() {
-    var yoshiGeometry = new THREE.BoxGeometry(7.5, 9, 6.3);
+    var yoshiGeometry = new THREE.BoxGeometry(7.5, 7.5, 6.3);
     yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
     //yoshiBox.position.set(0, -9.3, -600);
     yoshiBox.position.set(
@@ -1200,7 +1200,7 @@ function jump() {
     });
   tweenFlex.chain(tweenFlexBack);*/
   tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJump, 400)
+    .to(tweenGoalJump, 1000)
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
       if (!collidedTop) {
@@ -1255,7 +1255,7 @@ function jump() {
   //.start();
   tweenFlex.chain(tweenJump);
   tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJumpBack, 400)
+    .to(tweenGoalJumpBack, 1000)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       if (!collidedTop) {

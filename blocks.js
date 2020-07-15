@@ -86,7 +86,7 @@ export function createGroupPipes() {
     setGoombaGeometry(groupPipes[i]);
   }
 
-  setPipeGeometry(groupPipes[0], 7.5, 7.6);
+  setPipeGeometry(groupPipes[0], 6, 7.6);
   setPipeGeometry(groupPipes[1], 17.2, 7.6);
   setPipeGeometry(groupPipes[2], 25.2, 7.6);
   setPipeGeometry(groupPipes[3], 33, 7.6);
