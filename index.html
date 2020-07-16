@@ -63,7 +63,7 @@
             <div class="card" style="float: left; margin-right: 10px;">
               <img src="./img/luigi.png" alt="Avatar" class="img" />
               <div class="container-btn" align="center">
-                <button class="btn_card" id="luigi" onclick="loadYoshiGame()">
+                <button class="btn_card" id="luigi" onclick="loadLuigiGame()">
                   <font color="#009fde">L</font><font color="#fed302">U</font
                   ><font color="#e42910">I</font><font color="#46af38">G</font
                   ><font color="#fed302">I </font>
@@ -76,7 +76,7 @@
             >
               <img src="./img/mario.png" alt="Avatar" class="img" />
               <div class="container-btn" align="center">
-                <button class="btn_card" id="mario" onclick="loadYoshiGame()">
+                <button class="btn_card" id="mario" onclick="loadMarioGame()">
                   <font color="#009fde">M</font><font color="#fed302">A</font
                   ><font color="#e42910">R</font><font color="#46af38">I</font
                   ><font color="#fed302">O </font>
@@ -147,32 +147,32 @@
       };
     </script>
 
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
       function loadLuigiGame() {
         sessionStorage.setItem("luigiPressed", "true");
         sessionStorage.setItem("yoshiPressed", "false");
         sessionStorage.setItem("marioPressed", "false");
         window.location.href = "./game.html";
       }
-    </script> -->
+    </script>
 
     <script type="text/javascript">
       function loadYoshiGame() {
-        //sessionStorage.setItem("yoshiPressed", "true");
-        //sessionStorage.setItem("luigiPressed", "false");
-        //sessionStorage.setItem("marioPressed", "false");
+        sessionStorage.setItem("yoshiPressed", "true");
+        sessionStorage.setItem("luigiPressed", "false");
+        sessionStorage.setItem("marioPressed", "false");
         window.location.href = "./game.html";
       }
     </script>
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
       function loadMarioGame() {
         sessionStorage.setItem("marioPressed", "true");
         sessionStorage.setItem("luigiPressed", "false");
         sessionStorage.setItem("yoshiPressed", "false");
         window.location.href = "./game.html";
       }
-    </script> -->
+    </script>
 
     <script type="text/javascript">
       var modalControls = document.getElementById("myModalControls");

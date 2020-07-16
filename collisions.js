@@ -1,5 +1,5 @@
 import { fall } from "./tween_functions.js";
-import { setIdlePosition } from "./index.js";
+import { setIdlePosition } from "./tween_functions.js";
 
 export function onYoshiCollision(
   other_object,

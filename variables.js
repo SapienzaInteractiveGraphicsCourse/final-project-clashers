@@ -36,6 +36,7 @@ var tweenGoalRight;
 var tweenStartLeft;
 var tweenGoalLeft;
 var tweenIdle;
+var tween_idle;
 var tween;
 var tweenBack;
 var tweenJump;
@@ -123,3 +124,5 @@ var group5;
 var group6;
 var stairs;
 var groupPipes;
+
+var character;
