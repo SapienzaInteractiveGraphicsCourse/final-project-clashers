@@ -1,4 +1,5 @@
 import * as collFunc from "./collisions.js";
+import * as tweenFunc from "./tween_functions.js";
 
 group1 = new Array();
 group2 = new Array();
@@ -57,6 +58,7 @@ export function createGroup1() {
   scene.add(goombaClone);
   group1.push(goombaClone);
   setGoombaGeometry(goombaClone);
+  tweenFunc.goombaAnimation(goombaClone);
 
   setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
   setGroupGeometry(6.2 * 5, 9.5, -556.3);

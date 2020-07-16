@@ -126,3 +126,16 @@ var stairs;
 var groupPipes;
 
 var character;
+
+var left_foot;
+var right_foot;
+var headGoomba;
+
+var tweenGoomba;
+var tweenStartGoomba;
+var tweenGoalGoomba;
+var tweenBackGoomba;
+var tweenWalkGoomba;
+var tweenWalkBackGoomba;
+var tweenWalkGoal;
+var tweenWalkBack;

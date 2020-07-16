@@ -462,3 +462,76 @@ export function setIdlePosition() {
     })
     .start();
 }
+
+export function goombaAnimation(goombaElem) {
+  left_foot = goombaElem.getObjectByName("Left_Foot");
+  right_foot = goombaElem.getObjectByName("Right_Foor");
+  headGoomba = goombaElem.getObjectByName("Head");
+
+  tweenStartGoomba = {
+    foot_left: left_foot.rotation.y,
+    foot_right: right_foot.rotation.y,
+    head: headGoomba.rotation.x,
+    z: goombaElem.position.z,
+  };
+  tweenGoalGoomba = {
+    foot_left: (30 * Math.PI) / 180,
+    foot_right: (30 * Math.PI) / 180,
+    head: (85 * Math.PI) / 180,
+  };
+  tweenBackGoomba = {
+    foot_left: (-30 * Math.PI) / 180,
+    foot_right: (-30 * Math.PI) / 180,
+    head: (95 * Math.PI) / 180,
+  };
+
+  tweenWalkGoal = {
+    z: goombaElem.position.z + 15,
+  };
+
+  tweenWalkBack = {
+    z: goombaElem.position.z - 15,
+  };
+
+  tweenGoomba = new TWEEN.Tween(tweenStartGoomba)
+    .to(tweenGoalGoomba, 400)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      left_foot.rotation.y = tweenStartGoomba.foot_left;
+      right_foot.rotation.y = tweenStartGoomba.foot_right;
+      //goombaElem.position.z = tweenStartGoomba.z;
+      headGoomba.rotation.x = tweenStartGoomba.head;
+    })
+    .start();
+
+  tweenBackGoomba = new TWEEN.Tween(tweenStartGoomba)
+    .to(tweenBackGoomba, 400)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      left_foot.rotation.y = tweenStartGoomba.foot_left;
+      right_foot.rotation.y = tweenStartGoomba.foot_right;
+      //goombaElem.position.z = tweenStartGoomba.z;
+      headGoomba.rotation.x = tweenStartGoomba.head;
+    })
+    .yoyo(true)
+    .repeat(Infinity);
+  tweenGoomba.chain(tweenBackGoomba);
+
+  tweenWalkGoomba = new TWEEN.Tween(tweenStartGoomba)
+    .to(tweenWalkGoal, 5000)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      goombaElem.position.z = tweenStartGoomba.z;
+    })
+    .start();
+
+  tweenWalkBackGoomba = new TWEEN.Tween(tweenStartGoomba)
+    .to(tweenWalkBack, 5000)
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      goombaElem.position.z = tweenStartGoomba.z;
+    })
+    .yoyo(true)
+    .repeat(Infinity);
+  tweenWalkGoomba.chain(tweenWalkBackGoomba);
+}
