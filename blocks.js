@@ -20,7 +20,7 @@ export function createGroup1() {
     brickClone.position.set(0, 5, -570 + 5.5 * 2.25 * i);
     scene.add(brickClone);
     group1.push(brickClone);
-    // setBrickGeometry(brickClone);
+    setBrickGeometry(brickClone);
   }
 
   for (var i = 0; i < 4; i++) {
@@ -32,7 +32,7 @@ export function createGroup1() {
   group1[5].position.set(0, 25.2, -556);
   group1[6].position.set(0, 6.2, -600);
   for (var i = 3; i < 7; i++) {
-    //setQuestionBoxGeometry(group1[i]);
+    setQuestionBoxGeometry(group1[i]);
   }
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
@@ -58,9 +58,9 @@ export function createGroup1() {
   group1.push(goombaClone);
   setGoombaGeometry(goombaClone);
 
-  //setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
+  setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
   setGroupGeometry(6.2 * 5, 9.5, -556.3);
-  //setGroupGeometry(6.5, 28.5, -556.1);
+  setGroupGeometry(6.5, 28.5, -556.1);
 }
 
 export function createGroupPipes() {
@@ -775,7 +775,7 @@ export function createGroup6() {
 }
 
 function setQuestionBoxGeometry(questionBoxElem) {
-  var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
+  var questionBoxGeometry = new THREE.BoxGeometry(5, 0.5, 5);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
     geometryMaterial1,
@@ -783,25 +783,28 @@ function setQuestionBoxGeometry(questionBoxElem) {
   ); //mass 0
   questionBoxContainer.position.set(
     questionBoxElem.position.x,
-    questionBoxElem.position.y + 3.1,
+    questionBoxElem.position.y,
     questionBoxElem.position.z
   );
   scene.add(questionBoxContainer);
   //questionBoxContainer.__dirtyPosition = true;
   //questionBoxContainer.__dirtyRotation = false;
-  questionBoxContainer.addEventListener("collision", collFunc.onPipeCollision);
+  questionBoxContainer.addEventListener(
+    "collision",
+    collFunc.onBottomCollision
+  );
 }
 
 function setBrickGeometry(brickElem) {
-  var brickGeometry = new THREE.BoxGeometry(6.3, 6.2, 5.8);
+  var brickGeometry = new THREE.BoxGeometry(4, 0.5, 4);
   brickContainer = new Physijs.BoxMesh(brickGeometry, geometryMaterial1, 0);
   brickContainer.position.set(
     brickElem.position.x,
-    brickElem.position.y + 4.3,
+    brickElem.position.y + 1.3,
     brickElem.position.z + 1.2
   );
   scene.add(brickContainer);
-  brickContainer.addEventListener("collision", collFunc.onPipeCollision);
+  brickContainer.addEventListener("collision", collFunc.onBottomCollision);
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {
@@ -842,7 +845,7 @@ function setEmptyBlockGeometry(emptyBlockElem) {
   );
   scene.add(emptyBlockContainer);
 
-  //emptyBlockContainer.addEventListener("collision", collFunc.onPipeCollision);
+  emptyBlockContainer.addEventListener("collision", collFunc.onPipeCollision);
 }
 
 function setCoinGeometry(coinElem) {

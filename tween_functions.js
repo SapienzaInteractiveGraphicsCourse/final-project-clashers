@@ -1,4 +1,5 @@
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
+import { setIdlePosition } from "./index.js";
 
 export function fall() {
   tweenStartFall = {
@@ -11,12 +12,16 @@ export function fall() {
     .to(tweenGoalFall, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
-      yoshi.position.y = tweenStartFall.y;
+      if (!collidedTop) {
+        //?
+        yoshi.position.y = tweenStartFall.y;
+      }
     })
     .onComplete(function () {
       collidedTop = false; //?
       collidedLeft = false;
       collidedRight = false;
+
       //setIdlePosition();
     })
     .start();

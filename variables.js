@@ -107,3 +107,10 @@ var collision;
 var collidedLeft = false;
 var collidedRight = false;
 var collidedTop = false;
+var collidedBottom = false;
+
+var isOnObjectTop = false;
+
+var groupJump;
+var groupRun;
+var groupRotate;

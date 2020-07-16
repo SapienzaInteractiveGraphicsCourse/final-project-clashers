@@ -11,9 +11,9 @@ import * as blockFunc from "./blocks.js";
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
 
-var groupRun = new TWEEN.Group();
-var groupJump = new TWEEN.Group();
-var groupRotate = new TWEEN.Group();
+groupRun = new TWEEN.Group();
+groupJump = new TWEEN.Group();
+groupRotate = new TWEEN.Group();
 
 function init() {
   var container = document.getElementById("game");
@@ -37,7 +37,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = 170; //-620
+  const cameraZ = -620; //-620
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -121,7 +121,7 @@ function init() {
     gltfLoader.load(url_yoshi, (gltf) => {
       yoshi = gltf.scene;
       yoshi.name = "yoshi";
-      yoshi.position.set(0, -14.3, 170); //-620
+      yoshi.position.set(0, -14.3, -620); //-620
       yoshi.scale.set(0.3, 0.3, 0.3);
 
       yoshi.traverse(function (child) {
@@ -195,7 +195,7 @@ function init() {
         keysPressed[event.keyCode] = true;
         switch (event.which) {
           case 68:
-            collidedRight = false;
+            //collidedRight = false;
             isWalking = true;
             if (!isRotatedRight) {
               //TWEEN.removeAll();
@@ -214,7 +214,7 @@ function init() {
 
           case 65:
             //collision = false;
-            collidedLeft = false;
+            //collidedLeft = false;
             isWalking = true;
             if (isRotatedRight) {
               //TWEEN.removeAll();
@@ -375,8 +375,9 @@ function init() {
     );
     yoshiUpperBox.setCcdMotionThreshold(1);
     scene.add(yoshiUpperBox);
+    yoshiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
 
-    var yoshiLowerGeometry = new THREE.BoxGeometry(4, 1, 4);
+    var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 2);
     yoshiLowerBox = new Physijs.BoxMesh(
       yoshiLowerGeometry,
       geometryMaterial2,
@@ -384,7 +385,7 @@ function init() {
     );
     yoshiLowerBox.position.set(
       yoshi.position.x,
-      yoshi.position.y + 0.5,
+      yoshi.position.y + 0.1,
       yoshi.position.z
     );
     yoshiLowerBox.setCcdMotionThreshold(1);
@@ -405,7 +406,7 @@ function init() {
     );
     yoshiLowerBox.position.set(
       yoshi.position.x,
-      yoshi.position.y + 0.5,
+      yoshi.position.y + 0.1,
       yoshi.position.z
     );
     var yoshiBoxPos = yoshiBox.position.clone();
@@ -865,7 +866,10 @@ function init() {
     camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     updateYoshiBoxPosition();
 
-    //console.log("iscollided " + isCollided);
+    /* console.log("isJumping = " + isJumping);
+    console.log("collidedTop = " + collidedTop);
+    console.log("isOnObjectTop = " + isOnObjectTop);*/
+    console.log("collided bottom =  " + collidedBottom);
 
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
 
@@ -1134,7 +1138,7 @@ function jump() {
     head: (-15 * Math.PI) / 180,
   };
   tweenGoalJump = {
-    y: 15, //-3
+    y: tweenStartJump.y + 29.3, //-3, -15
     rightArm_rotation_z: (-60 * Math.PI) / 180,
     rightHand_rotation_y: (0 * Math.PI) / 180,
     finger_x: (-90 * Math.PI) / 180,
@@ -1153,6 +1157,12 @@ function jump() {
     finger_x: (0 * Math.PI) / 180,
     thumb1_y: (66.5 * Math.PI) / 180,
     thumb2_x: (0 * Math.PI) / 180,
+
+    upperLeg_right: (0 * Math.PI) / 180,
+    lowerLeg: (0 * Math.PI) / 180,
+    upperLeg_left: (-180 * Math.PI) / 180,
+    spine: (0 * Math.PI) / 180,
+    head: (0 * Math.PI) / 180,
   };
   tweenStartFlex = {
     upperLeg_right: upperLeg_right.rotation.x,
@@ -1188,7 +1198,9 @@ function jump() {
       lowerLeg_left.rotation.x = tweenStartFlex.lowerLeg;
       spine.rotation.x = tweenStartFlex.spine;
       head.rotation.x = tweenStartFlex.head;
-      yoshi.position.y = tweenStartFlex.y;
+      if (!collidedTop) {
+        yoshi.position.y = tweenStartFlex.y;
+      }
       //yoshiBox.__dirtyPosition = true;
       //yoshiBox.__dirtyRotation = false;
     })
@@ -1210,7 +1222,7 @@ function jump() {
     .to(tweenGoalJump, 1000) //400
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
-      if (!collidedTop) {
+      if (!collidedTop || isOnObjectTop) {
         yoshi.position.y = tweenStartJump.y;
       }
       if (keysPressed[68] && !collidedLeft) {
@@ -1265,7 +1277,7 @@ function jump() {
     .to(tweenGoalJumpBack, 1000) //400
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
-      if (!collidedTop) {
+      if (!collidedTop || isOnObjectTop) {
         yoshi.position.y = tweenStartJump.y;
       }
       if (keysPressed[68] && !collidedLeft) {
@@ -1276,6 +1288,13 @@ function jump() {
         yoshi.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
+
+      upperLeg_right.rotation.x = tweenStartJump.upperLeg_right;
+      upperLeg_left.rotation.x = tweenStartJump.upperLeg_left;
+      lowerLeg_right.rotation.x = tweenStartJump.lowerLeg;
+      lowerLeg_left.rotation.x = tweenStartJump.lowerLeg;
+      spine.rotation.x = tweenStartJump.spine;
+      head.rotation.x = tweenStartJump.head;
 
       if (isRotatedRight && isJumpingRight) {
         upperArm_right.rotation.x = (0 * Math.PI) / 180;
@@ -1314,6 +1333,7 @@ function jump() {
       collidedRight = false;
       collidedLeft = false;
       //setIdlePosition();
+      isOnObjectTop = true;
     });
   tweenJump.chain(tweenJumpBack);
 }
@@ -1338,7 +1358,7 @@ function jump() {
     .start();
 }*/
 
-function setIdlePosition() {
+export function setIdlePosition() {
   //groupRun.removeAll();
   var tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 500)

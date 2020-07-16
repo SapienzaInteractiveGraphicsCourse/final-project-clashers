@@ -1,4 +1,5 @@
 import { fall } from "./tween_functions.js";
+import { setIdlePosition } from "./index.js";
 
 export function onYoshiCollision(
   other_object,
@@ -14,6 +15,7 @@ export function onYoshiLowerCollision(
   contact_normal
 ) {
   if (contact_normal.y == -1) {
+    //isOnObjectTop = true;
     var checkTouch = function () {
       // see if we are still touching this object
       var touches = yoshiLowerBox._physijs.touches;
@@ -24,11 +26,48 @@ export function onYoshiLowerCollision(
 
       fall();
 
+      isOnObjectTop = false;
       collidedTop = false; //?
+      //collidedBottom = false;
       scene.removeEventListener("update", checkTouch);
     };
 
     scene.addEventListener("update", checkTouch);
+  }
+}
+
+export function onYoshiUpperCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  if (contact_normal.y == 1) {
+    console.log("contact_normal.y = " + contact_normal.y);
+    //isOnObjectTop = true;
+    var checkTouch = function () {
+      // see if we are still touching this object
+      var touches = yoshiUpperBox._physijs.touches;
+
+      for (var i = 0; i < touches.length; i++) {
+        if (touches[i] == other_object._physijs.id) return;
+      }
+
+      //fall();
+
+      //isOnObjectTop = false;
+      //collidedBottom = false; //?
+      collidedBottom = false;
+      //setIdlePosition();
+      //fall();
+      scene.removeEventListener("update", checkTouch);
+    };
+
+    scene.addEventListener("update", checkTouch);
+  }
+  if (contact_normal.y == -1) {
+    collidedLeft = false;
+    collidedRight = false;
   }
 }
 
@@ -55,6 +94,27 @@ export function onPipeCollision(
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
       collidedTop = true;
+      //isOnObjectTop = true;
     }
+  }
+}
+
+export function onBottomCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  if (other_object._physijs.id == yoshiUpperBox._physijs.id) {
+    console.log("collision bottom");
+    collidedBottom = true;
+    //groupJump.removeAll();
+    tweenJump.stop();
+    tweenJumpBack.start();
+    //setIdlePosition();
+    console.log("collideRight = " + collidedRight);
+    console.log("collidedLeft = " + collidedLeft);
+
+    //fall();
   }
 }
