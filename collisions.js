@@ -144,6 +144,7 @@ export function onGoombaCollision(
   if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
+
       if (this._physijs.id == 64) {
         group1[11].scale.set(0.07, 0.01, 0.07);
       }
@@ -156,12 +157,14 @@ export function onGoombaCollision(
       if (this._physijs.id == 4) {
         groupPipes[6].scale.set(0.07, 0.01, 0.07);
       }
+
       /*if (this._physijs.id == 2) {
         groupPipes[4].scale.set(0.07, 0.01, 0.07);
       } 
       if (this._physijs.id == 2) {
         groupPipes[4].scale.set(0.07, 0.01, 0.07);
       } */
+
       if (this._physijs.id == 33) {
         group5[10].scale.set(0.07, 0.01, 0.07);
       }
