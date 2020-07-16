@@ -145,6 +145,7 @@ export function onGoombaCollision(
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
 
+      //goombaArray[this._physijs.id].scale.set(0.07, 0.01, 0.07);
       if (this._physijs.id == 64) {
         group1[11].scale.set(0.07, 0.01, 0.07);
       }
