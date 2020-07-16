@@ -1,13 +1,13 @@
 import * as collFunc from "./collisions.js";
 
 group1 = new Array();
-var group2 = new Array();
-var group3 = new Array();
-var group4 = new Array();
-var group5 = new Array();
-var group6 = new Array();
-var stairs = new Array();
-var groupPipes = new Array();
+group2 = new Array();
+group3 = new Array();
+group4 = new Array();
+group5 = new Array();
+group6 = new Array();
+stairs = new Array();
+groupPipes = new Array();
 
 export function createGroup1() {
   //var brickClone;

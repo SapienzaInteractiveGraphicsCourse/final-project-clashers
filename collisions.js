@@ -144,8 +144,48 @@ export function onGoombaCollision(
   if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
-
-      group1[11].scale.set(0.07, 0.01, 0.07);
+      if (this._physijs.id == 64) {
+        group1[11].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 2) {
+        groupPipes[4].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 3) {
+        groupPipes[5].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 4) {
+        groupPipes[6].scale.set(0.07, 0.01, 0.07);
+      }
+      /*if (this._physijs.id == 2) {
+        groupPipes[4].scale.set(0.07, 0.01, 0.07);
+      } 
+      if (this._physijs.id == 2) {
+        groupPipes[4].scale.set(0.07, 0.01, 0.07);
+      } */
+      if (this._physijs.id == 33) {
+        group5[10].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 34) {
+        group5[11].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 35) {
+        group5[12].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 36) {
+        group5[13].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 37) {
+        group5[14].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 38) {
+        group5[15].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 44) {
+        group6[7].scale.set(0.07, 0.01, 0.07);
+      }
+      if (this._physijs.id == 45) {
+        group6[8].scale.set(0.07, 0.01, 0.07);
+      }
     }
   }
 }

@@ -116,3 +116,10 @@ var groupRun;
 var groupRotate;
 
 var group1;
+var group2;
+var group3;
+var group4;
+var group5;
+var group6;
+var stairs;
+var groupPipes;

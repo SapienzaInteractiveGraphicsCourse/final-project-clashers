@@ -869,7 +869,7 @@ function init() {
     /* console.log("isJumping = " + isJumping);
     console.log("collidedTop = " + collidedTop);
     console.log("isOnObjectTop = " + isOnObjectTop);*/
-    console.log("collided bottom =  " + collidedBottom);
+    //console.log("collided bottom =  " + collidedBottom);
 
     //dirLight.position.copy(camera.position); -> serve eventualmente per far muovere la luce quando spostiamo la camera col mouse
 
