@@ -377,7 +377,7 @@ function init() {
     scene.add(yoshiUpperBox);
     yoshiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
 
-    var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 2);
+    var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
     yoshiLowerBox = new Physijs.BoxMesh(
       yoshiLowerGeometry,
       geometryMaterial2,

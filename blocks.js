@@ -1,6 +1,6 @@
 import * as collFunc from "./collisions.js";
 
-var group1 = new Array();
+group1 = new Array();
 var group2 = new Array();
 var group3 = new Array();
 var group4 = new Array();
@@ -80,11 +80,11 @@ export function createGroupPipes() {
 
   for (var i = 0; i < 3; i++) {
     goombaClone = goomba.clone();
-    goombaClone.position.set(-5.25, -13.3, -460 + 45 * i);
+    goombaClone.position.set(0, -13.3, -460 + 45 * i);
     scene.add(goombaClone);
     groupPipes.push(goombaClone);
   }
-  groupPipes[6].position.set(-5.25, -13.3, -410);
+  groupPipes[6].position.set(0, -13.3, -410);
 
   for (var i = 4; i < 7; i++) {
     setGoombaGeometry(groupPipes[i]);
@@ -775,7 +775,7 @@ export function createGroup6() {
 }
 
 function setQuestionBoxGeometry(questionBoxElem) {
-  var questionBoxGeometry = new THREE.BoxGeometry(5, 0.5, 5);
+  var questionBoxGeometry = new THREE.BoxGeometry(5, 0.5, 3);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
     geometryMaterial1,
@@ -796,7 +796,7 @@ function setQuestionBoxGeometry(questionBoxElem) {
 }
 
 function setBrickGeometry(brickElem) {
-  var brickGeometry = new THREE.BoxGeometry(4, 0.5, 4);
+  var brickGeometry = new THREE.BoxGeometry(4, 0.5, 2);
   brickContainer = new Physijs.BoxMesh(brickGeometry, geometryMaterial1, 0);
   brickContainer.position.set(
     brickElem.position.x,
@@ -879,6 +879,7 @@ function setGoombaGeometry(goombaElem) {
     goombaElem.position.z
   );
   scene.add(goombaContainer);
+  goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
 }
 
 function setGroupGeometry(groupWidth, y, z) {

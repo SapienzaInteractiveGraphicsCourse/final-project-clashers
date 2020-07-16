@@ -2,6 +2,7 @@ import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 import { setIdlePosition } from "./index.js";
 
 export function fall() {
+  console.log("falling");
   tweenStartFall = {
     y: yoshi.position.y,
   };
@@ -21,7 +22,6 @@ export function fall() {
       collidedTop = false; //?
       collidedLeft = false;
       collidedRight = false;
-
       //setIdlePosition();
     })
     .start();

@@ -114,3 +114,5 @@ var isOnObjectTop = false;
 var groupJump;
 var groupRun;
 var groupRotate;
+
+var group1;

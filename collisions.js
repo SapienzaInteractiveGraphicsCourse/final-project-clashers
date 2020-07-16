@@ -6,7 +6,14 @@ export function onYoshiCollision(
   relative_velocity,
   relative_rotation,
   contact_normal
-) {}
+) {
+  /*if (other_object._physijs.id == brickContainer._physijs.id) {
+    collidedBottom = false;
+    collidedLeft = false;
+    collidedRight = false;
+    tweenFall.stop();
+  }*/
+}
 
 export function onYoshiLowerCollision(
   other_object,
@@ -68,6 +75,7 @@ export function onYoshiUpperCollision(
   if (contact_normal.y == -1) {
     collidedLeft = false;
     collidedRight = false;
+    //collidedBottom = false;
   }
 }
 
@@ -116,5 +124,28 @@ export function onBottomCollision(
     console.log("collidedLeft = " + collidedLeft);
 
     //fall();
+  }
+}
+
+export function onGoombaCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  if (other_object._physijs.id == yoshiBox._physijs.id) {
+    if (other_object instanceof Physijs.Mesh) {
+      console.log("collisione");
+
+      //perdi la vita
+    }
+  }
+
+  if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
+    if (other_object instanceof Physijs.Mesh) {
+      console.log("pipeCollision Top");
+
+      group1[11].scale.set(0.07, 0.01, 0.07);
+    }
   }
 }
