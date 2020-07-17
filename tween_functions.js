@@ -399,7 +399,7 @@ export function jump(character) {
           upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
         }
         if (character == mario) {
-          upperArm_right.rotation.x = (-90 * Math.PI) / 180;
+          upperArm_right.rotation.x = tweenStartJump.rightArm_rotation_x;
         }
         handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
       }
@@ -409,7 +409,7 @@ export function jump(character) {
           upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
         }
         if (character == mario) {
-          upperArm_left.rotation.x = (-90 * Math.PI) / 180;
+          upperArm_left.rotation.x = tweenStartJump.rightArm_rotation_x;
         }
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
       }
@@ -444,7 +444,7 @@ export function jump(character) {
           upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
         }
         if (character == mario) {
-          upperArm_right.rotation.x = (-90 * Math.PI) / 180;
+          upperArm_right.rotation.x = tweenStartJump.rightArm_rotation_x;
         }
         handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
       }
@@ -454,7 +454,7 @@ export function jump(character) {
           upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
         }
         if (character == mario) {
-          upperArm_left.rotation.x = (-90 * Math.PI) / 180;
+          upperArm_left.rotation.x = tweenStartJump.rightArm_rotation_x;
         }
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
       }
