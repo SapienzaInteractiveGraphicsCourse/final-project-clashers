@@ -27,6 +27,10 @@ var finger2_left;
 var finger2_2_left;
 var finger3_left;
 var finger3_2_left;
+var finger4_left;
+var finger4_2_left;
+var finger4_right;
+var finger4_2_right;
 
 var tweenStartScale;
 var tweenGoalScale;

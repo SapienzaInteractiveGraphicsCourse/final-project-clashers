@@ -198,6 +198,24 @@ function init() {
           //camera.position.z += yoshi.position.z - camera.position.z;
           //controls.update();
 
+          thumb1_left.rotation.y = (90 * Math.PI) / 180;
+          thumb2_left.rotation.x = (-135 * Math.PI) / 180;
+          finger1_left.rotation.x = (-90 * Math.PI) / 180;
+          finger1_2_left.rotation.x = (-90 * Math.PI) / 180;
+          finger2_left.rotation.x = (-90 * Math.PI) / 180;
+          finger2_2_left.rotation.x = (-90 * Math.PI) / 180;
+          finger3_left.rotation.x = (-90 * Math.PI) / 180;
+          finger3_2_left.rotation.x = (-90 * Math.PI) / 180;
+
+          thumb1_right.rotation.y = (90 * Math.PI) / 180;
+          thumb2_right.rotation.x = (-135 * Math.PI) / 180;
+          finger1_right.rotation.x = (-90 * Math.PI) / 180;
+          finger1_2_right.rotation.x = (-90 * Math.PI) / 180;
+          finger2_right.rotation.x = (-90 * Math.PI) / 180;
+          finger2_2_right.rotation.x = (-90 * Math.PI) / 180;
+          finger3_right.rotation.x = (-90 * Math.PI) / 180;
+          finger3_2_right.rotation.x = (-90 * Math.PI) / 180;
+
           dirLight.target = yoshi;
 
           //if (sessionStorage.getItem("yoshiPressed") == "true") {
@@ -372,24 +390,40 @@ function init() {
           //console.log(dumpObject(mario).join("\n"));
 
           head = mario.getObjectByName(mario_dic.Head);
-          //torso = mario.getObjectByName(mario_dic.Torso);
+          torso = mario.getObjectByName(mario_dic.Torso);
           upperArm_right = mario.getObjectByName(mario_dic.UpperArm_right);
           upperArm_left = mario.getObjectByName(mario_dic.UpperArm_left);
-          upperLeg_right = mario.getObjectByName(mario_dic.UpperLeg_right);
-          upperLeg_left = mario.getObjectByName(mario_dic.UpperLeg_left);
-          handRight = mario.getObjectByName(mario_dic.Hand_right);
+          spine = mario.getObjectByName(mario_dic.Spine);
 
-          //upperArm_right.rotation.z = (45 * Math.PI) / 180;
-          //upperArm_left.rotation.z = (45 * Math.PI) / 180;
+          upperLeg_left = mario.getObjectByName(mario_dic.UpperLeg_left);
+          lowerLeg_left = mario.getObjectByName(mario_dic.LowerLeg_left);
+          upperLeg_right = mario.getObjectByName(mario_dic.UpperLeg_right);
+          lowerLeg_right = mario.getObjectByName(mario_dic.LowerLeg_right);
+
+          handRight = mario.getObjectByName(mario_dic.Hand_right);
+          handLeft = mario.getObjectByName(mario_dic.Hand_left);
+
+          //upperArm_right.rotation.z = (0 * Math.PI) / 180;
+          //upperArm_left.rotation.z = (0 * Math.PI) / 180;
+
+          //handRight.rotation.y = (90 * Math.PI) / 180;
+
           upperArm_right.rotation.x = (45 * Math.PI) / 180;
+          /*
+          45x pos iniziale
+          -90 su x per avere il braccio alzato
+          90y per ruotarlo in avanti
+          */
           upperArm_left.rotation.x = (45 * Math.PI) / 180;
           upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+          lowerLeg_right.rotation.x = (0 * Math.PI) / 180;
           upperLeg_left.rotation.x = (0 * Math.PI) / 180;
+          lowerLeg_left.rotation.x = (0 * Math.PI) / 180;
 
           dirLight.target = mario;
           scene.add(mario);
           keyboard(mario);
-          tweenFunc.setAnimationParameters();
+          //tweenFunc.setAnimationParameters();
           requestAnimationFrame(animate);
         });
       }
@@ -433,10 +467,9 @@ function init() {
           finger2_2_right = luigi.getObjectByName(luigi_dic.Finger2_2_right);
           finger3_right = luigi.getObjectByName(luigi_dic.Finger3_right);
           finger3_2_right = luigi.getObjectByName(luigi_dic.Finger3_2_right);
-          //var finger4_right = luigi.getObjectByName(luigi_dic.Finger4_right);
-          /*var finger4_2_right = luigi.getObjectByName(
-            luigi_dic.Finger4_2_right
-          );*/
+          //*******************
+          finger4_right = luigi.getObjectByName(luigi_dic.Finger4_right);
+          finger4_2_right = luigi.getObjectByName(luigi_dic.Finger4_2_right);
 
           //left_arm related bones
           handLeft = luigi.getObjectByName(luigi_dic.Hand_left);
@@ -448,8 +481,9 @@ function init() {
           finger2_2_left = luigi.getObjectByName(luigi_dic.Finger2_2_left);
           finger3_left = luigi.getObjectByName(luigi_dic.Finger3_left);
           finger3_2_left = luigi.getObjectByName(luigi_dic.Finger3_2_left);
-          //var finger4_left = luigi.getObjectByName(luigi_dic.finger4_left);
-          //var finger4_2_left = luigi.getObjectByName(luigi_dic.finger4_2_left);
+          //*******************
+          finger4_left = luigi.getObjectByName(luigi_dic.Finger4_left);
+          finger4_2_left = luigi.getObjectByName(luigi_dic.Finger4_2_left);
 
           //left_leg related bones
           upperLeg_left = luigi.getObjectByName(luigi_dic.UpperLeg_left);
@@ -465,26 +499,28 @@ function init() {
           upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
 
           thumb1_left.rotation.y = (90 * Math.PI) / 180;
-          thumb2_left.rotation.x = (135 * Math.PI) / 180;
+          thumb2_left.rotation.x = (-90 * Math.PI) / 180; //*******************
           finger1_left.rotation.x = (-90 * Math.PI) / 180;
           finger1_2_left.rotation.x = (-90 * Math.PI) / 180;
           finger2_left.rotation.x = (-90 * Math.PI) / 180;
           finger2_2_left.rotation.x = (-90 * Math.PI) / 180;
           finger3_left.rotation.x = (-90 * Math.PI) / 180;
           finger3_2_left.rotation.x = (-90 * Math.PI) / 180;
-          //finger4_left.rotation.x = (-90 * Math.PI) / 180;
-          //finger4_2_left.rotation.x = (-90 * Math.PI) / 180;
+          //*******************
+          finger4_left.rotation.x = (-90 * Math.PI) / 180;
+          finger4_2_left.rotation.x = (-90 * Math.PI) / 180;
 
           thumb1_right.rotation.y = (90 * Math.PI) / 180;
-          thumb2_right.rotation.x = (135 * Math.PI) / 180;
+          thumb2_right.rotation.x = (-90 * Math.PI) / 180; //*******************
           finger1_right.rotation.x = (-90 * Math.PI) / 180;
           finger1_2_right.rotation.x = (-90 * Math.PI) / 180;
           finger2_right.rotation.x = (-90 * Math.PI) / 180;
           finger2_2_right.rotation.x = (-90 * Math.PI) / 180;
           finger3_right.rotation.x = (-90 * Math.PI) / 180;
           finger3_2_right.rotation.x = (-90 * Math.PI) / 180;
-          //finger4_right.rotation.x = (-90 * Math.PI) / 180;
-          //finger4_2_right.rotation.x = (-90 * Math.PI) / 180;
+          //*******************
+          finger4_right.rotation.x = (-90 * Math.PI) / 180;
+          finger4_2_right.rotation.x = (-90 * Math.PI) / 180;
 
           dirLight.target = luigi;
           scene.add(luigi);
@@ -546,7 +582,7 @@ function init() {
 
           if (!spacePressed && !isJumping) {
             //groupJump.removeAll();
-            tweenFunc.setIdlePosition();
+            tweenFunc.setIdlePosition(character);
             tweenFunc.jump(character);
             isJumping = true;
           }
@@ -590,7 +626,7 @@ function init() {
             //setIdlePosition();
           }
           //aPressed = false;
-          tweenFunc.setIdlePosition();
+          tweenFunc.setIdlePosition(character);
           break;
 
         case 65:
@@ -624,13 +660,13 @@ function init() {
             //setIdlePosition();
           }
           //dPressed = false;
-          tweenFunc.setIdlePosition();
+          tweenFunc.setIdlePosition(character);
           break;
 
         case 32:
           spacePressed = false;
           //isJumping = false;
-          tweenFunc.setIdlePosition();
+          tweenFunc.setIdlePosition(character);
           break;
       }
     });

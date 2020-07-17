@@ -1,4 +1,5 @@
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
+//mettere character ++++++++++++++++++++++++++++++++++++++++++++++
 
 export function fall() {
   console.log("falling");
@@ -28,57 +29,111 @@ export function fall() {
     .start();
 }
 
-export function setAnimationParameters() {
-  tweenStartScale = {
-    x_left: upperLeg_left.rotation.x,
-    x_right: upperLeg_right.rotation.x,
-    x_leftArm: upperArm_left.rotation.x,
-    x_rightArm: upperArm_right.rotation.x,
-    rightArm_rotation_z: (45 * Math.PI) / 180,
-    //rightArm_rotation_x: (0 * Math.PI) / 180,
-    rightHand_rotation_y: handRight.rotation.y,
-    finger_x: finger1_right.rotation.x,
-    thumb1_y: thumb1_right.rotation.y,
-    thumb2_x: thumb2_right.rotation.x,
-    spine: spine.rotation.x,
-    head: head.rotation.x,
-  };
-  tweenGoalScale = {
-    x_left: (-225 * Math.PI) / 180,
-    x_right: (45 * Math.PI) / 180,
-    x_leftArm: (45 * Math.PI) / 180,
-    x_rightArm: (-45 * Math.PI) / 180,
-    spine: (10 * Math.PI) / 180,
-    head: (-10 * Math.PI) / 180,
-  };
-  tweenBackScale = {
-    x_left: (-135 * Math.PI) / 180,
-    x_right: (-45 * Math.PI) / 180,
-    x_leftArm: (-45 * Math.PI) / 180,
-    x_rightArm: (45 * Math.PI) / 180,
-    //y: -14.3, -> pensare se fare piegare le ginocchia e quindi anche traslare su e giu yoshi
-    //spine: (0 * Math.PI) / 180,
-    //head: (0 * Math.PI) / 180,
-  };
-  tweenIdle = {
-    x_left: (-180 * Math.PI) / 180,
-    x_right: (0 * Math.PI) / 180,
-    x_leftArm: (0 * Math.PI) / 180,
-    x_rightArm: (0 * Math.PI) / 180,
+export function setAnimationParameters(character) {
+  if (character == yoshi || character == luigi) {
+    //+++++++++++++++++++++++++++
+    tweenStartScale = {
+      x_left: upperLeg_left.rotation.x,
+      x_right: upperLeg_right.rotation.x,
+      x_leftArm: upperArm_left.rotation.x,
+      x_rightArm: upperArm_right.rotation.x,
+      rightArm_rotation_z: (45 * Math.PI) / 180,
+      //rightArm_rotation_x: (0 * Math.PI) / 180,
+      rightHand_rotation_y: handRight.rotation.y,
+      spine: spine.rotation.x,
+      head: head.rotation.x,
+    };
+    tweenGoalScale = {
+      x_left: (-225 * Math.PI) / 180,
+      x_right: (45 * Math.PI) / 180,
+      x_leftArm: (45 * Math.PI) / 180,
+      x_rightArm: (-45 * Math.PI) / 180,
+      spine: (10 * Math.PI) / 180,
+      head: (-10 * Math.PI) / 180,
+    };
+    tweenBackScale = {
+      x_left: (-135 * Math.PI) / 180,
+      x_right: (-45 * Math.PI) / 180,
+      x_leftArm: (-45 * Math.PI) / 180,
+      x_rightArm: (45 * Math.PI) / 180,
+    };
+    tweenIdle = {
+      x_left: (-180 * Math.PI) / 180,
+      x_right: (0 * Math.PI) / 180,
+      x_leftArm: (0 * Math.PI) / 180,
+      x_rightArm: (0 * Math.PI) / 180,
 
-    rightArm_rotation_z: (45 * Math.PI) / 180,
-    rightHand_rotation_y: (90 * Math.PI) / 180,
-    finger_x: (0 * Math.PI) / 180,
-    thumb1_y: (66.5 * Math.PI) / 180,
-    thumb2_x: (0 * Math.PI) / 180,
-    spine: (0 * Math.PI) / 180,
-    head: (0 * Math.PI) / 180,
-  };
+      rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: (90 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+    };
+  }
+  if (character == mario) {
+    tweenStartScale = {
+      x_left: upperLeg_left.rotation.x,
+      x_right: upperLeg_right.rotation.x,
+      //Braccia su x
+
+      x_leftArm: upperArm_left.rotation.x,
+      x_rightArm: upperArm_right.rotation.x,
+
+      //Braccia su z
+      z_leftArm: upperArm_left.rotation.z,
+      z_rightArm: upperArm_right.rotation.z,
+      //rightArm_rotation_z: (45 * Math.PI) / 180,
+      //rightArm_rotation_x: (0 * Math.PI) / 180,
+      rightHand_rotation_y: handRight.rotation.y,
+      spine: spine.rotation.x,
+      head: head.rotation.x,
+    };
+    tweenGoalScale = {
+      x_left: (-45 * Math.PI) / 180,
+      x_right: (45 * Math.PI) / 180,
+      //Braccia su x non serve su mario
+      /*
+      x_leftArm: (45 * Math.PI) / 180,
+      x_rightArm: (45 * Math.PI) / 180,
+      */
+      //Braccia su z
+      z_leftArm: (-45 * Math.PI) / 180,
+      z_rightArm: (-45 * Math.PI) / 180,
+
+      spine: (10 * Math.PI) / 180,
+      head: (-10 * Math.PI) / 180,
+    };
+    tweenBackScale = {
+      x_left: (45 * Math.PI) / 180,
+      x_right: (-45 * Math.PI) / 180,
+      //Braccia su x non serve su mario
+      /*
+      x_leftArm: (45 * Math.PI) / 180,
+      x_rightArm: (45 * Math.PI) / 180,
+      */
+      //Braccia su z
+      z_leftArm: (45 * Math.PI) / 180,
+      z_rightArm: (45 * Math.PI) / 180,
+    };
+    tweenIdle = {
+      x_left: (0 * Math.PI) / 180,
+      x_right: (0 * Math.PI) / 180,
+      //Braccia su x
+      x_leftArm: (45 * Math.PI) / 180,
+      x_rightArm: (45 * Math.PI) / 180,
+      //Braccia su z
+      z_leftArm: (0 * Math.PI) / 180,
+      z_rightArm: (0 * Math.PI) / 180,
+      //rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: (0 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+    };
+  }
 }
 
 export function performAnimation(direction, character) {
   dir = direction;
-  setAnimationParameters(); //rinominare setTweenParameter!
+  setAnimationParameters(character); //rinominare setTweenParameter!
 
   tween = new TWEEN.Tween(tweenStartScale, groupRun)
     .to(tweenGoalScale, 400)
@@ -86,12 +141,21 @@ export function performAnimation(direction, character) {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
-      upperArm_left.rotation.x = tweenStartScale.x_leftArm;
-      upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-      //yoshi.position.y = tweenStartScale.y;
+
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
-      //if (!collision) {
+
+      if (character == yoshi || character == luigi) {
+        //Braccia su x
+        upperArm_left.rotation.x = tweenStartScale.x_leftArm;
+        upperArm_right.rotation.x = tweenStartScale.x_rightArm;
+      }
+
+      if (character == mario) {
+        upperArm_left.rotation.z = tweenStartScale.z_leftArm;
+        upperArm_right.rotation.z = tweenStartScale.z_rightArm;
+      }
+
       if (direction == "right" && !collidedLeft) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
@@ -100,9 +164,6 @@ export function performAnimation(direction, character) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
-      //}
-      //yoshiBox.__dirtyPosition = true;
-      //yoshiBox.__dirtyRotation = false;
       camera.position.z += character.position.z - camera.position.z;
       controls.update();
     })
@@ -114,12 +175,20 @@ export function performAnimation(direction, character) {
     .onUpdate(function () {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
-      upperArm_left.rotation.x = tweenStartScale.x_leftArm;
-      upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-      //yoshi.position.y = tweenStartScale.y;
+
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
-      //if (!collision) {
+
+      if (character == yoshi || character == luigi) {
+        //Braccia su x
+        upperArm_left.rotation.x = tweenStartScale.x_leftArm;
+        upperArm_right.rotation.x = tweenStartScale.x_rightArm;
+      }
+
+      if (character == mario) {
+        upperArm_left.rotation.z = tweenStartScale.z_leftArm;
+        upperArm_right.rotation.z = tweenStartScale.z_rightArm;
+      }
       if (direction == "right" && !collidedLeft) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
@@ -128,9 +197,6 @@ export function performAnimation(direction, character) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
-      //}
-      //yoshiBox.__dirtyPosition = true;
-      //yoshiBox.__dirtyRotation = false;
       camera.position.z += character.position.z - camera.position.z;
       controls.update();
     })
@@ -181,77 +247,102 @@ export function rotateTorso(direction) {
 }*/
 
 export function jump(character) {
-  tweenStartJump = {
-    y: character.position.y,
-    //rightArm_rotation_z: upperArm_right.rotation.z,
-    rightArm_rotation_z: (45 * Math.PI) / 180,
-    //rightArm_rotation_x: (0 * Math.PI) / 180,
-    rightHand_rotation_y: handRight.rotation.y,
-    finger_x: finger1_right.rotation.x,
-    thumb1_y: thumb1_right.rotation.y,
-    thumb2_x: thumb2_right.rotation.x,
-    /*upperLeg_right: upperLeg_right.rotation.x,
-    upperLeg_left: upperLeg_left.rotation.x,
-    lowerLeg: lowerLeg_right.rotation.x,
-    spine: spine.rotation.x,
-    head: head.rotation.x,*/
-    upperLeg_right: (-45 * Math.PI) / 180,
-    upperLeg_left: (-225 * Math.PI) / 180,
-    lowerLeg: (75 * Math.PI) / 180,
-    spine: (30 * Math.PI) / 180,
-    head: (-15 * Math.PI) / 180,
-  };
-  tweenGoalJump = {
-    y: tweenStartJump.y + 29.3, //-3, -15
-    rightArm_rotation_z: (-60 * Math.PI) / 180,
-    rightHand_rotation_y: (0 * Math.PI) / 180,
-    finger_x: (-90 * Math.PI) / 180,
-    thumb1_y: (135 * Math.PI) / 180,
-    thumb2_x: (90 * Math.PI) / 180,
-    upperLeg_right: (0 * Math.PI) / 180,
-    lowerLeg: (0 * Math.PI) / 180,
-    spine: (0 * Math.PI) / 180,
-    head: (0 * Math.PI) / 180,
-    upperLeg_left: (-180 * Math.PI) / 180,
-  };
-  tweenGoalJumpBack = {
-    y: -14.3,
-    rightArm_rotation_z: (45 * Math.PI) / 180,
-    rightHand_rotation_y: (90 * Math.PI) / 180,
-    finger_x: (0 * Math.PI) / 180,
-    thumb1_y: (66.5 * Math.PI) / 180,
-    thumb2_x: (0 * Math.PI) / 180,
-
-    upperLeg_right: (0 * Math.PI) / 180,
-    lowerLeg: (0 * Math.PI) / 180,
-    upperLeg_left: (-180 * Math.PI) / 180,
-    spine: (0 * Math.PI) / 180,
-    head: (0 * Math.PI) / 180,
-  };
-  tweenStartFlex = {
-    upperLeg_right: upperLeg_right.rotation.x,
-    upperLeg_left: upperLeg_left.rotation.x,
-    lowerLeg: lowerLeg_right.rotation.x,
-    spine: spine.rotation.x,
-    head: head.rotation.x,
-    y: character.position.y,
-  };
-  tweenGoalFlex = {
-    upperLeg_right: (-45 * Math.PI) / 180,
-    upperLeg_left: (-225 * Math.PI) / 180,
-    lowerLeg: (75 * Math.PI) / 180,
-    spine: (30 * Math.PI) / 180,
-    head: (-15 * Math.PI) / 180,
-    y: -14.6,
-  };
-  /*var tweenGoalFlexBack = {
-    upperLeg_right: (0 * Math.PI) / 180,
-    lowerLeg: (0 * Math.PI) / 180,
-    spine: (0 * Math.PI) / 180,
-    head: (0 * Math.PI) / 180,
-    upperLeg_left: (-180 * Math.PI) / 180,
-    y: -14.3,
-  };*/
+  if (character == yoshi || character == luigi) {
+    tweenStartJump = {
+      y: character.position.y,
+      rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: handRight.rotation.y,
+      upperLeg_right: (-45 * Math.PI) / 180,
+      upperLeg_left: (-225 * Math.PI) / 180,
+      lowerLeg: (75 * Math.PI) / 180,
+      spine: (30 * Math.PI) / 180,
+      head: (-15 * Math.PI) / 180,
+    };
+    tweenGoalJump = {
+      y: tweenStartJump.y + 29.3, //-3, -15
+      rightArm_rotation_z: (-60 * Math.PI) / 180,
+      rightHand_rotation_y: (0 * Math.PI) / 180,
+      upperLeg_right: (0 * Math.PI) / 180,
+      lowerLeg: (0 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+      upperLeg_left: (-180 * Math.PI) / 180,
+    };
+    tweenGoalJumpBack = {
+      y: -14.3,
+      rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: (90 * Math.PI) / 180,
+      upperLeg_right: (0 * Math.PI) / 180,
+      lowerLeg: (0 * Math.PI) / 180,
+      upperLeg_left: (-180 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+    };
+    tweenStartFlex = {
+      upperLeg_right: upperLeg_right.rotation.x,
+      upperLeg_left: upperLeg_left.rotation.x,
+      lowerLeg: lowerLeg_right.rotation.x,
+      spine: spine.rotation.x,
+      head: head.rotation.x,
+      y: character.position.y,
+    };
+    tweenGoalFlex = {
+      upperLeg_right: (-45 * Math.PI) / 180,
+      upperLeg_left: (-225 * Math.PI) / 180,
+      lowerLeg: (75 * Math.PI) / 180,
+      spine: (30 * Math.PI) / 180,
+      head: (-15 * Math.PI) / 180,
+      y: -14.6,
+    };
+  }
+  if (character == mario) {
+    tweenStartJump = {
+      y: character.position.y,
+      rightArm_rotation_x: upperArm_right.rotation.x,
+      rightHand_rotation_y: handRight.rotation.y,
+      upperLeg_right: (-75 * Math.PI) / 180,
+      upperLeg_left: (-75 * Math.PI) / 180,
+      lowerLeg: (-75 * Math.PI) / 180,
+      spine: (30 * Math.PI) / 180,
+      head: (-15 * Math.PI) / 180,
+    };
+    tweenGoalJump = {
+      y: tweenStartJump.y + 29.3, //-3, -15
+      rightArm_rotation_x: (-90 * Math.PI) / 180,
+      rightHand_rotation_y: (90 * Math.PI) / 180,
+      upperLeg_right: (0 * Math.PI) / 180,
+      lowerLeg: (0 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+      upperLeg_left: (0 * Math.PI) / 180,
+    };
+    tweenGoalJumpBack = {
+      y: -14.3,
+      rightArm_rotation_x: (45 * Math.PI) / 180,
+      rightHand_rotation_y: (0 * Math.PI) / 180,
+      upperLeg_right: (0 * Math.PI) / 180,
+      lowerLeg: (0 * Math.PI) / 180,
+      upperLeg_left: (0 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+    };
+    tweenStartFlex = {
+      upperLeg_right: upperLeg_right.rotation.x,
+      upperLeg_left: upperLeg_left.rotation.x,
+      lowerLeg: lowerLeg_right.rotation.x,
+      spine: spine.rotation.x,
+      head: head.rotation.x,
+      y: character.position.y,
+    };
+    tweenGoalFlex = {
+      upperLeg_right: (-75 * Math.PI) / 180,
+      upperLeg_left: (-75 * Math.PI) / 180,
+      lowerLeg: (-75 * Math.PI) / 180,
+      spine: (30 * Math.PI) / 180,
+      head: (-15 * Math.PI) / 180,
+      y: -14.6,
+    };
+  }
   tweenFlex = new TWEEN.Tween(tweenStartFlex, groupJump)
     .to(tweenGoalFlex, 200)
     .easing(TWEEN.Easing.Linear.None)
@@ -265,8 +356,6 @@ export function jump(character) {
       if (!collidedTop) {
         character.position.y = tweenStartFlex.y;
       }
-      //yoshiBox.__dirtyPosition = true;
-      //yoshiBox.__dirtyRotation = false;
     })
     .start();
   /*var tweenFlexBack = new TWEEN.Tween(tweenStartFlex, groupJump)
@@ -305,37 +394,26 @@ export function jump(character) {
       spine.rotation.x = tweenStartJump.spine;
       head.rotation.x = tweenStartJump.head;
       if (isRotatedRight && isJumpingRight) {
-        upperArm_right.rotation.x = (0 * Math.PI) / 180;
-        upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+        if (character == yoshi || character == luigi) {
+          upperArm_right.rotation.x = (0 * Math.PI) / 180;
+          upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+        }
+        if (character == mario) {
+          upperArm_right.rotation.x = (-90 * Math.PI) / 180;
+        }
         handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
-        finger1_right.rotation.x = tweenStartJump.finger_x;
-        finger1_2_right.rotation.x = tweenStartJump.finger_x;
-        finger2_right.rotation.x = tweenStartJump.finger_x;
-        finger2_2_right.rotation.x = tweenStartJump.finger_x;
-        finger3_right.rotation.x = tweenStartJump.finger_x;
-        finger3_2_right.rotation.x = tweenStartJump.finger_x;
-        thumb2_right.rotation.x = tweenStartJump.finger_x;
-        thumb1_right.rotation.y = tweenStartJump.thumb1_y;
       }
       if (!isRotatedRight && isJumpingLeft) {
-        upperArm_left.rotation.x = (0 * Math.PI) / 180;
-        upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
+        if (character == yoshi || character == luigi) {
+          upperArm_left.rotation.x = (0 * Math.PI) / 180;
+          upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
+        }
+        if (character == mario) {
+          upperArm_left.rotation.x = (-90 * Math.PI) / 180;
+        }
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
-        finger1_left.rotation.x = tweenStartJump.finger_x;
-        finger1_2_left.rotation.x = tweenStartJump.finger_x;
-        finger2_left.rotation.x = tweenStartJump.finger_x;
-        finger2_2_left.rotation.x = tweenStartJump.finger_x;
-        finger3_left.rotation.x = tweenStartJump.finger_x;
-        finger3_2_left.rotation.x = tweenStartJump.finger_x;
-        thumb2_left.rotation.x = tweenStartJump.finger_x;
-        thumb1_left.rotation.y = tweenStartJump.thumb1_y;
       }
-      //yoshiBox.__dirtyPosition = true;
-      //yoshiBox.__dirtyRotation = false;
-      //fix arm x rotation
-      //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     });
-  //.start();
   tweenFlex.chain(tweenJump);
   tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
     .to(tweenGoalJumpBack, 1000) //400
@@ -361,34 +439,25 @@ export function jump(character) {
       head.rotation.x = tweenStartJump.head;
 
       if (isRotatedRight && isJumpingRight) {
-        upperArm_right.rotation.x = (0 * Math.PI) / 180;
-        upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+        if (character == yoshi || character == luigi) {
+          upperArm_right.rotation.x = (0 * Math.PI) / 180;
+          upperArm_right.rotation.z = tweenStartJump.rightArm_rotation_z;
+        }
+        if (character == mario) {
+          upperArm_right.rotation.x = (-90 * Math.PI) / 180;
+        }
         handRight.rotation.y = tweenStartJump.rightHand_rotation_y;
-        finger1_right.rotation.x = tweenStartJump.finger_x;
-        finger1_2_right.rotation.x = tweenStartJump.finger_x;
-        finger2_right.rotation.x = tweenStartJump.finger_x;
-        finger2_2_right.rotation.x = tweenStartJump.finger_x;
-        finger3_right.rotation.x = tweenStartJump.finger_x;
-        finger3_2_right.rotation.x = tweenStartJump.finger_x;
-        thumb2_right.rotation.x = tweenStartJump.finger_x;
-        thumb1_right.rotation.y = tweenStartJump.thumb1_y;
       }
       if (!isRotatedRight && isJumpingLeft) {
-        upperArm_left.rotation.x = (0 * Math.PI) / 180;
-        upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
+        if (character == yoshi || character == luigi) {
+          upperArm_left.rotation.x = (0 * Math.PI) / 180;
+          upperArm_left.rotation.z = tweenStartJump.rightArm_rotation_z;
+        }
+        if (character == mario) {
+          upperArm_left.rotation.x = (-90 * Math.PI) / 180;
+        }
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
-        finger1_left.rotation.x = tweenStartJump.finger_x;
-        finger1_2_left.rotation.x = tweenStartJump.finger_x;
-        finger2_left.rotation.x = tweenStartJump.finger_x;
-        finger2_2_left.rotation.x = tweenStartJump.finger_x;
-        finger3_left.rotation.x = tweenStartJump.finger_x;
-        finger3_2_left.rotation.x = tweenStartJump.finger_x;
-        thumb2_left.rotation.x = tweenStartJump.finger_x;
-        thumb1_left.rotation.y = tweenStartJump.thumb1_y;
       }
-      //yoshiBox.__dirtyPosition = true;
-      //yoshiBox.__dirtyRotation = false;
-      //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     })
     .onStop(function () {
       isJumpingRight = false;
@@ -427,45 +496,32 @@ export function jump(character) {
     .start();
 }*/
 
-export function setIdlePosition() {
-  //groupRun.removeAll();
+export function setIdlePosition(character) {
   tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 500)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       spine.rotation.x = tweenStartScale.spine;
       head.rotation.x = tweenStartScale.head;
+
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
+
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
-      //mettere a posto anche le dita
 
-      //parametri modificati durante il salto
-      upperArm_right.rotation.z = tweenStartScale.rightArm_rotation_z;
+      if (character == mario) {
+        upperArm_left.rotation.z = tweenStartScale.z_leftArm;
+        upperArm_right.rotation.z = tweenStartScale.z_rightArm;
+      }
+
+      if (character == yoshi || character == luigi) {
+        upperArm_left.rotation.z = tweenStartScale.rightArm_rotation_z;
+        upperArm_right.rotation.z = tweenStartScale.rightArm_rotation_z;
+      }
+
       handRight.rotation.y = tweenStartScale.rightHand_rotation_y;
-      finger1_right.rotation.x = tweenStartScale.finger_x;
-      finger1_2_right.rotation.x = tweenStartScale.finger_x;
-      finger2_right.rotation.x = tweenStartScale.finger_x;
-      finger2_2_right.rotation.x = tweenStartScale.finger_x;
-      finger3_right.rotation.x = tweenStartScale.finger_x;
-      finger3_2_right.rotation.x = tweenStartScale.finger_x;
-      thumb2_right.rotation.x = tweenStartScale.finger_x;
-      thumb1_right.rotation.y = tweenStartScale.thumb1_y;
-
-      upperArm_left.rotation.z = tweenStartScale.rightArm_rotation_z;
       handLeft.rotation.y = tweenStartScale.rightHand_rotation_y;
-      finger1_left.rotation.x = tweenStartScale.finger_x;
-      finger1_2_left.rotation.x = tweenStartScale.finger_x;
-      finger2_left.rotation.x = tweenStartScale.finger_x;
-      finger2_2_left.rotation.x = tweenStartScale.finger_x;
-      finger3_left.rotation.x = tweenStartScale.finger_x;
-      finger3_2_left.rotation.x = tweenStartScale.finger_x;
-      thumb2_left.rotation.x = tweenStartScale.finger_x;
-      thumb1_left.rotation.y = tweenStartScale.thumb1_y;
-
-      //yoshiBox.__dirtyPosition = true;
-      //yoshiBox.__dirtyRotation = false;
     })
     .start();
 }
