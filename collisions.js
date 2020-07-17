@@ -203,7 +203,21 @@ export function onGoombaCollision(
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
 
-      console.log(other_object);
+      var id = this._physijs.id;
+      console.log(id);
+
+      //for (var i = 0; i < goombaContainerIdArray.lenght; i++) {
+      for (var i in goombaContainerIdArray) {
+        console.log(goombaContainerIdArray[i]);
+        if (goombaContainerIdArray[i] == id) {
+          console.log("goombaElemArray[i] = " + goombaElemArray[i]);
+          goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
+        }
+      }
+
+      /*for (var i in goombaElemArray) {
+        console.log(goombaElemArray[i]);
+      }*/
 
       //initializeGoombaArray();
       //se lo lascio qui funziona su tutti tranne che sul primo,
@@ -219,7 +233,7 @@ export function onGoombaCollision(
         group1[11].scale.set(0.07, 0.01, 0.07);
       }*/
 
-      if (this._physijs.id == 64) {
+      /*if (this._physijs.id == 64) {
         group1[11].scale.set(0.07, 0.01, 0.07);
       }
       if (this._physijs.id == 2) {
@@ -230,7 +244,7 @@ export function onGoombaCollision(
       }
       if (this._physijs.id == 4) {
         groupPipes[6].scale.set(0.07, 0.01, 0.07);
-      }
+      }*/
 
       /*if (this._physijs.id == 2) {
         groupPipes[4].scale.set(0.07, 0.01, 0.07);
@@ -239,7 +253,7 @@ export function onGoombaCollision(
         groupPipes[4].scale.set(0.07, 0.01, 0.07);
       } */
 
-      if (this._physijs.id == 33) {
+      /*if (this._physijs.id == 33) {
         group5[10].scale.set(0.07, 0.01, 0.07);
       }
       if (this._physijs.id == 34) {
@@ -262,7 +276,7 @@ export function onGoombaCollision(
       }
       if (this._physijs.id == 45) {
         group6[8].scale.set(0.07, 0.01, 0.07);
-      }
+      }*/
     }
   }
 }

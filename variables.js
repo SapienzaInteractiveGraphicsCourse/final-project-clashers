@@ -141,3 +141,6 @@ var tweenWalkGoal;
 var tweenWalkBack;
 
 var goombaArray = {};
+
+var goombaElemArray;
+var goombaContainerIdArray;

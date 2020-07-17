@@ -1184,6 +1184,7 @@ function init() {
     updateYoshiBoxPosition();
 
     initializeGoombaArray();
+
     /* console.log("isJumping = " + isJumping);
     console.log("collidedTop = " + collidedTop);
     console.log("isOnObjectTop = " + isOnObjectTop);*/

@@ -10,6 +10,9 @@ group6 = new Array();
 stairs = new Array();
 groupPipes = new Array();
 
+goombaElemArray = new Array();
+goombaContainerIdArray = new Array();
+
 export function createGroup1() {
   //var brickClone;
   //var questionBoxClone;
@@ -57,7 +60,7 @@ export function createGroup1() {
   goombaClone.position.set(0, -13.3, -562.5);
   scene.add(goombaClone);
   group1.push(goombaClone);
-  setGoombaGeometry(goombaClone);
+  setGoombaGeometry(group1[11]);
   tweenFunc.goombaAnimation(goombaClone);
 
   setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
@@ -884,6 +887,12 @@ function setGoombaGeometry(goombaElem) {
   );
   scene.add(goombaContainer);
   goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
+
+  //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
+  //goombaContainerIdArray[0] = goombaContainer._physijs;
+
+  goombaContainerIdArray.push(goombaContainer._physijs.id);
+  goombaElemArray.push(goombaElem);
 }
 
 function setGroupGeometry(groupWidth, y, z) {
