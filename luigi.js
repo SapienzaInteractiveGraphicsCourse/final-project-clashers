@@ -31,3 +31,82 @@ const luigi_dic = {
   Finger4_left: "L_finger4_1_033",
   Finger4_2_left: "L_finger4_2_034",
 };
+
+export function setLuigiGeometry() {
+  var luigiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
+  luigiBox = new Physijs.BoxMesh(luigiGeometry, geometryMaterial, 50); //mass 0
+  //yoshiBox.position.set(0, -9.3, -600);
+  luigiBox.position.set(
+    luigi.position.x,
+    luigi.position.y + 5.2,
+    luigi.position.z
+  );
+  luigiBox.setCcdMotionThreshold(1);
+  scene.add(luigiBox);
+  luigiBox.addEventListener("collision", collFunc.onYoshiCollision);
+
+  var luigiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+  luigiUpperBox = new Physijs.BoxMesh(
+    luigiUpperGeometry,
+    geometryMaterial1,
+    50
+  );
+  luigiUpperBox.position.set(
+    luigi.position.x,
+    luigi.position.y + 10,
+    luigi.position.z
+  );
+  luigiUpperBox.setCcdMotionThreshold(1);
+  scene.add(luigiUpperBox);
+  luigiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
+
+  var luigiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
+  luigiLowerBox = new Physijs.BoxMesh(
+    luigiLowerGeometry,
+    geometryMaterial2,
+    50
+  );
+  luigiLowerBox.position.set(
+    luigi.position.x,
+    luigi.position.y + 0.1,
+    luigi.position.z
+  );
+  luigiLowerBox.setCcdMotionThreshold(1);
+  scene.add(luigiLowerBox);
+  luigiLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
+}
+
+export function updateLuigiBoxPosition() {
+  luigiBox.position.set(
+    luigi.position.x,
+    luigi.position.y + 5.2,
+    luigi.position.z
+  );
+  luigiUpperBox.position.set(
+    luigi.position.x,
+    luigi.position.y + 10,
+    luigi.position.z
+  );
+  luigiLowerBox.position.set(
+    luigi.position.x,
+    luigi.position.y + 0.1,
+    luigi.position.z
+  );
+  var luigiBoxPos = luigiBox.position.clone();
+  luigiBox.position.copy(luigiBoxPos);
+  luigiBox.rotation.set(0, 0, 0);
+  luigiBox.__dirtyPosition = true;
+  luigiBox.__dirtyRotation = true;
+
+  var luigiUpperBoxPos = luigiUpperBox.position.clone();
+  luigiUpperBox.position.copy(luigiUpperBoxPos);
+  luigiUpperBox.rotation.set(0, 0, 0);
+  luigiUpperBox.__dirtyPosition = true;
+  luigiUpperBox.__dirtyRotation = true;
+
+  var luigiLowerBoxPos = luigiLowerBox.position.clone();
+  luigiLowerBox.position.copy(luigiLowerBoxPos);
+  luigiLowerBox.rotation.set(0, 0, 0);
+  luigiLowerBox.__dirtyPosition = true;
+  luigiLowerBox.__dirtyRotation = true;
+}
