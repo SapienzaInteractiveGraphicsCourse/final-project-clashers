@@ -1217,7 +1217,7 @@ function init() {
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
     }
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
-    //updateYoshiBoxPosition();
+    updateYoshiBoxPosition();
 
     initializeGoombaArray();
 
