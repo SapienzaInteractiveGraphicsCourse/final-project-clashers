@@ -496,6 +496,7 @@ export function jump(character) {
 }*/
 
 export function setIdlePosition(character) {
+  setAnimationParameters(character);
   tween_idle = new TWEEN.Tween(tweenStartScale)
     .to(tweenIdle, 500)
     .easing(TWEEN.Easing.Linear.None)
@@ -526,36 +527,37 @@ export function setIdlePosition(character) {
 }
 
 export function goombaAnimation(goombaElem) {
-  left_foot = goombaElem.getObjectByName("Left_Foot");
-  right_foot = goombaElem.getObjectByName("Right_Foor");
-  headGoomba = goombaElem.getObjectByName("Head");
+  var left_foot = goombaElem.getObjectByName("Left_Foot");
+  var right_foot = goombaElem.getObjectByName("Right_Foor");
+  var headGoomba = goombaElem.getObjectByName("Head");
 
-  tweenStartGoomba = {
+  var tweenStartGoomba = {
     foot_left: left_foot.rotation.y,
     foot_right: right_foot.rotation.y,
     head: headGoomba.rotation.x,
     z: goombaElem.position.z,
   };
-  tweenGoalGoomba = {
+
+  var tweenGoalGoomba = {
     foot_left: (30 * Math.PI) / 180,
     foot_right: (30 * Math.PI) / 180,
     head: (85 * Math.PI) / 180,
   };
-  tweenBackGoomba = {
+  var tweenBackGoomba = {
     foot_left: (-30 * Math.PI) / 180,
     foot_right: (-30 * Math.PI) / 180,
     head: (95 * Math.PI) / 180,
   };
 
-  tweenWalkGoal = {
+  var tweenWalkGoal = {
     z: goombaElem.position.z + 15,
   };
 
-  tweenWalkBack = {
+  var tweenWalkBack = {
     z: goombaElem.position.z - 15,
   };
 
-  tweenGoomba = new TWEEN.Tween(tweenStartGoomba)
+  var tweenGoomba = new TWEEN.Tween(tweenStartGoomba)
     .to(tweenGoalGoomba, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -566,7 +568,7 @@ export function goombaAnimation(goombaElem) {
     })
     .start();
 
-  tweenBackGoomba = new TWEEN.Tween(tweenStartGoomba)
+  var tweenBackGoomba = new TWEEN.Tween(tweenStartGoomba)
     .to(tweenBackGoomba, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -579,7 +581,7 @@ export function goombaAnimation(goombaElem) {
     .repeat(Infinity);
   tweenGoomba.chain(tweenBackGoomba);
 
-  tweenWalkGoomba = new TWEEN.Tween(tweenStartGoomba)
+  var tweenWalkGoomba = new TWEEN.Tween(tweenStartGoomba)
     .to(tweenWalkGoal, 5000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
@@ -587,7 +589,7 @@ export function goombaAnimation(goombaElem) {
     })
     .start();
 
-  tweenWalkBackGoomba = new TWEEN.Tween(tweenStartGoomba)
+  var tweenWalkBackGoomba = new TWEEN.Tween(tweenStartGoomba)
     .to(tweenWalkBack, 5000)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {

@@ -896,10 +896,10 @@ function setGoombaGeometry(goombaElem) {
   //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
   //goombaContainerIdArray[0] = goombaContainer._physijs;
 
-  goombaContainerIdArray.push(goombaContainer._physijs.id);
+  goombaContainerIdArray.push(goombaContainer);
   goombaElemArray.push(goombaElem);
   tweenFunc.goombaAnimation(goombaElem);
-  updateGoombaBoxPosition(goombaElem);
+  //updateGoombaBoxPosition(goombaElem);
 }
 
 function setGroupGeometry(groupWidth, y, z) {

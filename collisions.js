@@ -251,7 +251,7 @@ export function onGoombaCollision(
       //for (var i = 0; i < goombaContainerIdArray.lenght; i++) {
       for (var i in goombaContainerIdArray) {
         console.log(goombaContainerIdArray[i]);
-        if (goombaContainerIdArray[i] == id) {
+        if (goombaContainerIdArray[i]._physijs.id == id) {
           console.log("goombaElemArray[i] = " + goombaElemArray[i]);
           goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
         }

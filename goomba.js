@@ -1,12 +1,12 @@
-export function updateGoombaBoxPosition(goombaElem) {
-  goombaContainer.position.set(
+export function updateGoombaBoxPosition(goombaElem, i) {
+  goombaContainerIdArray[i].position.set(
     goombaElem.position.x,
     goombaElem.position.y + 1.8,
     goombaElem.position.z
   );
-  var goombaContainerPos = goombaContainer.position.clone();
-  goombaContainer.position.copy(goombaContainerPos);
-  goombaContainer.rotation.set(0, 0, 0);
-  goombaContainer.__dirtyPosition = true;
-  goombaContainer.__dirtyRotation = true;
+  var goombaContainerPos = goombaContainerIdArray[i].position.clone();
+  goombaContainerIdArray[i].position.copy(goombaContainerPos);
+  goombaContainerIdArray[i].rotation.set(0, 0, 0);
+  goombaContainerIdArray[i].__dirtyPosition = true;
+  goombaContainerIdArray[i].__dirtyRotation = true;
 }

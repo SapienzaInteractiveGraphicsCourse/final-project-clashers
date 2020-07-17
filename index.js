@@ -1036,7 +1036,11 @@ function init() {
     groupRun.update();
     groupJump.update();
     groupRotate.update();
-    updateGoombaBoxPosition(goombaClone);
+
+    for (var i in goombaElemArray) {
+      updateGoombaBoxPosition(goombaElemArray[i], i);
+    }
+
     if (character == "yoshi") {
       camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
       controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
