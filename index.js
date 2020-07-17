@@ -1183,6 +1183,7 @@ function init() {
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
     updateYoshiBoxPosition();
 
+    initializeGoombaArray();
     /* console.log("isJumping = " + isJumping);
     console.log("collidedTop = " + collidedTop);
     console.log("isOnObjectTop = " + isOnObjectTop);*/

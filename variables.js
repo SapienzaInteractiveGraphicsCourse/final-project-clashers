@@ -139,3 +139,5 @@ var tweenWalkGoomba;
 var tweenWalkBackGoomba;
 var tweenWalkGoal;
 var tweenWalkBack;
+
+var goombaArray = {};

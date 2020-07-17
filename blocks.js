@@ -773,6 +773,8 @@ export function createGroup6() {
 
   setQuestionBoxGeometry(questionBoxClone);
 
+  //initializeGoombaArray();
+
   //setGroupGeometry(6.1 * 4, 9.5, 145.3);
 }
 
