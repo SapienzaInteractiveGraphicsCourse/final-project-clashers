@@ -898,6 +898,7 @@ function setGoombaGeometry(goombaElem) {
 
   goombaContainerIdArray.push(goombaContainer._physijs.id);
   goombaElemArray.push(goombaElem);
+  tweenFunc.goombaAnimation(goombaElem);
   updateGoombaBoxPosition(goombaElem);
 }
 

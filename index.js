@@ -224,145 +224,8 @@ function init() {
           keyboard(yoshi);
           //}
 
-          /*document.addEventListener("keydown", (event) => {
-            keysPressed[event.keyCode] = true;
-            switch (event.which) {
-              case 68:
-                //collidedRight = false;
-                isWalking = true;
-                if (!isRotatedRight) {
-                  //TWEEN.removeAll();
-                  groupRun.removeAll(); //altrimenti rimane fermo ma le gamebe si muovono
-                  //tween.stop();
-                  groupRotate.removeAll();
-                  tweenFunc.rotateTorso("right");
-                  isRotatedRight = true;
-                }
-                if (!dPressed && isWalking && !collision) {
-                  //collision = false;
-                  tweenFunc.performAnimation("right");
-                }
-                dPressed = true;
-                break;
-
-              case 65:
-                //collision = false;
-                //collidedLeft = false;
-                isWalking = true;
-                if (isRotatedRight) {
-                  //TWEEN.removeAll();
-                  groupRun.removeAll();
-                  //tween.stop();
-                  groupRotate.removeAll();
-                  tweenFunc.rotateTorso("left");
-                  isRotatedRight = false;
-                }
-                if (!aPressed && isWalking) {
-                  tweenFunc.performAnimation("left");
-                }
-                aPressed = true;
-                break;
-
-              case 32:
-                //SPACE
-                if (isRotatedRight) {
-                  isJumpingRight = true;
-                } else {
-                  isJumpingLeft = true;
-                }
-
-                if (!spacePressed && !isJumping) {
-                  //groupJump.removeAll();
-                  tweenFunc.setIdlePosition();
-                  tweenFunc.jump();
-                  isJumping = true;
-                }
-                spacePressed = true;
-                break;
-            }
-          });
-
-          document.addEventListener("keyup", (event) => {
-            collision = false;
-
-            delete keysPressed[event.keyCode];
-            switch (event.which) {
-              case 68:
-                //D
-                //collision = false;
-                groupRun.removeAll();
-                if (keysPressed[65]) {
-                  //isRotatedRight = false;
-                  dPressed = false;
-                  isWalking = true;
-                  if (isRotatedRight) {
-                    //TWEEN.removeAll();
-                    groupRun.removeAll();
-                    //tween.stop();
-                    groupRotate.removeAll();
-                    rotateTorso("left");
-                    isRotatedRight = false;
-                  }
-                  //if (!aPressed && isWalking) {
-                  tweenFunc.performAnimation("left");
-                  //}
-                  aPressed = true;
-                } else {
-                  dPressed = false;
-                  //aPressed = false;
-                  isWalking = false;
-                  //groupRun.removeAll();
-                  tween.stop();
-                  tweenBack.stop();
-                  //setIdlePosition();
-                }
-                //aPressed = false;
-                tweenFunc.setIdlePosition();
-                break;
-
-              case 65:
-                //A
-                groupRun.removeAll();
-
-                if (keysPressed[68]) {
-                  aPressed = false;
-                  //faccio ripartire la camminata verso destra
-                  isWalking = true;
-                  if (!isRotatedRight) {
-                    //TWEEN.removeAll();
-                    groupRun.removeAll();
-                    //tween.stop();
-                    groupRotate.removeAll();
-                    tweenFunc.rotateTorso("right");
-                    isRotatedRight = true;
-                  }
-                  //if (!dPressed && isWalking) { --> se commento questa riga risolvo il problema
-                  tweenFunc.performAnimation("right");
-                  //}
-                  dPressed = true;
-                  //isRotatedRight = true;
-                } else {
-                  aPressed = false;
-                  //dPressed = false;
-                  isWalking = false;
-                  //groupRun.removeAll();
-                  tween.stop();
-                  tweenBack.stop();
-                  //setIdlePosition();
-                }
-                //dPressed = false;
-                tweenFunc.setIdlePosition();
-                break;
-
-              case 32:
-                spacePressed = false;
-                //isJumping = false;
-                tweenFunc.setIdlePosition();
-                break;
-            }
-          });*/
           setYoshiGeometry();
-          tweenFunc.setAnimationParameters();
+          //tweenFunc.setAnimationParameters(yoshi);
           requestAnimationFrame(animate);
         });
       }
@@ -849,118 +712,6 @@ function init() {
     marioLowerBox.__dirtyRotation = true;
   }
 
-  /* function setQuestionBoxGeometry(questionBoxElem) {
-    var questionBoxGeometry = new THREE.BoxGeometry(6.3, 6.3, 6.3);
-    questionBoxContainer = new Physijs.BoxMesh(
-      questionBoxGeometry,
-      geometryMaterial,
-      0
-    );
-    questionBoxContainer.position.set(
-      questionBoxElem.position.x,
-      questionBoxElem.position.y + 3.1,
-      questionBoxElem.position.z
-    );
-    scene.add(questionBoxContainer);
-  } */
-
-  /*
-  //MARIO
-
-  mario = new THREE.Scene();
-  {
-    const url_mario = "models/mario/scene.gltf";
-    gltfLoader.load(url_mario, (gltf) => {
-      mario = gltf.scene;
-      mario.name = "mario";
-      mario.position.set(0, -14.1, -600);
-      mario.scale.set(7, 7, 7);
-
-      mario.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        //if (child.material) child.material.metalness = 0;
-      });
-      mario.castShadow = true;
-      mario.receiveShadow = true;
-
-      //console.log(dumpObject(mario).join("\n"));
-
-      head = mario.getObjectByName(mario_dic.Head);
-      //torso = mario.getObjectByName(mario_dic.Torso);
-      upperArm_right = mario.getObjectByName(mario_dic.UpperArm_right);
-      upperArm_left = mario.getObjectByName(mario_dic.UpperArm_left);
-      upperLeg_right = mario.getObjectByName(mario_dic.UpperLeg_right);
-      upperLeg_left = mario.getObjectByName(mario_dic.UpperLeg_left);
-      handRight = mario.getObjectByName(mario_dic.Hand_right);
-
-      //upperArm_right.rotation.z = (45 * Math.PI) / 180;
-      //upperArm_left.rotation.z = (45 * Math.PI) / 180;
-      upperArm_right.rotation.x = (45 * Math.PI) / 180;
-      upperArm_left.rotation.x = (45 * Math.PI) / 180;
-      upperLeg_right.rotation.x = (0 * Math.PI) / 180;
-      upperLeg_left.rotation.x = (0 * Math.PI) / 180;
-
-      if (sessionStorage.getItem("marioPressed") == "true") {
-        scene.add(mario);
-      }
-    });
-  }
-
-  //LUIGI
-
-  luigi = new THREE.Scene();
-  {
-    const url_luigi = "models/luigi/scene.gltf";
-    gltfLoader.load(url_luigi, (gltf) => {
-      luigi = gltf.scene;
-      luigi.name = "luigi";
-      luigi.position.set(0, -14.1, -640);
-      luigi.scale.set(0.9, 0.9, 0.9);
-
-      luigi.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-        //if (child.material) child.material.metalness = 0;
-      });
-      luigi.castShadow = true;
-      luigi.receiveShadow = true;
-
-      //console.log(dumpObject(luigi).join("\n"));
-
-      head = luigi.getObjectByName(luigi_dic.Head);
-      torso = luigi.getObjectByName(luigi_dic.Torso);
-      upperArm_right = luigi.getObjectByName(luigi_dic.UpperArm_right);
-      upperArm_left = luigi.getObjectByName(luigi_dic.UpperArm_left);
-      upperLeg_right = luigi.getObjectByName(luigi_dic.UpperLeg_right);
-      upperLeg_left = luigi.getObjectByName(luigi_dic.UpperLeg_left);
-      handRight = luigi.getObjectByName(luigi_dic.Hand_right);
-      thumb1_right = luigi.getObjectByName(luigi_dic.Thumb1_right);
-      thumb2_right = luigi.getObjectByName(luigi_dic.Thumb2_right);
-      finger1_right = luigi.getObjectByName(luigi_dic.Finger1_right);
-      finger1_2_right = luigi.getObjectByName(luigi_dic.Finger1_2_right);
-      finger2_right = luigi.getObjectByName(luigi_dic.Finger2_right);
-      finger2_2_right = luigi.getObjectByName(luigi_dic.Finger2_2_right);
-      finger3_right = luigi.getObjectByName(luigi_dic.Finger3_right);
-      finger3_2_right = luigi.getObjectByName(luigi_dic.Finger3_2_right);
-
-      upperArm_right.rotation.z = (45 * Math.PI) / 180; //-60
-      upperArm_left.rotation.z = (45 * Math.PI) / 180;
-      upperArm_right.rotation.x = (0 * Math.PI) / 180; //0
-      upperArm_left.rotation.x = (0 * Math.PI) / 180;
-      upperLeg_right.rotation.x = (0 * Math.PI) / 180;
-      upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
-
-      if (sessionStorage.getItem("luigiPressed") == "true") {
-        scene.add(luigi);
-      }
-    });
-  }
-*/
   function loadModels() {
     brick = new THREE.Scene();
     //brick = new Physijs.Scene();
@@ -1399,6 +1150,29 @@ function createBgSky() {
   bg.rotation.y = (-90 * Math.PI) / 180;
   scene.add(bg);
 }
+
+var coinScore = document.createElement("img");
+coinScore.style.position = "absolute";
+coinScore.src = "img/coinScore.gif";
+coinScore.style.height = 40 + "px";
+coinScore.style.top = 20 + "px";
+coinScore.style.right = 90 + "px";
+document.body.appendChild(coinScore);
+
+var score = 10;
+
+var text = document.createElement("h1");
+text.style.fontFamily = "superMarioFont";
+text.style.position = "absolute";
+text.style.color = "yellow";
+text.style.webkitTextStroke = "1px black";
+text.style.height = 40 + "px";
+text.style.top = 30 + "px";
+text.style.right = 40 + "px";
+document.body.appendChild(text);
+
+//text.innerHTML = "Score: " + score;
+text.innerHTML = score;
 
 init();
 //window.onload = init;
