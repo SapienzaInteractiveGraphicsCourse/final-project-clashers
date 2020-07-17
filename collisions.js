@@ -1,12 +1,43 @@
 import { fall } from "./tween_functions.js";
 import { setIdlePosition } from "./tween_functions.js";
 
+export function setCharacterStuff() {
+  if (character == "yoshi") {
+    boxId = yoshiBox._physijs.id;
+    lowerBoxId = yoshiLowerBox._physijs.id;
+    upperBoxId = yoshiUpperBox._physijs.id;
+    touchesBox = yoshiBox._physijs.touches;
+    touchesUpper = yoshiUpperBox._physijs.touches;
+    touchesLower = yoshiLowerBox._physijs.touches;
+    model = yoshi;
+  }
+  if (character == "luigi") {
+    boxId = luigiBox._physijs.id;
+    lowerBoxId = luigiLowerBox._physijs.id;
+    upperBoxId = luigiUpperBox._physijs.id;
+    touchesBox = luigiBox._physijs.touches;
+    touchesUpper = luigiUpperBox._physijs.touches;
+    touchesLower = luigiLowerBox._physijs.touches;
+    model = luigi;
+  }
+  if (character == "mario") {
+    boxId = marioBox._physijs.id;
+    lowerBoxId = marioLowerBox._physijs.id;
+    upperBoxId = marioUpperBox._physijs.id;
+    touchesBox = marioBox._physijs.touches;
+    touchesUpper = marioUpperBox._physijs.touches;
+    touchesLower = marioLowerBox._physijs.touches;
+    model = mario;
+  }
+}
+
 export function onYoshiCollision(
   other_object,
   relative_velocity,
   relative_rotation,
   contact_normal
 ) {
+  setCharacterStuff();
   /*if (other_object._physijs.id == brickContainer._physijs.id) {
     collidedBottom = false;
     collidedLeft = false;
@@ -22,19 +53,19 @@ export function onYoshiCollision(
     //isOnObjectTop = true;
     var checkTouch = function () {
       // see if we are still touching this object
-      var touches = yoshiBox._physijs.touches;
+      //var touches = yoshiBox._physijs.touches;
 
-      for (var i = 0; i < touches.length; i++) {
-        if (touches[i] == other_object._physijs.id) return;
+      for (var i = 0; i < touchesBox.length; i++) {
+        if (touchesBox[i] == other_object._physijs.id) return;
       }
 
-      console.log(
+      /*console.log(
         "Stop colliding with the box of id: " + other_object._physijs.id
       );
       console.log("contact_normal.z = " + contact_normal.z);
       console.log("contact_normal.x = " + contact_normal.x);
       console.log("contact_normal.y = " + contact_normal.y);
-      console.log("yoshiBox.id = " + yoshiBox._physijs.id);
+      console.log("yoshiBox.id = " + yoshiBox._physijs.id);*/
 
       //Smette di collidere lateralmente con un box, quindi imposta le relative variabili a false
       collidedLeft = false; //quindi si possono togliere da onkeydown
@@ -56,18 +87,19 @@ export function onYoshiLowerCollision(
   relative_rotation,
   contact_normal
 ) {
+  setCharacterStuff();
   if (contact_normal.y == -1) {
     //isOnObjectTop = true;
     var checkTouch = function () {
       // see if we are still touching this object
-      var touches = yoshiLowerBox._physijs.touches;
+      //var touches = yoshiLowerBox._physijs.touches;
 
-      for (var i = 0; i < touches.length; i++) {
-        if (touches[i] == other_object._physijs.id) return;
+      for (var i = 0; i < touchesLower.length; i++) {
+        if (touchesLower[i] == other_object._physijs.id) return;
       }
 
       //if (!isJumping) {
-      fall();
+      fall(model);
       //}
       isOnObjectTop = false;
       collidedTop = false; //?
@@ -85,15 +117,16 @@ export function onYoshiUpperCollision(
   relative_rotation,
   contact_normal
 ) {
+  setCharacterStuff();
   if (contact_normal.y == 1) {
     console.log("contact_normal.y = " + contact_normal.y);
     //isOnObjectTop = true;
     var checkTouch = function () {
       // see if we are still touching this object
-      var touches = yoshiUpperBox._physijs.touches;
+      //var touches = yoshiUpperBox._physijs.touches;
 
-      for (var i = 0; i < touches.length; i++) {
-        if (touches[i] == other_object._physijs.id) return;
+      for (var i = 0; i < touchesUpper.length; i++) {
+        if (touchesUpper[i] == other_object._physijs.id) return;
       }
 
       //fall();
@@ -123,7 +156,8 @@ export function onPipeCollision(
   relative_rotation,
   contact_normal
 ) {
-  if (other_object._physijs.id == yoshiBox._physijs.id) {
+  setCharacterStuff();
+  if (other_object._physijs.id == boxId) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("collisione");
 
@@ -150,7 +184,7 @@ export function onPipeCollision(
     }
   }
 
-  if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
+  if (other_object._physijs.id == lowerBoxId) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
       tweenJump.stop();
@@ -171,7 +205,8 @@ export function onBottomCollision(
   relative_rotation,
   contact_normal
 ) {
-  if (other_object._physijs.id == yoshiUpperBox._physijs.id) {
+  setCharacterStuff();
+  if (other_object._physijs.id == upperBoxId) {
     console.log("collision bottom");
     collidedBottom = true;
     //groupJump.removeAll();
@@ -191,7 +226,8 @@ export function onGoombaCollision(
   relative_rotation,
   contact_normal
 ) {
-  if (other_object._physijs.id == yoshiBox._physijs.id) {
+  setCharacterStuff();
+  if (other_object._physijs.id == boxId) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("collisione");
 
@@ -199,7 +235,7 @@ export function onGoombaCollision(
     }
   }
 
-  if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
+  if (other_object._physijs.id == lowerBoxId) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
 
@@ -214,69 +250,6 @@ export function onGoombaCollision(
           goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
         }
       }
-
-      /*for (var i in goombaElemArray) {
-        console.log(goombaElemArray[i]);
-      }*/
-
-      //initializeGoombaArray();
-      //se lo lascio qui funziona su tutti tranne che sul primo,
-      //come se nel momento in cui la chiamo group1[11] non è stato ancora assegnato
-      //se invece metto la chiamata dentro animate (come ho lasciato adesso, ma probabilmente non ha senso) funziona perché solo la prima volta group1[11] è undefined,
-      //le volte successive è stato assegnato e funziona --> scommentare le stampe dentro initializeGoombaArray per vederlo
-
-      //group1[11].scale.set(0.07, 0.01, 0.07);
-      /*if (!(this._physijs.id == 64)) {*/
-      // goombaArray[this._physijs.id].scale.set(0.07, 0.01, 0.07);
-      //console.log(this._physijs.id);
-      /*} else {
-        group1[11].scale.set(0.07, 0.01, 0.07);
-      }*/
-
-      /*if (this._physijs.id == 64) {
-        group1[11].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 2) {
-        groupPipes[4].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 3) {
-        groupPipes[5].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 4) {
-        groupPipes[6].scale.set(0.07, 0.01, 0.07);
-      }*/
-
-      /*if (this._physijs.id == 2) {
-        groupPipes[4].scale.set(0.07, 0.01, 0.07);
-      } 
-      if (this._physijs.id == 2) {
-        groupPipes[4].scale.set(0.07, 0.01, 0.07);
-      } */
-
-      /*if (this._physijs.id == 33) {
-        group5[10].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 34) {
-        group5[11].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 35) {
-        group5[12].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 36) {
-        group5[13].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 37) {
-        group5[14].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 38) {
-        group5[15].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 44) {
-        group6[7].scale.set(0.07, 0.01, 0.07);
-      }
-      if (this._physijs.id == 45) {
-        group6[8].scale.set(0.07, 0.01, 0.07);
-      }*/
     }
   }
 }

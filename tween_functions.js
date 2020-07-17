@@ -1,10 +1,10 @@
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 //mettere character ++++++++++++++++++++++++++++++++++++++++++++++
 
-export function fall() {
+export function fall(model) {
   console.log("falling");
   tweenStartFall = {
-    y: yoshi.position.y,
+    y: model.position.y,
   };
   tweenGoalFall = {
     y: -14.3,
@@ -15,7 +15,7 @@ export function fall() {
     .onUpdate(function () {
       //if (!collidedTop) {
       //?
-      yoshi.position.y = tweenStartFall.y;
+      model.position.y = tweenStartFall.y;
       //}
     })
     .onComplete(function () {

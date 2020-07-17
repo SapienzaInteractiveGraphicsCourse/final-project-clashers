@@ -144,7 +144,17 @@ var tweenWalkBackGoomba;
 var tweenWalkGoal;
 var tweenWalkBack;
 
-var goombaArray = {};
-
 var goombaElemArray;
 var goombaContainerIdArray;
+
+var marioBox;
+var marioUpperBox;
+var marioLowerBox;
+
+var boxId;
+var lowerBoxId;
+var upperBoxId;
+var touchesBox;
+var touchesUpper;
+var touchesLower;
+var model;

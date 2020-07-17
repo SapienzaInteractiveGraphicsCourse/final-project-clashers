@@ -1287,20 +1287,19 @@ function init() {
     if (character == "yoshi") {
       camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
       controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
+      updateYoshiBoxPosition();
     }
     if (character == "mario") {
       camera.lookAt(mario.position.x, camera.position.y, mario.position.z);
       controls.target.set(mario.position.x, mario.position.y, mario.position.z);
-      updateYoshiBoxPosition();
+      updateMarioBoxPosition();
     }
     if (character == "luigi") {
       camera.lookAt(luigi.position.x, camera.position.y, luigi.position.z);
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
-      updateMarioBoxPosition();
+      //updateLuigiBoxPosition();
     }
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
-
-    initializeGoombaArray();
 
     /* console.log("isJumping = " + isJumping);
     console.log("collidedTop = " + collidedTop);
