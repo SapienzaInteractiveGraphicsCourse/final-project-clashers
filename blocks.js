@@ -128,8 +128,8 @@ export function createGroup2() {
   group2.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
 
-  //setGroupGeometry(6.5, 9.5, -360.5);
-  //setGroupGeometry(6.3 * 3, 9.5, -312.5);
+  setGroupGeometry(6.5, 9.5, -360.5);
+  setGroupGeometry(6.3 * 3, 9.5, -312.5);
 }
 
 export function createGroup3() {
@@ -149,7 +149,7 @@ export function createGroup3() {
     setGoombaGeometry(goombaClone);
   }
 
-  //setGroupGeometry(5.6 * 8, 28.5, -279.5);
+  setGroupGeometry(5.6 * 8, 28.5, -279.5);
 }
 
 export function createGroup4() {
@@ -208,10 +208,10 @@ export function createGroup4() {
   group4.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
 
-  //setGroupGeometry(6.1 * 4, 28.5, -230);
-  //setGroupGeometry(6.5, 28.5, -182);
-  //setGroupGeometry(5.6 * 3, 28.5, -135.8);
-  //setGroupGeometry(6.3 * 4, 28.5, -92);
+  setGroupGeometry(6.1 * 4, 28.5, -230);
+  setGroupGeometry(6.5, 28.5, -182);
+  setGroupGeometry(5.6 * 3, 28.5, -135.8);
+  setGroupGeometry(6.3 * 4, 28.5, -92);
 }
 
 export function createGroup5() {
@@ -273,12 +273,12 @@ export function createGroup5() {
   for (var i = 10; i < 16; i++) {
     setGoombaGeometry(group5[i]);
   }
-  /*
+
   setGroupGeometry(6, 9.5, -220);
   setGroupGeometry(6.5, 9.5, -197);
   setGroupGeometry(6.5, 9.5, -182);
   setGroupGeometry(6.5, 9.5, -167);
-  setGroupGeometry(5.7 * 2, 9.5, -92); */
+  setGroupGeometry(5.7 * 2, 9.5, -92);
 }
 
 export function createGroupStairs(start, width) {
@@ -775,11 +775,11 @@ export function createGroup6() {
 
   //initializeGoombaArray();
 
-  //setGroupGeometry(6.1 * 4, 9.5, 145.3);
+  setGroupGeometry(6.1 * 4, 9.5, 145.3);
 }
 
 function setQuestionBoxGeometry(questionBoxElem) {
-  var questionBoxGeometry = new THREE.BoxGeometry(5, 0.5, 3);
+  var questionBoxGeometry = new THREE.BoxGeometry(5, 0.5, 2);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
     geometryMaterial1,
@@ -860,7 +860,7 @@ function setCoinGeometry(coinElem) {
     coinElem.position.y,
     coinElem.position.z
   );
-  scene.add(coinContainer);
+  //scene.add(coinContainer);
 }
 
 function setPowerUpGeometry(powerUpElem) {
@@ -871,7 +871,7 @@ function setPowerUpGeometry(powerUpElem) {
     powerUpElem.position.y,
     powerUpElem.position.z
   );
-  scene.add(powerUpContainer);
+  //scene.add(powerUpContainer);
 }
 
 function setGoombaGeometry(goombaElem) {

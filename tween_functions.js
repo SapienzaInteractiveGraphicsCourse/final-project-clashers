@@ -12,15 +12,17 @@ export function fall() {
     .to(tweenGoalFall, 400)
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
-      if (!collidedTop) {
-        //?
-        yoshi.position.y = tweenStartFall.y;
-      }
+      //if (!collidedTop) {
+      //?
+      yoshi.position.y = tweenStartFall.y;
+      //}
     })
     .onComplete(function () {
       collidedTop = false; //?
       collidedLeft = false;
       collidedRight = false;
+
+      //isOnObjectTop = true;
       //setIdlePosition();
     })
     .start();
@@ -388,12 +390,17 @@ export function jump(character) {
       //yoshiBox.__dirtyRotation = false;
       //upperArm_right.rotation.x = (0 * Math.PI) / 180;
     })
+    .onStop(function () {
+      isJumpingRight = false;
+      isJumpingLeft = false;
+      isJumping = false;
+      //setIdlePosition();
+      isOnObjectTop = true;
+    })
     .onComplete(function () {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
-      collidedRight = false;
-      collidedLeft = false;
       //setIdlePosition();
       isOnObjectTop = true;
     });

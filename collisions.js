@@ -14,10 +14,8 @@ export function onYoshiCollision(
     tweenFall.stop();
   }*/
   //console.log("onYoshi Collision: contact_normal.y = " + contact_normal.y);
-
   //contact_normal.z == 1 se collide da sinistra --> imposto collidedLeft a false
   //contact_normal.z == 1 se collide da destra --> imposto collidedRight a false
-
   //if ((contact_normal.z == 1 || contact_normal.z == -1) && contact_normal.y == 0) {
   if (contact_normal.y == 0) {
     //if (contact_normal.z == 1) {
@@ -68,8 +66,9 @@ export function onYoshiLowerCollision(
         if (touches[i] == other_object._physijs.id) return;
       }
 
+      //if (!isJumping) {
       fall();
-
+      //}
       isOnObjectTop = false;
       collidedTop = false; //?
       //collidedBottom = false;
@@ -129,7 +128,7 @@ export function onPipeCollision(
       console.log("collisione");
 
       //previous code
-      /* if (dir == "right") {
+      /*if (dir == "right") {
         collidedLeft = true;
       }
       if (dir == "left") {
@@ -154,6 +153,12 @@ export function onPipeCollision(
   if (other_object._physijs.id == yoshiLowerBox._physijs.id) {
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
+      tweenJump.stop();
+      //tweenJumpBack.stop();
+      //isJumping = false;
+      //groupJump.removeAll();
+      //isJumping = false;
+      console.log("is jumping = " + isJumping);
       collidedTop = true;
       //isOnObjectTop = true;
     }
@@ -208,13 +213,12 @@ export function onGoombaCollision(
 
       //group1[11].scale.set(0.07, 0.01, 0.07);
       /*if (!(this._physijs.id == 64)) {*/
-      goombaArray[this._physijs.id].scale.set(0.07, 0.01, 0.07);
-      console.log(this._physijs.id);
+      // goombaArray[this._physijs.id].scale.set(0.07, 0.01, 0.07);
+      //console.log(this._physijs.id);
       /*} else {
         group1[11].scale.set(0.07, 0.01, 0.07);
       }*/
 
-      /*
       if (this._physijs.id == 64) {
         group1[11].scale.set(0.07, 0.01, 0.07);
       }
@@ -226,7 +230,7 @@ export function onGoombaCollision(
       }
       if (this._physijs.id == 4) {
         groupPipes[6].scale.set(0.07, 0.01, 0.07);
-      }*/
+      }
 
       /*if (this._physijs.id == 2) {
         groupPipes[4].scale.set(0.07, 0.01, 0.07);
@@ -235,7 +239,6 @@ export function onGoombaCollision(
         groupPipes[4].scale.set(0.07, 0.01, 0.07);
       } */
 
-      /*
       if (this._physijs.id == 33) {
         group5[10].scale.set(0.07, 0.01, 0.07);
       }
@@ -259,7 +262,7 @@ export function onGoombaCollision(
       }
       if (this._physijs.id == 45) {
         group6[8].scale.set(0.07, 0.01, 0.07);
-      }*/
+      }
     }
   }
 }
