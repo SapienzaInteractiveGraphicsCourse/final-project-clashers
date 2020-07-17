@@ -1,5 +1,4 @@
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
-//mettere character ++++++++++++++++++++++++++++++++++++++++++++++
 
 export function fall(model) {
   console.log("falling");

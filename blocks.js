@@ -1,5 +1,6 @@
 import * as collFunc from "./collisions.js";
 import * as tweenFunc from "./tween_functions.js";
+import { updateGoombaBoxPosition } from "./goomba.js";
 
 group1 = new Array();
 group2 = new Array();
@@ -93,6 +94,7 @@ export function createGroupPipes() {
 
   for (var i = 4; i < 7; i++) {
     setGoombaGeometry(groupPipes[i]);
+    //tweenFunc.goombaAnimation(groupPipes[i]);
   }
 
   setPipeGeometry(groupPipes[0], 9, 7.6);
@@ -150,6 +152,7 @@ export function createGroup3() {
     scene.add(goombaClone);
     group3.push(goombaClone);
     setGoombaGeometry(goombaClone);
+    //tweenFunc.goombaAnimation(goombaClone);
   }
 
   setGroupGeometry(5.6 * 8, 28.5, -279.5);
@@ -275,6 +278,7 @@ export function createGroup5() {
 
   for (var i = 10; i < 16; i++) {
     setGoombaGeometry(group5[i]);
+    //tweenFunc.goombaAnimation(group5[i]);
   }
 
   setGroupGeometry(6, 9.5, -220);
@@ -768,6 +772,7 @@ export function createGroup6() {
     scene.add(goombaClone);
     group6.push(goombaClone);
     setGoombaGeometry(goombaClone);
+    //tweenFunc.goombaAnimation(goombaClone);
   }
 
   for (var i = 2; i < 5; i++) {
@@ -893,6 +898,7 @@ function setGoombaGeometry(goombaElem) {
 
   goombaContainerIdArray.push(goombaContainer._physijs.id);
   goombaElemArray.push(goombaElem);
+  updateGoombaBoxPosition(goombaElem);
 }
 
 function setGroupGeometry(groupWidth, y, z) {

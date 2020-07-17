@@ -8,6 +8,7 @@ import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 import * as collFunc from "./collisions.js";
 import * as blockFunc from "./blocks.js";
 import * as tweenFunc from "./tween_functions.js";
+import { updateGoombaBoxPosition } from "./goomba.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -1284,6 +1285,7 @@ function init() {
     groupRun.update();
     groupJump.update();
     groupRotate.update();
+    updateGoombaBoxPosition(goombaClone);
     if (character == "yoshi") {
       camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
       controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);

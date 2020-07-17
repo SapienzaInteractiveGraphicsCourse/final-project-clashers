@@ -88,6 +88,11 @@ export function onYoshiLowerCollision(
   contact_normal
 ) {
   setCharacterStuff();
+
+  /*if (other_object._physijs.id == pipeContainer._physijs.id) {
+    tweenJumpBack.start();
+  }*/
+
   if (contact_normal.y == -1) {
     //isOnObjectTop = true;
     var checkTouch = function () {
@@ -98,9 +103,9 @@ export function onYoshiLowerCollision(
         if (touchesLower[i] == other_object._physijs.id) return;
       }
 
-      //if (!isJumping) {
-      fall(model);
-      //}
+      if (!isJumping) {
+        fall(model);
+      }
       isOnObjectTop = false;
       collidedTop = false; //?
       //collidedBottom = false;
@@ -188,6 +193,7 @@ export function onPipeCollision(
     if (other_object instanceof Physijs.Mesh) {
       console.log("pipeCollision Top");
       tweenJump.stop();
+      //tweenFall.stop();
       //tweenJumpBack.stop();
       //isJumping = false;
       //groupJump.removeAll();
