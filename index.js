@@ -424,6 +424,7 @@ function init() {
           scene.add(mario);
           keyboard(mario);
           //tweenFunc.setAnimationParameters();
+          setMarioGeometry();
           requestAnimationFrame(animate);
         });
       }
@@ -766,6 +767,85 @@ function init() {
     yoshiLowerBox.rotation.set(0, 0, 0);
     yoshiLowerBox.__dirtyPosition = true;
     yoshiLowerBox.__dirtyRotation = true;
+  }
+
+  function setMarioGeometry() {
+    var marioGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
+    marioBox = new Physijs.BoxMesh(marioGeometry, geometryMaterial, 50); //mass 0
+    //yoshiBox.position.set(0, -9.3, -600);
+    marioBox.position.set(
+      mario.position.x,
+      mario.position.y + 5.2,
+      mario.position.z
+    );
+    marioBox.setCcdMotionThreshold(1);
+    scene.add(marioBox);
+    marioBox.addEventListener("collision", collFunc.onYoshiCollision);
+
+    var marioUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+    marioUpperBox = new Physijs.BoxMesh(
+      marioUpperGeometry,
+      geometryMaterial1,
+      50
+    );
+    marioUpperBox.position.set(
+      mario.position.x,
+      mario.position.y + 10,
+      mario.position.z
+    );
+    marioUpperBox.setCcdMotionThreshold(1);
+    scene.add(marioUpperBox);
+    marioUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
+
+    var marioLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
+    marioLowerBox = new Physijs.BoxMesh(
+      marioLowerGeometry,
+      geometryMaterial2,
+      50
+    );
+    marioLowerBox.position.set(
+      mario.position.x,
+      mario.position.y + 0.1,
+      mario.position.z
+    );
+    marioLowerBox.setCcdMotionThreshold(1);
+    scene.add(marioLowerBox);
+    marioLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
+  }
+
+  function updateMarioBoxPosition() {
+    marioBox.position.set(
+      mario.position.x,
+      mario.position.y + 5.2,
+      mario.position.z
+    );
+    marioUpperBox.position.set(
+      mario.position.x,
+      mario.position.y + 10,
+      mario.position.z
+    );
+    marioLowerBox.position.set(
+      mario.position.x,
+      mario.position.y + 0.1,
+      mario.position.z
+    );
+    var marioBoxPos = marioBox.position.clone();
+    marioBox.position.copy(marioBoxPos);
+    marioBox.rotation.set(0, 0, 0);
+    marioBox.__dirtyPosition = true;
+    marioBox.__dirtyRotation = true;
+
+    var marioUpperBoxPos = marioUpperBox.position.clone();
+    marioUpperBox.position.copy(marioUpperBoxPos);
+    marioUpperBox.rotation.set(0, 0, 0);
+    marioUpperBox.__dirtyPosition = true;
+    marioUpperBox.__dirtyRotation = true;
+
+    var marioLowerBoxPos = marioLowerBox.position.clone();
+    marioLowerBox.position.copy(marioLowerBoxPos);
+    marioLowerBox.rotation.set(0, 0, 0);
+    marioLowerBox.__dirtyPosition = true;
+    marioLowerBox.__dirtyRotation = true;
   }
 
   /* function setQuestionBoxGeometry(questionBoxElem) {
@@ -1211,13 +1291,14 @@ function init() {
     if (character == "mario") {
       camera.lookAt(mario.position.x, camera.position.y, mario.position.z);
       controls.target.set(mario.position.x, mario.position.y, mario.position.z);
+      updateYoshiBoxPosition();
     }
     if (character == "luigi") {
       camera.lookAt(luigi.position.x, camera.position.y, luigi.position.z);
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
+      updateMarioBoxPosition();
     }
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
-    updateYoshiBoxPosition();
 
     initializeGoombaArray();
 
