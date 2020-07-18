@@ -138,6 +138,10 @@ var marioBox;
 var marioUpperBox;
 var marioLowerBox;
 
+var luigiBox;
+var luigiUpperBox;
+var luigiLowerBox;
+
 var boxId;
 var lowerBoxId;
 var upperBoxId;

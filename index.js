@@ -9,6 +9,7 @@ import * as collFunc from "./collisions.js";
 import * as blockFunc from "./blocks.js";
 import * as tweenFunc from "./tween_functions.js";
 import { updateGoombaBoxPosition } from "./goomba.js";
+import * as luigiFunc from "./luigi.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -316,45 +317,93 @@ function init() {
 
           //console.log(dumpObject(luigi).join("\n"));
 
-          head = luigi.getObjectByName(luigi_dic.Head);
-          torso = luigi.getObjectByName(luigi_dic.Torso);
-          upperArm_right = luigi.getObjectByName(luigi_dic.UpperArm_right);
-          upperArm_left = luigi.getObjectByName(luigi_dic.UpperArm_left);
-          spine = luigi.getObjectByName(luigi_dic.Spine);
+          head = luigi.getObjectByName(luigiFunc.luigi_dic.Head);
+          torso = luigi.getObjectByName(luigiFunc.luigi_dic.Torso);
+          upperArm_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.UpperArm_right
+          );
+          upperArm_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.UpperArm_left
+          );
+          spine = luigi.getObjectByName(luigiFunc.luigi_dic.Spine);
 
           //right_arm related bones
-          handRight = luigi.getObjectByName(luigi_dic.Hand_right);
-          thumb1_right = luigi.getObjectByName(luigi_dic.Thumb1_right);
-          thumb2_right = luigi.getObjectByName(luigi_dic.Thumb2_right);
-          finger1_right = luigi.getObjectByName(luigi_dic.Finger1_right);
-          finger1_2_right = luigi.getObjectByName(luigi_dic.Finger1_2_right);
-          finger2_right = luigi.getObjectByName(luigi_dic.Finger2_right);
-          finger2_2_right = luigi.getObjectByName(luigi_dic.Finger2_2_right);
-          finger3_right = luigi.getObjectByName(luigi_dic.Finger3_right);
-          finger3_2_right = luigi.getObjectByName(luigi_dic.Finger3_2_right);
+          handRight = luigi.getObjectByName(luigiFunc.luigi_dic.Hand_right);
+          thumb1_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Thumb1_right
+          );
+          thumb2_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Thumb2_right
+          );
+          finger1_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger1_right
+          );
+          finger1_2_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger1_2_right
+          );
+          finger2_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger2_right
+          );
+          finger2_2_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger2_2_right
+          );
+          finger3_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger3_right
+          );
+          finger3_2_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger3_2_right
+          );
           //*******************
-          finger4_right = luigi.getObjectByName(luigi_dic.Finger4_right);
-          finger4_2_right = luigi.getObjectByName(luigi_dic.Finger4_2_right);
+          finger4_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger4_right
+          );
+          finger4_2_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger4_2_right
+          );
 
           //left_arm related bones
-          handLeft = luigi.getObjectByName(luigi_dic.Hand_left);
-          thumb1_left = luigi.getObjectByName(luigi_dic.Thumb1_left);
-          thumb2_left = luigi.getObjectByName(luigi_dic.Thumb2_left);
-          finger1_left = luigi.getObjectByName(luigi_dic.Finger1_left);
-          finger1_2_left = luigi.getObjectByName(luigi_dic.Finger1_2_left);
-          finger2_left = luigi.getObjectByName(luigi_dic.Finger2_left);
-          finger2_2_left = luigi.getObjectByName(luigi_dic.Finger2_2_left);
-          finger3_left = luigi.getObjectByName(luigi_dic.Finger3_left);
-          finger3_2_left = luigi.getObjectByName(luigi_dic.Finger3_2_left);
+          handLeft = luigi.getObjectByName(luigiFunc.luigi_dic.Hand_left);
+          thumb1_left = luigi.getObjectByName(luigiFunc.luigi_dic.Thumb1_left);
+          thumb2_left = luigi.getObjectByName(luigiFunc.luigi_dic.Thumb2_left);
+          finger1_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger1_left
+          );
+          finger1_2_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger1_2_left
+          );
+          finger2_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger2_left
+          );
+          finger2_2_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger2_2_left
+          );
+          finger3_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger3_left
+          );
+          finger3_2_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger3_2_left
+          );
           //*******************
-          finger4_left = luigi.getObjectByName(luigi_dic.Finger4_left);
-          finger4_2_left = luigi.getObjectByName(luigi_dic.Finger4_2_left);
+          finger4_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger4_left
+          );
+          finger4_2_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.Finger4_2_left
+          );
 
           //left_leg related bones
-          upperLeg_left = luigi.getObjectByName(luigi_dic.UpperLeg_left);
-          lowerLeg_left = luigi.getObjectByName(luigi_dic.LowerLeg_left);
-          upperLeg_right = luigi.getObjectByName(luigi_dic.UpperLeg_right);
-          lowerLeg_right = luigi.getObjectByName(luigi_dic.LowerLeg_right);
+          upperLeg_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.UpperLeg_left
+          );
+          lowerLeg_left = luigi.getObjectByName(
+            luigiFunc.luigi_dic.LowerLeg_left
+          );
+          upperLeg_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.UpperLeg_right
+          );
+          lowerLeg_right = luigi.getObjectByName(
+            luigiFunc.luigi_dic.LowerLeg_right
+          );
 
           upperArm_right.rotation.z = (45 * Math.PI) / 180; //-60
           upperArm_left.rotation.z = (45 * Math.PI) / 180;
@@ -390,6 +439,7 @@ function init() {
           dirLight.target = luigi;
           scene.add(luigi);
           keyboard(luigi);
+          luigiFunc.setLuigiGeometry();
           tweenFunc.setAnimationParameters();
           requestAnimationFrame(animate);
         });
@@ -1054,7 +1104,7 @@ function init() {
     if (character == "luigi") {
       camera.lookAt(luigi.position.x, camera.position.y, luigi.position.z);
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
-      //updateLuigiBoxPosition();
+      luigiFunc.updateLuigiBoxPosition();
     }
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
 

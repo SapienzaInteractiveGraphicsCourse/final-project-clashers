@@ -1,4 +1,6 @@
-const luigi_dic = {
+import * as collFunc from "./collisions.js";
+
+export const luigi_dic = {
   Head: "head_05",
   Torso: "NDcha_pos_02",
   Spine: "spine00_04",
@@ -38,7 +40,7 @@ export function setLuigiGeometry() {
   //yoshiBox.position.set(0, -9.3, -600);
   luigiBox.position.set(
     luigi.position.x,
-    luigi.position.y + 5.2,
+    luigi.position.y + 6,
     luigi.position.z
   );
   luigiBox.setCcdMotionThreshold(1);
@@ -53,7 +55,7 @@ export function setLuigiGeometry() {
   );
   luigiUpperBox.position.set(
     luigi.position.x,
-    luigi.position.y + 10,
+    luigi.position.y + 13.3,
     luigi.position.z
   );
   luigiUpperBox.setCcdMotionThreshold(1);
@@ -79,12 +81,12 @@ export function setLuigiGeometry() {
 export function updateLuigiBoxPosition() {
   luigiBox.position.set(
     luigi.position.x,
-    luigi.position.y + 5.2,
+    luigi.position.y + 6,
     luigi.position.z
   );
   luigiUpperBox.position.set(
     luigi.position.x,
-    luigi.position.y + 10,
+    luigi.position.y + 13.3,
     luigi.position.z
   );
   luigiLowerBox.position.set(
