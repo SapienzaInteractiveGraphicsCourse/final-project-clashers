@@ -1,4 +1,6 @@
-const yoshi_dic = {
+import * as collFunc from "./collisions.js";
+
+export const yoshi_dic = {
   Head: "head_05",
   Torso: "NDcha_pos_02",
   Spine: "spine00_04",
@@ -39,3 +41,82 @@ const yoshi_dic = {
   Tail_1: "tail_1_060",
   Tail_2: "tail_2_00",
 };
+
+export function setYoshiGeometry() {
+  var yoshiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
+  yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
+  //yoshiBox.position.set(0, -9.3, -600);
+  yoshiBox.position.set(
+    yoshi.position.x,
+    yoshi.position.y + 5.2,
+    yoshi.position.z
+  );
+  yoshiBox.setCcdMotionThreshold(1);
+  scene.add(yoshiBox);
+  yoshiBox.addEventListener("collision", collFunc.onYoshiCollision);
+
+  var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+  yoshiUpperBox = new Physijs.BoxMesh(
+    yoshiUpperGeometry,
+    geometryMaterial1,
+    50
+  );
+  yoshiUpperBox.position.set(
+    yoshi.position.x,
+    yoshi.position.y + 10,
+    yoshi.position.z
+  );
+  yoshiUpperBox.setCcdMotionThreshold(1);
+  scene.add(yoshiUpperBox);
+  yoshiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
+
+  var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
+  yoshiLowerBox = new Physijs.BoxMesh(
+    yoshiLowerGeometry,
+    geometryMaterial2,
+    50
+  );
+  yoshiLowerBox.position.set(
+    yoshi.position.x,
+    yoshi.position.y + 0.1,
+    yoshi.position.z
+  );
+  yoshiLowerBox.setCcdMotionThreshold(1);
+  scene.add(yoshiLowerBox);
+  yoshiLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
+}
+
+export function updateYoshiBoxPosition() {
+  yoshiBox.position.set(
+    yoshi.position.x,
+    yoshi.position.y + 5.2,
+    yoshi.position.z
+  );
+  yoshiUpperBox.position.set(
+    yoshi.position.x,
+    yoshi.position.y + 10,
+    yoshi.position.z
+  );
+  yoshiLowerBox.position.set(
+    yoshi.position.x,
+    yoshi.position.y + 0.1,
+    yoshi.position.z
+  );
+  var yoshiBoxPos = yoshiBox.position.clone();
+  yoshiBox.position.copy(yoshiBoxPos);
+  yoshiBox.rotation.set(0, 0, 0);
+  yoshiBox.__dirtyPosition = true;
+  yoshiBox.__dirtyRotation = true;
+
+  var yoshiUpperBoxPos = yoshiUpperBox.position.clone();
+  yoshiUpperBox.position.copy(yoshiUpperBoxPos);
+  yoshiUpperBox.rotation.set(0, 0, 0);
+  yoshiUpperBox.__dirtyPosition = true;
+  yoshiUpperBox.__dirtyRotation = true;
+
+  var yoshiLowerBoxPos = yoshiLowerBox.position.clone();
+  yoshiLowerBox.position.copy(yoshiLowerBoxPos);
+  yoshiLowerBox.rotation.set(0, 0, 0);
+  yoshiLowerBox.__dirtyPosition = true;
+  yoshiLowerBox.__dirtyRotation = true;
+}

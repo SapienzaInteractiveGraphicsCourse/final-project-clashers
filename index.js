@@ -9,7 +9,9 @@ import * as collFunc from "./collisions.js";
 import * as blockFunc from "./blocks.js";
 import * as tweenFunc from "./tween_functions.js";
 import { updateGoombaBoxPosition } from "./goomba.js";
+import * as yoshiFunc from "./yoshi.js";
 import * as luigiFunc from "./luigi.js";
+import * as marioFunc from "./mario.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -152,39 +154,79 @@ function init() {
 
           //console.log(dumpObject(yoshi).join("\n"));
 
-          head = yoshi.getObjectByName(yoshi_dic.Head);
-          torso = yoshi.getObjectByName(yoshi_dic.Torso);
-          upperArm_right = yoshi.getObjectByName(yoshi_dic.UpperArm_right);
-          upperArm_left = yoshi.getObjectByName(yoshi_dic.UpperArm_left);
-          spine = yoshi.getObjectByName(yoshi_dic.Spine);
+          head = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Head);
+          torso = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Torso);
+          upperArm_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.UpperArm_right
+          );
+          upperArm_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.UpperArm_left
+          );
+          spine = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Spine);
 
           //right_arm related bones
-          handRight = yoshi.getObjectByName(yoshi_dic.Hand_right);
-          thumb1_right = yoshi.getObjectByName(yoshi_dic.Thumb1_right);
-          thumb2_right = yoshi.getObjectByName(yoshi_dic.Thumb2_right);
-          finger1_right = yoshi.getObjectByName(yoshi_dic.Finger1_right);
-          finger1_2_right = yoshi.getObjectByName(yoshi_dic.Finger1_2_right);
-          finger2_right = yoshi.getObjectByName(yoshi_dic.Finger2_right);
-          finger2_2_right = yoshi.getObjectByName(yoshi_dic.Finger2_2_right);
-          finger3_right = yoshi.getObjectByName(yoshi_dic.Finger3_right);
-          finger3_2_right = yoshi.getObjectByName(yoshi_dic.Finger3_2_right);
+          handRight = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Hand_right);
+          thumb1_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Thumb1_right
+          );
+          thumb2_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Thumb2_right
+          );
+          finger1_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger1_right
+          );
+          finger1_2_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger1_2_right
+          );
+          finger2_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger2_right
+          );
+          finger2_2_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger2_2_right
+          );
+          finger3_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger3_right
+          );
+          finger3_2_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger3_2_right
+          );
 
           //left_arm related bones
-          handLeft = yoshi.getObjectByName(yoshi_dic.Hand_left);
-          thumb1_left = yoshi.getObjectByName(yoshi_dic.Thumb1_left);
-          thumb2_left = yoshi.getObjectByName(yoshi_dic.Thumb2_left);
-          finger1_left = yoshi.getObjectByName(yoshi_dic.Finger1_left);
-          finger1_2_left = yoshi.getObjectByName(yoshi_dic.Finger1_2_left);
-          finger2_left = yoshi.getObjectByName(yoshi_dic.Finger2_left);
-          finger2_2_left = yoshi.getObjectByName(yoshi_dic.Finger2_2_left);
-          finger3_left = yoshi.getObjectByName(yoshi_dic.Finger3_left);
-          finger3_2_left = yoshi.getObjectByName(yoshi_dic.Finger3_2_left);
+          handLeft = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Hand_left);
+          thumb1_left = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Thumb1_left);
+          thumb2_left = yoshi.getObjectByName(yoshiFunc.yoshi_dic.Thumb2_left);
+          finger1_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger1_left
+          );
+          finger1_2_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger1_2_left
+          );
+          finger2_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger2_left
+          );
+          finger2_2_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger2_2_left
+          );
+          finger3_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger3_left
+          );
+          finger3_2_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.Finger3_2_left
+          );
 
           //left_leg related bones
-          upperLeg_left = yoshi.getObjectByName(yoshi_dic.UpperLeg_left);
-          lowerLeg_left = yoshi.getObjectByName(yoshi_dic.LowerLeg_left);
-          upperLeg_right = yoshi.getObjectByName(yoshi_dic.UpperLeg_right);
-          lowerLeg_right = yoshi.getObjectByName(yoshi_dic.LowerLeg_right);
+          upperLeg_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.UpperLeg_left
+          );
+          lowerLeg_left = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.LowerLeg_left
+          );
+          upperLeg_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.UpperLeg_right
+          );
+          lowerLeg_right = yoshi.getObjectByName(
+            yoshiFunc.yoshi_dic.LowerLeg_right
+          );
 
           upperArm_right.rotation.z = (45 * Math.PI) / 180; //-60
           //handRight.rotation.y = (0 * Math.PI) / 180; -> deve tornare a 90 gradi
@@ -225,7 +267,7 @@ function init() {
           keyboard(yoshi);
           //}
 
-          setYoshiGeometry();
+          yoshiFunc.setYoshiGeometry();
           //tweenFunc.setAnimationParameters(yoshi);
           requestAnimationFrame(animate);
         });
@@ -254,19 +296,31 @@ function init() {
 
           //console.log(dumpObject(mario).join("\n"));
 
-          head = mario.getObjectByName(mario_dic.Head);
-          torso = mario.getObjectByName(mario_dic.Torso);
-          upperArm_right = mario.getObjectByName(mario_dic.UpperArm_right);
-          upperArm_left = mario.getObjectByName(mario_dic.UpperArm_left);
-          spine = mario.getObjectByName(mario_dic.Spine);
+          head = mario.getObjectByName(marioFunc.mario_dic.Head);
+          torso = mario.getObjectByName(marioFunc.mario_dic.Torso);
+          upperArm_right = mario.getObjectByName(
+            marioFunc.mario_dic.UpperArm_right
+          );
+          upperArm_left = mario.getObjectByName(
+            marioFunc.mario_dic.UpperArm_left
+          );
+          spine = mario.getObjectByName(marioFunc.mario_dic.Spine);
 
-          upperLeg_left = mario.getObjectByName(mario_dic.UpperLeg_left);
-          lowerLeg_left = mario.getObjectByName(mario_dic.LowerLeg_left);
-          upperLeg_right = mario.getObjectByName(mario_dic.UpperLeg_right);
-          lowerLeg_right = mario.getObjectByName(mario_dic.LowerLeg_right);
+          upperLeg_left = mario.getObjectByName(
+            marioFunc.mario_dic.UpperLeg_left
+          );
+          lowerLeg_left = mario.getObjectByName(
+            marioFunc.mario_dic.LowerLeg_left
+          );
+          upperLeg_right = mario.getObjectByName(
+            marioFunc.mario_dic.UpperLeg_right
+          );
+          lowerLeg_right = mario.getObjectByName(
+            marioFunc.mario_dic.LowerLeg_right
+          );
 
-          handRight = mario.getObjectByName(mario_dic.Hand_right);
-          handLeft = mario.getObjectByName(mario_dic.Hand_left);
+          handRight = mario.getObjectByName(marioFunc.mario_dic.Hand_right);
+          handLeft = mario.getObjectByName(marioFunc.mario_dic.Hand_left);
 
           //upperArm_right.rotation.z = (0 * Math.PI) / 180;
           //upperArm_left.rotation.z = (0 * Math.PI) / 180;
@@ -289,7 +343,7 @@ function init() {
           scene.add(mario);
           keyboard(mario);
           //tweenFunc.setAnimationParameters();
-          setMarioGeometry();
+          marioFunc.setMarioGeometry();
           requestAnimationFrame(animate);
         });
       }
@@ -604,164 +658,6 @@ function init() {
     color: 0x344feb,
   });
 
-  function setYoshiGeometry() {
-    var yoshiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
-    yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
-    //yoshiBox.position.set(0, -9.3, -600);
-    yoshiBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 5.2,
-      yoshi.position.z
-    );
-    yoshiBox.setCcdMotionThreshold(1);
-    scene.add(yoshiBox);
-    yoshiBox.addEventListener("collision", collFunc.onYoshiCollision);
-
-    var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
-    yoshiUpperBox = new Physijs.BoxMesh(
-      yoshiUpperGeometry,
-      geometryMaterial1,
-      50
-    );
-    yoshiUpperBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 10,
-      yoshi.position.z
-    );
-    yoshiUpperBox.setCcdMotionThreshold(1);
-    scene.add(yoshiUpperBox);
-    yoshiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
-
-    var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
-    yoshiLowerBox = new Physijs.BoxMesh(
-      yoshiLowerGeometry,
-      geometryMaterial2,
-      50
-    );
-    yoshiLowerBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 0.1,
-      yoshi.position.z
-    );
-    yoshiLowerBox.setCcdMotionThreshold(1);
-    scene.add(yoshiLowerBox);
-    yoshiLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
-  }
-
-  function updateYoshiBoxPosition() {
-    yoshiBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 5.2,
-      yoshi.position.z
-    );
-    yoshiUpperBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 10,
-      yoshi.position.z
-    );
-    yoshiLowerBox.position.set(
-      yoshi.position.x,
-      yoshi.position.y + 0.1,
-      yoshi.position.z
-    );
-    var yoshiBoxPos = yoshiBox.position.clone();
-    yoshiBox.position.copy(yoshiBoxPos);
-    yoshiBox.rotation.set(0, 0, 0);
-    yoshiBox.__dirtyPosition = true;
-    yoshiBox.__dirtyRotation = true;
-
-    var yoshiUpperBoxPos = yoshiUpperBox.position.clone();
-    yoshiUpperBox.position.copy(yoshiUpperBoxPos);
-    yoshiUpperBox.rotation.set(0, 0, 0);
-    yoshiUpperBox.__dirtyPosition = true;
-    yoshiUpperBox.__dirtyRotation = true;
-
-    var yoshiLowerBoxPos = yoshiLowerBox.position.clone();
-    yoshiLowerBox.position.copy(yoshiLowerBoxPos);
-    yoshiLowerBox.rotation.set(0, 0, 0);
-    yoshiLowerBox.__dirtyPosition = true;
-    yoshiLowerBox.__dirtyRotation = true;
-  }
-
-  function setMarioGeometry() {
-    var marioGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
-    marioBox = new Physijs.BoxMesh(marioGeometry, geometryMaterial, 50); //mass 0
-    //yoshiBox.position.set(0, -9.3, -600);
-    marioBox.position.set(
-      mario.position.x,
-      mario.position.y + 5.2,
-      mario.position.z
-    );
-    marioBox.setCcdMotionThreshold(1);
-    scene.add(marioBox);
-    marioBox.addEventListener("collision", collFunc.onYoshiCollision);
-
-    var marioUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
-    marioUpperBox = new Physijs.BoxMesh(
-      marioUpperGeometry,
-      geometryMaterial1,
-      50
-    );
-    marioUpperBox.position.set(
-      mario.position.x,
-      mario.position.y + 10,
-      mario.position.z
-    );
-    marioUpperBox.setCcdMotionThreshold(1);
-    scene.add(marioUpperBox);
-    marioUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
-
-    var marioLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
-    marioLowerBox = new Physijs.BoxMesh(
-      marioLowerGeometry,
-      geometryMaterial2,
-      50
-    );
-    marioLowerBox.position.set(
-      mario.position.x,
-      mario.position.y + 0.1,
-      mario.position.z
-    );
-    marioLowerBox.setCcdMotionThreshold(1);
-    scene.add(marioLowerBox);
-    marioLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
-  }
-
-  function updateMarioBoxPosition() {
-    marioBox.position.set(
-      mario.position.x,
-      mario.position.y + 5.2,
-      mario.position.z
-    );
-    marioUpperBox.position.set(
-      mario.position.x,
-      mario.position.y + 10,
-      mario.position.z
-    );
-    marioLowerBox.position.set(
-      mario.position.x,
-      mario.position.y + 0.1,
-      mario.position.z
-    );
-    var marioBoxPos = marioBox.position.clone();
-    marioBox.position.copy(marioBoxPos);
-    marioBox.rotation.set(0, 0, 0);
-    marioBox.__dirtyPosition = true;
-    marioBox.__dirtyRotation = true;
-
-    var marioUpperBoxPos = marioUpperBox.position.clone();
-    marioUpperBox.position.copy(marioUpperBoxPos);
-    marioUpperBox.rotation.set(0, 0, 0);
-    marioUpperBox.__dirtyPosition = true;
-    marioUpperBox.__dirtyRotation = true;
-
-    var marioLowerBoxPos = marioLowerBox.position.clone();
-    marioLowerBox.position.copy(marioLowerBoxPos);
-    marioLowerBox.rotation.set(0, 0, 0);
-    marioLowerBox.__dirtyPosition = true;
-    marioLowerBox.__dirtyRotation = true;
-  }
-
   function loadModels() {
     brick = new THREE.Scene();
     //brick = new Physijs.Scene();
@@ -926,7 +822,7 @@ function init() {
         goomba.castShadow = true;
         goomba.receiveShadow = true;
 
-        console.log(dumpObject(goomba).join("\n"));
+        //console.log(dumpObject(goomba).join("\n"));
 
         //var left_foot = goomba.getObjectByName("Left_Foot");
         //left_foot.rotation.x = (90 * Math.PI) / 180;
@@ -1094,12 +990,12 @@ function init() {
     if (character == "yoshi") {
       camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
       controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
-      updateYoshiBoxPosition();
+      yoshiFunc.updateYoshiBoxPosition();
     }
     if (character == "mario") {
       camera.lookAt(mario.position.x, camera.position.y, mario.position.z);
       controls.target.set(mario.position.x, mario.position.y, mario.position.z);
-      updateMarioBoxPosition();
+      marioFunc.updateMarioBoxPosition();
     }
     if (character == "luigi") {
       camera.lookAt(luigi.position.x, camera.position.y, luigi.position.z);
