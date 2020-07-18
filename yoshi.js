@@ -44,46 +44,44 @@ export const yoshi_dic = {
 
 export function setYoshiGeometry() {
   var yoshiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
-  yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 50); //mass 0
+  yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 1); //mass 0
   //yoshiBox.position.set(0, -9.3, -600);
   yoshiBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 5.2,
     yoshi.position.z
   );
-  yoshiBox.setCcdMotionThreshold(1);
+  //yoshiBox.setCcdMotionThreshold(1);
   scene.add(yoshiBox);
-  yoshiBox.addEventListener("collision", collFunc.onYoshiCollision);
+  yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
 
   var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
-  yoshiUpperBox = new Physijs.BoxMesh(
-    yoshiUpperGeometry,
-    geometryMaterial1,
-    50
-  );
+  yoshiUpperBox = new Physijs.BoxMesh(yoshiUpperGeometry, geometryMaterial1, 0);
   yoshiUpperBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 10,
     yoshi.position.z
   );
-  yoshiUpperBox.setCcdMotionThreshold(1);
+  //yoshiUpperBox.setCcdMotionThreshold(1);
   scene.add(yoshiUpperBox);
-  yoshiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
+  yoshiUpperBox.addEventListener(
+    "collision",
+    collFunc.onCharacterUpperCollision
+  );
 
   var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
-  yoshiLowerBox = new Physijs.BoxMesh(
-    yoshiLowerGeometry,
-    geometryMaterial2,
-    50
-  );
+  yoshiLowerBox = new Physijs.BoxMesh(yoshiLowerGeometry, geometryMaterial2, 0);
   yoshiLowerBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 0.1,
     yoshi.position.z
   );
-  yoshiLowerBox.setCcdMotionThreshold(1);
+  //yoshiLowerBox.setCcdMotionThreshold(1);
   scene.add(yoshiLowerBox);
-  yoshiLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
+  yoshiLowerBox.addEventListener(
+    "collision",
+    collFunc.onCharacterLowerCollision
+  );
 }
 
 export function updateYoshiBoxPosition() {

@@ -1,5 +1,5 @@
 import { fall } from "./tween_functions.js";
-import { setIdlePosition } from "./tween_functions.js";
+//import { setIdlePosition } from "./tween_functions.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -31,6 +31,62 @@ export function setCharacterStuff() {
   }
 }
 
+export function onCharacterCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+  console.log("i'm in onCharacterCollision ");
+  //Se tocca il groupcontainer
+  console.log("other_object._physijs.id: " + other_object._physijs.id);
+  console.log("groupContainer._physijs.id: " + groupContainer._physijs.id);
+  console.log("ground._physijs.id: " + ground._physijs.id);
+  console.log("yoshiBox.id: " + yoshiBox._physijs.id);
+  console.log("yoshiLowerBox.id: " + yoshiLowerBox._physijs.id);
+  console.log("yoshiUpperBox.id: " + yoshiUpperBox._physijs.id);
+
+  if (other_object._physijs.id == groupContainer._physijs.id) {
+    console.log("Collided with group container");
+    //o blocca il salto e cade, oppure continua il salto ma senza traslare --> scegliere una delle due
+    tweenJump.stop();
+    //impostiamo il flag che dice che ha colliso lateralmente
+    collidedSide = true;
+    tweenJumpBack.start();
+  }
+}
+
+export function onCharacterLowerCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+  console.log("i'm in onCharacterLowerCollision ");
+}
+
+export function onCharacterUpperCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+  console.log("i'm in onCharacterUpperCollision ");
+}
+
+export function onGroupCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  //setCharacterStuff();
+}
+
+/*
 export function onYoshiCollision(
   other_object,
   relative_velocity,
@@ -43,7 +99,7 @@ export function onYoshiCollision(
     collidedLeft = false;
     collidedRight = false;
     tweenFall.stop();
-  }*/
+  }
   //console.log("onYoshi Collision: contact_normal.y = " + contact_normal.y);
   //contact_normal.z == 1 se collide da sinistra --> imposto collidedLeft a false
   //contact_normal.z == 1 se collide da destra --> imposto collidedRight a false
@@ -65,7 +121,7 @@ export function onYoshiCollision(
       console.log("contact_normal.z = " + contact_normal.z);
       console.log("contact_normal.x = " + contact_normal.x);
       console.log("contact_normal.y = " + contact_normal.y);
-      console.log("yoshiBox.id = " + yoshiBox._physijs.id);*/
+      console.log("yoshiBox.id = " + yoshiBox._physijs.id);
 
       //Smette di collidere lateralmente con un box, quindi imposta le relative variabili a false
       collidedLeft = false; //quindi si possono togliere da onkeydown
@@ -73,7 +129,7 @@ export function onYoshiCollision(
       /*fall();
       isOnObjectTop = false;
       collidedTop = false; //?
-      //collidedBottom = false;*/
+      //collidedBottom = false;
       scene.removeEventListener("update", checkTouch);
     };
 
@@ -91,7 +147,7 @@ export function onYoshiLowerCollision(
 
   /*if (other_object._physijs.id == pipeContainer._physijs.id) {
     tweenJumpBack.start();
-  }*/
+  }
 
   if (contact_normal.y == -1) {
     //isOnObjectTop = true;
@@ -152,9 +208,9 @@ export function onYoshiUpperCollision(
     collidedLeft = false;
     collidedRight = false;
     //collidedBottom = false;
-  }*/
-}
-
+  }
+}*/
+/*
 export function onPipeCollision(
   other_object,
   relative_velocity,
@@ -172,7 +228,7 @@ export function onPipeCollision(
       }
       if (dir == "left") {
         collidedRight = true;
-      }*/
+      }*
 
       //ho aggiunto rispettivamente && !collidedLeft e && !collidedRight perché con questo approccio a volte rilevava
       //la collisione una seconda volta anche se già l'aveva rilevata e si buggava andando un altro pochino avanti,
@@ -258,4 +314,4 @@ export function onGoombaCollision(
       }
     }
   }
-}
+}*/

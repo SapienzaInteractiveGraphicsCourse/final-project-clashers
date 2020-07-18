@@ -88,7 +88,7 @@ function init() {
 
     scene.simulate(undefined, 1);
   });*/
-  scene.setGravity = new THREE.Vector3(0, -50, 0); //?
+  //scene.setGravity = new THREE.Vector3(0, 0, 0); //?
   {
     const d = 100;
     const color = 0xffffff;
@@ -507,7 +507,8 @@ function init() {
       switch (event.which) {
         case 68:
           //collidedRight = false;
-          isWalking = true;
+          isWalking = true; //serve per non far ripartire il tween della camminata quando si tiene premuto il tasto
+
           if (!isRotatedRight) {
             //TWEEN.removeAll();
             groupRun.removeAll(); //altrimenti rimane fermo ma le gamebe si muovono
@@ -516,7 +517,7 @@ function init() {
             tweenFunc.rotateTorso("right");
             isRotatedRight = true;
           }
-          if (!dPressed && isWalking && !collision) {
+          if (!dPressed && isWalking) {
             //collision = false;
             tweenFunc.performAnimation("right", character);
           }
@@ -542,6 +543,7 @@ function init() {
           break;
 
         case 32:
+          isWalking = false;
           //SPACE
           if (isRotatedRight) {
             isJumpingRight = true;
@@ -553,7 +555,7 @@ function init() {
             //groupJump.removeAll();
             tweenFunc.setIdlePosition(character);
             tweenFunc.jump(character);
-            isJumping = true;
+            isJumping = true; //serve per non far ripartire il tween del salto se ne è già partito uno e non è ancora finito
           }
           spacePressed = true;
           break;
@@ -561,8 +563,6 @@ function init() {
     });
 
     document.addEventListener("keyup", (event) => {
-      collision = false;
-
       delete keysPressed[event.keyCode];
       switch (event.which) {
         case 68:
@@ -592,10 +592,10 @@ function init() {
             //groupRun.removeAll();
             tween.stop();
             tweenBack.stop();
-            //setIdlePosition();
+            tweenFunc.setIdlePosition(character);
           }
           //aPressed = false;
-          tweenFunc.setIdlePosition(character);
+          //tweenFunc.setIdlePosition(character);
           break;
 
         case 65:
@@ -626,15 +626,14 @@ function init() {
             //groupRun.removeAll();
             tween.stop();
             tweenBack.stop();
-            //setIdlePosition();
+            tweenFunc.setIdlePosition(character);
           }
           //dPressed = false;
-          tweenFunc.setIdlePosition(character);
+
           break;
 
         case 32:
           spacePressed = false;
-          //isJumping = false;
           tweenFunc.setIdlePosition(character);
           break;
       }
@@ -1002,6 +1001,8 @@ function init() {
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
       luigiFunc.updateLuigiBoxPosition();
     }
+
+    //console.log("yoshi.position.y: " + yoshi.position.y);
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
 
     /* console.log("isJumping = " + isJumping);

@@ -801,10 +801,10 @@ function setQuestionBoxGeometry(questionBoxElem) {
   scene.add(questionBoxContainer);
   //questionBoxContainer.__dirtyPosition = true;
   //questionBoxContainer.__dirtyRotation = false;
-  questionBoxContainer.addEventListener(
+  /*questionBoxContainer.addEventListener(
     "collision",
     collFunc.onBottomCollision
-  );
+  );*/
 }
 
 function setBrickGeometry(brickElem) {
@@ -816,7 +816,7 @@ function setBrickGeometry(brickElem) {
     brickElem.position.z + 1.2
   );
   scene.add(brickContainer);
-  brickContainer.addEventListener("collision", collFunc.onBottomCollision);
+  //brickContainer.addEventListener("collision", collFunc.onBottomCollision);
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {
@@ -839,7 +839,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
   //scene.add(pipeContainerTop);
   //pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.setCcdMotionThreshold(1);
-  pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
+  //pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
   //pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
 }
 
@@ -857,7 +857,7 @@ function setEmptyBlockGeometry(emptyBlockElem) {
   );
   scene.add(emptyBlockContainer);
 
-  emptyBlockContainer.addEventListener("collision", collFunc.onPipeCollision);
+  //emptyBlockContainer.addEventListener("collision", collFunc.onPipeCollision);
 }
 
 function setCoinGeometry(coinElem) {
@@ -891,7 +891,7 @@ function setGoombaGeometry(goombaElem) {
     goombaElem.position.z
   );
   scene.add(goombaContainer);
-  goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
+  //goombaContainer.addEventListener("collision", collFunc.onGoombaCollision); //RIMETTERE
 
   //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
   //goombaContainerIdArray[0] = goombaContainer._physijs;
@@ -904,8 +904,8 @@ function setGoombaGeometry(goombaElem) {
 
 function setGroupGeometry(groupWidth, y, z) {
   var groupGeometry = new THREE.BoxGeometry(6.3, 6, groupWidth);
-  groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 0);
+  groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 1);
   groupContainer.position.set(0, y, z);
   scene.add(groupContainer);
-  groupContainer.addEventListener("collision", collFunc.onPipeCollision);
+  //groupContainer.addEventListener("collision", collFunc.onGroupCollision);
 }

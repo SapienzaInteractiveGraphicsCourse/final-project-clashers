@@ -107,12 +107,12 @@ var powerUpClone;
 var goombaClone;
 
 var dir;
-var collision;
 
 var collidedLeft = false;
 var collidedRight = false;
 var collidedTop = false;
 var collidedBottom = false;
+var collidedSide = false;
 
 var isOnObjectTop = false;
 

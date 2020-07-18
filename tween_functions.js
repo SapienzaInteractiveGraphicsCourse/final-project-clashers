@@ -155,11 +155,13 @@ export function performAnimation(direction, character) {
         upperArm_right.rotation.z = tweenStartScale.z_rightArm;
       }
 
-      if (direction == "right" && !collidedLeft) {
+      //if (direction == "right" && !collidedLeft) {
+      if (direction == "right") {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
       }
-      if (direction == "left" && !collidedRight) {
+      //if (direction == "left" && !collidedRight) {
+      if (direction == "left") {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -188,11 +190,13 @@ export function performAnimation(direction, character) {
         upperArm_left.rotation.z = tweenStartScale.z_leftArm;
         upperArm_right.rotation.z = tweenStartScale.z_rightArm;
       }
-      if (direction == "right" && !collidedLeft) {
+      //if (direction == "right" && !collidedLeft) {
+      if (direction == "right") {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
       }
-      if (direction == "left" && !collidedRight) {
+      //if (direction == "left" && !collidedRight) {
+      if (direction == "left") {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -352,9 +356,9 @@ export function jump(character) {
       lowerLeg_left.rotation.x = tweenStartFlex.lowerLeg;
       spine.rotation.x = tweenStartFlex.spine;
       head.rotation.x = tweenStartFlex.head;
-      if (!collidedTop) {
-        character.position.y = tweenStartFlex.y;
-      }
+      //if (!collidedTop) {
+      character.position.y = tweenStartFlex.y;
+      //}
     })
     .start();
   /*var tweenFlexBack = new TWEEN.Tween(tweenStartFlex, groupJump)
@@ -374,14 +378,18 @@ export function jump(character) {
     .to(tweenGoalJump, 1000) //400
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
-      if (!collidedTop || isOnObjectTop) {
-        character.position.y = tweenStartJump.y;
-      }
-      if (keysPressed[68] && !collidedLeft) {
+      //se non ha colliso da sopra o stava sopra un oggetto,
+      //aggiorna la posizione y durante il salto
+      //&if (!collidedTop || isOnObjectTop) {
+      character.position.y = tweenStartJump.y;
+      // }
+      //if (keysPressed[68] && !collidedLeft) {
+      if (keysPressed[68] && !collidedSide) {
         character.position.z += 0.3;
         dirLight.position.z += 0.3;
       }
-      if (keysPressed[65] && !collidedRight) {
+      //if (keysPressed[65] && !collidedRight) {
+      if (keysPressed[65] && !collidedSide) {
         character.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
@@ -418,14 +426,16 @@ export function jump(character) {
     .to(tweenGoalJumpBack, 1000) //400
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
-      if (!collidedTop || isOnObjectTop) {
-        character.position.y = tweenStartJump.y;
-      }
-      if (keysPressed[68] && !collidedLeft) {
+      //if (!collidedTop || isOnObjectTop) {
+      character.position.y = tweenStartJump.y;
+      //}
+      //if (keysPressed[68] && !collidedLeft) {
+      if (keysPressed[68] && !collidedSide) {
         character.position.z += 0.3;
         dirLight.position.z += 0.3;
       }
-      if (keysPressed[65] && !collidedRight) {
+      //if (keysPressed[65] && !collidedRight) {
+      if (keysPressed[65] && !collidedSide) {
         character.position.z -= 0.3;
         dirLight.position.z -= 0.3;
       }
@@ -459,18 +469,18 @@ export function jump(character) {
       }
     })
     .onStop(function () {
-      isJumpingRight = false;
+      /*isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
-      //setIdlePosition();
-      isOnObjectTop = true;
+      setIdlePosition(character);*/
+      //isOnObjectTop = true;
     })
     .onComplete(function () {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
       //setIdlePosition();
-      isOnObjectTop = true;
+      //isOnObjectTop = true;
     });
   tweenJump.chain(tweenJumpBack);
 }
