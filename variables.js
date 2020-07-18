@@ -105,6 +105,7 @@ var questionBoxClone;
 var coinClone;
 var powerUpClone;
 var goombaClone;
+var groupContainerTop;
 
 var dir;
 

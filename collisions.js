@@ -1,4 +1,4 @@
-import { fall } from "./tween_functions.js";
+import { fall, setIdlePosition } from "./tween_functions.js";
 //import { setIdlePosition } from "./tween_functions.js";
 
 export function setCharacterStuff() {
@@ -28,6 +28,63 @@ export function setCharacterStuff() {
     touchesUpper = marioUpperBox._physijs.touches;
     touchesLower = marioLowerBox._physijs.touches;
     model = mario;
+  }
+}
+
+export function onGroupContainerCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+  if (
+    other_object._physijs.id == boxId &&
+    other_object._physijs.id != lowerBoxId
+  ) {
+    //impostiamo il flag che dice che ha colliso lateralmente
+    console.log("Collided Side");
+    collidedSide = true;
+    isWalking = false; //capiamo bene se serve
+  }
+
+  /*if (other_object._physijs.id == lowerBoxId) {
+    console.log("Collided Top");
+    collidedTop = true;
+    //tweenJumpBack.stop();
+  }*/
+}
+
+export function onGroupContainerTopCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+
+  if (other_object._physijs.id == lowerBoxId) {
+    console.log("Collided Top");
+    collidedTop = true;
+    //collidedSide = false;
+    //tweenJumpBack.stop();
+  }
+}
+
+export function onPipeCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+
+  //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
+
+  if (other_object._physijs.id == yoshiBox._physijs.id) {
+    //impostiamo il flag che dice che ha colliso lateralmente
+    collidedSide = true;
+    isWalking = false; //capiamo bene se serve
   }
 }
 

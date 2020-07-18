@@ -839,7 +839,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
   //scene.add(pipeContainerTop);
   //pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.setCcdMotionThreshold(1);
-  //pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
+  pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
   //pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
 }
 
@@ -903,9 +903,30 @@ function setGoombaGeometry(goombaElem) {
 }
 
 function setGroupGeometry(groupWidth, y, z) {
-  var groupGeometry = new THREE.BoxGeometry(6.3, 6, groupWidth);
-  groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 1);
+  var groupGeometry = new THREE.BoxGeometry(6.3, 3, groupWidth);
+  groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 0);
   groupContainer.position.set(0, y, z);
   scene.add(groupContainer);
-  //groupContainer.addEventListener("collision", collFunc.onGroupCollision);
+  groupContainer.addEventListener(
+    "collision",
+    collFunc.onGroupContainerCollision
+  );
+
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1, groupWidth - 2);
+  groupContainerTop = new Physijs.BoxMesh(
+    groupGeometryTop,
+    geometryMaterial2,
+    0
+  );
+  groupContainerTop.position.set(0, y + 3, z);
+  scene.add(groupContainerTop);
+  groupContainerTop.addEventListener(
+    "collision",
+    collFunc.onGroupContainerTopCollision
+  );
+  /*var groupPos = groupContainer.position.clone();
+  groupContainer.position.copy(groupPos);
+  groupContainer.rotation.set(0, 0, 0);
+  groupContainer.__dirtyPosition = true;
+  groupContainer.__dirtyRotation = true;*/
 }

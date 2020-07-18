@@ -43,7 +43,7 @@ export const yoshi_dic = {
 };
 
 export function setYoshiGeometry() {
-  var yoshiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
+  var yoshiGeometry = new THREE.BoxGeometry(7.5, 4, 6.3);
   yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 1); //mass 0
   //yoshiBox.position.set(0, -9.3, -600);
   yoshiBox.position.set(
@@ -53,10 +53,10 @@ export function setYoshiGeometry() {
   );
   //yoshiBox.setCcdMotionThreshold(1);
   scene.add(yoshiBox);
-  yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
+  //yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
 
   var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
-  yoshiUpperBox = new Physijs.BoxMesh(yoshiUpperGeometry, geometryMaterial1, 0);
+  yoshiUpperBox = new Physijs.BoxMesh(yoshiUpperGeometry, geometryMaterial1, 1);
   yoshiUpperBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 10,
@@ -64,24 +64,24 @@ export function setYoshiGeometry() {
   );
   //yoshiUpperBox.setCcdMotionThreshold(1);
   scene.add(yoshiUpperBox);
-  yoshiUpperBox.addEventListener(
+  /* yoshiUpperBox.addEventListener(
     "collision",
     collFunc.onCharacterUpperCollision
-  );
+  );*/
 
-  var yoshiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
-  yoshiLowerBox = new Physijs.BoxMesh(yoshiLowerGeometry, geometryMaterial2, 0);
+  var yoshiLowerGeometry = new THREE.BoxGeometry(4, 1.5, 3);
+  yoshiLowerBox = new Physijs.BoxMesh(yoshiLowerGeometry, geometryMaterial2, 1);
   yoshiLowerBox.position.set(
     yoshi.position.x,
-    yoshi.position.y + 0.1,
+    yoshi.position.y + 1,
     yoshi.position.z
   );
   //yoshiLowerBox.setCcdMotionThreshold(1);
   scene.add(yoshiLowerBox);
-  yoshiLowerBox.addEventListener(
+  /* yoshiLowerBox.addEventListener(
     "collision",
     collFunc.onCharacterLowerCollision
-  );
+  );*/
 }
 
 export function updateYoshiBoxPosition() {
@@ -90,6 +90,7 @@ export function updateYoshiBoxPosition() {
     yoshi.position.y + 5.2,
     yoshi.position.z
   );
+  //console.log("yoshiBox.position.y: " + yoshiBox.position.y);
   yoshiUpperBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 10,
@@ -97,7 +98,7 @@ export function updateYoshiBoxPosition() {
   );
   yoshiLowerBox.position.set(
     yoshi.position.x,
-    yoshi.position.y + 0.1,
+    yoshi.position.y + 1,
     yoshi.position.z
   );
   var yoshiBoxPos = yoshiBox.position.clone();

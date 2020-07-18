@@ -4,9 +4,13 @@ export function fall(model) {
   console.log("falling");
   tweenStartFall = {
     y: model.position.y,
+    rightArm_z: upperArm_right.rotation.z,
+    leftArm_z: upperArm_left.rotation.z,
   };
   tweenGoalFall = {
     y: -14.3,
+    rightArm_z: (45 * Math.PI) / 180,
+    leftArm_z: (45 * Math.PI) / 180,
   };
   tweenFall = new TWEEN.Tween(tweenStartFall)
     .to(tweenGoalFall, 400)
@@ -15,6 +19,8 @@ export function fall(model) {
       //if (!collidedTop) {
       //?
       model.position.y = tweenStartFall.y;
+      upperArm_right.rotation.z = tweenStartFall.rightArm_z;
+      upperArm_left.rotation.z = tweenStartFall.leftArm_z;
       //}
     })
     .onComplete(function () {
@@ -22,6 +28,10 @@ export function fall(model) {
       collidedLeft = false;
       collidedRight = false;
 
+      isJumping = false;
+      collidedSide = false;
+      isWalking = true;
+      //setIdlePosition(model);
       //isOnObjectTop = true;
       //setIdlePosition();
     })
@@ -156,12 +166,12 @@ export function performAnimation(direction, character) {
       }
 
       //if (direction == "right" && !collidedLeft) {
-      if (direction == "right") {
+      if (direction == "right" && !collidedSide) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
       }
       //if (direction == "left" && !collidedRight) {
-      if (direction == "left") {
+      if (direction == "left" && !collidedSide) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -191,12 +201,12 @@ export function performAnimation(direction, character) {
         upperArm_right.rotation.z = tweenStartScale.z_rightArm;
       }
       //if (direction == "right" && !collidedLeft) {
-      if (direction == "right") {
+      if (direction == "right" && !collidedSide) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
       }
       //if (direction == "left" && !collidedRight) {
-      if (direction == "left") {
+      if (direction == "left" && !collidedSide) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -250,6 +260,7 @@ export function rotateTorso(direction) {
 }*/
 
 export function jump(character) {
+  //collidedTop = false;
   if (character == yoshi || character == luigi) {
     tweenStartJump = {
       y: character.position.y,
@@ -343,7 +354,7 @@ export function jump(character) {
       lowerLeg: (-75 * Math.PI) / 180,
       spine: (30 * Math.PI) / 180,
       head: (-15 * Math.PI) / 180,
-      y: -14.6,
+      y: tweenStartJump.y - 0.3, //-14.6
     };
   }
   tweenFlex = new TWEEN.Tween(tweenStartFlex, groupJump)
@@ -356,9 +367,9 @@ export function jump(character) {
       lowerLeg_left.rotation.x = tweenStartFlex.lowerLeg;
       spine.rotation.x = tweenStartFlex.spine;
       head.rotation.x = tweenStartFlex.head;
-      //if (!collidedTop) {
-      character.position.y = tweenStartFlex.y;
-      //}
+      if (!collidedTop) {
+        character.position.y = tweenStartFlex.y;
+      }
     })
     .start();
   /*var tweenFlexBack = new TWEEN.Tween(tweenStartFlex, groupJump)
@@ -420,6 +431,9 @@ export function jump(character) {
         }
         handLeft.rotation.y = tweenStartJump.rightHand_rotation_y;
       }
+    })
+    .onComplete(function () {
+      collidedTop = false;
     });
   tweenFlex.chain(tweenJump);
   tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
@@ -427,8 +441,11 @@ export function jump(character) {
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       //if (!collidedTop || isOnObjectTop) {
-      character.position.y = tweenStartJump.y;
-      //}
+      if (!collidedTop) {
+        character.position.y = tweenStartJump.y;
+      } else {
+        character.position.y = 12.2;
+      }
       //if (keysPressed[68] && !collidedLeft) {
       if (keysPressed[68] && !collidedSide) {
         character.position.z += 0.3;
@@ -474,11 +491,14 @@ export function jump(character) {
       isJumping = false;
       setIdlePosition(character);*/
       //isOnObjectTop = true;
+      isJumping = false;
     })
     .onComplete(function () {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
+
+      collidedSide = false;
       //setIdlePosition();
       //isOnObjectTop = true;
     });
