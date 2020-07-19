@@ -42,10 +42,15 @@ var tweenGoalLeft;
 var tweenIdle;
 var tween_idle;
 var tween;
+var tweenRaiseUpHand;
+var tweenLowerHand;
 var tweenBack;
 var tweenJump;
 var tweenJumpBack;
 var tweenFlex;
+var tweenStartRaise;
+var tweenGoalRaise;
+var tweenGoalLower;
 
 var tweenStartJump;
 var tweenGoalJump;

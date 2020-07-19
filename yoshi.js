@@ -78,10 +78,10 @@ export function setYoshiGeometry() {
   );
   //yoshiLowerBox.setCcdMotionThreshold(1);
   scene.add(yoshiLowerBox);
-  /* yoshiLowerBox.addEventListener(
+  yoshiLowerBox.addEventListener(
     "collision",
     collFunc.onCharacterLowerCollision
-  );*/
+  );
 }
 
 export function updateYoshiBoxPosition() {

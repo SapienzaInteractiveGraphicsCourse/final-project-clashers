@@ -1,5 +1,4 @@
 import { fall, setIdlePosition } from "./tween_functions.js";
-//import { setIdlePosition } from "./tween_functions.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -38,21 +37,12 @@ export function onGroupContainerCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  if (
-    other_object._physijs.id == boxId &&
-    other_object._physijs.id != lowerBoxId
-  ) {
+  if (other_object._physijs.id == boxId) {
     //impostiamo il flag che dice che ha colliso lateralmente
     console.log("Collided Side");
     collidedSide = true;
     isWalking = false; //capiamo bene se serve
   }
-
-  /*if (other_object._physijs.id == lowerBoxId) {
-    console.log("Collided Top");
-    collidedTop = true;
-    //tweenJumpBack.stop();
-  }*/
 }
 
 export function onGroupContainerTopCollision(
@@ -62,12 +52,10 @@ export function onGroupContainerTopCollision(
   contact_normal
 ) {
   setCharacterStuff();
-
   if (other_object._physijs.id == lowerBoxId) {
     console.log("Collided Top");
     collidedTop = true;
-    //collidedSide = false;
-    //tweenJumpBack.stop();
+    tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
   }
 }
 
@@ -95,23 +83,6 @@ export function onCharacterCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  console.log("i'm in onCharacterCollision ");
-  //Se tocca il groupcontainer
-  console.log("other_object._physijs.id: " + other_object._physijs.id);
-  console.log("groupContainer._physijs.id: " + groupContainer._physijs.id);
-  console.log("ground._physijs.id: " + ground._physijs.id);
-  console.log("yoshiBox.id: " + yoshiBox._physijs.id);
-  console.log("yoshiLowerBox.id: " + yoshiLowerBox._physijs.id);
-  console.log("yoshiUpperBox.id: " + yoshiUpperBox._physijs.id);
-
-  if (other_object._physijs.id == groupContainer._physijs.id) {
-    console.log("Collided with group container");
-    //o blocca il salto e cade, oppure continua il salto ma senza traslare --> scegliere una delle due
-    tweenJump.stop();
-    //impostiamo il flag che dice che ha colliso lateralmente
-    collidedSide = true;
-    tweenJumpBack.start();
-  }
 }
 
 export function onCharacterLowerCollision(
@@ -121,7 +92,20 @@ export function onCharacterLowerCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  console.log("i'm in onCharacterLowerCollision ");
+  if (contact_normal.y == -1) {
+    var checkTouch = function () {
+      for (var i = 0; i < touchesLower.length; i++) {
+        if (touchesLower[i] == other_object._physijs.id) return;
+      }
+      if (!isJumping) {
+        //serve per non fare il fall appena salta e si stacca da terra
+        fall(model);
+      }
+
+      scene.removeEventListener("update", checkTouch);
+    };
+    scene.addEventListener("update", checkTouch);
+  }
 }
 
 export function onCharacterUpperCollision(
@@ -131,7 +115,6 @@ export function onCharacterUpperCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  console.log("i'm in onCharacterUpperCollision ");
 }
 
 export function onGroupCollision(
