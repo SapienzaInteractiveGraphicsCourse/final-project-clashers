@@ -543,7 +543,7 @@ function init() {
           break;
 
         case 32:
-          isWalking = false;
+          //isWalking = false; --> probabilmente non serve a niente
           //groupRun.removeAll();
           //SPACE
           if (isRotatedRight) {
@@ -595,8 +595,7 @@ function init() {
             tweenBack.stop();
             tweenFunc.setIdlePosition(character);
           }
-          //aPressed = false;
-          //tweenFunc.setIdlePosition(character);
+
           break;
 
         case 65:
@@ -629,7 +628,6 @@ function init() {
             tweenBack.stop();
             tweenFunc.setIdlePosition(character);
           }
-          //dPressed = false;
 
           break;
 

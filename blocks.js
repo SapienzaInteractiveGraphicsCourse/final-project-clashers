@@ -801,10 +801,10 @@ function setQuestionBoxGeometry(questionBoxElem) {
   scene.add(questionBoxContainer);
   //questionBoxContainer.__dirtyPosition = true;
   //questionBoxContainer.__dirtyRotation = false;
-  /*questionBoxContainer.addEventListener(
+  questionBoxContainer.addEventListener(
     "collision",
     collFunc.onBottomCollision
-  );*/
+  );
 }
 
 function setBrickGeometry(brickElem) {
@@ -816,7 +816,7 @@ function setBrickGeometry(brickElem) {
     brickElem.position.z + 1.2
   );
   scene.add(brickContainer);
-  //brickContainer.addEventListener("collision", collFunc.onBottomCollision);
+  brickContainer.addEventListener("collision", collFunc.onBottomCollision);
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {

@@ -75,6 +75,22 @@ export function onGroupContainerTopCollision2(
   }
 }
 
+export function onBottomCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+  if (other_object._physijs.id == upperBoxId) {
+    console.log("collision bottom");
+    //collidedBottom = true;
+
+    tweenJump.stop();
+    tweenJumpBack.start();
+  }
+}
+
 export function onPipeCollision(
   other_object,
   relative_velocity,
