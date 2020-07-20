@@ -112,7 +112,7 @@ export function onCharacterLowerCollision(
         if (touchesLower[i] == other_object._physijs.id) return;
       }
       collidedTop1 = false;
-      //collidedTop2 = false;
+      collidedTop2 = false;
       collidedSide = false;
       if (!isJumping) {
         //serve per non fare il fall appena salta e si stacca da terra

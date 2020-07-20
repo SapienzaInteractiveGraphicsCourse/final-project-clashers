@@ -69,7 +69,7 @@ export function setYoshiGeometry() {
     collFunc.onCharacterUpperCollision
   );*/
 
-  var yoshiLowerGeometry = new THREE.BoxGeometry(4, 1.5, 3);
+  var yoshiLowerGeometry = new THREE.BoxGeometry(4, 2, 3);
   yoshiLowerBox = new Physijs.BoxMesh(yoshiLowerGeometry, geometryMaterial2, 1);
   yoshiLowerBox.position.set(
     yoshi.position.x,

@@ -436,11 +436,13 @@ export function jump(character) {
         character.position.y = 12;
         collidedTop1 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+        //tweenJumpBack.stop();
       } else if (collidedTop2) {
         console.log("Setting Yoshi position to 31");
         character.position.y = 31;
         collidedTop2 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+        //tweenJumpBack.stop();
       } else {
         // se non collide nè al primo piano né al secondo piano continua il salto normalmente
         character.position.y = tweenStartJump.y;
@@ -466,7 +468,7 @@ export function jump(character) {
       head.rotation.x = tweenStartJump.head;
     })
     .onStop(function () {
-      isJumping = false;
+      isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
     })
     .onComplete(function () {
       isJumpingRight = false;
