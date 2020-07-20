@@ -116,7 +116,8 @@ var dir;
 
 var collidedLeft = false;
 var collidedRight = false;
-var collidedTop = false;
+var collidedTop1 = false;
+var collidedTop2 = false;
 var collidedBottom = false;
 var collidedSide = false;
 

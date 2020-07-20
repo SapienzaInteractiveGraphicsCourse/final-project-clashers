@@ -912,7 +912,7 @@ function setGroupGeometry(groupWidth, y, z) {
     collFunc.onGroupContainerCollision
   );
 
-  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1, groupWidth - 2);
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1.5, groupWidth);
   groupContainerTop = new Physijs.BoxMesh(
     groupGeometryTop,
     geometryMaterial2,
@@ -920,10 +920,21 @@ function setGroupGeometry(groupWidth, y, z) {
   );
   groupContainerTop.position.set(0, y + 3, z);
   scene.add(groupContainerTop);
-  groupContainerTop.addEventListener(
-    "collision",
-    collFunc.onGroupContainerTopCollision
-  );
+
+  if (y == 9.5) {
+    //associo il listener relativo al "primo piano"
+    groupContainerTop.addEventListener(
+      "collision",
+      collFunc.onGroupContainerTopCollision1
+    );
+  }
+  if (y == 28.5) {
+    //associo il listener relativo al "secondo piano"
+    groupContainerTop.addEventListener(
+      "collision",
+      collFunc.onGroupContainerTopCollision2
+    );
+  }
   /*var groupPos = groupContainer.position.clone();
   groupContainer.position.copy(groupPos);
   groupContainer.rotation.set(0, 0, 0);

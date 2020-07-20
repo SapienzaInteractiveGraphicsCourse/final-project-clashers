@@ -45,7 +45,7 @@ export function onGroupContainerCollision(
   }
 }
 
-export function onGroupContainerTopCollision(
+export function onGroupContainerTopCollision1(
   other_object,
   relative_velocity,
   relative_rotation,
@@ -53,9 +53,23 @@ export function onGroupContainerTopCollision(
 ) {
   setCharacterStuff();
   if (other_object._physijs.id == lowerBoxId) {
-    console.log("Collided Top");
-    collidedTop = true;
-    tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+    console.log("Collided Top1, Yoshi position: " + model.position.y);
+    collidedTop1 = true;
+    collidedTop2 = false;
+  }
+}
+
+export function onGroupContainerTopCollision2(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+  if (other_object._physijs.id == lowerBoxId) {
+    console.log("Collided Top2, Yoshi position: " + model.position.y);
+    collidedTop2 = true;
+    collidedTop1 = false;
   }
 }
 
@@ -97,6 +111,9 @@ export function onCharacterLowerCollision(
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
+      collidedTop1 = false;
+      //collidedTop2 = false;
+      collidedSide = false;
       if (!isJumping) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
