@@ -645,3 +645,40 @@ export function goombaAnimation(goombaElem) {
     .repeat(Infinity);
   tweenWalkGoomba.chain(tweenWalkBackGoomba);
 }
+
+export function objectAnimation(object) {
+  var tweenStartObject = {
+    y: object.position.y,
+  };
+
+  if (object.position.y == 9) {
+    var tweenGoalObject = {
+      y: 16.5,
+    };
+  }
+
+  if (object.position.y == 28) {
+    var tweenGoalObject = {
+      y: 35,
+    };
+  }
+
+  var tweenObject = new TWEEN.Tween(tweenStartObject)
+    .to(tweenGoalObject, 6000)
+    //.easing(TWEEN.Easing.Elastic.Out)
+    .onUpdate(function () {
+      object.position.y = tweenStartObject.y;
+    })
+    .start();
+
+  if (flagCoin) {
+    var tweenRotationCoin = new TWEEN.Tween()
+      .easing(TWEEN.Easing.Linear.None)
+      .onUpdate(function () {
+        object.rotation.y += 0.1;
+      })
+      .yoyo(true)
+      .repeat(Infinity)
+      .start();
+  }
+}
