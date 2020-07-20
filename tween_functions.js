@@ -267,6 +267,12 @@ export function rotateTorso(direction) {
 }
 
 export function jump(character) {
+  //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi
+  var timeJumpBack = 1000;
+  if (character.position.y == 31) {
+    timeJumpBack = 1500;
+    console.log("Setting timeJumpBack = 1500");
+  }
   if (character == yoshi || character == luigi) {
     tweenStartJump = {
       y: character.position.y,
@@ -423,7 +429,7 @@ export function jump(character) {
 
   tweenFlex.chain(tweenJump);
   tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJumpBack, 1000) //400
+    .to(tweenGoalJumpBack, timeJumpBack) //400
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       //se collide al primo piano imposta la posizione del personaggio a 12

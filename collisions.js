@@ -111,9 +111,9 @@ export function onCharacterLowerCollision(
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
-      collidedTop1 = false;
-      collidedTop2 = false;
-      collidedSide = false;
+      collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
+      //collidedTop2 = false;
+      //collidedSide = false;
       if (!isJumping) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
