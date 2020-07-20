@@ -912,7 +912,7 @@ function setGroupGeometry(groupWidth, y, z) {
     collFunc.onGroupContainerCollision
   );
 
-  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1.5, groupWidth);
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1.5, groupWidth - 1);
   groupContainerTop = new Physijs.BoxMesh(
     groupGeometryTop,
     geometryMaterial2,

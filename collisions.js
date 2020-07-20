@@ -41,7 +41,7 @@ export function onGroupContainerCollision(
     //impostiamo il flag che dice che ha colliso lateralmente
     console.log("Collided Side");
     collidedSide = true;
-    isWalking = false; //capiamo bene se serve
+    //isWalking = false; //capiamo bene se serve
   }
 }
 
@@ -56,6 +56,7 @@ export function onGroupContainerTopCollision1(
     console.log("Collided Top1, Yoshi position: " + model.position.y);
     collidedTop1 = true;
     collidedTop2 = false;
+    //collidedSide = false;
   }
 }
 
@@ -70,6 +71,7 @@ export function onGroupContainerTopCollision2(
     console.log("Collided Top2, Yoshi position: " + model.position.y);
     collidedTop2 = true;
     collidedTop1 = false;
+    //collidedSide = false;
   }
 }
 
@@ -86,7 +88,7 @@ export function onPipeCollision(
   if (other_object._physijs.id == yoshiBox._physijs.id) {
     //impostiamo il flag che dice che ha colliso lateralmente
     collidedSide = true;
-    isWalking = false; //capiamo bene se serve
+    //isWalking = false; //capiamo bene se serve
   }
 }
 

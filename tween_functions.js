@@ -54,6 +54,7 @@ export function fall(character) {
         tweenFall.stop();
         console.log("Setting Character position to 12");
         character.position.y = 12;
+        collidedTop1 = false;
       } else {
         character.position.y = tweenStartFall.y;
       }
@@ -184,6 +185,7 @@ export function performAnimation(direction, character) {
       if (direction == "right" && !collidedSide) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
+        console.log("tween");
       }
 
       if (direction == "left" && !collidedSide) {
@@ -219,6 +221,7 @@ export function performAnimation(direction, character) {
       if (direction == "right" && !collidedSide) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
+        console.log("tweenBack");
       }
 
       if (direction == "left" && !collidedSide) {
@@ -412,6 +415,7 @@ export function jump(character) {
       if (keysPressed[68] && !collidedSide && !collidedTop1 && !collidedTop2) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
+        console.log("jump");
       }
 
       if (keysPressed[65] && !collidedSide && !collidedTop1 && !collidedTop2) {
@@ -459,6 +463,7 @@ export function jump(character) {
         //collidedtop serve per non fargli fare lo speedboost quando atterra
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
+        console.log("jumpBack");
       }
 
       if (keysPressed[65] && !collidedSide && !collidedTop1 && !collidedTop2) {
@@ -480,7 +485,6 @@ export function jump(character) {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
-
       collidedSide = false;
     });
   tweenJump.chain(tweenJumpBack);

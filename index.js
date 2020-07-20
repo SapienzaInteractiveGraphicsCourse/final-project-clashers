@@ -544,14 +544,15 @@ function init() {
 
         case 32:
           isWalking = false;
+          //groupRun.removeAll();
           //SPACE
           if (isRotatedRight) {
             isJumpingRight = true;
           } else {
             isJumpingLeft = true;
           }
-
           if (!spacePressed && !isJumping) {
+            //!isJumping a cosa serve?!?!?!?!!?
             //groupJump.removeAll();
             tweenFunc.setIdlePosition(character);
             tweenFunc.jump(character);
@@ -634,7 +635,8 @@ function init() {
 
         case 32:
           spacePressed = false;
-          tweenFunc.setIdlePosition(character);
+          //tweenFunc.setIdlePosition(character);
+
           break;
       }
     });
