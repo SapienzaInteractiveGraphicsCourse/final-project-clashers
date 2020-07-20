@@ -647,17 +647,27 @@ export function goombaAnimation(goombaElem) {
 }
 
 export function objectAnimation(object) {
+  if (object.position.y == 9) {
+    flag1 = true;
+    flag2 = false;
+  }
+
+  if (object.position.y == 28) {
+    flag2 = true;
+    flag1 = false;
+  }
+
   var tweenStartObject = {
     y: object.position.y,
   };
 
-  if (object.position.y == 9) {
+  if (flag1) {
     var tweenGoalObject = {
       y: 16.5,
     };
   }
 
-  if (object.position.y == 28) {
+  if (flag2) {
     var tweenGoalObject = {
       y: 35,
     };

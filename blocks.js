@@ -61,6 +61,13 @@ export function createGroup1() {
   group1.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
 
+  objectArray.push(group1[7]);
+  objectArray.push(group1[10]);
+  objectArray.push(group1[8]);
+  objectArray.push(group1[9]);
+
+  //console.log(objectArray[0]);
+
   goombaClone = goomba.clone();
   goombaClone.position.set(0, -13.3, -562.5);
   scene.add(goombaClone);
@@ -131,11 +138,15 @@ export function createGroup2() {
   group2.push(coinClone);
   setCoinGeometry(coinClone);
 
+  objectArray.push(coinClone);
+
   powerUpClone = powerUp.clone();
   powerUpClone.position.set(0, 9, -312.5);
   scene.add(powerUpClone);
   group2.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
+
+  objectArray.push(powerUpClone);
 
   setGroupGeometry(6.5, 9.5, -360.5);
   setGroupGeometry(6.3 * 3, 9.5, -312.5);
@@ -218,6 +229,11 @@ export function createGroup4() {
   group4.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
 
+  objectArray.push(group4[12]);
+  objectArray.push(group4[15]);
+  objectArray.push(group4[13]);
+  objectArray.push(group4[14]);
+
   setGroupGeometry(6.1 * 4, 28.5, -230);
   setGroupGeometry(6.5, 28.5, -182);
   setGroupGeometry(5.6 * 3, 28.5, -135.8);
@@ -259,6 +275,7 @@ export function createGroup5() {
 
   for (var i = 6; i < 9; i++) {
     setCoinGeometry(group5[i]);
+    objectArray.push(group5[i]);
   }
 
   for (var i = 0; i < 6; i++) {
@@ -769,6 +786,7 @@ export function createGroup6() {
   scene.add(coinClone);
   group6.push(coinClone);
   setCoinGeometry(coinClone);
+  objectArray.push(coinClone);
 
   for (var i = 0; i < 2; i++) {
     goombaClone = goomba.clone();
@@ -874,7 +892,7 @@ function setCoinGeometry(coinElem) {
     coinElem.position.y,
     coinElem.position.z
   );
-  objectArray.push(coinElem);
+  //objectArray.push(coinElem);
   //tweenFunc.objectAnimation(coinElem);
   //scene.add(coinContainer);
 }
@@ -887,7 +905,7 @@ function setPowerUpGeometry(powerUpElem) {
     powerUpElem.position.y,
     powerUpElem.position.z
   );
-  objectArray.push(powerUpElem);
+  //objectArray.push(powerUpElem);
   //scene.add(powerUpContainer);
   //tweenFunc.objectAnimation(powerUpElem);
 }
