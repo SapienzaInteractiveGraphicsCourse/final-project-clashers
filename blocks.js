@@ -13,6 +13,8 @@ groupPipes = new Array();
 
 goombaElemArray = new Array();
 goombaContainerIdArray = new Array();
+questionBoxArray = new Array();
+objectArray = new Array();
 
 export function createGroup1() {
   //var brickClone;
@@ -34,25 +36,27 @@ export function createGroup1() {
     scene.add(questionBoxClone);
     group1.push(questionBoxClone);
   }
-  group1[5].position.set(0, 25.2, -556);
-  group1[6].position.set(0, 6.2, -600);
+  group1[6].position.set(0, 25.2, -556);
+  group1[3].position.set(0, 6.2, -600);
+  group1[4].position.set(0, 6.2, -562.5);
+  group1[5].position.set(0, 6.2, -550.1);
   for (var i = 3; i < 7; i++) {
     setQuestionBoxGeometry(group1[i]);
   }
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 16.5, -600 + 50 * i); //8.5
+    coinClone.position.set(0, 9, -600 + 50 * i); //8.5
     scene.add(coinClone);
     group1.push(coinClone);
   }
-  group1[9].position.set(0, 35, -556);
+  group1[9].position.set(0, 28, -556);
 
   for (var i = 7; i < 10; i++) {
     setCoinGeometry(group1[i]);
   }
 
   powerUpClone = powerUp.clone();
-  powerUpClone.position.set(0, 16.5, -562.5); //16.5
+  powerUpClone.position.set(0, 9, -562.5); //16.5
   scene.add(powerUpClone);
   group1.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
@@ -122,13 +126,13 @@ export function createGroup2() {
   }
 
   coinClone = coin.clone();
-  coinClone.position.set(0, 16.5, -360.5);
+  coinClone.position.set(0, 9, -360.5);
   scene.add(coinClone);
   group2.push(coinClone);
   setCoinGeometry(coinClone);
 
   powerUpClone = powerUp.clone();
-  powerUpClone.position.set(0, 16.5, -312.5);
+  powerUpClone.position.set(0, 9, -312.5);
   scene.add(powerUpClone);
   group2.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
@@ -198,18 +202,18 @@ export function createGroup4() {
 
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 35, -221.5 + 126.7 * i); //8.5
+    coinClone.position.set(0, 28, -221.5 + 126.7 * i); //8.5
     scene.add(coinClone);
     group4.push(coinClone);
   }
-  group4[14].position.set(0, 35, -89.3);
+  group4[14].position.set(0, 28, -89.3);
 
   for (var i = 12; i < 15; i++) {
     setCoinGeometry(group4[i]);
   }
 
   powerUpClone = powerUp.clone();
-  powerUpClone.position.set(0, 35, -182);
+  powerUpClone.position.set(0, 28, -182);
   scene.add(powerUpClone);
   group4.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
@@ -243,17 +247,17 @@ export function createGroup5() {
   group5[1].position.set(0, 5, -95.8);
   group5[2].position.set(0, 5, -95.8 + 5.5);
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 16.5, -220.25 + 23.25 * i); //8.5
+    coinClone.position.set(0, 9, -197 + 23.25 * i); //8.5
     scene.add(coinClone);
     group5.push(coinClone);
   }
 
-  group5[8].position.set(0, 16.5, -182);
-  group5[9].position.set(0, 16.5, -167);
+  group5[7].position.set(0, 9, -182);
+  group5[8].position.set(0, 9, -167);
 
-  for (var i = 6; i < 10; i++) {
+  for (var i = 6; i < 9; i++) {
     setCoinGeometry(group5[i]);
   }
 
@@ -264,10 +268,10 @@ export function createGroup5() {
     group5.push(goombaClone);
   }
 
-  group5[12].position.set(0, -13.3, -120);
-  group5[13].position.set(0, -13.3, -110);
-  group5[14].position.set(0, -13.3, -100);
-  group5[15].position.set(0, -13.3, -90);
+  group5[11].position.set(0, -13.3, -120);
+  group5[12].position.set(0, -13.3, -110);
+  group5[13].position.set(0, -13.3, -100);
+  group5[14].position.set(0, -13.3, -90);
 
   for (var i = 0; i < 3; i++) {
     setBrickGeometry(group5[i]);
@@ -276,7 +280,7 @@ export function createGroup5() {
     setQuestionBoxGeometry(group5[i]);
   }
 
-  for (var i = 10; i < 16; i++) {
+  for (var i = 9; i < 15; i++) {
     setGoombaGeometry(group5[i]);
     //tweenFunc.goombaAnimation(group5[i]);
   }
@@ -761,7 +765,7 @@ export function createGroup6() {
   group6.push(questionBoxClone);
 
   coinClone = coin.clone();
-  coinClone.position.set(0, 16.5, 148); //8.5
+  coinClone.position.set(0, 9, 148); //8.5
   scene.add(coinClone);
   group6.push(coinClone);
   setCoinGeometry(coinClone);
@@ -801,6 +805,8 @@ function setQuestionBoxGeometry(questionBoxElem) {
   scene.add(questionBoxContainer);
   //questionBoxContainer.__dirtyPosition = true;
   //questionBoxContainer.__dirtyRotation = false;
+
+  questionBoxArray.push(questionBoxContainer);
   questionBoxContainer.addEventListener(
     "collision",
     collFunc.onBottomCollision
@@ -868,6 +874,8 @@ function setCoinGeometry(coinElem) {
     coinElem.position.y,
     coinElem.position.z
   );
+  objectArray.push(coinElem);
+  //tweenFunc.objectAnimation(coinElem);
   //scene.add(coinContainer);
 }
 
@@ -879,7 +887,9 @@ function setPowerUpGeometry(powerUpElem) {
     powerUpElem.position.y,
     powerUpElem.position.z
   );
+  objectArray.push(powerUpElem);
   //scene.add(powerUpContainer);
+  //tweenFunc.objectAnimation(powerUpElem);
 }
 
 function setGoombaGeometry(goombaElem) {

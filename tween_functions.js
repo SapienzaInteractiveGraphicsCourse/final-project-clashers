@@ -185,7 +185,7 @@ export function performAnimation(direction, character) {
       if (direction == "right" && !collidedSide) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
-        console.log("tween");
+        //console.log("tween");
       }
 
       if (direction == "left" && !collidedSide) {
@@ -221,7 +221,7 @@ export function performAnimation(direction, character) {
       if (direction == "right" && !collidedSide) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
-        console.log("tweenBack");
+        //console.log("tweenBack");
       }
 
       if (direction == "left" && !collidedSide) {
@@ -665,20 +665,20 @@ export function objectAnimation(object) {
 
   var tweenObject = new TWEEN.Tween(tweenStartObject)
     .to(tweenGoalObject, 6000)
-    //.easing(TWEEN.Easing.Elastic.Out)
+    .easing(TWEEN.Easing.Elastic.Out)
     .onUpdate(function () {
       object.position.y = tweenStartObject.y;
     })
     .start();
 
-  if (flagCoin) {
-    var tweenRotationCoin = new TWEEN.Tween()
-      .easing(TWEEN.Easing.Linear.None)
-      .onUpdate(function () {
-        object.rotation.y += 0.1;
-      })
-      .yoyo(true)
-      .repeat(Infinity)
-      .start();
-  }
+  //if (flagCoin) {
+  var tweenRotationCoin = new TWEEN.Tween()
+    .easing(TWEEN.Easing.Linear.None)
+    .onUpdate(function () {
+      object.rotation.y += 0.1;
+    })
+    .yoyo(true)
+    .repeat(Infinity)
+    .start();
+  //}
 }

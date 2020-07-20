@@ -1,4 +1,4 @@
-import { fall, setIdlePosition } from "./tween_functions.js";
+import { fall, setIdlePosition, objectAnimation } from "./tween_functions.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -85,9 +85,20 @@ export function onBottomCollision(
   if (other_object._physijs.id == upperBoxId) {
     console.log("collision bottom");
     //collidedBottom = true;
-
     tweenJump.stop();
     tweenJumpBack.start();
+
+    var id = this._physijs.id;
+
+    for (var i in questionBoxArray) {
+      console.log(
+        "questionBoxArray[i]._physijs.id:" + questionBoxArray[i]._physijs.id
+      );
+      console.log("id:" + id);
+      if (questionBoxArray[i]._physijs.id == id) {
+        objectAnimation(objectArray[i]);
+      }
+    }
   }
 }
 

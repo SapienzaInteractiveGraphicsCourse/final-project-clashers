@@ -140,6 +140,8 @@ var character;
 
 var goombaElemArray;
 var goombaContainerIdArray;
+var questionBoxArray;
+var objectArray;
 
 var marioBox;
 var marioUpperBox;
