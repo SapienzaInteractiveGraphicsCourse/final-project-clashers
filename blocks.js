@@ -810,7 +810,7 @@ export function createGroup6() {
 }
 
 function setQuestionBoxGeometry(questionBoxElem) {
-  var questionBoxGeometry = new THREE.BoxGeometry(5, 0.5, 2);
+  var questionBoxGeometry = new THREE.BoxGeometry(5, 1, 4);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
     geometryMaterial1,
@@ -920,7 +920,7 @@ function setGoombaGeometry(goombaElem) {
     goombaElem.position.z
   );
   scene.add(goombaContainer);
-  //goombaContainer.addEventListener("collision", collFunc.onGoombaCollision); //RIMETTERE
+  goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
 
   //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
   //goombaContainerIdArray[0] = goombaContainer._physijs;
@@ -935,8 +935,15 @@ function setGoombaGeometry(goombaElem) {
     goombaElem.position.y + 4.5,
     goombaElem.position.z
   );
-  scene.add(goombaContainerTop);
+  //scene.add(goombaContainerTop); //questa riga da errore
   goombaContainerTopArray.push(goombaContainerTop);
+  for (var i in goombaContainerTopArray) {
+    scene.add(goombaContainerTopArray[i]);
+    goombaContainerTopArray[i].addEventListener(
+      "collision",
+      collFunc.onGoombaTopCollision
+    );
+  }
 
   goombaContainerIdArray.push(goombaContainer); //levare id
   goombaElemArray.push(goombaElem);
@@ -977,9 +984,4 @@ function setGroupGeometry(groupWidth, y, z) {
       collFunc.onGroupContainerTopCollision2
     );
   }
-  /*var groupPos = groupContainer.position.clone();
-  groupContainer.position.copy(groupPos);
-  groupContainer.rotation.set(0, 0, 0);
-  groupContainer.__dirtyPosition = true;
-  groupContainer.__dirtyRotation = true;*/
 }

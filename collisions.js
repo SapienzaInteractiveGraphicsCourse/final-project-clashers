@@ -1,4 +1,9 @@
-import { fall, setIdlePosition, objectAnimation } from "./tween_functions.js";
+import {
+  fall,
+  setIdlePosition,
+  objectAnimation,
+  goombaAnimation,
+} from "./tween_functions.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -170,6 +175,47 @@ export function onGroupCollision(
   contact_normal
 ) {
   //setCharacterStuff();
+}
+
+export function onGoombaTopCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+
+  if (other_object._physijs.id == lowerBoxId) {
+    if (other_object instanceof Physijs.Mesh) {
+      var id = this._physijs.id;
+      for (var i in goombaContainerTopArray) {
+        if (goombaContainerTopArray[i]._physijs.id == id) {
+          goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
+          //in caso STOPPARE PER FARE CONTENTA MARTINA TURBESSI
+        }
+      }
+    }
+  }
+}
+
+export function onGoombaCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+
+  if (other_object._physijs.id == boxId) {
+    if (other_object instanceof Physijs.Mesh) {
+      var id = this._physijs.id;
+      for (var i in goombaContainerIdArray) {
+        if (goombaContainerIdArray[i]._physijs.id == id) {
+          goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
+        }
+      }
+    }
+  }
 }
 
 /*
@@ -367,37 +413,4 @@ export function onBottomCollision(
     //fall();
   }
 }
-
-export function onGoombaCollision(
-  other_object,
-  relative_velocity,
-  relative_rotation,
-  contact_normal
-) {
-  setCharacterStuff();
-  if (other_object._physijs.id == boxId) {
-    if (other_object instanceof Physijs.Mesh) {
-      console.log("collisione");
-
-      //perdi la vita
-    }
-  }
-
-  if (other_object._physijs.id == lowerBoxId) {
-    if (other_object instanceof Physijs.Mesh) {
-      console.log("pipeCollision Top");
-
-      var id = this._physijs.id;
-      console.log(id);
-
-      //for (var i = 0; i < goombaContainerIdArray.lenght; i++) {
-      for (var i in goombaContainerIdArray) {
-        console.log(goombaContainerIdArray[i]);
-        if (goombaContainerIdArray[i]._physijs.id == id) {
-          console.log("goombaElemArray[i] = " + goombaElemArray[i]);
-          goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
-        }
-      }
-    }
-  }
-}*/
+*/
