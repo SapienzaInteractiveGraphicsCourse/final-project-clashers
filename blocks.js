@@ -41,7 +41,7 @@ export function createGroup1() {
     scene.add(questionBoxClone);
     group1.push(questionBoxClone);
   }
-  group1[6].position.set(0, 25.2, -556);
+  group1[6].position.set(0, 30, -556); //25.2
   group1[3].position.set(0, 6.2, -600);
   group1[4].position.set(0, 6.2, -562.5);
   group1[5].position.set(0, 6.2, -550.1);
@@ -54,7 +54,7 @@ export function createGroup1() {
     scene.add(coinClone);
     group1.push(coinClone);
   }
-  group1[9].position.set(0, 28, -556);
+  group1[9].position.set(0, 33, -556);
 
   for (var i = 7; i < 10; i++) {
     setCoinGeometry(group1[i]);
@@ -82,7 +82,7 @@ export function createGroup1() {
 
   setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
   setGroupGeometry(6.2 * 5, 9.5, -556.3);
-  setGroupGeometry(6.5, 28.5, -556.1);
+  setGroupGeometry(6.5, 33.5, -556.1);
 }
 
 export function createGroupPipes() {
@@ -161,21 +161,21 @@ export function createGroup3() {
   var brickClone;
   for (var i = 0; i < 8; i++) {
     brickClone = brick.clone();
-    brickClone.position.set(0, 24, -300 + 5.5 * i);
+    brickClone.position.set(0, 28.8, -300 + 5.5 * i); //24
     scene.add(brickClone);
     group3.push(brickClone);
     setBrickGeometry(brickClone);
   }
   for (var i = 0; i < 2; i++) {
     goombaClone = goomba.clone();
-    goombaClone.position.set(0, 32.5, -292 + 10 * i);
+    goombaClone.position.set(0, 36.8, -292 + 10 * i);
     scene.add(goombaClone);
     group3.push(goombaClone);
     setGoombaGeometry(goombaClone);
     //tweenFunc.goombaAnimation(goombaClone);
   }
 
-  setGroupGeometry(5.6 * 8, 28.5, -279.5);
+  setGroupGeometry(5.6 * 8, 33.5, -279.5);
 }
 
 export function createGroup4() {
@@ -192,21 +192,21 @@ export function createGroup4() {
     scene.add(questionBoxClone);
     group4.push(questionBoxClone);
   }
-  group4[0].position.set(0, 24, -240);
-  group4[1].position.set(0, 24, -240 + 5.5);
-  group4[2].position.set(0, 24, -240 + 5.5 * 2);
-  group4[8].position.set(0, 25.2, -238 + 5.5 * 3);
+  group4[0].position.set(0, 28.8, -240);
+  group4[1].position.set(0, 28.8, -240 + 5.5);
+  group4[2].position.set(0, 28.8, -240 + 5.5 * 2);
+  group4[8].position.set(0, 30, -238 + 5.5 * 3);
 
-  group4[9].position.set(0, 25.2, -182);
+  group4[9].position.set(0, 30, -182);
 
-  group4[3].position.set(0, 24, -142.5);
-  group4[4].position.set(0, 24, -142.5 + 5.5);
-  group4[5].position.set(0, 24, -142.5 + 5.5 * 2);
+  group4[3].position.set(0, 28.8, -142.5);
+  group4[4].position.set(0, 28.8, -142.5 + 5.5);
+  group4[5].position.set(0, 28.8, -142.5 + 5.5 * 2);
 
-  group4[6].position.set(0, 24, -102.5);
-  group4[7].position.set(0, 24, -84);
-  group4[10].position.set(0, 25.2, -94.8);
-  group4[11].position.set(0, 25.2, -94.8 + 5.8);
+  group4[6].position.set(0, 28.8, -102.5);
+  group4[7].position.set(0, 28.8, -84);
+  group4[10].position.set(0, 30, -94.8);
+  group4[11].position.set(0, 30, -94.8 + 5.8);
 
   for (var i = 0; i < 8; i++) {
     setBrickGeometry(group4[i]);
@@ -218,18 +218,18 @@ export function createGroup4() {
 
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 28, -221.5 + 126.7 * i); //8.5
+    coinClone.position.set(0, 33, -221.5 + 126.7 * i); //8.5
     scene.add(coinClone);
     group4.push(coinClone);
   }
-  group4[14].position.set(0, 28, -89.3);
+  group4[14].position.set(0, 33, -89.3);
 
   for (var i = 12; i < 15; i++) {
     setCoinGeometry(group4[i]);
   }
 
   powerUpClone = powerUp.clone();
-  powerUpClone.position.set(0, 28, -182);
+  powerUpClone.position.set(0, 33, -182);
   scene.add(powerUpClone);
   group4.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
@@ -239,10 +239,10 @@ export function createGroup4() {
   objectArray.push(group4[13]);
   objectArray.push(group4[14]);
 
-  setGroupGeometry(6.1 * 4, 28.5, -230);
-  setGroupGeometry(6.5, 28.5, -182);
-  setGroupGeometry(5.6 * 3, 28.5, -135.8);
-  setGroupGeometry(6.3 * 4, 28.5, -92);
+  setGroupGeometry(6.1 * 4, 33.5, -230);
+  setGroupGeometry(6.5, 33.5, -182);
+  setGroupGeometry(5.6 * 3, 33.5, -135.8);
+  setGroupGeometry(6.3 * 4, 33.5, -92);
 }
 
 export function createGroup5() {
@@ -973,7 +973,7 @@ function setGroupGeometry(groupWidth, y, z) {
     collFunc.onGroupContainerCollision
   );
 
-  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1.5, groupWidth - 1);
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1.5, groupWidth - 0.5);
   groupContainerTop = new Physijs.BoxMesh(
     groupGeometryTop,
     geometryMaterial2,
@@ -989,7 +989,7 @@ function setGroupGeometry(groupWidth, y, z) {
       collFunc.onGroupContainerTopCollision1
     );
   }
-  if (y == 28.5) {
+  if (y == 33.5) {
     //associo il listener relativo al "secondo piano"
     groupContainerTop.addEventListener(
       "collision",

@@ -2,8 +2,8 @@ import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 
 export function fall(character) {
   var timeFall = 400;
-  if (character.position.y == 31) {
-    timeFall = 700;
+  if (character.position.y == 36) {
+    timeFall = 900;
     console.log("Setting timeFall = 700");
   }
 
@@ -14,7 +14,7 @@ export function fall(character) {
   if (
     collidedBottom &&
     character.position.y > 10 &&
-    character.position.y < 31
+    character.position.y < 36
   ) {
     timeFall = 1500;
     console.log("sto qua");
@@ -261,9 +261,13 @@ export function rotateTorso(direction) {
 export function jump(character) {
   //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi
   var timeJumpBack = 1000;
-  if (character.position.y == 31) {
+  if (character.position.y == 36) {
     timeJumpBack = 1500;
     console.log("Setting timeJumpBack = 1500");
+  }
+  if (isCoin) {
+    timeJumpBack = 3000;
+    console.log("Setting timeJumpBack = 3000");
   }
   if (character == yoshi || character == luigi) {
     tweenStartJump = {
@@ -437,8 +441,8 @@ export function jump(character) {
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
         //tweenJumpBack.stop();
       } else if (collidedTop2) {
-        console.log("Setting Yoshi position to 31");
-        character.position.y = 31;
+        console.log("Setting Yoshi position to 36");
+        character.position.y = 36;
         collidedTop2 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
         //tweenJumpBack.stop();
@@ -469,6 +473,7 @@ export function jump(character) {
     })
     .onStop(function () {
       isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
+      collidedSide = false;
     })
     .onComplete(function () {
       isJumpingRight = false;
@@ -647,7 +652,7 @@ export function objectAnimation(object, i) {
     var flag2 = false;
   }
 
-  if (object.position.y >= 28 && object.position.y < 35) {
+  if (object.position.y >= 32 && object.position.y < 40.5) {
     var flag2 = true;
     var flag1 = false;
   }
@@ -664,7 +669,7 @@ export function objectAnimation(object, i) {
 
   if (flag2) {
     var tweenGoalObject = {
-      y: 35,
+      y: 40.5,
     };
   }
 

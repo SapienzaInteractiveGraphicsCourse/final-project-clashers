@@ -62,6 +62,10 @@ export function onGroupContainerTopCollision1(
     collidedTop1 = true;
     collidedTop2 = false;
     //collidedSide = false;
+
+    isCoin = false;
+    console.log("isJumping = " + isJumping);
+    console.log("isCoin = " + isCoin);
   }
 }
 
@@ -76,6 +80,10 @@ export function onGroupContainerTopCollision2(
     console.log("Collided Top2, Yoshi position: " + model.position.y);
     collidedTop2 = true;
     collidedTop1 = false;
+
+    isCoin = false;
+    console.log("isJumping = " + isJumping);
+    console.log("isCoin = " + isCoin);
     //collidedSide = false;
   }
 }
@@ -148,10 +156,12 @@ export function onCharacterLowerCollision(
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
+      //isCoin = false;
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
       //collidedTop2 = false;
       //collidedSide = false;
-      if (!isJumping) {
+
+      if (!isJumping && !isCoin) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
       }
@@ -235,7 +245,7 @@ export function onCoinCollision(
         score += 1;
         scene.remove(coinArray[i]);
         scene.remove(coinContainerArray[i]);
-        //isCoin = false;
+        isCoin = true;
       }
     }
   }
