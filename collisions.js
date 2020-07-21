@@ -249,7 +249,10 @@ export function onPowerUpCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  if (other_object._physijs.id == boxId) {
+  if (
+    other_object._physijs.id == boxId ||
+    other_object._physijs.id == lowerBoxId
+  ) {
     var id = this._physijs.id;
     for (var i in coinContainerArray) {
       if (coinContainerArray[i]._physijs.id == id) {

@@ -1139,8 +1139,8 @@ var coinScore = document.createElement("img");
 coinScore.style.position = "absolute";
 coinScore.src = "img/coinScore.gif";
 coinScore.style.height = 40 + "px";
-coinScore.style.top = 20 + "px";
-coinScore.style.right = 90 + "px";
+coinScore.style.top = 80 + "px";
+coinScore.style.left = 40 + "px";
 document.body.appendChild(coinScore);
 
 score = 0;
@@ -1150,9 +1150,10 @@ text.style.fontFamily = "superMarioFont";
 text.style.position = "absolute";
 text.style.color = "yellow";
 text.style.webkitTextStroke = "1px black";
+text.style.textShadow = "4px 4px 8px black";
 text.style.height = 40 + "px";
-text.style.top = 30 + "px";
-text.style.right = 40 + "px";
+text.style.top = 90 + "px";
+text.style.left = 90 + "px";
 document.body.appendChild(text);
 
 //text.innerHTML = "Score: " + score;
