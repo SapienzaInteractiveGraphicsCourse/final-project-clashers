@@ -89,17 +89,15 @@ export function onBottomCollision(
   setCharacterStuff();
   if (other_object._physijs.id == upperBoxId) {
     console.log("collision bottom");
-    //collidedBottom = true;
+    collidedBottom = true;
+
     tweenJump.stop();
-    tweenJumpBack.start();
+    fall(model);
+    //tweenJumpBack.start();
 
     var id = this._physijs.id;
 
     for (var i in questionBoxArray) {
-      console.log(
-        "questionBoxArray[i]._physijs.id:" + questionBoxArray[i]._physijs.id
-      );
-      console.log("id:" + id);
       if (questionBoxArray[i]._physijs.id == id) {
         objectAnimation(objectArray[i]);
       }

@@ -55,7 +55,7 @@ export function setYoshiGeometry() {
   scene.add(yoshiBox);
   //yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
 
-  var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+  var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 1.5, 5);
   yoshiUpperBox = new Physijs.BoxMesh(yoshiUpperGeometry, geometryMaterial1, 1);
   yoshiUpperBox.position.set(
     yoshi.position.x,

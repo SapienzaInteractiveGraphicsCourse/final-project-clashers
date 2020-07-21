@@ -276,8 +276,11 @@ export function createGroup5() {
 
   for (var i = 6; i < 9; i++) {
     setCoinGeometry(group5[i]);
-    objectArray.push(group5[i]);
   }
+
+  objectArray.push(group5[6]);
+  objectArray.push(group5[7]);
+  objectArray.push(group5[8]);
 
   for (var i = 0; i < 6; i++) {
     goombaClone = goomba.clone();
@@ -810,7 +813,7 @@ export function createGroup6() {
 }
 
 function setQuestionBoxGeometry(questionBoxElem) {
-  var questionBoxGeometry = new THREE.BoxGeometry(5, 1, 4);
+  var questionBoxGeometry = new THREE.BoxGeometry(5, 1.5, 4);
   questionBoxContainer = new Physijs.BoxMesh(
     questionBoxGeometry,
     geometryMaterial1,
@@ -833,7 +836,7 @@ function setQuestionBoxGeometry(questionBoxElem) {
 }
 
 function setBrickGeometry(brickElem) {
-  var brickGeometry = new THREE.BoxGeometry(4, 0.5, 2);
+  var brickGeometry = new THREE.BoxGeometry(4, 1.5, 4);
   brickContainer = new Physijs.BoxMesh(brickGeometry, geometryMaterial1, 0);
   brickContainer.position.set(
     brickElem.position.x,

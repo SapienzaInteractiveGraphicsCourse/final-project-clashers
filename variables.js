@@ -160,6 +160,3 @@ var touchesBox;
 var touchesUpper;
 var touchesLower;
 var model;
-
-var flag1;
-var flag2;

@@ -6,6 +6,19 @@ export function fall(character) {
     timeFall = 700;
     console.log("Setting timeFall = 700");
   }
+
+  if (collidedBottom && character.position.y < 10) {
+    timeFall = 600;
+  }
+
+  if (
+    collidedBottom &&
+    character.position.y > 10 &&
+    character.position.y < 31
+  ) {
+    timeFall = 1500;
+    console.log("sto qua");
+  }
   console.log("falling");
   tweenStartFall = {
     y: character.position.y,
@@ -13,38 +26,6 @@ export function fall(character) {
   tweenGoalFall = {
     y: -14.3,
   };
-
-  /*if (collidedTop1) {
-    tweenGoalFall = {
-      y: -14.3,
-    };
-  } else if (collidedTop2) {
-    tweenGoalFall = {
-      y: 12,
-    };
-  } else {
-    // se non collide nè al primo piano né al secondo piano continua il salto normalmente
-    tweenGoalFall = {
-      y: -14.3,
-    };
-  }*/
-
-  /*if (!collidedTop1 && !collideTop2) {
-    tweenGoalFall = {
-      y: -14.3,
-    };
-  } else {
-    if (character.position.y > 11.5 && character.position.y < 13) {
-      tweenGoalFall = {
-        y: -14.3,
-      };
-    }
-    if (character.position.y > 30 && character.position.y < 32) {
-      tweenGoalFall = {
-        y: 12,
-      };
-    }
-  }*/
 
   tweenFall = new TWEEN.Tween(tweenStartFall)
     .to(tweenGoalFall, timeFall)
@@ -66,6 +47,8 @@ export function fall(character) {
     .onComplete(function () {
       collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
       //collidedTop = false; //serve per dire che quando cade smete di collidere col top
+      isJumping = false;
+      setIdlePosition(character);
     })
     .start();
 }
@@ -77,6 +60,8 @@ export function setAnimationParameters(character) {
       x_right: upperLeg_right.rotation.x,
       x_leftArm: upperArm_left.rotation.x,
       x_rightArm: upperArm_right.rotation.x,
+      lowerLeg_right: lowerLeg_right.rotation.x,
+      lowerLeg_left: lowerLeg_left.rotation.x,
       rightArm_rotation_z: (45 * Math.PI) / 180,
       rightHand_rotation_y: handRight.rotation.y,
       spine: spine.rotation.x,
@@ -101,6 +86,8 @@ export function setAnimationParameters(character) {
       x_right: (0 * Math.PI) / 180,
       x_leftArm: (0 * Math.PI) / 180,
       x_rightArm: (0 * Math.PI) / 180,
+      lowerLeg_right: (0 * Math.PI) / 180,
+      lowerLeg_left: (0 * Math.PI) / 180,
 
       rightArm_rotation_z: (45 * Math.PI) / 180,
       rightHand_rotation_y: (90 * Math.PI) / 180,
@@ -555,6 +542,9 @@ export function setIdlePosition(character) {
       upperLeg_left.rotation.x = tweenStartScale.x_left;
       upperLeg_right.rotation.x = tweenStartScale.x_right;
 
+      lowerLeg_right.rotation.x = tweenStartScale.lowerLeg_right;
+      lowerLeg_left.rotation.x = tweenStartScale.lowerLeg_left;
+
       upperArm_left.rotation.x = tweenStartScale.x_leftArm;
       upperArm_right.rotation.x = tweenStartScale.x_rightArm;
 
@@ -570,6 +560,9 @@ export function setIdlePosition(character) {
 
       handRight.rotation.y = tweenStartScale.rightHand_rotation_y;
       handLeft.rotation.y = tweenStartScale.rightHand_rotation_y;
+    })
+    .onComplete(function () {
+      isJumping = false;
     })
     .start();
 }
@@ -647,14 +640,14 @@ export function goombaAnimation(goombaElem) {
 }
 
 export function objectAnimation(object) {
-  if (object.position.y == 9) {
-    flag1 = true;
-    flag2 = false;
+  if (object.position.y >= 9 && object.position.y < 16.5) {
+    var flag1 = true;
+    var flag2 = false;
   }
 
-  if (object.position.y == 28) {
-    flag2 = true;
-    flag1 = false;
+  if (object.position.y >= 28 && object.position.y < 35) {
+    var flag2 = true;
+    var flag1 = false;
   }
 
   var tweenStartObject = {
