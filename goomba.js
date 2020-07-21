@@ -9,4 +9,15 @@ export function updateGoombaBoxPosition(goombaElem, i) {
   goombaContainerIdArray[i].rotation.set(0, 0, 0);
   goombaContainerIdArray[i].__dirtyPosition = true;
   goombaContainerIdArray[i].__dirtyRotation = true;
+
+  goombaContainerTopArray[i].position.set(
+    goombaElem.position.x,
+    goombaElem.position.y + 4.5,
+    goombaElem.position.z
+  );
+  var goombaContainerTopPos = goombaContainerTopArray[i].position.clone();
+  goombaContainerTopArray[i].position.copy(goombaContainerTopPos);
+  goombaContainerTopArray[i].rotation.set(0, 0, 0);
+  goombaContainerTopArray[i].__dirtyPosition = true;
+  goombaContainerTopArray[i].__dirtyRotation = true;
 }

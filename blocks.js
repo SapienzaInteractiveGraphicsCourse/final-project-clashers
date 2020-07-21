@@ -13,6 +13,7 @@ groupPipes = new Array();
 
 goombaElemArray = new Array();
 goombaContainerIdArray = new Array();
+goombaContainerTopArray = new Array();
 questionBoxArray = new Array();
 objectArray = new Array();
 
@@ -911,7 +912,7 @@ function setPowerUpGeometry(powerUpElem) {
 }
 
 function setGoombaGeometry(goombaElem) {
-  var goombaGeometry = new THREE.BoxGeometry(4.7, 5.2, 4.8);
+  var goombaGeometry = new THREE.BoxGeometry(4.7, 3, 4.8);
   goombaContainer = new Physijs.BoxMesh(goombaGeometry, geometryMaterial, 0);
   goombaContainer.position.set(
     goombaElem.position.x,
@@ -923,8 +924,21 @@ function setGoombaGeometry(goombaElem) {
 
   //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
   //goombaContainerIdArray[0] = goombaContainer._physijs;
+  var goombaGeometryTop = new THREE.BoxGeometry(4.7, 1, 4.8);
+  goombaContainerTop = new Physijs.BoxMesh(
+    goombaGeometryTop,
+    geometryMaterial2,
+    0
+  );
+  goombaContainerTop.position.set(
+    goombaElem.position.x,
+    goombaElem.position.y + 4.5,
+    goombaElem.position.z
+  );
+  scene.add(goombaContainerTop);
+  goombaContainerTopArray.push(goombaContainerTop);
 
-  goombaContainerIdArray.push(goombaContainer);
+  goombaContainerIdArray.push(goombaContainer); //levare id
   goombaElemArray.push(goombaElem);
   tweenFunc.goombaAnimation(goombaElem);
   //updateGoombaBoxPosition(goombaElem);

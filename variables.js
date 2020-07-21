@@ -111,6 +111,7 @@ var coinClone;
 var powerUpClone;
 var goombaClone;
 var groupContainerTop;
+var goombaContainerTop;
 
 var dir;
 
@@ -140,6 +141,7 @@ var character;
 
 var goombaElemArray;
 var goombaContainerIdArray;
+var goombaContainerTopArray;
 var questionBoxArray;
 var objectArray;
 
