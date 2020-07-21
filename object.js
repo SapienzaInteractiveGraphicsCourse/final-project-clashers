@@ -1,12 +1,25 @@
-export function updateObjectBoxPosition(object, i) {
-  objectContainerArray[i].position.set(
-    object.position.x,
-    object.position.y,
-    object.position.z
+export function updateCoinBoxPosition(coinElem, i) {
+  coinContainerArray[i].position.set(
+    coinElem.position.x,
+    coinElem.position.y,
+    coinElem.position.z
   );
-  var objectContainerPos = objectContainerArray[i].position.clone();
-  objectContainerPos[i].position.copy(objectContainerPos);
-  objectContainerPos[i].rotation.set(0, 0, 0);
-  objectContainerPos[i].__dirtyPosition = true;
-  objectContainerPos[i].__dirtyRotation = true;
+  var coinContainerPos = coinContainerArray[i].position.clone();
+  coinContainerArray[i].position.copy(coinContainerPos);
+  coinContainerArray[i].rotation.set(0, 0, 0);
+  coinContainerArray[i].__dirtyPosition = true;
+  coinContainerArray[i].__dirtyRotation = true;
+}
+
+export function updatePowerUpBoxPosition(powerUpElem, i) {
+  powerUpContainerArray[i].position.set(
+    powerUpElem.position.x,
+    powerUpElem.position.y,
+    powerUpElem.position.z
+  );
+  var powerUpContainerPos = powerUpContainerArray[i].position.clone();
+  powerUpContainerArray[i].position.copy(powerUpContainerPos);
+  powerUpContainerArray[i].rotation.set(0, 0, 0);
+  powerUpContainerArray[i].__dirtyPosition = true;
+  powerUpContainerArray[i].__dirtyRotation = true;
 }

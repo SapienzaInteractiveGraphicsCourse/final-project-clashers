@@ -9,7 +9,7 @@ import * as collFunc from "./collisions.js";
 import * as blockFunc from "./blocks.js";
 import * as tweenFunc from "./tween_functions.js";
 import { updateGoombaBoxPosition } from "./goomba.js";
-import { updateObjectBoxPosition } from "./object.js";
+import * as objectFunc from "./object.js";
 import * as yoshiFunc from "./yoshi.js";
 import * as luigiFunc from "./luigi.js";
 import * as marioFunc from "./mario.js";
@@ -987,9 +987,13 @@ function init() {
       updateGoombaBoxPosition(goombaElemArray[i], i);
     }
 
-    /*for (var i in objectArray) {
-      updateObjectBoxPosition(objectArray[i], i);
-    }*/
+    for (var i in coinContainerArray) {
+      objectFunc.updateCoinBoxPosition(coinArray[i], i);
+    }
+
+    for (var i in powerUpContainerArray) {
+      objectFunc.updatePowerUpBoxPosition(powerUpArray[i], i);
+    }
 
     if (character == "yoshi") {
       camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);

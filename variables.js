@@ -144,7 +144,10 @@ var goombaContainerIdArray;
 var goombaContainerTopArray;
 var questionBoxArray;
 var objectArray;
-var objectContainerArray;
+var coinContainerArray;
+var coinArray;
+var powerUpContainerArray;
+var powerUpArray;
 
 var marioBox;
 var marioUpperBox;

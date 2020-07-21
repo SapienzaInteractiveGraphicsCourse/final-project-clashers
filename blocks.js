@@ -16,7 +16,10 @@ goombaContainerIdArray = new Array();
 goombaContainerTopArray = new Array();
 questionBoxArray = new Array();
 objectArray = new Array();
-objectContainerArray = new Array();
+coinContainerArray = new Array();
+coinArray = new Array();
+powerUpContainerArray = new Array();
+powerUpArray = new Array();
 
 export function createGroup1() {
   //var brickClone;
@@ -897,7 +900,8 @@ function setCoinGeometry(coinElem) {
     coinElem.position.y,
     coinElem.position.z
   );
-  objectContainerArray.push(coinElem);
+  coinContainerArray.push(coinContainer);
+  coinArray.push(coinElem);
   //objectArray.push(coinElem);
   //tweenFunc.objectAnimation(coinElem);
   scene.add(coinContainer);
@@ -911,7 +915,8 @@ function setPowerUpGeometry(powerUpElem) {
     powerUpElem.position.y,
     powerUpElem.position.z
   );
-  objectContainerArray.push(powerUpContainer);
+  powerUpContainerArray.push(powerUpContainer);
+  powerUpArray.push(powerUpElem);
   //objectArray.push(powerUpElem);
   scene.add(powerUpContainer);
   //tweenFunc.objectAnimation(powerUpElem);
