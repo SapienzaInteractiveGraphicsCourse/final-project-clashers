@@ -1119,9 +1119,9 @@ coinScore.style.top = 20 + "px";
 coinScore.style.right = 90 + "px";
 document.body.appendChild(coinScore);
 
-var score = 10;
+score = 0;
 
-var text = document.createElement("h1");
+text = document.createElement("h1");
 text.style.fontFamily = "superMarioFont";
 text.style.position = "absolute";
 text.style.color = "yellow";

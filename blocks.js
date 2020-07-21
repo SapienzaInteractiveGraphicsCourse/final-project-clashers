@@ -905,6 +905,7 @@ function setCoinGeometry(coinElem) {
   //objectArray.push(coinElem);
   //tweenFunc.objectAnimation(coinElem);
   scene.add(coinContainer);
+  coinContainer.addEventListener("collision", collFunc.onCoinCollision);
 }
 
 function setPowerUpGeometry(powerUpElem) {

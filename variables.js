@@ -164,3 +164,8 @@ var touchesBox;
 var touchesUpper;
 var touchesLower;
 var model;
+
+var score;
+var text;
+
+var isCoin = false;

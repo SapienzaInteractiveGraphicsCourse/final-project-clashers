@@ -43,12 +43,14 @@ export function fall(character) {
     .onStop(function () {
       collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
       //character.position.y = 12;
+      collidedBottom = false;
     })
     .onComplete(function () {
       collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
       //collidedTop = false; //serve per dire che quando cade smete di collidere col top
       isJumping = false;
       setIdlePosition(character);
+      collidedBottom = false;
     })
     .start();
 }
@@ -639,7 +641,7 @@ export function goombaAnimation(goombaElem) {
   tweenWalkGoomba.chain(tweenWalkBackGoomba);
 }
 
-export function objectAnimation(object) {
+export function objectAnimation(object, i) {
   if (object.position.y >= 9 && object.position.y < 16.5) {
     var flag1 = true;
     var flag2 = false;
