@@ -44,6 +44,7 @@ export function fall(character) {
       collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
       //character.position.y = 12;
       collidedBottom = false;
+      isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
     })
     .onComplete(function () {
       collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
