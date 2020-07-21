@@ -569,7 +569,7 @@ export function setIdlePosition(character) {
       handLeft.rotation.y = tweenStartScale.rightHand_rotation_y;
     })
     .onComplete(function () {
-      isJumping = false;
+      //isJumping = false; //--> se lo lasciamo fa buggare il salto quando premiamo piùù volte lo spazio mentre il personaggio sta già saltando
     })
     .start();
 }
