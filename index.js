@@ -1111,6 +1111,30 @@ function createBgSky() {
   scene.add(bg);
 }
 
+var lifeImg = document.createElement("img");
+lifeImg.style.position = "absolute";
+lifeImg.src = "img/powerUpIcon.png";
+lifeImg.style.height = 40 + "px";
+lifeImg.style.top = 20 + "px";
+lifeImg.style.left = 40 + "px";
+document.body.appendChild(lifeImg);
+
+life = 0;
+
+textLife = document.createElement("h1");
+textLife.style.fontFamily = "superMarioFont";
+textLife.style.position = "absolute";
+textLife.style.color = "white";
+textLife.style.webkitTextStroke = "1px black";
+textLife.style.textShadow = "4px 4px 8px black";
+textLife.style.height = 40 + "px";
+textLife.style.top = 30 + "px";
+textLife.style.left = 90 + "px";
+document.body.appendChild(textLife);
+
+//text.innerHTML = "Score: " + score;
+textLife.innerHTML = "x" + life;
+
 var coinScore = document.createElement("img");
 coinScore.style.position = "absolute";
 coinScore.src = "img/coinScore.gif";

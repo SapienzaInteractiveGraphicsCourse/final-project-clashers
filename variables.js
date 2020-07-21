@@ -167,5 +167,7 @@ var model;
 
 var score;
 var text;
+var life;
+var textLife;
 
 var isCoin = false;
