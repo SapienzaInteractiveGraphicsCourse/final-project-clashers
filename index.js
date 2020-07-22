@@ -508,7 +508,7 @@ function init() {
       switch (event.which) {
         case 68:
           isWalking = true; //serve per non far ripartire il tween della camminata quando si tiene premuto il tasto
-
+          collidedRight = false; //secondo valentina è così
           if (!isRotatedRight) {
             groupRun.removeAll(); //altrimenti rimane fermo ma le gamebe si muovono
             groupRotate.removeAll();
@@ -523,6 +523,7 @@ function init() {
 
         case 65:
           isWalking = true;
+          collidedLeft = false;
           if (isRotatedRight) {
             groupRun.removeAll();
             groupRotate.removeAll();

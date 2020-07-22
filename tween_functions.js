@@ -94,7 +94,11 @@ export function fall(character) {
       }
     })
     .onStop(function () {
-      collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
+      //collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
+
+      //collidedRight = false;
+      //collidedLeft = false;
+
       //character.position.y = 12;
       collidedBottom = false;
       isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
@@ -102,7 +106,10 @@ export function fall(character) {
       //serve perché altrimenti quando sbatte su un blocco da sotto non si rimette nella posizione iniziale
     })
     .onComplete(function () {
-      collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
+      //collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
+
+      //collidedRight = false;
+      //collidedLeft = false;
       //collidedTop = false; //serve per dire che quando cade smete di collidere col top
       isJumping = false;
       //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
@@ -227,13 +234,23 @@ export function performAnimation(direction, character) {
         upperArm_right.rotation.z = tweenStartScale.z_rightArm;
       }
 
-      if (direction == "right" && !collidedSide) {
+      if (direction == "right" && !collidedLeft) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
         //console.log("tween");
       }
 
-      if (direction == "left" && !collidedSide) {
+      if (collidedLeft) {
+        console.log("ciao");
+        character.position.z = currentPipePosition - 8.5;
+      }
+
+      if (collidedRight) {
+        console.log("ciao1");
+        character.position.z = currentPipePosition + 9;
+      }
+
+      if (direction == "left" && !collidedRight) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -263,13 +280,13 @@ export function performAnimation(direction, character) {
         upperArm_right.rotation.z = tweenStartScale.z_rightArm;
       }
 
-      if (direction == "right" && !collidedSide) {
+      if (direction == "right" && !collidedLeft) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
         //console.log("tweenBack");
       }
 
-      if (direction == "left" && !collidedSide) {
+      if (direction == "left" && !collidedRight) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -461,13 +478,13 @@ export function jump(character) {
     .onUpdate(function () {
       character.position.y = tweenStartJump.y;
 
-      if (keysPressed[68] && !collidedSide && !collidedTop1 && !collidedTop2) {
+      if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
         console.log("jump");
       }
 
-      if (keysPressed[65] && !collidedSide && !collidedTop1 && !collidedTop2) {
+      if (keysPressed[65] && !collidedRight && !collidedTop1 && !collidedTop2) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -511,7 +528,7 @@ export function jump(character) {
         character.position.y = tweenStartJump.y;
       }
 
-      if (keysPressed[68] && !collidedSide && !collidedTop1 && !collidedTop2) {
+      if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
         //collidedside serve per non farlo traslare quando collide di lato;
         //collidedtop serve per non fargli fare lo speedboost quando atterra
         character.position.z += 0.2;
@@ -519,7 +536,7 @@ export function jump(character) {
         console.log("jumpBack");
       }
 
-      if (keysPressed[65] && !collidedSide && !collidedTop1 && !collidedTop2) {
+      if (keysPressed[65] && !collidedRight && !collidedTop1 && !collidedTop2) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
@@ -533,13 +550,28 @@ export function jump(character) {
     })
     .onStop(function () {
       isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
-      collidedSide = false;
+      //collidedSide = false;
+
+      //collidedLeft = false;
+      //collidedRight = false;
+      if (keysPressed[68]) {
+        collidedRight = false;
+      }
+      if (keysPressed[65]) {
+        collidedLeft = false;
+      }
     })
     .onComplete(function () {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
-      collidedSide = false;
+      //collidedSide = false;
+      if (keysPressed[68]) {
+        collidedRight = false;
+      }
+      if (keysPressed[65]) {
+        collidedLeft = false;
+      }
     });
   tweenJump.chain(tweenJumpBack);
 

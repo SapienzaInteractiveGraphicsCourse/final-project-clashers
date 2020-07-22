@@ -123,11 +123,23 @@ export function onPipeCollision(
   setCharacterStuff();
 
   //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
-
   if (other_object._physijs.id == boxId) {
+    console.log("collided pipe");
     //impostiamo il flag che dice che ha colliso lateralmente
-    collidedSide = true;
+    //collidedSide = true;
     //isWalking = false; //capiamo bene se serve
+    if (keysPressed[68]) {
+      collidedLeft = true; //collide da sinistra sulla pipe
+    }
+    if (keysPressed[65]) {
+      collidedRight = true; //collide da destra sulla pipe
+    }
+    var id = this._physijs.id;
+    for (var i in pipeContainerArray) {
+      if (pipeContainerArray[i]._physijs.id == id) {
+        currentPipePosition = pipeContainerArray[i].position.z;
+      }
+    }
   }
 }
 
@@ -165,6 +177,16 @@ export function onCharacterCollision(
   contact_normal
 ) {
   setCharacterStuff();
+  //console.log("normale " + contact_normal.y);
+  if (contact_normal.z == 0) {
+    var checkTouch = function () {
+      for (var i = 0; i < touchesLower.length; i++) {
+        if (touchesLower[i] == other_object._physijs.id) return;
+      }
+      scene.removeEventListener("update", checkTouch);
+    };
+    scene.addEventListener("update", checkTouch);
+  }
 }
 
 export function onCharacterLowerCollision(

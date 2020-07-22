@@ -21,6 +21,7 @@ coinArray = new Array();
 powerUpContainerArray = new Array();
 powerUpArray = new Array();
 pipeContainerTopArray = new Array();
+pipeContainerArray = new Array();
 
 export function createGroup1() {
   //var brickClone;
@@ -854,24 +855,25 @@ function setBrickGeometry(brickElem) {
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {
-  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 10.5);
+  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 11.5);
   pipeContainer = new Physijs.BoxMesh(pipeGeometry, geometryMaterial, 0);
   pipeContainer.position.set(
     pipeElem.position.x + 5,
     pipeElem.position.y + 3.2,
-    pipeElem.position.z - 5.3
+    pipeElem.position.z - 5
   );
-  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 10);
+  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 9.5);
   pipeContainerTop = new Physijs.BoxMesh(pipeGeometryTop, geometryMaterial2, 0);
   pipeContainerTop.position.set(
     pipeElem.position.x + 5,
     pipeElem.position.y + y_top,
-    pipeElem.position.z - 5.3
+    pipeElem.position.z - 5
   );
 
   scene.add(pipeContainer);
   scene.add(pipeContainerTop);
 
+  pipeContainerArray.push(pipeContainer);
   pipeContainerTopArray.push(pipeContainerTop);
   //pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.setCcdMotionThreshold(1);

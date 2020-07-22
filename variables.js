@@ -151,6 +151,7 @@ var coinArray;
 var powerUpContainerArray;
 var powerUpArray;
 var pipeContainerTopArray;
+var pipeContainerArray;
 
 var marioBox;
 var marioUpperBox;
@@ -176,3 +177,5 @@ var textLife;
 var isCoin = false;
 
 var pipeHeightGoal;
+
+var currentPipePosition;

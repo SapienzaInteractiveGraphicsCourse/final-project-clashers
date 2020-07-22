@@ -53,7 +53,7 @@ export function setYoshiGeometry() {
   );
   //yoshiBox.setCcdMotionThreshold(1);
   scene.add(yoshiBox);
-  //yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
+  yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
 
   var yoshiUpperGeometry = new THREE.BoxGeometry(7.5, 1.5, 5);
   yoshiUpperBox = new Physijs.BoxMesh(yoshiUpperGeometry, geometryMaterial1, 1);
