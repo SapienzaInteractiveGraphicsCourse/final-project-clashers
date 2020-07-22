@@ -502,6 +502,10 @@ export function jump(character) {
         collidedTop2 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
         //tweenJumpBack.stop();
+      } else if (collidedTopPipe) {
+        character.position.y = pipeHeightGoal;
+        console.log("pipeHeightGoal: " + pipeHeightGoal);
+        tweenJump.stop();
       } else {
         // se non collide nè al primo piano né al secondo piano continua il salto normalmente
         character.position.y = tweenStartJump.y;

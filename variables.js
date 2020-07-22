@@ -121,6 +121,7 @@ var collidedTop1 = false;
 var collidedTop2 = false;
 var collidedBottom = false;
 var collidedSide = false;
+var collidedTopPipe = false;
 
 var isOnObjectTop = false;
 
@@ -148,6 +149,7 @@ var coinContainerArray;
 var coinArray;
 var powerUpContainerArray;
 var powerUpArray;
+var pipeContainerTopArray;
 
 var marioBox;
 var marioUpperBox;
@@ -171,3 +173,5 @@ var life;
 var textLife;
 
 var isCoin = false;
+
+var pipeHeightGoal;

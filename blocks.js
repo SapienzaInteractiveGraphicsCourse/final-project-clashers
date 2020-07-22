@@ -20,6 +20,7 @@ coinContainerArray = new Array();
 coinArray = new Array();
 powerUpContainerArray = new Array();
 powerUpArray = new Array();
+pipeContainerTopArray = new Array();
 
 export function createGroup1() {
   //var brickClone;
@@ -870,10 +871,12 @@ function setPipeGeometry(pipeElem, y, y_top) {
 
   scene.add(pipeContainer);
   scene.add(pipeContainerTop);
+
+  pipeContainerTopArray.push(pipeContainerTop);
   //pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
-  //pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
+  pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {

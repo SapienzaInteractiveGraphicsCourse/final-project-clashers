@@ -4,6 +4,7 @@ import {
   objectAnimation,
   goombaAnimation,
 } from "./tween_functions.js";
+import { setPipeHeightGoal } from "./pipe.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -123,10 +124,37 @@ export function onPipeCollision(
 
   //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
 
-  if (other_object._physijs.id == yoshiBox._physijs.id) {
+  if (other_object._physijs.id == boxId) {
     //impostiamo il flag che dice che ha colliso lateralmente
     collidedSide = true;
     //isWalking = false; //capiamo bene se serve
+  }
+}
+
+export function onPipeTopCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+
+  //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
+
+  if (other_object._physijs.id == lowerBoxId) {
+    console.log("Collided Top Pipe");
+    collidedTopPipe = true;
+
+    console.log("Yoshi position.y: " + model.position.y);
+
+    var id = this._physijs.id;
+    for (var i in pipeContainerTopArray) {
+      if (pipeContainerTopArray[i]._physijs.id == id) {
+        setPipeHeightGoal(i);
+      }
+    }
+
+    //collidedSide = false;
   }
 }
 
@@ -153,7 +181,8 @@ export function onCharacterLowerCollision(
         if (touchesLower[i] == other_object._physijs.id) return;
       }
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
-      if (!isJumping && !isCoin) {
+      collidedTopPipe = false;
+      if (!isJumping && !isCoin && !collidedTopPipe) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
       }
