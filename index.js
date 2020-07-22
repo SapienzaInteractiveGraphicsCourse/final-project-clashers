@@ -912,9 +912,9 @@ function init() {
         //scene.add(emptyBlock);
         blockFunc.createGroupStairs(-60, 4);
         blockFunc.createGroupStairsReverse(-30, 4);
-        blockFunc.createGroupStairs(20, 5);
-        blockFunc.createGroupStairsReverse(55, 5);
-        blockFunc.createGroupStairs(220, 9);
+        blockFunc.createGroupStairs(20, 4); //5
+        blockFunc.createGroupStairsReverse(55, 4); //5
+        blockFunc.createGroupStairs(220, 8); //9
       });
     }
 

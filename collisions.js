@@ -5,6 +5,7 @@ import {
   goombaAnimation,
 } from "./tween_functions.js";
 import { setPipeHeightGoal } from "./pipe.js";
+import { setStairsHeightGoal } from "./stairs.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -128,16 +129,19 @@ export function onPipeCollision(
     //impostiamo il flag che dice che ha colliso lateralmente
     //collidedSide = true;
     //isWalking = false; //capiamo bene se serve
+    var increase;
     if (keysPressed[68]) {
       collidedLeft = true; //collide da sinistra sulla pipe
+      increase = -8.5;
     }
     if (keysPressed[65]) {
       collidedRight = true; //collide da destra sulla pipe
+      increase = 9;
     }
     var id = this._physijs.id;
     for (var i in pipeContainerArray) {
       if (pipeContainerArray[i]._physijs.id == id) {
-        currentPipePosition = pipeContainerArray[i].position.z;
+        currentPipePosition = pipeContainerArray[i].position.z + increase;
       }
     }
   }
@@ -204,6 +208,7 @@ export function onCharacterLowerCollision(
       }
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
       collidedTopPipe = false;
+      collidedTopStairs = false;
       if (!isJumping && !isCoin && !collidedTopPipe) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
@@ -340,12 +345,23 @@ export function onStairsCollision(
 ) {
   setCharacterStuff();
 
-  //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
-
   if (other_object._physijs.id == boxId) {
-    //impostiamo il flag che dice che ha colliso lateralmente
-    collidedSide = true;
-    //isWalking = false; //capiamo bene se serve
+    console.log("collided stairs");
+    var increase;
+    if (keysPressed[68]) {
+      collidedLeft = true; //collide da sinistra sulla pipe
+      increase = -2.5;
+    }
+    if (keysPressed[65]) {
+      collidedRight = true; //collide da destra sulla pipe
+      increase = 2.5;
+    }
+    var id = this._physijs.id;
+    for (var i in emptyBlockContainerArray) {
+      if (emptyBlockContainerArray[i]._physijs.id == id) {
+        currentPipePosition = model.position.z;
+      }
+    }
   }
 }
 
@@ -354,4 +370,19 @@ export function onStairsTopCollision(
   relative_velocity,
   relative_rotation,
   contact_normal
-) {}
+) {
+  setCharacterStuff();
+  if (other_object._physijs.id == lowerBoxId) {
+    collidedTopStairs = true;
+
+    var id = this._physijs.id;
+    for (var i in emptyBlockContainerTopArray) {
+      console.log("Container Y: " + emptyBlockContainerTopArray[i].position.y);
+      if (emptyBlockContainerTopArray[i]._physijs.id == id) {
+        //funzione da scrivere
+        console.log("Sono qui!!!!");
+        setStairsHeightGoal(emptyBlockContainerTopArray[i].position.y);
+      }
+    }
+  }
+}

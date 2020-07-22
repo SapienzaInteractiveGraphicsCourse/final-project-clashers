@@ -123,8 +123,9 @@ var collidedTop2 = false;
 var collidedBottom = false;
 var collidedSide = false;
 var collidedTopPipe = false;
+var collidedTopStairs = false;
 
-var isOnObjectTop = false;
+//var isOnObjectTop = false;
 
 var groupJump;
 var groupRun;
@@ -152,6 +153,8 @@ var powerUpContainerArray;
 var powerUpArray;
 var pipeContainerTopArray;
 var pipeContainerArray;
+var emptyBlockContainerArray;
+var emptyBlockContainerTopArray;
 
 var marioBox;
 var marioUpperBox;
@@ -177,5 +180,6 @@ var textLife;
 var isCoin = false;
 
 var pipeHeightGoal;
+var stairsHeightGoal;
 
 var currentPipePosition;

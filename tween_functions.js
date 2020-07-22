@@ -72,6 +72,8 @@ export function fall(character) {
         console.log("Setting Character position to 12");
         character.position.y = 12;
         collidedTop1 = false;
+      } else if (collidedTopStairs) {
+        tweenFall.stop(); //aggiunto per farlo fermare quando cade dalle scale ma si bugga lo stesso
       } else {
         character.position.y = tweenStartFall.y;
         spine.rotation.x = tweenStartFall.spine;
@@ -242,12 +244,12 @@ export function performAnimation(direction, character) {
 
       if (collidedLeft) {
         console.log("ciao");
-        character.position.z = currentPipePosition - 8.5;
+        character.position.z = currentPipePosition;
       }
 
       if (collidedRight) {
         console.log("ciao1");
-        character.position.z = currentPipePosition + 9;
+        character.position.z = currentPipePosition;
       }
 
       if (direction == "left" && !collidedRight) {
@@ -522,6 +524,10 @@ export function jump(character) {
       } else if (collidedTopPipe) {
         character.position.y = pipeHeightGoal;
         console.log("pipeHeightGoal: " + pipeHeightGoal);
+        tweenJump.stop();
+      } else if (collidedTopStairs) {
+        console.log("stairsHeightGoal: " + stairsHeightGoal);
+        //character.position.y = stairsHeightGoal;
         tweenJump.stop();
       } else {
         // se non collide nè al primo piano né al secondo piano continua il salto normalmente
