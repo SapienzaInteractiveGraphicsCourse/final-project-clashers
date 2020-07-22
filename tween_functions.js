@@ -22,9 +22,30 @@ export function fall(character) {
   console.log("falling");
   tweenStartFall = {
     y: character.position.y,
+    x_left: upperLeg_left.rotation.x,
+    x_right: upperLeg_right.rotation.x,
+    x_leftArm: upperArm_left.rotation.x,
+    x_rightArm: upperArm_right.rotation.x,
+    lowerLeg_right: lowerLeg_right.rotation.x,
+    lowerLeg_left: lowerLeg_left.rotation.x,
+    rightArm_rotation_z: (45 * Math.PI) / 180,
+    rightHand_rotation_y: handRight.rotation.y,
+    spine: spine.rotation.x,
+    head: head.rotation.x,
   };
   tweenGoalFall = {
     y: -14.3,
+    x_left: (-180 * Math.PI) / 180,
+    x_right: (0 * Math.PI) / 180,
+    x_leftArm: (0 * Math.PI) / 180,
+    x_rightArm: (0 * Math.PI) / 180,
+    lowerLeg_right: (0 * Math.PI) / 180,
+    lowerLeg_left: (0 * Math.PI) / 180,
+
+    rightArm_rotation_z: (45 * Math.PI) / 180,
+    rightHand_rotation_y: (90 * Math.PI) / 180,
+    spine: (0 * Math.PI) / 180,
+    head: (0 * Math.PI) / 180,
   };
 
   tweenFall = new TWEEN.Tween(tweenStartFall)
@@ -32,12 +53,44 @@ export function fall(character) {
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       if (collidedTop1) {
+        spine.rotation.x = (0 * Math.PI) / 180;
+        head.rotation.x = (0 * Math.PI) / 180;
+
+        upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
+        upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+
+        lowerLeg_right.rotation.x = (0 * Math.PI) / 180;
+        lowerLeg_left.rotation.x = (0 * Math.PI) / 180;
+
+        upperArm_left.rotation.x = (0 * Math.PI) / 180;
+        upperArm_right.rotation.x = (0 * Math.PI) / 180;
+
+        handRight.rotation.y = (90 * Math.PI) / 180;
+        handLeft.rotation.y = (90 * Math.PI) / 180;
+
         tweenFall.stop();
         console.log("Setting Character position to 12");
         character.position.y = 12;
         collidedTop1 = false;
       } else {
         character.position.y = tweenStartFall.y;
+        spine.rotation.x = tweenStartFall.spine;
+        head.rotation.x = tweenStartFall.head;
+
+        upperLeg_left.rotation.x = tweenStartFall.x_left;
+        upperLeg_right.rotation.x = tweenStartFall.x_right;
+
+        lowerLeg_right.rotation.x = tweenStartFall.lowerLeg_right;
+        lowerLeg_left.rotation.x = tweenStartFall.lowerLeg_left;
+
+        upperArm_left.rotation.x = tweenStartFall.x_leftArm;
+        upperArm_right.rotation.x = tweenStartFall.x_rightArm;
+
+        upperArm_left.rotation.z = tweenStartFall.rightArm_rotation_z;
+        upperArm_right.rotation.z = tweenStartFall.rightArm_rotation_z;
+
+        handRight.rotation.y = tweenStartFall.rightHand_rotation_y;
+        handLeft.rotation.y = tweenStartFall.rightHand_rotation_y;
       }
     })
     .onStop(function () {
@@ -45,12 +98,14 @@ export function fall(character) {
       //character.position.y = 12;
       collidedBottom = false;
       isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
+      //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
+      //serve perché altrimenti quando sbatte su un blocco da sotto non si rimette nella posizione iniziale
     })
     .onComplete(function () {
       collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
       //collidedTop = false; //serve per dire che quando cade smete di collidere col top
       isJumping = false;
-      setIdlePosition(character);
+      //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
       collidedBottom = false;
     })
     .start();
@@ -570,7 +625,7 @@ export function setIdlePosition(character) {
       handLeft.rotation.y = tweenStartScale.rightHand_rotation_y;
     })
     .onComplete(function () {
-      //isJumping = false; //--> se lo lasciamo fa buggare il salto quando premiamo piùù volte lo spazio mentre il personaggio sta già saltando
+      //isJumping = false; //--> se lo lasciamo fa buggare il salto quando premiamo più volte lo spazio mentre il personaggio sta già saltando
     })
     .start();
 }

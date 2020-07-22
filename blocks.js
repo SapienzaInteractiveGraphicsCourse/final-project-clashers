@@ -774,7 +774,8 @@ export function createGroup6() {
     pipeClone.position.set(-5.25, -14.1, 120 + 80 * i);
     scene.add(pipeClone);
     group6.push(pipeClone);
-    setPipeGeometry(pipeClone, 17.2, 7.6); //da modificare
+    //setPipeGeometry(pipeClone, 17.2, 7.6); //da modificare
+    setPipeGeometry(pipeClone, 16.5, 11.5);
   }
   for (var i = 0; i < 3; i++) {
     brickClone = brick.clone();
@@ -893,7 +894,7 @@ function setEmptyBlockGeometry(emptyBlockElem) {
 }
 
 function setCoinGeometry(coinElem) {
-  var coinGeometry = new THREE.BoxGeometry(2, 4, 4);
+  var coinGeometry = new THREE.BoxGeometry(2, 4, 2);
   coinContainer = new Physijs.BoxMesh(coinGeometry, geometryMaterial, 0);
   coinContainer.position.set(
     coinElem.position.x,

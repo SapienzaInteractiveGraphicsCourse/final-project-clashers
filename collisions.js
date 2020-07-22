@@ -171,6 +171,20 @@ export function onCharacterUpperCollision(
   contact_normal
 ) {
   setCharacterStuff();
+  //console.log("contact_normal: " + contact_normal.y);
+  if (contact_normal.y <= 1) {
+    //abbiamo aggiunto il caso in cui è minore o uguale a 0 in modo da non farlo buggare quando collide con lo spigolo laterale durante il salto
+    var checkTouch = function () {
+      for (var i = 0; i < touchesLower.length; i++) {
+        if (touchesLower[i] == other_object._physijs.id) return;
+      }
+
+      //setIdlePosition(model); //serve per farlo tornare alla posizione iniziale del corpo quando sbatte su un blocco da sotto
+
+      scene.removeEventListener("update", checkTouch);
+    };
+    scene.addEventListener("update", checkTouch);
+  }
 }
 
 export function onGroupCollision(
