@@ -507,32 +507,24 @@ function init() {
       keysPressed[event.keyCode] = true;
       switch (event.which) {
         case 68:
-          //collidedRight = false;
           isWalking = true; //serve per non far ripartire il tween della camminata quando si tiene premuto il tasto
 
           if (!isRotatedRight) {
-            //TWEEN.removeAll();
             groupRun.removeAll(); //altrimenti rimane fermo ma le gamebe si muovono
-            //tween.stop();
             groupRotate.removeAll();
             tweenFunc.rotateTorso("right");
             isRotatedRight = true;
           }
           if (!dPressed && isWalking) {
-            //collision = false;
             tweenFunc.performAnimation("right", character);
           }
           dPressed = true;
           break;
 
         case 65:
-          //collision = false;
-          //collidedLeft = false;
           isWalking = true;
           if (isRotatedRight) {
-            //TWEEN.removeAll();
             groupRun.removeAll();
-            //tween.stop();
             groupRotate.removeAll();
             tweenFunc.rotateTorso("left");
             isRotatedRight = false;
@@ -544,8 +536,6 @@ function init() {
           break;
 
         case 32:
-          //isWalking = false; --> probabilmente non serve a niente
-          //groupRun.removeAll();
           //SPACE
           if (isRotatedRight) {
             isJumpingRight = true;
@@ -553,9 +543,6 @@ function init() {
             isJumpingLeft = true;
           }
           if (!spacePressed && !isJumping) {
-            //!isJumping a cosa serve?!?!?!?!!?
-            //groupJump.removeAll();
-            tweenFunc.setIdlePosition(character);
             tweenFunc.jump(character);
             isJumping = true; //serve per non far ripartire il tween del salto se ne è già partito uno e non è ancora finito
           }

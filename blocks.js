@@ -114,9 +114,9 @@ export function createGroupPipes() {
   }
 
   setPipeGeometry(groupPipes[0], 9, 7.6);
-  setPipeGeometry(groupPipes[1], 17.2, 7.6);
-  setPipeGeometry(groupPipes[2], 25.2, 7.6);
-  setPipeGeometry(groupPipes[3], 33, 7.6);
+  setPipeGeometry(groupPipes[1], 16.5, 11.5);
+  setPipeGeometry(groupPipes[2], 24.5, 15.5);
+  setPipeGeometry(groupPipes[3], 31, 19);
 }
 
 export function createGroup2() {
@@ -852,7 +852,7 @@ function setBrickGeometry(brickElem) {
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {
-  var pipeGeometry = new THREE.BoxGeometry(10.5, y, 10.5);
+  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 10.5);
   pipeContainer = new Physijs.BoxMesh(pipeGeometry, geometryMaterial, 0);
   pipeContainer.position.set(
     pipeElem.position.x + 5,
@@ -868,7 +868,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
   );
 
   scene.add(pipeContainer);
-  //scene.add(pipeContainerTop);
+  scene.add(pipeContainerTop);
   //pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", collFunc.onPipeCollision);

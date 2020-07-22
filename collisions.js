@@ -146,21 +146,13 @@ export function onCharacterLowerCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  /*for (var i in coinContainerArray) {
-    if (other_object._physijs.id == coinContainerArray[i]._physijs.id) {
-      isCoin = true;
-    }
-  }*/
-  if (contact_normal.y == -1) {
+  if (contact_normal.y <= 0) {
+    //abbiamo aggiunto il caso in cui è minore o uguale a 0 in modo da non farlo buggare quando collide con lo spigolo laterale durante il salto
     var checkTouch = function () {
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
-      //isCoin = false;
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
-      //collidedTop2 = false;
-      //collidedSide = false;
-
       if (!isJumping && !isCoin) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
