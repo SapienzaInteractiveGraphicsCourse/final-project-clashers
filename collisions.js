@@ -309,3 +309,27 @@ export function onPowerUpCollision(
   }
   text.innerHTML = score;
 }
+
+export function onStairsCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  setCharacterStuff();
+
+  //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
+
+  if (other_object._physijs.id == boxId) {
+    //impostiamo il flag che dice che ha colliso lateralmente
+    collidedSide = true;
+    //isWalking = false; //capiamo bene se serve
+  }
+}
+
+export function onStairsTopCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {}

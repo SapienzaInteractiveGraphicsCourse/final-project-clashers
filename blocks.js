@@ -880,7 +880,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {
-  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 5.7, 5.7);
+  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 4, 7);
   emptyBlockContainer = new Physijs.BoxMesh(
     emptyBlockGeometry,
     geometryMaterial,
@@ -892,8 +892,24 @@ function setEmptyBlockGeometry(emptyBlockElem) {
     emptyBlockElem.position.z
   );
   scene.add(emptyBlockContainer);
+  emptyBlockContainer.addEventListener("collision", collFunc.onStairsCollision);
 
-  //emptyBlockContainer.addEventListener("collision", collFunc.onPipeCollision);
+  var emptyBlockGeometryTop = new THREE.BoxGeometry(5.7, 1, 4.8);
+  emptyBlockContainerTop = new Physijs.BoxMesh(
+    emptyBlockGeometryTop,
+    geometryMaterial2,
+    0
+  );
+  emptyBlockContainerTop.position.set(
+    emptyBlockElem.position.x,
+    emptyBlockElem.position.y + 2.8,
+    emptyBlockElem.position.z
+  );
+  scene.add(emptyBlockContainerTop);
+  emptyBlockContainer.addEventListener(
+    "collision",
+    collFunc.onStairsTopCollision
+  );
 }
 
 function setCoinGeometry(coinElem) {

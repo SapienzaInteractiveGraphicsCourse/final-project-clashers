@@ -44,7 +44,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = -620; //-620
+  const cameraZ = 100; //-620
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -95,7 +95,7 @@ function init() {
     const color = 0xffffff;
     const intensity = 1;
     dirLight = new THREE.DirectionalLight(color, intensity, 100);
-    dirLight.position.set(0, 100, -620); //y = 100
+    dirLight.position.set(0, 100, -620); //y = 100 z = -620
     dirLight.castShadow = true;
 
     dirLight.shadow.mapSize.width = 512;
@@ -139,7 +139,7 @@ function init() {
         gltfLoader.load(url_yoshi, (gltf) => {
           yoshi = gltf.scene;
           yoshi.name = "yoshi";
-          yoshi.position.set(0, -14.3, -620); //-620
+          yoshi.position.set(0, -14.3, 100); //-620
           yoshi.scale.set(0.3, 0.3, 0.3);
 
           yoshi.traverse(function (child) {

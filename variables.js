@@ -112,6 +112,7 @@ var powerUpClone;
 var goombaClone;
 var groupContainerTop;
 var goombaContainerTop;
+var emptyBlockContainerTop;
 
 var dir;
 
