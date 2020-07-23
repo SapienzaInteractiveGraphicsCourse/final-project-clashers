@@ -675,7 +675,7 @@ export function setIdlePosition(character) {
     .start();
 }
 
-export function goombaAnimation(goombaElem) {
+export function goombaAnimation(goombaElem, increase) {
   var left_foot = goombaElem.getObjectByName("Left_Foot");
   var right_foot = goombaElem.getObjectByName("Right_Foor");
   var headGoomba = goombaElem.getObjectByName("Head");
@@ -699,11 +699,11 @@ export function goombaAnimation(goombaElem) {
   };
 
   var tweenWalkGoal = {
-    z: goombaElem.position.z + 15,
+    z: goombaElem.position.z + increase, //15
   };
 
   var tweenWalkBack = {
-    z: goombaElem.position.z - 15,
+    z: goombaElem.position.z - increase, //-15
   };
 
   var tweenGoomba = new TWEEN.Tween(tweenStartGoomba)

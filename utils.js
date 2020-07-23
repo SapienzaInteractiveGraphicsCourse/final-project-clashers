@@ -1,15 +1,30 @@
-function dumpObject(obj, lines = [], isLast = true, prefix = "") {
-  const localPrefix = isLast ? "└─" : "├─";
-  lines.push(
-    `${prefix}${prefix ? localPrefix : ""}${obj.name || "*no-name*"} [${
-      obj.type
-    }]`
-  );
-  const newPrefix = prefix + (isLast ? "  " : "│ ");
-  const lastNdx = obj.children.length - 1;
-  obj.children.forEach((child, ndx) => {
-    const isLast = ndx === lastNdx;
-    dumpObject(child, lines, isLast, newPrefix);
-  });
-  return lines;
+export function resetStartingPosition(character) {
+  character.position.set(0, -14.3, -620);
+  dirLight.position.set(0, 100, -620);
+  camera.position.set(-100, 0, -620);
+  torso.rotation.y = 0;
+
+  dPressed = false;
+  aPressed = false;
+  spacePressed = false;
+  isRotatedRight = true;
+  isWalking = false;
+  isJumping = false;
+  isJumpingLeft = false;
+  isJumpingRight = false;
+
+  isFalling = false;
+
+  collidedLeft = false;
+  collidedRight = false;
+  collidedTop1 = false;
+  collidedTop2 = false;
+  collidedBottom = false;
+  collidedSide = false;
+  collidedTopPipe = false;
+  collidedTopStairs = false;
+
+  groupRun.removeAll();
+  groupRotate.removeAll();
+  groupJump.removeAll();
 }

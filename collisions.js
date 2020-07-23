@@ -6,6 +6,7 @@ import {
 } from "./tween_functions.js";
 import { setPipeHeightGoal } from "./pipe.js";
 import { setStairsHeightGoal } from "./stairs.js";
+import { resetStartingPosition } from "./utils.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -281,6 +282,8 @@ export function onGoombaTopCollision(
         if (goombaContainerTopArray[i]._physijs.id == id) {
           goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
           //in caso STOPPARE PER FARE CONTENTA MARTINA TURBESSI
+          scene.remove(goombaContainerIdArray[i]);
+          scene.remove(goombaContainerTopArray[i]);
         }
       }
     }
@@ -296,14 +299,21 @@ export function onGoombaCollision(
   setCharacterStuff();
 
   if (other_object._physijs.id == boxId) {
-    if (other_object instanceof Physijs.Mesh) {
-      var id = this._physijs.id;
-      for (var i in goombaContainerIdArray) {
-        if (goombaContainerIdArray[i]._physijs.id == id) {
-          goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
-        }
+    var id = this._physijs.id;
+    for (var i in goombaContainerIdArray) {
+      if (goombaContainerIdArray[i]._physijs.id == id) {
+        //goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
+        life -= 1;
       }
     }
+    if (life == 0) {
+      //muori
+    }
+    if (life > 0) {
+      //riparti dall'inizio;
+      resetStartingPosition(model);
+    }
+    textLife.innerHTML = "x" + life;
   }
 }
 

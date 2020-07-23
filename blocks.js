@@ -1,6 +1,6 @@
 import * as collFunc from "./collisions.js";
 import * as tweenFunc from "./tween_functions.js";
-import { updateGoombaBoxPosition } from "./goomba.js";
+import { updateGoombaBoxPosition, setGoombaIncrease } from "./goomba.js";
 
 //spostare tutto dentro il file delle variabili
 group1 = new Array();
@@ -83,7 +83,7 @@ export function createGroup1() {
   scene.add(goombaClone);
   group1.push(goombaClone);
   setGoombaGeometry(group1[11]);
-  tweenFunc.goombaAnimation(goombaClone);
+  //tweenFunc.goombaAnimation(goombaClone);
 
   setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
   setGroupGeometry(6.2 * 5, 9.5, -556.3);
@@ -925,7 +925,11 @@ function setGoombaGeometry(goombaElem) {
 
   goombaContainerIdArray.push(goombaContainer); //levare id
   goombaElemArray.push(goombaElem);
-  tweenFunc.goombaAnimation(goombaElem);
+
+  for (var i in goombaElemArray) {
+    var increase = setGoombaIncrease(i);
+  }
+  tweenFunc.goombaAnimation(goombaElem, increase);
   //updateGoombaBoxPosition(goombaElem);
 }
 
