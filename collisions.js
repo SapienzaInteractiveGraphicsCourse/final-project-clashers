@@ -140,6 +140,7 @@ export function onBottomCollision(
     for (var i in questionBoxArray) {
       if (questionBoxArray[i]._physijs.id == id) {
         objectAnimation(objectArray[i], i);
+        itemSound.play();
       }
     }
   }
@@ -337,9 +338,11 @@ export function onGoombaCollision(
     }
     if (life == 0) {
       //muori
+      gameOverSound.play();
     }
     if (life > 0) {
       //riparti dall'inizio;
+      loseLifeSound.play();
       resetStartingPosition(model);
     }
     textLife.innerHTML = "x" + life;
@@ -362,6 +365,8 @@ export function onCoinCollision(
         scene.remove(coinArray[i]);
         scene.remove(coinContainerArray[i]);
         isCoin = true;
+
+        coinSound.play();
       }
     }
   }

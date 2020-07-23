@@ -187,3 +187,9 @@ var goombaDead = false;
 var pipeHeightGoal;
 var stairsHeightGoal;
 var currentPosition;
+
+var coinSound;
+var itemSound;
+var jumpSound;
+var loseLifeSound;
+var gameOverSound;

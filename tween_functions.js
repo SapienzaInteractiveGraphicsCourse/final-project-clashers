@@ -340,6 +340,7 @@ export function rotateTorso(direction) {
 }
 
 export function jump(character) {
+  jumpSound.play();
   //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi
   var timeJumpBack = 1000;
   if (character.position.y == 36) {

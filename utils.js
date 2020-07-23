@@ -28,3 +28,19 @@ export function resetStartingPosition(character) {
   groupRotate.removeAll();
   groupJump.removeAll();
 }
+
+//AUDIO ----------
+coinSound = new Audio("audio/coinSound.mp3");
+coinSound.volume = 0.4;
+
+itemSound = new Audio("audio/itemSound.mp3");
+itemSound.volume = 0.4;
+
+jumpSound = new Audio("audio/jumpSound.mp3");
+jumpSound.volume = 0.4;
+
+loseLifeSound = new Audio("audio/loseLifeSound.mp3");
+loseLifeSound.volume = 0.4;
+
+gameOverSound = new Audio("audio/gameOverSound.mp3");
+gameOverSound.volume = 0.4;
