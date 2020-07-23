@@ -108,6 +108,7 @@ export function fall(character) {
       //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
       //serve perché altrimenti quando sbatte su un blocco da sotto non si rimette nella posizione iniziale
       isFalling = false;
+      groupCollision = false;
     })
     .onComplete(function () {
       //collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
@@ -119,6 +120,7 @@ export function fall(character) {
       //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
       collidedBottom = false;
       isFalling = false;
+      groupCollision = false;
     })
     .start();
 }
@@ -216,6 +218,7 @@ export function setAnimationParameters(character) {
 
 export function performAnimation(direction, character) {
   dir = direction;
+  groupCollision = false;
   setAnimationParameters(character); //rinominare setTweenParameter!
 
   tween = new TWEEN.Tween(tweenStartScale, groupRun)
@@ -575,11 +578,17 @@ export function jump(character) {
       isJumpingLeft = false;
       isJumping = false;
       //collidedSide = false;
-      if (keysPressed[68]) {
-        collidedRight = false;
-      }
-      if (keysPressed[65]) {
+      if (!groupCollision) {
+        if (keysPressed[68]) {
+          collidedRight = false;
+        }
+        if (keysPressed[65]) {
+          collidedLeft = false;
+        }
+      } else {
         collidedLeft = false;
+        collidedRight = false;
+        groupCollision = false;
       }
     });
   tweenJump.chain(tweenJumpBack);

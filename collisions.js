@@ -36,6 +36,7 @@ export function setCharacterStuff() {
     touchesLower = marioLowerBox._physijs.touches;
     model = mario;
   }
+  currentPosition = model.position.z;
 }
 
 export function onGroupContainerCollision(
@@ -48,7 +49,35 @@ export function onGroupContainerCollision(
   if (other_object._physijs.id == boxId) {
     //impostiamo il flag che dice che ha colliso lateralmente
     console.log("Collided Side");
-    collidedSide = true;
+    //collidedSide = true;
+    /*if (keysPressed[65]) {
+      collidedRight = true;
+    }
+    if (keysPressed[68]) {
+      collidedLeft = true;
+    }*/
+    groupCollision = true;
+
+    if (keysPressed[68] && !isFalling) {
+      collidedLeft = true; //collide da sinistra sulla pipe
+      //increase = -8.5;
+    }
+    if (keysPressed[65] && !isFalling) {
+      collidedRight = true; //collide da destra sulla pipe
+      //increase = 9;
+    }
+
+    //per risolvere il problema che andava attraverso la pipe dopo che era sceso da sopra
+    if (isRotatedRight && isFalling) {
+      collidedRight = true; //collide da sinistra sulla pipe
+      //increase = 9;
+    }
+    if (!isRotatedRight && isFalling) {
+      collidedLeft = true; //collide da destra sulla pipe
+      //console.log("Setting collided left true");
+      //increase = -8.5;
+    }
+    currentPosition = model.position.z;
     //isWalking = false; //capiamo bene se serve
   }
 }
@@ -130,6 +159,8 @@ export function onPipeCollision(
     //impostiamo il flag che dice che ha colliso lateralmente
     //collidedSide = true;
     //isWalking = false; //capiamo bene se serve
+    //groupCollision = false;
+
     var increase;
     if (keysPressed[68] && !isFalling) {
       collidedLeft = true; //collide da sinistra sulla pipe
@@ -200,6 +231,9 @@ export function onCharacterCollision(
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
+      //collidedLeft = false;
+      //collidedRight = false;
+      //groupCollision = false;
       scene.removeEventListener("update", checkTouch);
     };
     scene.addEventListener("update", checkTouch);
@@ -258,15 +292,6 @@ export function onCharacterUpperCollision(
   }
 }
 
-export function onGroupCollision(
-  other_object,
-  relative_velocity,
-  relative_rotation,
-  contact_normal
-) {
-  //setCharacterStuff();
-}
-
 export function onGoombaTopCollision(
   other_object,
   relative_velocity,
@@ -282,8 +307,11 @@ export function onGoombaTopCollision(
         if (goombaContainerTopArray[i]._physijs.id == id) {
           goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
           //in caso STOPPARE PER FARE CONTENTA MARTINA TURBESSI
-          scene.remove(goombaContainerIdArray[i]);
-          scene.remove(goombaContainerTopArray[i]);
+          scene.remove(goombaContainerIdArray[i]); //da errore
+          scene.remove(goombaContainerTopArray[i]); //da errore
+          //goombaContainerTopArray[i].removeEventListener("collision");
+          //goombaContainerIdArray[i].removeEventListener("collision");
+          //goombaDead = true;
         }
       }
     }
@@ -298,6 +326,7 @@ export function onGoombaCollision(
 ) {
   setCharacterStuff();
 
+  //if (!goombaDead) {
   if (other_object._physijs.id == boxId) {
     var id = this._physijs.id;
     for (var i in goombaContainerIdArray) {
@@ -315,6 +344,7 @@ export function onGoombaCollision(
     }
     textLife.innerHTML = "x" + life;
   }
+  //}
 }
 
 export function onCoinCollision(
@@ -368,6 +398,8 @@ export function onStairsCollision(
   contact_normal
 ) {
   setCharacterStuff();
+
+  //groupCollision = false;
 
   if (other_object._physijs.id == boxId) {
     console.log("collided stairs");

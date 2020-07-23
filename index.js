@@ -911,7 +911,7 @@ function init() {
 
         //scene.add(emptyBlock);
         blockFunc.createGroupStairs(-60, 4);
-        blockFunc.createGroupStairsReverse(-30, 4);
+        blockFunc.createGroupStairsReverse(-15, 4);
         blockFunc.createGroupStairs(20, 4); //5
         blockFunc.createGroupStairsReverse(55, 4); //5
         blockFunc.createGroupStairs(220, 8); //9
@@ -998,6 +998,7 @@ function init() {
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
       luigiFunc.updateLuigiBoxPosition();
     }
+    //console.log(currentPosition);
 
     //console.log("yoshi.position.y: " + yoshi.position.y);
     //camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);

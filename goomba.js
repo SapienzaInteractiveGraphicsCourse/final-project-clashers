@@ -1,7 +1,7 @@
 export function updateGoombaBoxPosition(goombaElem, i) {
   goombaContainerIdArray[i].position.set(
     goombaElem.position.x,
-    goombaElem.position.y + 1.8,
+    goombaElem.position.y + 2.5,
     goombaElem.position.z
   );
   var goombaContainerPos = goombaContainerIdArray[i].position.clone();

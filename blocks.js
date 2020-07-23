@@ -82,7 +82,7 @@ export function createGroup1() {
   goombaClone.position.set(0, -13.3, -562.5);
   scene.add(goombaClone);
   group1.push(goombaClone);
-  setGoombaGeometry(group1[11]);
+  setGoombaGeometry(goombaClone);
   tweenFunc.goombaAnimation(goombaClone, 15);
 
   setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
@@ -890,15 +890,23 @@ function setPowerUpGeometry(powerUpElem) {
 }
 
 function setGoombaGeometry(goombaElem) {
-  var goombaGeometry = new THREE.BoxGeometry(4.7, 3, 4.8);
+  var goombaGeometry = new THREE.BoxGeometry(4.7, 1, 4.8);
   goombaContainer = new Physijs.BoxMesh(goombaGeometry, geometryMaterial, 0);
   goombaContainer.position.set(
     goombaElem.position.x,
-    goombaElem.position.y + 1.8,
+    goombaElem.position.y + 2.5,
     goombaElem.position.z
   );
   scene.add(goombaContainer);
   goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
+  /*goombaContainerIdArray.push(goombaContainer);
+  for (var i in goombaContainerIdArray) {
+    scene.add(goombaContainerIdArray[i]);
+    goombaContainerIdArray[i].addEventListener(
+      "collision",
+      collFunc.onGoombaCollision
+    );
+  }*/
 
   //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
   //goombaContainerIdArray[0] = goombaContainer._physijs;

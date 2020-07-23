@@ -127,6 +127,7 @@ var collidedBottom = false;
 var collidedSide = false;
 var collidedTopPipe = false;
 var collidedTopStairs = false;
+var groupCollision = false;
 
 //var isOnObjectTop = false;
 
@@ -181,8 +182,8 @@ var life;
 var textLife;
 
 var isCoin = false;
+var goombaDead = false;
 
 var pipeHeightGoal;
 var stairsHeightGoal;
-
 var currentPosition;
