@@ -21,30 +21,3 @@ export function updateGoombaBoxPosition(goombaElem, i) {
   goombaContainerTopArray[i].__dirtyPosition = true;
   goombaContainerTopArray[i].__dirtyRotation = true;
 }
-
-export function setGoombaIncrease(i) {
-  var increase;
-
-  if (i == 0) {
-    increase = 15;
-  }
-
-  if (i == 3) {
-    increase = 2;
-  }
-  if (i == 1 || i == 2) {
-    increase = 5;
-  }
-
-  if (i == 4 || i == 5) {
-    increase = 3;
-  }
-  if ((i >= 8 && i <= 13) || i == 6) {
-    increase = 15;
-  }
-  if (i == 7) {
-    increase = 30;
-  }
-
-  return increase;
-}

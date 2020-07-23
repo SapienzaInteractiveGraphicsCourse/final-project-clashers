@@ -1,6 +1,6 @@
 import * as collFunc from "./collisions.js";
 import * as tweenFunc from "./tween_functions.js";
-import { updateGoombaBoxPosition, setGoombaIncrease } from "./goomba.js";
+import { updateGoombaBoxPosition } from "./goomba.js";
 
 //spostare tutto dentro il file delle variabili
 group1 = new Array();
@@ -83,7 +83,7 @@ export function createGroup1() {
   scene.add(goombaClone);
   group1.push(goombaClone);
   setGoombaGeometry(group1[11]);
-  //tweenFunc.goombaAnimation(goombaClone);
+  tweenFunc.goombaAnimation(goombaClone, 15);
 
   setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
   setGroupGeometry(6.2 * 5, 9.5, -556.3);
@@ -115,7 +115,7 @@ export function createGroupPipes() {
 
   for (var i = 4; i < 7; i++) {
     setGoombaGeometry(groupPipes[i]);
-    //tweenFunc.goombaAnimation(groupPipes[i]);
+    tweenFunc.goombaAnimation(groupPipes[i], 3);
   }
 
   setPipeGeometry(groupPipes[0], 9, 7.6);
@@ -177,7 +177,7 @@ export function createGroup3() {
     scene.add(goombaClone);
     group3.push(goombaClone);
     setGoombaGeometry(goombaClone);
-    //tweenFunc.goombaAnimation(goombaClone);
+    tweenFunc.goombaAnimation(goombaClone, 3);
   }
 
   setGroupGeometry(5.6 * 8, 33.5, -279.5);
@@ -312,7 +312,7 @@ export function createGroup5() {
 
   for (var i = 9; i < 15; i++) {
     setGoombaGeometry(group5[i]);
-    //tweenFunc.goombaAnimation(group5[i]);
+    tweenFunc.goombaAnimation(group5[i], 15);
   }
 
   setGroupGeometry(6, 9.5, -220);
@@ -746,7 +746,7 @@ export function createGroup6() {
     scene.add(goombaClone);
     group6.push(goombaClone);
     setGoombaGeometry(goombaClone);
-    //tweenFunc.goombaAnimation(goombaClone);
+    tweenFunc.goombaAnimation(goombaClone, 15);
   }
 
   for (var i = 2; i < 5; i++) {
@@ -874,7 +874,7 @@ function setCoinGeometry(coinElem) {
 }
 
 function setPowerUpGeometry(powerUpElem) {
-  var powerUpGeometry = new THREE.BoxGeometry(4.7, 4.5, 4.7);
+  var powerUpGeometry = new THREE.BoxGeometry(4.7, 4.5, 2);
   powerUpContainer = new Physijs.BoxMesh(powerUpGeometry, geometryMaterial, 0);
   powerUpContainer.position.set(
     powerUpElem.position.x,
@@ -926,10 +926,7 @@ function setGoombaGeometry(goombaElem) {
   goombaContainerIdArray.push(goombaContainer); //levare id
   goombaElemArray.push(goombaElem);
 
-  for (var i in goombaElemArray) {
-    var increase = setGoombaIncrease(i);
-  }
-  tweenFunc.goombaAnimation(goombaElem, increase);
+  //tweenFunc.goombaAnimation(goombaElem, increase);
   //updateGoombaBoxPosition(goombaElem);
 }
 
