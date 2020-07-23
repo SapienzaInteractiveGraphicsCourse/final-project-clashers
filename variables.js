@@ -160,6 +160,9 @@ var goombaArray = new Array();
 var goombaContainerArray = new Array();
 var goombaContainerTopArray = new Array();
 
+var tweenWalkGoombaArray = new Array();
+var tweenGoombaFeetArray = new Array();
+
 var marioBox;
 var marioUpperBox;
 var marioLowerBox;

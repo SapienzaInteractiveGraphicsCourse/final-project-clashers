@@ -726,6 +726,9 @@ export function goombaAnimation(goombaElem, increase) {
       headGoomba.rotation.x = tweenStartGoomba.head;
     })
     .start();
+
+  tweenGoombaFeetArray.push(tweenGoomba);
+
   var tweenBackGoomba = new TWEEN.Tween(tweenStartGoomba)
     .to(tweenBackGoomba, 400)
     .easing(TWEEN.Easing.Linear.None)
@@ -746,6 +749,9 @@ export function goombaAnimation(goombaElem, increase) {
       goombaElem.position.z = tweenStartGoomba.z;
     })
     .start();
+
+  tweenWalkGoombaArray.push(tweenWalkGoomba);
+
   var tweenWalkBackGoomba = new TWEEN.Tween(tweenStartGoomba)
     .to(tweenWalkBack, 5000)
     .easing(TWEEN.Easing.Linear.None)

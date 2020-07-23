@@ -314,6 +314,8 @@ export function onGoombaTopCollision(
           //goombaContainerTopArray[i].removeEventListener("collision");
           //goombaContainerIdArray[i].removeEventListener("collision");
           //goombaDead = true;
+          tweenWalkGoombaArray[i].stop();
+          tweenGoombaFeetArray[i].stop();
         }
       }
     }
