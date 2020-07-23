@@ -971,8 +971,8 @@ function init() {
     groupJump.update();
     groupRotate.update();
 
-    for (var i in goombaElemArray) {
-      updateGoombaBoxPosition(goombaElemArray[i], i);
+    for (var i in goombaArray) {
+      updateGoombaBoxPosition(goombaArray[i], i);
     }
 
     for (var i in coinContainerArray) {

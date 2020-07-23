@@ -1,37 +1,7 @@
 import * as collFunc from "./collisions.js";
 import * as tweenFunc from "./tween_functions.js";
-import { updateGoombaBoxPosition } from "./goomba.js";
-
-//spostare tutto dentro il file delle variabili
-group1 = new Array();
-group2 = new Array();
-group3 = new Array();
-group4 = new Array();
-group5 = new Array();
-group6 = new Array();
-stairs = new Array();
-groupPipes = new Array();
-
-goombaElemArray = new Array();
-goombaContainerIdArray = new Array();
-goombaContainerTopArray = new Array();
-questionBoxArray = new Array();
-objectArray = new Array();
-coinContainerArray = new Array();
-coinArray = new Array();
-powerUpContainerArray = new Array();
-powerUpArray = new Array();
-pipeContainerTopArray = new Array();
-pipeContainerArray = new Array();
-emptyBlockContainerArray = new Array();
-emptyBlockContainerTopArray = new Array();
 
 export function createGroup1() {
-  //var brickClone;
-  //var questionBoxClone;
-  //var coinClone;
-  //var powerUpClone;
-  //var goombaClone;
   for (var i = 0; i < 3; i++) {
     brickClone = brick.clone();
     brickClone.position.set(0, 5, -570 + 5.5 * 2.25 * i);
@@ -76,8 +46,6 @@ export function createGroup1() {
   objectArray.push(group1[8]);
   objectArray.push(group1[9]);
 
-  //console.log(objectArray[0]);
-
   goombaClone = goomba.clone();
   goombaClone.position.set(0, -13.3, -562.5);
   scene.add(goombaClone);
@@ -85,7 +53,7 @@ export function createGroup1() {
   setGoombaGeometry(goombaClone);
   tweenFunc.goombaAnimation(goombaClone, 15);
 
-  setGroupGeometry(6.3, 9.5, -600); //forse si bugga perchè vanno in un for?
+  setGroupGeometry(6.3, 9.5, -600);
   setGroupGeometry(6.2 * 5, 9.5, -556.3);
   setGroupGeometry(6.5, 33.5, -556.1);
 }
@@ -105,6 +73,11 @@ export function createGroupPipes() {
   groupPipes[2].scale.set(0.3, 0.4, 0.3);
   groupPipes[3].scale.set(0.3, 0.5, 0.3);
 
+  setPipeGeometry(groupPipes[0], 9, 7.6);
+  setPipeGeometry(groupPipes[1], 16.5, 11.5);
+  setPipeGeometry(groupPipes[2], 24.5, 15.5);
+  setPipeGeometry(groupPipes[3], 31, 19);
+
   for (var i = 0; i < 3; i++) {
     goombaClone = goomba.clone();
     goombaClone.position.set(0, -13.3, -460 + 45 * i);
@@ -117,11 +90,6 @@ export function createGroupPipes() {
     setGoombaGeometry(groupPipes[i]);
     tweenFunc.goombaAnimation(groupPipes[i], 3);
   }
-
-  setPipeGeometry(groupPipes[0], 9, 7.6);
-  setPipeGeometry(groupPipes[1], 16.5, 11.5);
-  setPipeGeometry(groupPipes[2], 24.5, 15.5);
-  setPipeGeometry(groupPipes[3], 31, 19);
 }
 
 export function createGroup2() {
@@ -171,6 +139,9 @@ export function createGroup3() {
     group3.push(brickClone);
     setBrickGeometry(brickClone);
   }
+
+  setGroupGeometry(5.6 * 8, 33.5, -279.5);
+
   for (var i = 0; i < 2; i++) {
     goombaClone = goomba.clone();
     goombaClone.position.set(0, 36.8, -292 + 10 * i);
@@ -179,8 +150,6 @@ export function createGroup3() {
     setGoombaGeometry(goombaClone);
     tweenFunc.goombaAnimation(goombaClone, 3);
   }
-
-  setGroupGeometry(5.6 * 8, 33.5, -279.5);
 }
 
 export function createGroup4() {
@@ -303,16 +272,16 @@ export function createGroup5() {
   group5[13].position.set(0, -13.3, -100);
   group5[14].position.set(0, -13.3, -90);
 
+  for (var i = 9; i < 15; i++) {
+    setGoombaGeometry(group5[i]);
+    tweenFunc.goombaAnimation(group5[i], 15);
+  }
+
   for (var i = 0; i < 3; i++) {
     setBrickGeometry(group5[i]);
   }
   for (var i = 3; i < 6; i++) {
     setQuestionBoxGeometry(group5[i]);
-  }
-
-  for (var i = 9; i < 15; i++) {
-    setGoombaGeometry(group5[i]);
-    tweenFunc.goombaAnimation(group5[i], 15);
   }
 
   setGroupGeometry(6, 9.5, -220);
@@ -890,26 +859,14 @@ function setPowerUpGeometry(powerUpElem) {
 }
 
 function setGoombaGeometry(goombaElem) {
-  var goombaGeometry = new THREE.BoxGeometry(4.7, 1, 4.8);
+  var goombaGeometry = new THREE.BoxGeometry(4.7, 3, 4.8);
   goombaContainer = new Physijs.BoxMesh(goombaGeometry, geometryMaterial, 0);
   goombaContainer.position.set(
     goombaElem.position.x,
     goombaElem.position.y + 2.5,
     goombaElem.position.z
   );
-  scene.add(goombaContainer);
-  goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
-  /*goombaContainerIdArray.push(goombaContainer);
-  for (var i in goombaContainerIdArray) {
-    scene.add(goombaContainerIdArray[i]);
-    goombaContainerIdArray[i].addEventListener(
-      "collision",
-      collFunc.onGoombaCollision
-    );
-  }*/
 
-  //console.log("goombaContainer Id: " + goombaContainer._physijs.id);
-  //goombaContainerIdArray[0] = goombaContainer._physijs;
   var goombaGeometryTop = new THREE.BoxGeometry(4.7, 1, 4.8);
   goombaContainerTop = new Physijs.BoxMesh(
     goombaGeometryTop,
@@ -921,21 +878,19 @@ function setGoombaGeometry(goombaElem) {
     goombaElem.position.y + 4.5,
     goombaElem.position.z
   );
-  //scene.add(goombaContainerTop); //questa riga da errore
+
+  scene.add(goombaContainer);
+  scene.add(goombaContainerTop);
+
+  goombaArray.push(goombaElem);
+  goombaContainerArray.push(goombaContainer);
   goombaContainerTopArray.push(goombaContainerTop);
-  for (var i in goombaContainerTopArray) {
-    scene.add(goombaContainerTopArray[i]);
-    goombaContainerTopArray[i].addEventListener(
-      "collision",
-      collFunc.onGoombaTopCollision
-    );
-  }
-
-  goombaContainerIdArray.push(goombaContainer); //levare id
-  goombaElemArray.push(goombaElem);
-
-  //tweenFunc.goombaAnimation(goombaElem, increase);
-  //updateGoombaBoxPosition(goombaElem);
+  goombaContainer.setCcdMotionThreshold(1);
+  goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
+  goombaContainerTop.addEventListener(
+    "collision",
+    collFunc.onGoombaTopCollision
+  );
 }
 
 function setGroupGeometry(groupWidth, y, z) {

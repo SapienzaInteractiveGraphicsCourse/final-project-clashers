@@ -306,9 +306,10 @@ export function onGoombaTopCollision(
       var id = this._physijs.id;
       for (var i in goombaContainerTopArray) {
         if (goombaContainerTopArray[i]._physijs.id == id) {
-          goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
+          goombaArray[i].scale.set(0.07, 0.01, 0.07);
+
           //in caso STOPPARE PER FARE CONTENTA MARTINA TURBESSI
-          scene.remove(goombaContainerIdArray[i]); //da errore
+          scene.remove(goombaContainerArray[i]); //da errore
           scene.remove(goombaContainerTopArray[i]); //da errore
           //goombaContainerTopArray[i].removeEventListener("collision");
           //goombaContainerIdArray[i].removeEventListener("collision");
@@ -330,8 +331,8 @@ export function onGoombaCollision(
   //if (!goombaDead) {
   if (other_object._physijs.id == boxId) {
     var id = this._physijs.id;
-    for (var i in goombaContainerIdArray) {
-      if (goombaContainerIdArray[i]._physijs.id == id) {
+    for (var i in goombaContainerArray) {
+      if (goombaContainerArray[i]._physijs.id == id) {
         //goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
         life -= 1;
       }
