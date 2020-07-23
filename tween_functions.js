@@ -1,6 +1,7 @@
 import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
 
 export function fall(character) {
+  isFalling = true;
   var timeFall = 400;
   if (character.position.y == 36) {
     timeFall = 900;
@@ -106,6 +107,7 @@ export function fall(character) {
       isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
       //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
       //serve perché altrimenti quando sbatte su un blocco da sotto non si rimette nella posizione iniziale
+      isFalling = false;
     })
     .onComplete(function () {
       //collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
@@ -116,6 +118,7 @@ export function fall(character) {
       isJumping = false;
       //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
       collidedBottom = false;
+      isFalling = false;
     })
     .start();
 }
@@ -244,12 +247,12 @@ export function performAnimation(direction, character) {
 
       if (collidedLeft) {
         console.log("ciao");
-        character.position.z = currentPipePosition;
+        character.position.z = currentPosition;
       }
 
       if (collidedRight) {
         console.log("ciao1");
-        character.position.z = currentPipePosition;
+        character.position.z = currentPosition;
       }
 
       if (direction == "left" && !collidedRight) {
@@ -527,7 +530,7 @@ export function jump(character) {
         tweenJump.stop();
       } else if (collidedTopStairs) {
         console.log("stairsHeightGoal: " + stairsHeightGoal);
-        //character.position.y = stairsHeightGoal;
+        character.position.y = stairsHeightGoal;
         tweenJump.stop();
       } else {
         // se non collide nè al primo piano né al secondo piano continua il salto normalmente

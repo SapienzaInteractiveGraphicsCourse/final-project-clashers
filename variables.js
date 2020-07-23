@@ -85,6 +85,9 @@ var isWalking = false;
 var isJumping = false;
 var isJumpingLeft = false;
 var isJumpingRight = false;
+
+var isFalling = false;
+
 var dirLight;
 var ambientLight;
 var controls;
@@ -182,4 +185,4 @@ var isCoin = false;
 var pipeHeightGoal;
 var stairsHeightGoal;
 
-var currentPipePosition;
+var currentPosition;

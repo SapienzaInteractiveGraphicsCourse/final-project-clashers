@@ -44,7 +44,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = 100; //-620
+  const cameraZ = -620; //-620
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -139,7 +139,7 @@ function init() {
         gltfLoader.load(url_yoshi, (gltf) => {
           yoshi = gltf.scene;
           yoshi.name = "yoshi";
-          yoshi.position.set(0, -14.3, 100); //-620
+          yoshi.position.set(0, -14.3, -620); //-620
           yoshi.scale.set(0.3, 0.3, 0.3);
 
           yoshi.traverse(function (child) {
@@ -1107,7 +1107,7 @@ lifeImg.style.top = 20 + "px";
 lifeImg.style.left = 40 + "px";
 document.body.appendChild(lifeImg);
 
-life = 0;
+life = 1;
 
 textLife = document.createElement("h1");
 textLife.style.fontFamily = "superMarioFont";

@@ -796,14 +796,14 @@ function setBrickGeometry(brickElem) {
 }
 
 function setPipeGeometry(pipeElem, y, y_top) {
-  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 11.5);
+  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 11); //11.5
   pipeContainer = new Physijs.BoxMesh(pipeGeometry, geometryMaterial, 0);
   pipeContainer.position.set(
     pipeElem.position.x + 5,
     pipeElem.position.y + 3.2,
     pipeElem.position.z - 5
   );
-  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 9.5);
+  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 12); //9.5
   pipeContainerTop = new Physijs.BoxMesh(pipeGeometryTop, geometryMaterial2, 0);
   pipeContainerTop.position.set(
     pipeElem.position.x + 5,
@@ -823,7 +823,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {
-  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 4, 7);
+  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 4, 5.7);
   emptyBlockContainer = new Physijs.BoxMesh(
     emptyBlockGeometry,
     geometryMaterial,
@@ -886,6 +886,7 @@ function setPowerUpGeometry(powerUpElem) {
   //objectArray.push(powerUpElem);
   scene.add(powerUpContainer);
   //tweenFunc.objectAnimation(powerUpElem);
+  powerUpContainer.addEventListener("collision", collFunc.onPowerUpCollision);
 }
 
 function setGoombaGeometry(goombaElem) {
