@@ -735,7 +735,7 @@ function init() {
       gltfLoader.load(url_coin, (gltf) => {
         coin = gltf.scene;
         coin.name = "coin";
-        coin.position.set(0, 15, -570);
+        coin.position.set(0, 9, -590);
         coin.scale.set(1.8, 1.8, 1.8);
 
         coin.traverse(function (child) {
