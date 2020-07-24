@@ -282,7 +282,7 @@ function init() {
         gltfLoader.load(url_mario, (gltf) => {
           mario = gltf.scene;
           mario.name = "mario";
-          mario.position.set(0, -14.1, -600);
+          mario.position.set(0, -14.1, -620);
           mario.scale.set(7, 7, 7);
 
           mario.traverse(function (child) {
@@ -357,7 +357,7 @@ function init() {
         gltfLoader.load(url_luigi, (gltf) => {
           luigi = gltf.scene;
           luigi.name = "luigi";
-          luigi.position.set(0, -14.1, -640);
+          luigi.position.set(0, -14.1, -620);
           luigi.scale.set(0.9, 0.9, 0.9);
 
           luigi.traverse(function (child) {
@@ -1144,7 +1144,7 @@ coinScore.style.top = 80 + "px";
 coinScore.style.left = 40 + "px";
 document.body.appendChild(coinScore);
 
-score = 10;
+score = 0;
 
 text = document.createElement("h1");
 text.style.fontFamily = "superMarioFont";

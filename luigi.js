@@ -35,7 +35,7 @@ export const luigi_dic = {
 };
 
 export function setLuigiGeometry() {
-  var luigiGeometry = new THREE.BoxGeometry(7.5, 4, 6.3);
+  var luigiGeometry = new THREE.BoxGeometry(7.5, 4.5, 6.3);
   luigiBox = new Physijs.BoxMesh(luigiGeometry, geometryMaterial, 50); //mass 0
   //yoshiBox.position.set(0, -9.3, -600);
   luigiBox.position.set(

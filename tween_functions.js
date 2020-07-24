@@ -21,33 +21,64 @@ export function fall(character) {
     console.log("sto qua");
   }
   console.log("falling");
-  tweenStartFall = {
-    y: character.position.y,
-    x_left: upperLeg_left.rotation.x,
-    x_right: upperLeg_right.rotation.x,
-    x_leftArm: upperArm_left.rotation.x,
-    x_rightArm: upperArm_right.rotation.x,
-    lowerLeg_right: lowerLeg_right.rotation.x,
-    lowerLeg_left: lowerLeg_left.rotation.x,
-    rightArm_rotation_z: (45 * Math.PI) / 180,
-    rightHand_rotation_y: handRight.rotation.y,
-    spine: spine.rotation.x,
-    head: head.rotation.x,
-  };
-  tweenGoalFall = {
-    y: -14.3,
-    x_left: (-180 * Math.PI) / 180,
-    x_right: (0 * Math.PI) / 180,
-    x_leftArm: (0 * Math.PI) / 180,
-    x_rightArm: (0 * Math.PI) / 180,
-    lowerLeg_right: (0 * Math.PI) / 180,
-    lowerLeg_left: (0 * Math.PI) / 180,
+  if (character == yoshi || character == luigi) {
+    tweenStartFall = {
+      y: character.position.y,
+      x_left: upperLeg_left.rotation.x,
+      x_right: upperLeg_right.rotation.x,
+      x_leftArm: upperArm_left.rotation.x,
+      x_rightArm: upperArm_right.rotation.x,
+      lowerLeg_right: lowerLeg_right.rotation.x,
+      lowerLeg_left: lowerLeg_left.rotation.x,
+      rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: handRight.rotation.y,
+      spine: spine.rotation.x,
+      head: head.rotation.x,
+    };
+    tweenGoalFall = {
+      y: -14.3,
+      x_left: (-180 * Math.PI) / 180,
+      x_right: (0 * Math.PI) / 180,
+      x_leftArm: (0 * Math.PI) / 180,
+      x_rightArm: (0 * Math.PI) / 180,
+      lowerLeg_right: (0 * Math.PI) / 180,
+      lowerLeg_left: (0 * Math.PI) / 180,
 
-    rightArm_rotation_z: (45 * Math.PI) / 180,
-    rightHand_rotation_y: (90 * Math.PI) / 180,
-    spine: (0 * Math.PI) / 180,
-    head: (0 * Math.PI) / 180,
-  };
+      rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: (90 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+    };
+  }
+  if (character == mario) {
+    tweenStartFall = {
+      y: character.position.y,
+      x_left: upperLeg_left.rotation.x,
+      x_right: upperLeg_right.rotation.x,
+      x_leftArm: upperArm_left.rotation.x,
+      x_rightArm: upperArm_right.rotation.x,
+      lowerLeg_right: lowerLeg_right.rotation.x,
+      lowerLeg_left: lowerLeg_left.rotation.x,
+      //rightArm_rotation_z: (45 * Math.PI) / 180, //questa non dovrebbe essere uguale cit martina
+      rightHand_rotation_y: handRight.rotation.y,
+      spine: spine.rotation.x,
+      head: head.rotation.x,
+    };
+    tweenGoalFall = {
+      y: -14.3,
+      x_left: (0 * Math.PI) / 180,
+      x_right: (0 * Math.PI) / 180,
+      x_leftArm: (45 * Math.PI) / 180,
+      x_rightArm: (45 * Math.PI) / 180,
+      lowerLeg_right: (0 * Math.PI) / 180,
+      lowerLeg_left: (0 * Math.PI) / 180,
+
+      //rightArm_rotation_z: (45 * Math.PI) / 180,
+      rightHand_rotation_y: (0 * Math.PI) / 180,
+      spine: (0 * Math.PI) / 180,
+      head: (0 * Math.PI) / 180,
+    };
+  }
 
   tweenFall = new TWEEN.Tween(tweenStartFall)
     .to(tweenGoalFall, timeFall)
@@ -171,6 +202,8 @@ export function setAnimationParameters(character) {
     tweenStartScale = {
       x_left: upperLeg_left.rotation.x,
       x_right: upperLeg_right.rotation.x,
+      lowerLeg_right: lowerLeg_right.rotation.x,
+      lowerLeg_left: lowerLeg_left.rotation.x,
       //Braccia su x
       x_leftArm: upperArm_left.rotation.x,
       x_rightArm: upperArm_right.rotation.x,
@@ -202,6 +235,8 @@ export function setAnimationParameters(character) {
     tweenIdle = {
       x_left: (0 * Math.PI) / 180,
       x_right: (0 * Math.PI) / 180,
+      lowerLeg_right: (0 * Math.PI) / 180,
+      lowerLeg_left: (0 * Math.PI) / 180,
       //Braccia su x
       x_leftArm: (45 * Math.PI) / 180,
       x_rightArm: (45 * Math.PI) / 180,
