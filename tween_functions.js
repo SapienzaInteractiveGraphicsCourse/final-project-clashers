@@ -88,17 +88,26 @@ export function fall(character) {
         spine.rotation.x = (0 * Math.PI) / 180;
         head.rotation.x = (0 * Math.PI) / 180;
 
-        upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
-        upperLeg_right.rotation.x = (0 * Math.PI) / 180;
-
         lowerLeg_right.rotation.x = (0 * Math.PI) / 180;
         lowerLeg_left.rotation.x = (0 * Math.PI) / 180;
 
-        upperArm_left.rotation.x = (0 * Math.PI) / 180;
-        upperArm_right.rotation.x = (0 * Math.PI) / 180;
+        if (character == yoshi || character == luigi) {
+          upperArm_left.rotation.x = (0 * Math.PI) / 180;
+          upperArm_right.rotation.x = (0 * Math.PI) / 180;
+          upperLeg_left.rotation.x = (-180 * Math.PI) / 180;
+          upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+          handRight.rotation.y = (90 * Math.PI) / 180;
+          handLeft.rotation.y = (90 * Math.PI) / 180;
+        }
 
-        handRight.rotation.y = (90 * Math.PI) / 180;
-        handLeft.rotation.y = (90 * Math.PI) / 180;
+        if (character == mario) {
+          upperArm_left.rotation.x = (45 * Math.PI) / 180;
+          upperArm_right.rotation.x = (45 * Math.PI) / 180;
+          upperLeg_left.rotation.x = (0 * Math.PI) / 180;
+          upperLeg_right.rotation.x = (0 * Math.PI) / 180;
+          handRight.rotation.y = (0 * Math.PI) / 180;
+          handLeft.rotation.y = (0 * Math.PI) / 180;
+        }
 
         tweenFall.stop();
         console.log("Setting Character position to 12");
@@ -120,8 +129,10 @@ export function fall(character) {
         upperArm_left.rotation.x = tweenStartFall.x_leftArm;
         upperArm_right.rotation.x = tweenStartFall.x_rightArm;
 
-        upperArm_left.rotation.z = tweenStartFall.rightArm_rotation_z;
-        upperArm_right.rotation.z = tweenStartFall.rightArm_rotation_z;
+        if (character == yoshi || character == luigi) {
+          upperArm_left.rotation.z = tweenStartFall.rightArm_rotation_z;
+          upperArm_right.rotation.z = tweenStartFall.rightArm_rotation_z;
+        }
 
         handRight.rotation.y = tweenStartFall.rightHand_rotation_y;
         handLeft.rotation.y = tweenStartFall.rightHand_rotation_y;
