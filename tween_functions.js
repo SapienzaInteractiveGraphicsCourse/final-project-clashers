@@ -146,6 +146,10 @@ export function fall(character) {
       collidedBottom = false;
       isFalling = false;
       groupCollision = false;
+
+      //VEDERE SE DANNNO PROBLEMI CON LE PIPE
+      collidedLeft = false;
+      collidedRight = false;
     })
     .start();
 }
@@ -502,10 +506,31 @@ export function jump(character) {
     .onUpdate(function () {
       character.position.y = tweenStartJump.y;
 
+      if (collidedTop1) {
+        character.position.y = 12;
+        collidedTop1 = false;
+        tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+      } else if (collidedTop2) {
+        character.position.y = 36;
+        collidedTop2 = false;
+        tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+      } else if (collidedTopPipe) {
+        character.position.y = pipeHeightGoal;
+
+        tweenJump.stop();
+      } else if (collidedTopStairs) {
+        character.position.y = stairsHeightGoal;
+        tweenJump.stop();
+      } else {
+        // se non collide nè al primo piano né al secondo piano continua il salto normalmente
+        character.position.y = tweenStartJump.y;
+      }
+
       if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
+        //collidedside serve per non farlo traslare quando collide di lato;
+        //collidedtop serve per non fargli fare lo speedboost quando atterra
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
-        console.log("jump");
       }
 
       if (keysPressed[65] && !collidedRight && !collidedTop1 && !collidedTop2) {
@@ -519,6 +544,16 @@ export function jump(character) {
       lowerLeg_left.rotation.x = tweenStartJump.lowerLeg;
       spine.rotation.x = tweenStartJump.spine;
       head.rotation.x = tweenStartJump.head;
+    })
+    .onStop(function () {
+      isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
+
+      if (keysPressed[68]) {
+        collidedRight = false;
+      }
+      if (keysPressed[65]) {
+        collidedLeft = false;
+      }
     });
 
   tweenFlex.chain(tweenJump);
@@ -773,11 +808,13 @@ export function objectAnimation(object, i) {
   if (object.position.y >= 9 && object.position.y < 16.5) {
     var flag1 = true;
     var flag2 = false;
+    itemSound.play();
   }
 
   if (object.position.y >= 32 && object.position.y < 40.5) {
     var flag2 = true;
     var flag1 = false;
+    itemSound.play();
   }
 
   var tweenStartObject = {

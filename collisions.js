@@ -42,7 +42,13 @@ export function onGroupContainerCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  if (other_object._physijs.id == boxId) {
+  if (
+    other_object._physijs.id == boxId ||
+    other_object._physijs.id == lowerBoxId
+  ) {
+    if (other_object._physijs.id == lowerBoxId) {
+      console.log("Collisione con lowerBoxId");
+    }
     groupCollision = true;
 
     if (keysPressed[68] && !isFalling) {
@@ -98,7 +104,10 @@ export function onBottomCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  if (other_object._physijs.id == upperBoxId) {
+  if (
+    other_object._physijs.id == upperBoxId ||
+    other_object._physijs.id == boxId
+  ) {
     collidedBottom = true;
 
     tweenJump.stop();
@@ -106,10 +115,12 @@ export function onBottomCollision(
 
     var id = this._physijs.id;
 
-    for (var i in questionBoxArray) {
-      if (questionBoxArray[i]._physijs.id == id) {
-        objectAnimation(objectArray[i], i);
-        itemSound.play();
+    if (other_object._physijs.id == upperBoxId) {
+      for (var i in questionBoxArray) {
+        if (questionBoxArray[i]._physijs.id == id) {
+          objectAnimation(objectArray[i], i);
+          //itemSound.play();
+        }
       }
     }
   }
@@ -208,6 +219,8 @@ export function onCharacterLowerCollision(
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
       collidedTopPipe = false;
       collidedTopStairs = false;
+      isCoin = false;
+
       if (
         !isJumping &&
         !isCoin &&

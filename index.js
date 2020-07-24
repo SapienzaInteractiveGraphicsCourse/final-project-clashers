@@ -116,7 +116,7 @@ function init() {
     scene.add(ambientLight);
   }
 
-  levelSound.play();
+  //levelSound.play();
 
   var gltfLoader = new GLTFLoader();
 

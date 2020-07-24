@@ -36,7 +36,7 @@ export function setBrickGeometry(brickElem) {
 }
 
 export function setGroupGeometry(groupWidth, y, z) {
-  var groupGeometry = new THREE.BoxGeometry(6.3, 3, groupWidth);
+  var groupGeometry = new THREE.BoxGeometry(6.3, 3.8, groupWidth);
   groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 0);
   groupContainer.position.set(0, y, z);
   scene.add(groupContainer);
@@ -46,7 +46,7 @@ export function setGroupGeometry(groupWidth, y, z) {
     collFunc.onGroupContainerCollision
   );
 
-  var groupGeometryTop = new THREE.BoxGeometry(6.3, 2, groupWidth - 0.5);
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 2, groupWidth + 0.5); //-0.5
   groupContainerTop = new Physijs.BoxMesh(
     groupGeometryTop,
     geometryMaterial2,
