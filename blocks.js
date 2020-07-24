@@ -715,7 +715,7 @@ export function createGroup6() {
     scene.add(goombaClone);
     group6.push(goombaClone);
     setGoombaGeometry(goombaClone);
-    tweenFunc.goombaAnimation(goombaClone, 10);
+    tweenFunc.goombaAnimation(goombaClone, 6);
   }
 
   for (var i = 2; i < 5; i++) {
@@ -792,7 +792,7 @@ function setPipeGeometry(pipeElem, y, y_top) {
 }
 
 function setEmptyBlockGeometry(emptyBlockElem) {
-  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 4, 5.7);
+  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 3, 5.5);
   emptyBlockContainer = new Physijs.BoxMesh(
     emptyBlockGeometry,
     geometryMaterial,
@@ -807,7 +807,7 @@ function setEmptyBlockGeometry(emptyBlockElem) {
   emptyBlockContainer.addEventListener("collision", collFunc.onStairsCollision);
   emptyBlockContainerArray.push(emptyBlockContainer);
 
-  var emptyBlockGeometryTop = new THREE.BoxGeometry(5, 1, 6);
+  var emptyBlockGeometryTop = new THREE.BoxGeometry(5, 1.5, 6.2);
   emptyBlockContainerTop = new Physijs.BoxMesh(
     emptyBlockGeometryTop,
     geometryMaterial2,
@@ -827,7 +827,7 @@ function setEmptyBlockGeometry(emptyBlockElem) {
 }
 
 function setCoinGeometry(coinElem) {
-  var coinGeometry = new THREE.BoxGeometry(2, 1, 2);
+  var coinGeometry = new THREE.BoxGeometry(2, 4, 2);
   coinContainer = new Physijs.BoxMesh(coinGeometry, geometryMaterial, 0);
   coinContainer.position.set(
     coinElem.position.x,
@@ -843,7 +843,7 @@ function setCoinGeometry(coinElem) {
 }
 
 function setPowerUpGeometry(powerUpElem) {
-  var powerUpGeometry = new THREE.BoxGeometry(4.7, 2, 2);
+  var powerUpGeometry = new THREE.BoxGeometry(4.7, 4, 2);
   powerUpContainer = new Physijs.BoxMesh(powerUpGeometry, geometryMaterial, 0);
   powerUpContainer.position.set(
     powerUpElem.position.x,

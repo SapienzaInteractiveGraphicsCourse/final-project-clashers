@@ -44,7 +44,7 @@ function init() {
 
   const cameraX = -100; //-100
   const cameraY = 0; //0
-  const cameraZ = -620; //-620
+  const cameraZ = 150; //-620
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -139,7 +139,7 @@ function init() {
         gltfLoader.load(url_yoshi, (gltf) => {
           yoshi = gltf.scene;
           yoshi.name = "yoshi";
-          yoshi.position.set(0, -14.3, -620); //-620
+          yoshi.position.set(0, -14.3, 150); //-620
           yoshi.scale.set(0.3, 0.3, 0.3);
 
           yoshi.traverse(function (child) {
@@ -679,7 +679,7 @@ function init() {
       gltfLoader.load(url_castle, (gltf) => {
         castle = gltf.scene;
         castle.name = "castle";
-        castle.position.set(17, -14.1, 450);
+        castle.position.set(17, -14.1, 330);
         castle.scale.set(0.01, 0.01, 0.01);
 
         castle.traverse(function (child) {
@@ -987,16 +987,28 @@ function init() {
       camera.lookAt(yoshi.position.x, camera.position.y, yoshi.position.z);
       controls.target.set(yoshi.position.x, yoshi.position.y, yoshi.position.z);
       yoshiFunc.updateYoshiBoxPosition();
+      if (yoshi.position.z >= 330) {
+        localStorage.setItem("coinScore", score);
+        window.location.href = "./level_completed.html";
+      }
     }
     if (character == "mario") {
       camera.lookAt(mario.position.x, camera.position.y, mario.position.z);
       controls.target.set(mario.position.x, mario.position.y, mario.position.z);
       marioFunc.updateMarioBoxPosition();
+      if (mario.position.z >= 330) {
+        localStorage.setItem("coinScore", score);
+        window.location.href = "./level_completed.html";
+      }
     }
     if (character == "luigi") {
       camera.lookAt(luigi.position.x, camera.position.y, luigi.position.z);
       controls.target.set(luigi.position.x, luigi.position.y, luigi.position.z);
       luigiFunc.updateLuigiBoxPosition();
+      if (luigi.position.z >= 330) {
+        localStorage.setItem("coinScore", score);
+        window.location.href = "./level_completed.html";
+      }
     }
     //console.log(currentPosition);
 

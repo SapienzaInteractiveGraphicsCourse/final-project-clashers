@@ -348,6 +348,7 @@ export function jump(character) {
     console.log("Setting timeJumpBack = 1500");
   }
   if (isCoin) {
+    //questo if serve perchè se salto da sopra la moneta e ci cado sopra, in questo modo non cade e rimane sul cubo
     timeJumpBack = 3000;
     console.log("Setting timeJumpBack = 3000");
   }

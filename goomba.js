@@ -21,3 +21,7 @@ export function updateGoombaBoxPosition(goombaElem, i) {
   goombaContainerTopArray[i].__dirtyPosition = true;
   goombaContainerTopArray[i].__dirtyRotation = true;
 }
+
+export function goombaDelete(i) {
+  scene.remove(goombaArray[i]);
+}

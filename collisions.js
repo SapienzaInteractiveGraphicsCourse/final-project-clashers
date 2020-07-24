@@ -7,6 +7,7 @@ import {
 import { setPipeHeightGoal } from "./pipe.js";
 import { setStairsHeightGoal } from "./stairs.js";
 import { resetStartingPosition } from "./utils.js";
+import { goombaDelete } from "./goomba.js";
 
 export function setCharacterStuff() {
   if (character == "yoshi") {
@@ -316,6 +317,7 @@ export function onGoombaTopCollision(
           //goombaDead = true;
           tweenWalkGoombaArray[i].stop();
           tweenGoombaFeetArray[i].stop();
+          setTimeout(goombaDelete.bind(null, i), 5000);
         }
       }
     }
