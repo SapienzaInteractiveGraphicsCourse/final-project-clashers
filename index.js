@@ -1132,7 +1132,7 @@ coinScore.style.top = 80 + "px";
 coinScore.style.left = 40 + "px";
 document.body.appendChild(coinScore);
 
-score = 0;
+score = 10;
 
 text = document.createElement("h1");
 text.style.fontFamily = "superMarioFont";

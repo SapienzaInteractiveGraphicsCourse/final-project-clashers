@@ -11,5 +11,54 @@
     <link rel="stylesheet" href="./game_over.css" />
   </head>
 
-  <body></body>
+  <body>
+    <div class="container" align="center">
+      <h1 class="title">
+        <font color="#009fde">Y</font><font color="#fed302">O</font
+        ><font color="#e42910">U </font> <font color="#46af38">W</font
+        ><font color="#fed302">I</font><font color="#e42910">N</font
+        ><font color="#46af38">!</font>
+      </h1>
+      <div class="score">
+        <div style="float: left; margin-right: 10px;">
+          <img src="./img/coinScore.gif" style="width: 64px; height: 64px;" />
+        </div>
+        <div
+          style="
+            float: left;
+            margin-top: 15px;
+            margin-left: 10px;
+            margin-right: 20px;
+          "
+        >
+          <p class="coin">
+            COIN:
+          </p>
+        </div>
+        <div style="float: left; margin-top: 15px;">
+          <p class="coin" id="scoreId">
+            <script>
+              window.onload = function () {
+                var score = localStorage.getItem("coinScore");
+                document.getElementById("scoreId").innerHTML = score;
+              };
+            </script>
+          </p>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+
+      <div>
+        <button id="back" class="btn btn1" onclick="backFunction()">
+          <font color="#ffffff">BACK TO MAIN MENU</font>
+        </button>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function backFunction() {
+        window.location.href = "./index.html";
+      }
+    </script>
+  </body>
 </html>

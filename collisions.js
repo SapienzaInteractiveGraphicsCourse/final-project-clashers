@@ -341,6 +341,8 @@ export function onGoombaCollision(
     }
     if (life == 0) {
       //muori
+      localStorage.setItem("coinScore", score);
+      window.location.href = "./game_over.html";
 
       gameOverSound.play();
     }
