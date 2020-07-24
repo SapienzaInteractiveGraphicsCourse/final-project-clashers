@@ -148,8 +148,8 @@ export function fall(character) {
       groupCollision = false;
 
       //VEDERE SE DANNNO PROBLEMI CON LE PIPE
-      collidedLeft = false;
-      collidedRight = false;
+      //collidedLeft = false;
+      //collidedRight = false;
     })
     .start();
 }
@@ -506,7 +506,7 @@ export function jump(character) {
     .onUpdate(function () {
       character.position.y = tweenStartJump.y;
 
-      if (collidedTop1) {
+      /*if (collidedTop1) {
         character.position.y = 12;
         collidedTop1 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
@@ -524,7 +524,7 @@ export function jump(character) {
       } else {
         // se non collide nè al primo piano né al secondo piano continua il salto normalmente
         character.position.y = tweenStartJump.y;
-      }
+      }*/
 
       if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
         //collidedside serve per non farlo traslare quando collide di lato;
