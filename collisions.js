@@ -1,9 +1,4 @@
-import {
-  fall,
-  setIdlePosition,
-  objectAnimation,
-  goombaAnimation,
-} from "./tween_functions.js";
+import { fall, objectAnimation } from "./tween_functions.js";
 import { setPipeHeightGoal } from "./pipe.js";
 import { setStairsHeightGoal } from "./stairs.js";
 import { resetStartingPosition } from "./utils.js";
@@ -48,38 +43,23 @@ export function onGroupContainerCollision(
 ) {
   setCharacterStuff();
   if (other_object._physijs.id == boxId) {
-    //impostiamo il flag che dice che ha colliso lateralmente
-    console.log("Collided Side");
-    //collidedSide = true;
-    /*if (keysPressed[65]) {
-      collidedRight = true;
-    }
-    if (keysPressed[68]) {
-      collidedLeft = true;
-    }*/
     groupCollision = true;
 
     if (keysPressed[68] && !isFalling) {
       collidedLeft = true; //collide da sinistra sulla pipe
-      //increase = -8.5;
     }
     if (keysPressed[65] && !isFalling) {
       collidedRight = true; //collide da destra sulla pipe
-      //increase = 9;
     }
 
     //per risolvere il problema che andava attraverso la pipe dopo che era sceso da sopra
     if (isRotatedRight && isFalling) {
       collidedRight = true; //collide da sinistra sulla pipe
-      //increase = 9;
     }
     if (!isRotatedRight && isFalling) {
       collidedLeft = true; //collide da destra sulla pipe
-      //console.log("Setting collided left true");
-      //increase = -8.5;
     }
     currentPosition = model.position.z;
-    //isWalking = false; //capiamo bene se serve
   }
 }
 
@@ -91,14 +71,9 @@ export function onGroupContainerTopCollision1(
 ) {
   setCharacterStuff();
   if (other_object._physijs.id == lowerBoxId) {
-    console.log("Collided Top1, Yoshi position: " + model.position.y);
     collidedTop1 = true;
     collidedTop2 = false;
-    //collidedSide = false;
-
     isCoin = false;
-    console.log("isJumping = " + isJumping);
-    console.log("isCoin = " + isCoin);
   }
 }
 
@@ -110,14 +85,9 @@ export function onGroupContainerTopCollision2(
 ) {
   setCharacterStuff();
   if (other_object._physijs.id == lowerBoxId) {
-    console.log("Collided Top2, Yoshi position: " + model.position.y);
     collidedTop2 = true;
     collidedTop1 = false;
-
     isCoin = false;
-    console.log("isJumping = " + isJumping);
-    console.log("isCoin = " + isCoin);
-    //collidedSide = false;
   }
 }
 
@@ -129,12 +99,10 @@ export function onBottomCollision(
 ) {
   setCharacterStuff();
   if (other_object._physijs.id == upperBoxId) {
-    console.log("collision bottom");
     collidedBottom = true;
 
     tweenJump.stop();
     fall(model);
-    //tweenJumpBack.start();
 
     var id = this._physijs.id;
 
@@ -155,14 +123,7 @@ export function onPipeCollision(
 ) {
   setCharacterStuff();
 
-  //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
   if (other_object._physijs.id == boxId) {
-    console.log("collided pipe");
-    //impostiamo il flag che dice che ha colliso lateralmente
-    //collidedSide = true;
-    //isWalking = false; //capiamo bene se serve
-    //groupCollision = false;
-
     var increase;
     if (keysPressed[68] && !isFalling) {
       collidedLeft = true; //collide da sinistra sulla pipe
@@ -180,7 +141,6 @@ export function onPipeCollision(
     }
     if (!isRotatedRight && isFalling) {
       collidedLeft = true; //collide da destra sulla pipe
-      //console.log("Setting collided left true");
       increase = -8.5;
     }
 
@@ -201,13 +161,8 @@ export function onPipeTopCollision(
 ) {
   setCharacterStuff();
 
-  //risolvere il fatto che una volta che ha colliso non si stacca dalla pipe
-
   if (other_object._physijs.id == lowerBoxId) {
-    console.log("Collided Top Pipe");
     collidedTopPipe = true;
-
-    console.log("Yoshi position.y: " + model.position.y);
 
     var id = this._physijs.id;
     for (var i in pipeContainerTopArray) {
@@ -215,8 +170,6 @@ export function onPipeTopCollision(
         setPipeHeightGoal(i);
       }
     }
-
-    //collidedSide = false;
   }
 }
 
@@ -227,15 +180,12 @@ export function onCharacterCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  //console.log("normale " + contact_normal.y);
+
   if (contact_normal.z == 0) {
     var checkTouch = function () {
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
-      //collidedLeft = false;
-      //collidedRight = false;
-      //groupCollision = false;
       scene.removeEventListener("update", checkTouch);
     };
     scene.addEventListener("update", checkTouch);
@@ -258,8 +208,6 @@ export function onCharacterLowerCollision(
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
       collidedTopPipe = false;
       collidedTopStairs = false;
-      //collidedLeft = false;
-      //collidedRight = false;
       if (
         !isJumping &&
         !isCoin &&
@@ -283,16 +231,12 @@ export function onCharacterUpperCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  //console.log("contact_normal: " + contact_normal.y);
   if (contact_normal.y <= 1) {
     //abbiamo aggiunto il caso in cui è minore o uguale a 0 in modo da non farlo buggare quando collide con lo spigolo laterale durante il salto
     var checkTouch = function () {
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
-
-      //setIdlePosition(model); //serve per farlo tornare alla posizione iniziale del corpo quando sbatte su un blocco da sotto
-
       scene.removeEventListener("update", checkTouch);
     };
     scene.addEventListener("update", checkTouch);
@@ -313,13 +257,8 @@ export function onGoombaTopCollision(
       for (var i in goombaContainerTopArray) {
         if (goombaContainerTopArray[i]._physijs.id == id) {
           goombaArray[i].scale.set(0.07, 0.01, 0.07);
-
-          //in caso STOPPARE PER FARE CONTENTA MARTINA TURBESSI
-          scene.remove(goombaContainerArray[i]); //da errore
-          scene.remove(goombaContainerTopArray[i]); //da errore
-          //goombaContainerTopArray[i].removeEventListener("collision");
-          //goombaContainerIdArray[i].removeEventListener("collision");
-          //goombaDead = true;
+          scene.remove(goombaContainerArray[i]);
+          scene.remove(goombaContainerTopArray[i]);
           tweenWalkGoombaArray[i].stop();
           tweenGoombaFeetArray[i].stop();
           setTimeout(goombaDelete.bind(null, i), 5000);
@@ -337,24 +276,19 @@ export function onGoombaCollision(
 ) {
   setCharacterStuff();
 
-  //if (!goombaDead) {
   if (other_object._physijs.id == boxId) {
     var id = this._physijs.id;
     for (var i in goombaContainerArray) {
       if (goombaContainerArray[i]._physijs.id == id) {
-        //goombaElemArray[i].scale.set(0.07, 0.01, 0.07);
         life -= 1;
       }
     }
     if (life == 0) {
-      //muori
       localStorage.setItem("coinScore", score);
       window.location.href = "./game_over.html";
-
       gameOverSound.play();
     }
     if (life > 0) {
-      //riparti dall'inizio;
       loseLifeSound.play();
       resetStartingPosition(model);
     }
@@ -417,11 +351,7 @@ export function onStairsCollision(
 ) {
   setCharacterStuff();
 
-  //groupCollision = false;
-
   if (other_object._physijs.id == boxId) {
-    console.log("collided stairs");
-
     if (keysPressed[68] && !isFalling) {
       collidedLeft = true; //collide da sinistra sulla pipe
     }
@@ -431,11 +361,9 @@ export function onStairsCollision(
 
     if (isRotatedRight && isFalling) {
       collidedRight = true; //collide da sinistra sulla pipe
-      //increase = -8.5;
     }
     if (!isRotatedRight && isFalling) {
       collidedLeft = true; //collide da destra sulla pipe
-      //increase = 9;
     }
 
     var id = this._physijs.id;
@@ -459,10 +387,7 @@ export function onStairsTopCollision(
 
     var id = this._physijs.id;
     for (var i in emptyBlockContainerTopArray) {
-      //console.log("Container Y: " + emptyBlockContainerTopArray[i].position.y);
       if (emptyBlockContainerTopArray[i]._physijs.id == id) {
-        //funzione da scrivere
-        //console.log("Sono qui!!!!");
         setStairsHeightGoal(emptyBlockContainerTopArray[i].position.y);
       }
     }

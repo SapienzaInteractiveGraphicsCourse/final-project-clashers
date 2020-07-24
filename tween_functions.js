@@ -59,7 +59,6 @@ export function fall(character) {
       x_rightArm: upperArm_right.rotation.x,
       lowerLeg_right: lowerLeg_right.rotation.x,
       lowerLeg_left: lowerLeg_left.rotation.x,
-      //rightArm_rotation_z: (45 * Math.PI) / 180, //questa non dovrebbe essere uguale cit martina
       rightHand_rotation_y: handRight.rotation.y,
       spine: spine.rotation.x,
       head: head.rotation.x,
@@ -72,8 +71,6 @@ export function fall(character) {
       x_rightArm: (45 * Math.PI) / 180,
       lowerLeg_right: (0 * Math.PI) / 180,
       lowerLeg_left: (0 * Math.PI) / 180,
-
-      //rightArm_rotation_z: (45 * Math.PI) / 180,
       rightHand_rotation_y: (0 * Math.PI) / 180,
       spine: (0 * Math.PI) / 180,
       head: (0 * Math.PI) / 180,
@@ -139,27 +136,13 @@ export function fall(character) {
       }
     })
     .onStop(function () {
-      //collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
-
-      //collidedRight = false;
-      //collidedLeft = false;
-
-      //character.position.y = 12;
       collidedBottom = false;
       isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
-      //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
-      //serve perché altrimenti quando sbatte su un blocco da sotto non si rimette nella posizione iniziale
       isFalling = false;
       groupCollision = false;
     })
     .onComplete(function () {
-      //collidedSide = false; //serve per farlo ricominciare a camminare quando cade per terra
-
-      //collidedRight = false;
-      //collidedLeft = false;
-      //collidedTop = false; //serve per dire che quando cade smete di collidere col top
       isJumping = false;
-      //setIdlePosition(character); //se lo lasciamo si bugga la camminata dopo che fa falling
       collidedBottom = false;
       isFalling = false;
       groupCollision = false;
@@ -215,10 +198,8 @@ export function setAnimationParameters(character) {
       x_right: upperLeg_right.rotation.x,
       lowerLeg_right: lowerLeg_right.rotation.x,
       lowerLeg_left: lowerLeg_left.rotation.x,
-      //Braccia su x
       x_leftArm: upperArm_left.rotation.x,
       x_rightArm: upperArm_right.rotation.x,
-      //Braccia su z
       z_leftArm: upperArm_left.rotation.z,
       z_rightArm: upperArm_right.rotation.z,
       rightHand_rotation_y: handRight.rotation.y,
@@ -228,18 +209,14 @@ export function setAnimationParameters(character) {
     tweenGoalScale = {
       x_left: (-45 * Math.PI) / 180,
       x_right: (45 * Math.PI) / 180,
-      //Braccia su z
       z_leftArm: (-45 * Math.PI) / 180,
       z_rightArm: (-45 * Math.PI) / 180,
-
       spine: (10 * Math.PI) / 180,
       head: (-10 * Math.PI) / 180,
     };
     tweenBackScale = {
       x_left: (45 * Math.PI) / 180,
       x_right: (-45 * Math.PI) / 180,
-
-      //Braccia su z
       z_leftArm: (45 * Math.PI) / 180,
       z_rightArm: (45 * Math.PI) / 180,
     };
@@ -248,13 +225,10 @@ export function setAnimationParameters(character) {
       x_right: (0 * Math.PI) / 180,
       lowerLeg_right: (0 * Math.PI) / 180,
       lowerLeg_left: (0 * Math.PI) / 180,
-      //Braccia su x
       x_leftArm: (45 * Math.PI) / 180,
       x_rightArm: (45 * Math.PI) / 180,
-      //Braccia su z
       z_leftArm: (0 * Math.PI) / 180,
       z_rightArm: (0 * Math.PI) / 180,
-
       rightHand_rotation_y: (0 * Math.PI) / 180,
       spine: (0 * Math.PI) / 180,
       head: (0 * Math.PI) / 180,
@@ -265,7 +239,7 @@ export function setAnimationParameters(character) {
 export function performAnimation(direction, character) {
   dir = direction;
   groupCollision = false;
-  setAnimationParameters(character); //rinominare setTweenParameter!
+  setAnimationParameters(character);
 
   tween = new TWEEN.Tween(tweenStartScale, groupRun)
     .to(tweenGoalScale, 400)
@@ -278,7 +252,6 @@ export function performAnimation(direction, character) {
       head.rotation.x = tweenStartScale.head;
 
       if (character == yoshi || character == luigi) {
-        //Braccia su x
         upperArm_left.rotation.x = tweenStartScale.x_leftArm;
         upperArm_right.rotation.x = tweenStartScale.x_rightArm;
       }
@@ -291,16 +264,13 @@ export function performAnimation(direction, character) {
       if (direction == "right" && !collidedLeft) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
-        //console.log("tween");
       }
 
       if (collidedLeft) {
-        console.log("ciao");
         character.position.z = currentPosition;
       }
 
       if (collidedRight) {
-        console.log("ciao1");
         character.position.z = currentPosition;
       }
 
@@ -324,7 +294,6 @@ export function performAnimation(direction, character) {
       head.rotation.x = tweenStartScale.head;
 
       if (character == yoshi || character == luigi) {
-        //Braccia su x
         upperArm_left.rotation.x = tweenStartScale.x_leftArm;
         upperArm_right.rotation.x = tweenStartScale.x_rightArm;
       }
@@ -337,7 +306,6 @@ export function performAnimation(direction, character) {
       if (direction == "right" && !collidedLeft) {
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
-        //console.log("tweenBack");
       }
 
       if (direction == "left" && !collidedRight) {
@@ -409,7 +377,7 @@ export function jump(character) {
       head: (-15 * Math.PI) / 180,
     };
     tweenGoalJump = {
-      y: tweenStartJump.y + 29.3, //-3, -15
+      y: tweenStartJump.y + 29.3,
 
       upperLeg_right: (0 * Math.PI) / 180,
       lowerLeg: (0 * Math.PI) / 180,
@@ -467,7 +435,7 @@ export function jump(character) {
       head: (-15 * Math.PI) / 180,
     };
     tweenGoalJump = {
-      y: tweenStartJump.y + 29.3, //-3, -15
+      y: tweenStartJump.y + 29.3,
       rightArm_rotation_x: (-90 * Math.PI) / 180,
       rightHand_rotation_y: (90 * Math.PI) / 180,
       upperLeg_right: (0 * Math.PI) / 180,
@@ -500,7 +468,7 @@ export function jump(character) {
       lowerLeg: (-75 * Math.PI) / 180,
       spine: (30 * Math.PI) / 180,
       head: (-15 * Math.PI) / 180,
-      y: tweenStartJump.y - 0.3, //-14.6
+      y: tweenStartJump.y - 0.3,
     };
     tweenStartRaise = {
       rightArm_rotation_x: upperArm_right.rotation.x,
@@ -529,7 +497,7 @@ export function jump(character) {
     .start();
 
   tweenJump = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJump, 1000) //400
+    .to(tweenGoalJump, 1000)
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
       character.position.y = tweenStartJump.y;
@@ -555,7 +523,7 @@ export function jump(character) {
 
   tweenFlex.chain(tweenJump);
   tweenJumpBack = new TWEEN.Tween(tweenStartJump, groupJump)
-    .to(tweenGoalJumpBack, timeJumpBack) //400
+    .to(tweenGoalJumpBack, timeJumpBack)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       //se collide al primo piano imposta la posizione del personaggio a 12
@@ -568,13 +536,11 @@ export function jump(character) {
         character.position.y = 12;
         collidedTop1 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
-        //tweenJumpBack.stop();
       } else if (collidedTop2) {
         console.log("Setting Yoshi position to 36");
         character.position.y = 36;
         collidedTop2 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
-        //tweenJumpBack.stop();
       } else if (collidedTopPipe) {
         character.position.y = pipeHeightGoal;
         console.log("pipeHeightGoal: " + pipeHeightGoal);
@@ -610,10 +576,7 @@ export function jump(character) {
     })
     .onStop(function () {
       isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
-      //collidedSide = false;
 
-      //collidedLeft = false;
-      //collidedRight = false;
       if (keysPressed[68]) {
         collidedRight = false;
       }
@@ -625,7 +588,6 @@ export function jump(character) {
       isJumpingRight = false;
       isJumpingLeft = false;
       isJumping = false;
-      //collidedSide = false;
       if (!groupCollision) {
         if (keysPressed[68]) {
           collidedRight = false;
@@ -726,9 +688,6 @@ export function setIdlePosition(character) {
       handRight.rotation.y = tweenStartScale.rightHand_rotation_y;
       handLeft.rotation.y = tweenStartScale.rightHand_rotation_y;
     })
-    .onComplete(function () {
-      //isJumping = false; //--> se lo lasciamo fa buggare il salto quando premiamo più volte lo spazio mentre il personaggio sta già saltando
-    })
     .start();
 }
 
@@ -756,11 +715,11 @@ export function goombaAnimation(goombaElem, increase) {
   };
 
   var tweenWalkGoal = {
-    z: goombaElem.position.z + increase, //15
+    z: goombaElem.position.z + increase,
   };
 
   var tweenWalkBack = {
-    z: goombaElem.position.z - increase, //-15
+    z: goombaElem.position.z - increase,
   };
 
   var tweenGoomba = new TWEEN.Tween(tweenStartGoomba)
@@ -845,8 +804,7 @@ export function objectAnimation(object, i) {
     })
     .start();
 
-  //if (flagCoin) {
-  var tweenRotationCoin = new TWEEN.Tween()
+  var tweenRotation = new TWEEN.Tween()
     .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
       object.rotation.y += 0.1;
@@ -854,5 +812,4 @@ export function objectAnimation(object, i) {
     .yoyo(true)
     .repeat(Infinity)
     .start();
-  //}
 }

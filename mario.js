@@ -16,8 +16,7 @@ export const mario_dic = {
 
 export function setMarioGeometry() {
   var marioGeometry = new THREE.BoxGeometry(7.5, 4, 6.3);
-  marioBox = new Physijs.BoxMesh(marioGeometry, geometryMaterial, 50); //mass 0
-  //yoshiBox.position.set(0, -9.3, -600);
+  marioBox = new Physijs.BoxMesh(marioGeometry, geometryMaterial, 50);
   marioBox.position.set(
     mario.position.x,
     mario.position.y + 5.2,

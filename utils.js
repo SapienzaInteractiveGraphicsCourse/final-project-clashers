@@ -44,3 +44,6 @@ loseLifeSound.volume = 0.4;
 
 gameOverSound = new Audio("audio/gameOverSound.mp3");
 gameOverSound.volume = 0.4;
+
+levelSound = new Audio("audio/levelSound.mp3");
+levelSound.volume = 0.2;

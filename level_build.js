@@ -20,11 +20,11 @@ export function createGroup1() {
 
   for (var i = 0; i < 4; i++) {
     questionBoxClone = questionBox.clone();
-    questionBoxClone.position.set(0, 6.2, -562.5 + 5.5 * 2.25 * i); //-562.5 + 5.5 * 2.25 * i
+    questionBoxClone.position.set(0, 6.2, -562.5 + 5.5 * 2.25 * i);
     scene.add(questionBoxClone);
     group1.push(questionBoxClone);
   }
-  group1[6].position.set(0, 30, -556); //25.2
+  group1[6].position.set(0, 30, -556);
   group1[3].position.set(0, 6.2, -600);
   group1[4].position.set(0, 6.2, -562.5);
   group1[5].position.set(0, 6.2, -550.1);
@@ -33,7 +33,7 @@ export function createGroup1() {
   }
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 9, -600 + 50 * i); //8.5
+    coinClone.position.set(0, 9, -600 + 50 * i);
     scene.add(coinClone);
     group1.push(coinClone);
   }
@@ -44,7 +44,7 @@ export function createGroup1() {
   }
 
   powerUpClone = powerUp.clone();
-  powerUpClone.position.set(0, 9, -562.5); //16.5
+  powerUpClone.position.set(0, 9, -562.5);
   scene.add(powerUpClone);
   group1.push(powerUpClone);
   setPowerUpGeometry(powerUpClone);
@@ -142,7 +142,7 @@ export function createGroup3() {
   var brickClone;
   for (var i = 0; i < 8; i++) {
     brickClone = brick.clone();
-    brickClone.position.set(0, 28.8, -300 + 5.5 * i); //24
+    brickClone.position.set(0, 28.8, -300 + 5.5 * i);
     scene.add(brickClone);
     group3.push(brickClone);
     setBrickGeometry(brickClone);
@@ -200,7 +200,7 @@ export function createGroup4() {
 
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 33, -221.5 + 126.7 * i); //8.5
+    coinClone.position.set(0, 33, -221.5 + 126.7 * i);
     scene.add(coinClone);
     group4.push(coinClone);
   }
@@ -252,7 +252,7 @@ export function createGroup5() {
 
   for (var i = 0; i < 3; i++) {
     coinClone = coin.clone();
-    coinClone.position.set(0, 9, -197 + 23.25 * i); //8.5
+    coinClone.position.set(0, 9, -197 + 23.25 * i);
     scene.add(coinClone);
     group5.push(coinClone);
   }
@@ -420,7 +420,6 @@ export function createGroupStairs(start, width) {
   }
 
   if (width == 8) {
-    //9
     for (var i = 3; i < width; i++) {
       emptyBlockClone1 = emptyBlock.clone();
       emptyBlockClone2 = emptyBlock.clone();
@@ -694,7 +693,6 @@ export function createGroup6() {
     pipeClone.position.set(-5.25, -14.1, 120 + 80 * i);
     scene.add(pipeClone);
     group6.push(pipeClone);
-    //setPipeGeometry(pipeClone, 17.2, 7.6); //da modificare
     setPipeGeometry(pipeClone, 16.5, 11.5);
   }
   for (var i = 0; i < 3; i++) {
@@ -711,7 +709,7 @@ export function createGroup6() {
   group6.push(questionBoxClone);
 
   coinClone = coin.clone();
-  coinClone.position.set(0, 9, 148); //8.5
+  coinClone.position.set(0, 9, 148);
   scene.add(coinClone);
   group6.push(coinClone);
   setCoinGeometry(coinClone);
@@ -731,8 +729,6 @@ export function createGroup6() {
   }
 
   setQuestionBoxGeometry(questionBoxClone);
-
-  //initializeGoombaArray();
 
   setGroupGeometry(6.1 * 4, 9.5, 145.3);
 }

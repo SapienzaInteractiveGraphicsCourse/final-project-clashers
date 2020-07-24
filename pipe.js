@@ -13,14 +13,14 @@ export function setPipeHeightGoal(i) {
 }
 
 export function setPipeGeometry(pipeElem, y, y_top) {
-  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 11); //11.5
+  var pipeGeometry = new THREE.BoxGeometry(10.5, y - 4, 11);
   pipeContainer = new Physijs.BoxMesh(pipeGeometry, geometryMaterial, 0);
   pipeContainer.position.set(
     pipeElem.position.x + 5,
     pipeElem.position.y + 3.2,
     pipeElem.position.z - 5
   );
-  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 12); //9.5
+  var pipeGeometryTop = new THREE.BoxGeometry(10, 1.8, 12);
   pipeContainerTop = new Physijs.BoxMesh(pipeGeometryTop, geometryMaterial2, 0);
   pipeContainerTop.position.set(
     pipeElem.position.x + 5,
@@ -33,7 +33,7 @@ export function setPipeGeometry(pipeElem, y, y_top) {
 
   pipeContainerArray.push(pipeContainer);
   pipeContainerTopArray.push(pipeContainerTop);
-  //pipeContainerTop.setCcdMotionThreshold(1);
+  pipeContainerTop.setCcdMotionThreshold(1);
   pipeContainer.setCcdMotionThreshold(1);
   pipeContainer.addEventListener("collision", collFunc.onPipeCollision);
   pipeContainerTop.addEventListener("collision", collFunc.onPipeTopCollision);

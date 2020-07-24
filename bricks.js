@@ -6,15 +6,13 @@ export function setQuestionBoxGeometry(questionBoxElem) {
     questionBoxGeometry,
     geometryMaterial1,
     0
-  ); //mass 0
+  );
   questionBoxContainer.position.set(
     questionBoxElem.position.x,
     questionBoxElem.position.y,
     questionBoxElem.position.z
   );
   scene.add(questionBoxContainer);
-  //questionBoxContainer.__dirtyPosition = true;
-  //questionBoxContainer.__dirtyRotation = false;
 
   questionBoxArray.push(questionBoxContainer);
   questionBoxContainer.addEventListener(
@@ -45,7 +43,7 @@ export function setGroupGeometry(groupWidth, y, z) {
     collFunc.onGroupContainerCollision
   );
 
-  var groupGeometryTop = new THREE.BoxGeometry(6.3, 1.5, groupWidth - 0.5);
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 2, groupWidth - 0.5);
   groupContainerTop = new Physijs.BoxMesh(
     groupGeometryTop,
     geometryMaterial2,

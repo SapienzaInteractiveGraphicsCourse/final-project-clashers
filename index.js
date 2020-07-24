@@ -1,4 +1,3 @@
-//file js
 "use strict";
 
 import * as THREE from "./build/three.js-master/build/three.module.js";
@@ -116,6 +115,8 @@ function init() {
     ambientLight = new THREE.AmbientLight(color, intensity);
     scene.add(ambientLight);
   }
+
+  levelSound.play();
 
   var gltfLoader = new GLTFLoader();
 

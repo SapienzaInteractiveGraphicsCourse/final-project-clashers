@@ -129,8 +129,6 @@ var collidedTopPipe = false;
 var collidedTopStairs = false;
 var groupCollision = false;
 
-//var isOnObjectTop = false;
-
 var groupJump;
 var groupRun;
 var groupRotate;
@@ -196,3 +194,4 @@ var itemSound;
 var jumpSound;
 var loseLifeSound;
 var gameOverSound;
+var levelSound;
