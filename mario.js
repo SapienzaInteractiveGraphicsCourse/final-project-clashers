@@ -25,7 +25,7 @@ export function setMarioGeometry() {
   );
   marioBox.setCcdMotionThreshold(1);
   scene.add(marioBox);
-  marioBox.addEventListener("collision", collFunc.onYoshiCollision);
+  marioBox.addEventListener("collision", collFunc.onCharacterCollision);
 
   var marioUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
   marioUpperBox = new Physijs.BoxMesh(
@@ -40,7 +40,10 @@ export function setMarioGeometry() {
   );
   marioUpperBox.setCcdMotionThreshold(1);
   scene.add(marioUpperBox);
-  marioUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
+  marioUpperBox.addEventListener(
+    "collision",
+    collFunc.onCharacterUpperCollision
+  );
 
   var marioLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
   marioLowerBox = new Physijs.BoxMesh(
