@@ -41,6 +41,7 @@ export function setEmptyBlockGeometry(emptyBlockElem) {
     emptyBlockElem.position.z
   );
   scene.add(emptyBlockContainer);
+  emptyBlockContainer.setCcdMotionThreshold(1);
   emptyBlockContainer.addEventListener("collision", collFunc.onStairsCollision);
   emptyBlockContainerArray.push(emptyBlockContainer);
 
@@ -56,6 +57,7 @@ export function setEmptyBlockGeometry(emptyBlockElem) {
     emptyBlockElem.position.z
   );
   scene.add(emptyBlockContainerTop);
+  emptyBlockContainerTop.setCcdMotionThreshold(1);
   emptyBlockContainerTop.addEventListener(
     "collision",
     collFunc.onStairsTopCollision

@@ -24,6 +24,7 @@ export function setCoinGeometry(coinElem) {
   coinContainerArray.push(coinContainer);
   coinArray.push(coinElem);
   scene.add(coinContainer);
+  coinContainer.setCcdMotionThreshold(1);
   coinContainer.addEventListener("collision", collFunc.onCoinCollision);
 }
 
@@ -51,5 +52,6 @@ export function setPowerUpGeometry(powerUpElem) {
   powerUpContainerArray.push(powerUpContainer);
   powerUpArray.push(powerUpElem);
   scene.add(powerUpContainer);
+  powerUpContainer.setCcdMotionThreshold(1);
   powerUpContainer.addEventListener("collision", collFunc.onPowerUpCollision);
 }

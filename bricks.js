@@ -15,6 +15,7 @@ export function setQuestionBoxGeometry(questionBoxElem) {
   scene.add(questionBoxContainer);
 
   questionBoxArray.push(questionBoxContainer);
+  questionBoxContainer.setCcdMotionThreshold(1);
   questionBoxContainer.addEventListener(
     "collision",
     collFunc.onBottomCollision
@@ -30,6 +31,7 @@ export function setBrickGeometry(brickElem) {
     brickElem.position.z + 1.2
   );
   scene.add(brickContainer);
+  brickContainer.setCcdMotionThreshold(1);
   brickContainer.addEventListener("collision", collFunc.onBottomCollision);
 }
 
@@ -38,6 +40,7 @@ export function setGroupGeometry(groupWidth, y, z) {
   groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 0);
   groupContainer.position.set(0, y, z);
   scene.add(groupContainer);
+  groupContainer.setCcdMotionThreshold(1);
   groupContainer.addEventListener(
     "collision",
     collFunc.onGroupContainerCollision
@@ -51,7 +54,7 @@ export function setGroupGeometry(groupWidth, y, z) {
   );
   groupContainerTop.position.set(0, y + 3, z);
   scene.add(groupContainerTop);
-
+  groupContainerTop.setCcdMotionThreshold(1);
   if (y == 9.5) {
     //associo il listener relativo al "primo piano"
     groupContainerTop.addEventListener(

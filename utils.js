@@ -47,3 +47,4 @@ gameOverSound.volume = 0.4;
 
 levelSound = new Audio("audio/levelSound.mp3");
 levelSound.volume = 0.2;
+levelSound.loop = true;

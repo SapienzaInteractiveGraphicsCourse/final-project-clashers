@@ -56,6 +56,7 @@ export function setGoombaGeometry(goombaElem) {
   goombaContainerArray.push(goombaContainer);
   goombaContainerTopArray.push(goombaContainerTop);
   goombaContainer.setCcdMotionThreshold(1);
+  goombaContainerTop.setCcdMotionThreshold(1);
   goombaContainer.addEventListener("collision", collFunc.onGoombaCollision);
   goombaContainerTop.addEventListener(
     "collision",
