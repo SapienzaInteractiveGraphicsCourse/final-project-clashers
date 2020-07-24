@@ -260,7 +260,12 @@ export function onCharacterLowerCollision(
       collidedTopStairs = false;
       //collidedLeft = false;
       //collidedRight = false;
-      if (!isJumping && !isCoin && !collidedTopPipe) {
+      if (
+        !isJumping &&
+        !isCoin &&
+        !collidedTopPipe &&
+        other_object._physijs.id != ground._physijs.id
+      ) {
         //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
       }

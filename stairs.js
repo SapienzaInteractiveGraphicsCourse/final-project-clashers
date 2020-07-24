@@ -1,29 +1,7 @@
+import * as collFunc from "./collisions.js";
+
 export function setStairsHeightGoal(containerY) {
   console.log("container Y: " + containerY);
-  /* if (containerY >= -9 && containerY <= -7) {
-    stairsHeightGoal = -9.6;
-  }
-  if (containerY >= -2 && containerY <= -1.5) {
-    stairsHeightGoal = -4;
-  }
-  if (containerY >= 2 && containerY <= 3) {
-    stairsHeightGoal = 1.3;
-  }
-  if (containerY >= 7.5 && containerY <= 8.5) {
-    stairsHeightGoal = 6.4;
-  }
-  if (containerY >= 13 && containerY <= 14) {
-    stairsHeightGoal = 11;
-  }
-  if (containerY >= 18.5 && containerY <= 19.5) {
-    stairsHeightGoal = 17;
-  }
-  if (containerY >= 24 && containerY <= 25) {
-    stairsHeightGoal = 22;
-  }
-  if (containerY >= 29.5 && containerY <= 30.5) {
-    stairsHeightGoal = 29;
-  }*/
   if (containerY == -8.399999618530273) {
     stairsHeightGoal = -8.7;
   }
@@ -48,4 +26,39 @@ export function setStairsHeightGoal(containerY) {
   if (containerY == 30.100000381469727) {
     stairsHeightGoal = 29.9;
   }
+}
+
+export function setEmptyBlockGeometry(emptyBlockElem) {
+  var emptyBlockGeometry = new THREE.BoxGeometry(5.7, 3, 5.5);
+  emptyBlockContainer = new Physijs.BoxMesh(
+    emptyBlockGeometry,
+    geometryMaterial,
+    0
+  );
+  emptyBlockContainer.position.set(
+    emptyBlockElem.position.x,
+    emptyBlockElem.position.y,
+    emptyBlockElem.position.z
+  );
+  scene.add(emptyBlockContainer);
+  emptyBlockContainer.addEventListener("collision", collFunc.onStairsCollision);
+  emptyBlockContainerArray.push(emptyBlockContainer);
+
+  var emptyBlockGeometryTop = new THREE.BoxGeometry(5, 1.5, 6.2);
+  emptyBlockContainerTop = new Physijs.BoxMesh(
+    emptyBlockGeometryTop,
+    geometryMaterial2,
+    0
+  );
+  emptyBlockContainerTop.position.set(
+    emptyBlockElem.position.x,
+    emptyBlockElem.position.y + 2.8,
+    emptyBlockElem.position.z
+  );
+  scene.add(emptyBlockContainerTop);
+  emptyBlockContainerTop.addEventListener(
+    "collision",
+    collFunc.onStairsTopCollision
+  );
+  emptyBlockContainerTopArray.push(emptyBlockContainerTop);
 }

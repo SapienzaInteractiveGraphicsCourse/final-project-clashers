@@ -45,7 +45,7 @@ export function setMarioGeometry() {
     collFunc.onCharacterUpperCollision
   );
 
-  var marioLowerGeometry = new THREE.BoxGeometry(4, 2, 3);
+  var marioLowerGeometry = new THREE.BoxGeometry(4, 1.5, 3);
   marioLowerBox = new Physijs.BoxMesh(
     marioLowerGeometry,
     geometryMaterial2,
