@@ -177,3 +177,33 @@
 .fas:hover {
   text-shadow: 4px 4px 8px white;
 }
+
+.controlsAD {
+  background-color: white;
+  border-radius: 6px;
+  -webkit-text-stroke: 2px black;
+  box-shadow: 8px 8px 16px black;
+  text-shadow: 2px 2px 4px black;
+  border-color: black;
+  font-size: 7vmin;
+  font-family: superMarioFont;
+  height: 96px;
+  width: 96px;
+  margin-bottom: 5%;
+  position: relative;
+}
+
+.controlsSpace {
+  background-color: white;
+  border-radius: 6px;
+  -webkit-text-stroke: 2px black;
+  box-shadow: 8px 8px 16px black;
+  text-shadow: 2px 2px 4px black;
+  border-color: black;
+  font-size: 7vmin;
+  font-family: superMarioFont;
+  height: 96px;
+  width: 185px;
+  margin-bottom: 5%;
+  position: relative;
+}
