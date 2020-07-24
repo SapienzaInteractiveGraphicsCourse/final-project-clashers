@@ -35,7 +35,7 @@ export const luigi_dic = {
 };
 
 export function setLuigiGeometry() {
-  var luigiGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
+  var luigiGeometry = new THREE.BoxGeometry(7.5, 4, 6.3);
   luigiBox = new Physijs.BoxMesh(luigiGeometry, geometryMaterial, 50); //mass 0
   //yoshiBox.position.set(0, -9.3, -600);
   luigiBox.position.set(
@@ -45,9 +45,9 @@ export function setLuigiGeometry() {
   );
   luigiBox.setCcdMotionThreshold(1);
   scene.add(luigiBox);
-  luigiBox.addEventListener("collision", collFunc.onYoshiCollision);
+  luigiBox.addEventListener("collision", collFunc.onCharacterCollision);
 
-  var luigiUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+  var luigiUpperGeometry = new THREE.BoxGeometry(7.5, 1.5, 5);
   luigiUpperBox = new Physijs.BoxMesh(
     luigiUpperGeometry,
     geometryMaterial1,
@@ -60,9 +60,12 @@ export function setLuigiGeometry() {
   );
   luigiUpperBox.setCcdMotionThreshold(1);
   scene.add(luigiUpperBox);
-  luigiUpperBox.addEventListener("collision", collFunc.onYoshiUpperCollision);
+  luigiUpperBox.addEventListener(
+    "collision",
+    collFunc.onCharacterUpperCollision
+  );
 
-  var luigiLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
+  var luigiLowerGeometry = new THREE.BoxGeometry(4, 2, 3);
   luigiLowerBox = new Physijs.BoxMesh(
     luigiLowerGeometry,
     geometryMaterial2,
@@ -70,12 +73,15 @@ export function setLuigiGeometry() {
   );
   luigiLowerBox.position.set(
     luigi.position.x,
-    luigi.position.y + 0.1,
-    luigi.position.z
+    luigi.position.y + 1,
+    luigi.position.z - 0.5
   );
   luigiLowerBox.setCcdMotionThreshold(1);
   scene.add(luigiLowerBox);
-  luigiLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
+  luigiLowerBox.addEventListener(
+    "collision",
+    collFunc.onCharacterLowerCollision
+  );
 }
 
 export function updateLuigiBoxPosition() {
@@ -91,8 +97,8 @@ export function updateLuigiBoxPosition() {
   );
   luigiLowerBox.position.set(
     luigi.position.x,
-    luigi.position.y + 0.1,
-    luigi.position.z
+    luigi.position.y + 1,
+    luigi.position.z - 0.5
   );
   var luigiBoxPos = luigiBox.position.clone();
   luigiBox.position.copy(luigiBoxPos);

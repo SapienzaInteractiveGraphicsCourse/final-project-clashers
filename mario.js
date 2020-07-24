@@ -15,7 +15,7 @@ export const mario_dic = {
 };
 
 export function setMarioGeometry() {
-  var marioGeometry = new THREE.BoxGeometry(7.5, 6.5, 6.3);
+  var marioGeometry = new THREE.BoxGeometry(7.5, 4, 6.3);
   marioBox = new Physijs.BoxMesh(marioGeometry, geometryMaterial, 50); //mass 0
   //yoshiBox.position.set(0, -9.3, -600);
   marioBox.position.set(
@@ -27,7 +27,7 @@ export function setMarioGeometry() {
   scene.add(marioBox);
   marioBox.addEventListener("collision", collFunc.onCharacterCollision);
 
-  var marioUpperGeometry = new THREE.BoxGeometry(7.5, 0.5, 6.3);
+  var marioUpperGeometry = new THREE.BoxGeometry(7.5, 1.5, 5);
   marioUpperBox = new Physijs.BoxMesh(
     marioUpperGeometry,
     geometryMaterial1,
@@ -45,7 +45,7 @@ export function setMarioGeometry() {
     collFunc.onCharacterUpperCollision
   );
 
-  var marioLowerGeometry = new THREE.BoxGeometry(4, 0.1, 3);
+  var marioLowerGeometry = new THREE.BoxGeometry(4, 2, 3);
   marioLowerBox = new Physijs.BoxMesh(
     marioLowerGeometry,
     geometryMaterial2,
@@ -53,12 +53,15 @@ export function setMarioGeometry() {
   );
   marioLowerBox.position.set(
     mario.position.x,
-    mario.position.y + 0.1,
+    mario.position.y + 1,
     mario.position.z
   );
   marioLowerBox.setCcdMotionThreshold(1);
   scene.add(marioLowerBox);
-  marioLowerBox.addEventListener("collision", collFunc.onYoshiLowerCollision);
+  marioLowerBox.addEventListener(
+    "collision",
+    collFunc.onCharacterLowerCollision
+  );
 }
 
 export function updateMarioBoxPosition() {
@@ -74,7 +77,7 @@ export function updateMarioBoxPosition() {
   );
   marioLowerBox.position.set(
     mario.position.x,
-    mario.position.y + 0.1,
+    mario.position.y + 1,
     mario.position.z
   );
   var marioBoxPos = marioBox.position.clone();
