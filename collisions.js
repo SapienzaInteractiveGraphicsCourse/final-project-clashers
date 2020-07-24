@@ -341,6 +341,7 @@ export function onGoombaCollision(
     }
     if (life == 0) {
       //muori
+
       gameOverSound.play();
     }
     if (life > 0) {
