@@ -484,7 +484,7 @@ function init() {
           } else {
             isJumpingLeft = true;
           }
-          if (!spacePressed && !isJumping) {
+          if (!spacePressed && !isJumping && !isFalling) {
             tweenFunc.jump(character);
             isJumping = true; //serve per non far ripartire il tween del salto se ne è già partito uno e non è ancora finito
           }

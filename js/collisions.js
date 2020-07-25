@@ -110,7 +110,10 @@ export function onBottomCollision(
     collidedBottom = true;
 
     tweenJump.stop();
-    fall(model);
+
+    if (!isFalling) {
+      fall(model);
+    }
 
     var id = this._physijs.id;
 
@@ -193,8 +196,8 @@ export function onCharacterCollision(
 
   if (contact_normal.z == 0) {
     var checkTouch = function () {
-      for (var i = 0; i < touchesLower.length; i++) {
-        if (touchesLower[i] == other_object._physijs.id) return;
+      for (var i = 0; i < touchesBox.length; i++) {
+        if (touchesBox[i] == other_object._physijs.id) return;
       }
       scene.removeEventListener("update", checkTouch);
     };
@@ -246,8 +249,8 @@ export function onCharacterUpperCollision(
   if (contact_normal.y <= 1) {
     //abbiamo aggiunto il caso in cui è minore o uguale a 0 in modo da non farlo buggare quando collide con lo spigolo laterale durante il salto
     var checkTouch = function () {
-      for (var i = 0; i < touchesLower.length; i++) {
-        if (touchesLower[i] == other_object._physijs.id) return;
+      for (var i = 0; i < touchesUpper.length; i++) {
+        if (touchesUpper[i] == other_object._physijs.id) return;
       }
       scene.removeEventListener("update", checkTouch);
     };
