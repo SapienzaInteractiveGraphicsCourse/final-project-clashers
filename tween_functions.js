@@ -5,7 +5,6 @@ export function fall(character) {
   var timeFall = 400;
   if (character.position.y == 36) {
     timeFall = 900;
-    console.log("Setting timeFall = 700");
   }
 
   if (collidedBottom && character.position.y < 10) {
@@ -18,9 +17,7 @@ export function fall(character) {
     character.position.y < 36
   ) {
     timeFall = 1500;
-    console.log("sto qua");
   }
-  console.log("falling");
   if (character == yoshi || character == luigi) {
     tweenStartFall = {
       y: character.position.y,
@@ -107,7 +104,6 @@ export function fall(character) {
         }
 
         tweenFall.stop();
-        console.log("Setting Character position to 12");
         character.position.y = 12;
         collidedTop1 = false;
       } else if (collidedTopStairs) {
@@ -364,12 +360,10 @@ export function jump(character) {
   var timeJumpBack = 1000;
   if (character.position.y == 36) {
     timeJumpBack = 1500;
-    console.log("Setting timeJumpBack = 1500");
   }
   if (isCoin) {
     //questo if serve perchè se salto da sopra la moneta e ci cado sopra, in questo modo non cade e rimane sul cubo
     timeJumpBack = 3000;
-    console.log("Setting timeJumpBack = 3000");
   }
   if (character == yoshi || character == luigi) {
     tweenStartJump = {
@@ -568,21 +562,17 @@ export function jump(character) {
       //sarebbe potuto succedere che il tween si bloccava prima di poter fare il controllo qui dentro
       //stessa cosa per l'else if solo che facciamo il controllo per il secondo piano
       if (collidedTop1) {
-        console.log("Setting Yoshi position to 12");
         character.position.y = 12;
         collidedTop1 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
       } else if (collidedTop2) {
-        console.log("Setting Yoshi position to 36");
         character.position.y = 36;
         collidedTop2 = false;
         tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
       } else if (collidedTopPipe) {
         character.position.y = pipeHeightGoal;
-        console.log("pipeHeightGoal: " + pipeHeightGoal);
         tweenJump.stop();
       } else if (collidedTopStairs) {
-        console.log("stairsHeightGoal: " + stairsHeightGoal);
         character.position.y = stairsHeightGoal;
         tweenJump.stop();
       } else {
@@ -595,7 +585,6 @@ export function jump(character) {
         //collidedtop serve per non fargli fare lo speedboost quando atterra
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
-        console.log("jumpBack");
       }
 
       if (keysPressed[65] && !collidedRight && !collidedTop1 && !collidedTop2) {

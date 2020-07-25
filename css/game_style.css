@@ -1,10 +1,10 @@
 @font-face {
   font-family: superMarioFont;
-  src: url(font/SuperMario256.ttf);
+  src: url(../font/SuperMario256.ttf);
 }
 
 .container {
-  background-image: url(./img/sky.png);
+  background-image: url(../img/sky.png);
   height: auto;
   width: 100%;
   max-width: 100%;

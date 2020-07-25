@@ -65,7 +65,7 @@ levelSound.volume = 0.2;
 levelSound.loop = true;
 
 goombaSound = new Audio("audio/goombaSound.mp3");
-goombaSound.volume = 0.7;
+goombaSound.volume = 1;
 
 winSound = new Audio("audio/winSound.mp3");
 winSound.volume = 0.4;

@@ -47,7 +47,6 @@ export function onGroupContainerCollision(
     other_object._physijs.id == lowerBoxId
   ) {
     if (other_object._physijs.id == lowerBoxId) {
-      console.log("Collisione con lowerBoxId");
     }
     groupCollision = true;
 
@@ -275,6 +274,7 @@ export function onGoombaTopCollision(
             scene.remove(goombaContainerTopArray[i]);
             tweenWalkGoombaArray[i].stop();
             tweenGoombaFeetArray[i].stop();
+            goombaSound.play();
             setTimeout(goombaDelete.bind(null, i), 5000);
           }
         }

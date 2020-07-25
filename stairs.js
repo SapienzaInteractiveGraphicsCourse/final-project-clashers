@@ -1,7 +1,6 @@
 import * as collFunc from "./collisions.js";
 
 export function setStairsHeightGoal(containerY) {
-  console.log("container Y: " + containerY);
   if (containerY == -8.399999618530273) {
     stairsHeightGoal = -8.7;
   }

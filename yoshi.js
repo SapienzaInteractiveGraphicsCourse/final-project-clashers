@@ -44,8 +44,7 @@ export const yoshi_dic = {
 
 export function setYoshiGeometry() {
   var yoshiGeometry = new THREE.BoxGeometry(7.5, 4, 6.3);
-  yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 1); //mass 0
-  //yoshiBox.position.set(0, -9.3, -600);
+  yoshiBox = new Physijs.BoxMesh(yoshiGeometry, geometryMaterial, 1);
   yoshiBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 5.2,
@@ -90,7 +89,6 @@ export function updateYoshiBoxPosition() {
     yoshi.position.y + 5.2,
     yoshi.position.z
   );
-  //console.log("yoshiBox.position.y: " + yoshiBox.position.y);
   yoshiUpperBox.position.set(
     yoshi.position.x,
     yoshi.position.y + 10,

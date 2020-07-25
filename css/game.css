@@ -1,6 +1,6 @@
 @font-face {
   font-family: superMarioFont;
-  src: url(font/SuperMario256.ttf);
+  src: url(../font/SuperMario256.ttf);
 }
 
 .canvas_three {
