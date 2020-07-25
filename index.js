@@ -12,6 +12,7 @@ import * as yoshiFunc from "./js/yoshi.js";
 import * as luigiFunc from "./js/luigi.js";
 import * as marioFunc from "./js/mario.js";
 import { loadWin } from "./js/utils.js";
+import { setWallGeometry } from "./js/bricks.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -484,7 +485,7 @@ function init() {
           } else {
             isJumpingLeft = true;
           }
-          if (!spacePressed && !isJumping) {
+          if (!spacePressed && !isJumping && !isFalling) {
             tweenFunc.jump(character);
             isJumping = true; //serve per non far ripartire il tween del salto se ne è già partito uno e non è ancora finito
           }
@@ -891,6 +892,7 @@ function createLandscape() {
   landscape = new landscapeFunction();
   ground.position.y = -24;
   scene.add(ground);
+  setWallGeometry();
 }
 
 function createBgSky() {
