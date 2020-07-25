@@ -94,7 +94,7 @@ function init() {
     const color = 0xffffff;
     const intensity = 1;
     dirLight = new THREE.DirectionalLight(color, intensity, 100);
-    dirLight.position.set(0, 100, -620); //y = 100 z = -620
+    dirLight.position.set(0, 100, -620);
     dirLight.castShadow = true;
 
     dirLight.shadow.mapSize.width = 512;
