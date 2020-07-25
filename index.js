@@ -918,7 +918,7 @@ lifeImg.style.top = 20 + "px";
 lifeImg.style.left = 40 + "px";
 document.body.appendChild(lifeImg);
 
-life = 1;
+life = 2;
 
 textLife = document.createElement("h1");
 textLife.style.fontFamily = "superMarioFont";
