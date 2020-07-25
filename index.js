@@ -12,6 +12,7 @@ import * as yoshiFunc from "./js/yoshi.js";
 import * as luigiFunc from "./js/luigi.js";
 import * as marioFunc from "./js/mario.js";
 import { loadWin } from "./js/utils.js";
+import { setWallGeometry } from "./js/bricks.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
