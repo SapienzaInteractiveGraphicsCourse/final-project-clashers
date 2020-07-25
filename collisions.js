@@ -296,12 +296,14 @@ export function onGoombaCollision(
     for (var i in goombaContainerArray) {
       if (goombaContainerArray[i]._physijs.id == id) {
         goombaCollision = true;
-        life -= 1;
+        if (removeLife == 1) {
+          life -= 1;
+          removeLife = 0;
+        }
+
         levelSound.volume = 0;
         gameOver(model);
         levelSound.currentTime = 0;
-
-        scene.remove(goombaContainerArray[i]);
       }
     }
     if (life == 0) {

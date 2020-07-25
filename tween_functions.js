@@ -660,6 +660,7 @@ export function jump(character) {
         }
         if (character == mario) {
           upperArm_left.rotation.x = tweenStartRaise.rightArm_rotation_x;
+          upperArm_left.rotation.y = (0 * Math.PI) / 180;
         }
         handLeft.rotation.y = tweenStartRaise.rightHand_rotation_y;
       }
@@ -676,6 +677,7 @@ export function jump(character) {
         }
         if (character == mario) {
           upperArm_right.rotation.x = tweenStartRaise.rightArm_rotation_x;
+          upperArm_left.rotation.y = (0 * Math.PI) / 180;
         }
         handRight.rotation.y = tweenStartRaise.rightHand_rotation_y;
       }

@@ -206,3 +206,5 @@ var gameOverSound;
 var levelSound;
 var goombaSound;
 var winSound;
+
+var removeLife = 1;

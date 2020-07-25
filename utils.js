@@ -33,7 +33,7 @@ export function resetStartingPosition(character, i) {
   levelSound.play();
   levelSound.volume = 0.2;
 
-  scene.add(goombaContainerArray[i]);
+  removeLife = 1;
 }
 
 export function loadGameOver() {
