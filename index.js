@@ -919,41 +919,6 @@ function init() {
         blockFunc.createGroupStairs(220, 8); //9
       });
     }
-
-    //FLAGPOLE
-
-    //Non funziona
-
-    flagpole = new THREE.Scene();
-    {
-      const url_flagpole = "models/flagpole/scene.gltf";
-      gltfLoader.load(url_flagpole, (gltf) => {
-        flagpole = gltf.scene;
-        flagpole.name = "flagpole";
-        flagpole.position.set(0, 10, 300);
-        flagpole.scale.set(10, 10, 10);
-
-        flagpole.traverse(function (child) {
-          if (child instanceof THREE.Mesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-            flagpole.layers.enable(32);
-          }
-          if (child.material) {
-            child.material.metalness = 0;
-            child.material.roughness = 0;
-          }
-        });
-        flagpole.castShadow = true;
-        flagpole.receiveShadow = true;
-
-        //flagpole.rotation.z = (-45 * Math.PI) / 180;
-
-        scene.add(flagpole);
-
-        //console.log(dumpObject(flagpole).join("\n"));
-      });
-    }
   }
 
   scene.add(camera);
