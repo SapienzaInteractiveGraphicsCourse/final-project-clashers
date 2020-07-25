@@ -891,6 +891,7 @@ function createLandscape() {
   landscape = new landscapeFunction();
   ground.position.y = -24;
   scene.add(ground);
+  setWallGeometry();
 }
 
 function createBgSky() {

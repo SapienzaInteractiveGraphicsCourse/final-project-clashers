@@ -70,3 +70,12 @@ export function setGroupGeometry(groupWidth, y, z) {
     );
   }
 }
+
+export function setWallGeometry() {
+  var wallGeometry = new THREE.BoxGeometry(50, 50, 4);
+  var wallContainer = new Physijs.BoxMesh(wallGeometry, geometryMaterial, 0);
+  wallContainer.position.set(0, 11, -650);
+  scene.add(wallContainer);
+  wallContainer.setCcdMotionThreshold(1);
+  //wallContainer.addEventListener("collision", collFunc.onwallCollision);
+}
