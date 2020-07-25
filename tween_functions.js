@@ -358,6 +358,7 @@ export function rotateTorso(direction) {
 }
 
 export function jump(character) {
+  jumpSound.currentTime = 0;
   jumpSound.play();
   //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi
   var timeJumpBack = 1000;
@@ -848,5 +849,85 @@ export function objectAnimation(object, i) {
     })
     .yoyo(true)
     .repeat(Infinity)
+    .start();
+}
+
+export function gameOver(character) {
+  tweenStartGameOver = {
+    y: character.position.y,
+    torso: torso.rotation.y,
+  };
+
+  tweenGoalGameOver = {
+    y: -7,
+    torso: (-90 * Math.PI) / 180,
+  };
+
+  tweenBackGameOver = {
+    y: -30,
+  };
+
+  tweenGameOver = new TWEEN.Tween(tweenStartGameOver)
+    .to(tweenGoalGameOver, 1000)
+    .easing(TWEEN.Easing.Quadratic.In)
+    .onUpdate(function () {
+      character.position.y = tweenStartGameOver.y;
+      torso.rotation.y = tweenStartGameOver.torso;
+    })
+    .start();
+
+  tweenGameOverBack = new TWEEN.Tween(tweenStartGameOver)
+    .to(tweenBackGameOver, 1000)
+    .easing(TWEEN.Easing.Quadratic.In)
+    .onUpdate(function () {
+      character.position.y = tweenStartGameOver.y;
+    });
+  tweenGameOver.chain(tweenGameOverBack);
+}
+
+export function win(character) {
+  if (character == yoshi || character == luigi) {
+    tweenStartWin = {
+      arm: upperArm_left.rotation.z,
+      hand: handLeft.rotation.y,
+      torso: torso.rotation.y,
+    };
+
+    tweenGoalWin = {
+      arm: (-60 * Math.PI) / 180,
+      hand: (0 * Math.PI) / 180,
+      torso: (-90 * Math.PI) / 180,
+    };
+  }
+
+  if (character == mario) {
+    tweenStartWin = {
+      arm: upperArm_left.rotation.x,
+      hand: handLeft.rotation.y,
+      torso: torso.rotation.y,
+    };
+
+    tweenGoalWin = {
+      arm: (-90 * Math.PI) / 180,
+      hand: (90 * Math.PI) / 180,
+      torso: (-180 * Math.PI) / 180,
+    };
+  }
+
+  tweenWin = new TWEEN.Tween(tweenStartWin)
+    .to(tweenGoalWin, 100)
+    .easing(TWEEN.Easing.Quadratic.In)
+    .onUpdate(function () {
+      if (character == yoshi || character == luigi) {
+        upperArm_left.rotation.x = (0 * Math.PI) / 180;
+        upperArm_left.rotation.z = tweenStartWin.arm;
+      }
+      if (character == mario) {
+        upperArm_left.rotation.x = tweenStartWin.arm;
+      }
+
+      handLeft.rotation.y = tweenStartWin.hand;
+      torso.rotation.y = tweenStartWin.torso;
+    })
     .start();
 }

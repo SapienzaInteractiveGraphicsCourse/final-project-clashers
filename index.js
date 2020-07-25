@@ -11,6 +11,7 @@ import * as objectFunc from "./object.js";
 import * as yoshiFunc from "./yoshi.js";
 import * as luigiFunc from "./luigi.js";
 import * as marioFunc from "./mario.js";
+import { loadWin } from "./utils.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -116,7 +117,8 @@ function init() {
     scene.add(ambientLight);
   }
 
-  //levelSound.play();
+  levelSound.play();
+  levelSound.volume = 0.2;
 
   var gltfLoader = new GLTFLoader();
 
@@ -989,7 +991,11 @@ function init() {
       yoshiFunc.updateYoshiBoxPosition();
       if (yoshi.position.z >= 330) {
         localStorage.setItem("coinScore", score);
-        window.location.href = "./level_completed.html";
+        //window.location.href = "./level_completed.html";
+        levelSound.volume = 0;
+        winSound.play();
+        tweenFunc.win(yoshi);
+        setTimeout(loadWin.bind(null), 6000);
       }
     }
     if (character == "mario") {
@@ -998,7 +1004,11 @@ function init() {
       marioFunc.updateMarioBoxPosition();
       if (mario.position.z >= 330) {
         localStorage.setItem("coinScore", score);
-        window.location.href = "./level_completed.html";
+        //window.location.href = "./level_completed.html";
+        levelSound.volume = 0;
+        winSound.play();
+        tweenFunc.win(mario);
+        setTimeout(loadWin.bind(null), 6000);
       }
     }
     if (character == "luigi") {
@@ -1007,7 +1017,11 @@ function init() {
       luigiFunc.updateLuigiBoxPosition();
       if (luigi.position.z >= 330) {
         localStorage.setItem("coinScore", score);
-        window.location.href = "./level_completed.html";
+        //window.location.href = "./level_completed.html";
+        levelSound.volume = 0;
+        winSound.play();
+        tweenFunc.win(luigi);
+        setTimeout(loadWin.bind(null), 6000);
       }
     }
     //console.log(currentPosition);

@@ -60,6 +60,14 @@ var tweenGoalFlex;
 var tweenStartFall;
 var tweenGoalFall;
 var tweenFall;
+var tweenGoalWin;
+var tweenStartWin;
+var tweenStartGameOver;
+var tweenGoalGameOver;
+var tweenBackGameOver;
+var tweenGameOver;
+var tweenGameOverBack;
+var tweenWin;
 
 var ground;
 
@@ -128,6 +136,7 @@ var collidedSide = false;
 var collidedTopPipe = false;
 var collidedTopStairs = false;
 var groupCollision = false;
+var goombaCollision = false;
 
 var groupJump;
 var groupRun;
@@ -195,3 +204,5 @@ var jumpSound;
 var loseLifeSound;
 var gameOverSound;
 var levelSound;
+var goombaSound;
+var winSound;

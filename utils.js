@@ -1,4 +1,4 @@
-export function resetStartingPosition(character) {
+export function resetStartingPosition(character, i) {
   character.position.set(0, -14.3, -620);
   dirLight.position.set(0, 100, -620);
   camera.position.set(-100, 0, -620);
@@ -24,9 +24,24 @@ export function resetStartingPosition(character) {
   collidedTopPipe = false;
   collidedTopStairs = false;
 
+  goombaCollision = false;
+
   groupRun.removeAll();
   groupRotate.removeAll();
   groupJump.removeAll();
+
+  levelSound.play();
+  levelSound.volume = 0.2;
+
+  scene.add(goombaContainerArray[i]);
+}
+
+export function loadGameOver() {
+  window.location.href = "./game_over.html";
+}
+
+export function loadWin() {
+  window.location.href = "./level_completed.html";
 }
 
 //AUDIO ----------
@@ -37,7 +52,7 @@ itemSound = new Audio("audio/itemSound.mp3");
 itemSound.volume = 0.4;
 
 jumpSound = new Audio("audio/jumpSound.mp3");
-jumpSound.volume = 0.4;
+jumpSound.volume = 0.7;
 
 loseLifeSound = new Audio("audio/loseLifeSound.mp3");
 loseLifeSound.volume = 0.4;
@@ -48,3 +63,9 @@ gameOverSound.volume = 0.4;
 levelSound = new Audio("audio/levelSound.mp3");
 levelSound.volume = 0.2;
 levelSound.loop = true;
+
+goombaSound = new Audio("audio/goombaSound.mp3");
+goombaSound.volume = 0.7;
+
+winSound = new Audio("audio/winSound.mp3");
+winSound.volume = 0.4;

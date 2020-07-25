@@ -1,7 +1,7 @@
-import { fall, objectAnimation } from "./tween_functions.js";
+import { fall, objectAnimation, gameOver } from "./tween_functions.js";
 import { setPipeHeightGoal } from "./pipe.js";
 import { setStairsHeightGoal } from "./stairs.js";
-import { resetStartingPosition } from "./utils.js";
+import { resetStartingPosition, loadGameOver } from "./utils.js";
 import { goombaDelete } from "./goomba.js";
 
 export function setCharacterStuff() {
@@ -264,17 +264,19 @@ export function onGoombaTopCollision(
 ) {
   setCharacterStuff();
 
-  if (other_object._physijs.id == lowerBoxId) {
-    if (other_object instanceof Physijs.Mesh) {
-      var id = this._physijs.id;
-      for (var i in goombaContainerTopArray) {
-        if (goombaContainerTopArray[i]._physijs.id == id) {
-          goombaArray[i].scale.set(0.07, 0.01, 0.07);
-          scene.remove(goombaContainerArray[i]);
-          scene.remove(goombaContainerTopArray[i]);
-          tweenWalkGoombaArray[i].stop();
-          tweenGoombaFeetArray[i].stop();
-          setTimeout(goombaDelete.bind(null, i), 5000);
+  if (!goombaCollision) {
+    if (other_object._physijs.id == lowerBoxId) {
+      if (other_object instanceof Physijs.Mesh) {
+        var id = this._physijs.id;
+        for (var i in goombaContainerTopArray) {
+          if (goombaContainerTopArray[i]._physijs.id == id) {
+            goombaArray[i].scale.set(0.07, 0.01, 0.07);
+            scene.remove(goombaContainerArray[i]);
+            scene.remove(goombaContainerTopArray[i]);
+            tweenWalkGoombaArray[i].stop();
+            tweenGoombaFeetArray[i].stop();
+            setTimeout(goombaDelete.bind(null, i), 5000);
+          }
         }
       }
     }
@@ -293,17 +295,25 @@ export function onGoombaCollision(
     var id = this._physijs.id;
     for (var i in goombaContainerArray) {
       if (goombaContainerArray[i]._physijs.id == id) {
+        goombaCollision = true;
         life -= 1;
+        levelSound.volume = 0;
+        gameOver(model);
+        levelSound.currentTime = 0;
+
+        scene.remove(goombaContainerArray[i]);
       }
     }
     if (life == 0) {
       localStorage.setItem("coinScore", score);
-      window.location.href = "./game_over.html";
+      //window.location.href = "./game_over.html";
       gameOverSound.play();
+      setTimeout(loadGameOver.bind(null), 3000);
     }
     if (life > 0) {
       loseLifeSound.play();
-      resetStartingPosition(model);
+      //resetStartingPosition(model);
+      setTimeout(resetStartingPosition.bind(null, model, i), 3000);
     }
     textLife.innerHTML = "x" + life;
   }
