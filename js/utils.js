@@ -37,35 +37,35 @@ export function resetStartingPosition(character, i) {
 }
 
 export function loadGameOver() {
-  window.location.href = "./game_over.html";
+  window.location.href = "../html/game_over.html";
 }
 
 export function loadWin() {
-  window.location.href = "./level_completed.html";
+  window.location.href = "../html/level_completed.html";
 }
 
 //AUDIO ----------
-coinSound = new Audio("audio/coinSound.mp3");
+coinSound = new Audio("../audio/coinSound.mp3");
 coinSound.volume = 0.4;
 
-itemSound = new Audio("audio/itemSound.mp3");
+itemSound = new Audio("../audio/itemSound.mp3");
 itemSound.volume = 0.4;
 
-jumpSound = new Audio("audio/jumpSound.mp3");
+jumpSound = new Audio("../audio/jumpSound.mp3");
 jumpSound.volume = 0.7;
 
-loseLifeSound = new Audio("audio/loseLifeSound.mp3");
+loseLifeSound = new Audio("../audio/loseLifeSound.mp3");
 loseLifeSound.volume = 0.4;
 
-gameOverSound = new Audio("audio/gameOverSound.mp3");
+gameOverSound = new Audio("../audio/gameOverSound.mp3");
 gameOverSound.volume = 0.4;
 
-levelSound = new Audio("audio/levelSound.mp3");
+levelSound = new Audio("../audio/levelSound.mp3");
 levelSound.volume = 0.2;
 levelSound.loop = true;
 
-goombaSound = new Audio("audio/goombaSound.mp3");
-goombaSound.volume = 0.7;
+goombaSound = new Audio("../audio/goombaSound.mp3");
+goombaSound.volume = 1;
 
-winSound = new Audio("audio/winSound.mp3");
+winSound = new Audio("../audio/winSound.mp3");
 winSound.volume = 0.4;
