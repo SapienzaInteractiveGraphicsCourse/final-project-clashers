@@ -1,4 +1,4 @@
-import TWEEN from "./build/tween.js-master/dist/tween.esm.js";
+import TWEEN from "../build/tween.js-master/dist/tween.esm.js";
 
 export function fall(character) {
   isFalling = true;
@@ -500,26 +500,6 @@ export function jump(character) {
     .easing(TWEEN.Easing.Quadratic.Out)
     .onUpdate(function () {
       character.position.y = tweenStartJump.y;
-
-      /*if (collidedTop1) {
-        character.position.y = 12;
-        collidedTop1 = false;
-        tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
-      } else if (collidedTop2) {
-        character.position.y = 36;
-        collidedTop2 = false;
-        tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
-      } else if (collidedTopPipe) {
-        character.position.y = pipeHeightGoal;
-
-        tweenJump.stop();
-      } else if (collidedTopStairs) {
-        character.position.y = stairsHeightGoal;
-        tweenJump.stop();
-      } else {
-        // se non collide nè al primo piano né al secondo piano continua il salto normalmente
-        character.position.y = tweenStartJump.y;
-      }*/
 
       if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
         //collidedside serve per non farlo traslare quando collide di lato;
