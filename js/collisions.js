@@ -414,11 +414,11 @@ export function onStairsCollision(
 
   if (other_object._physijs.id == lowerBoxId) {
     tweenJump.stop();
-    if (keysPressed[68]) {
+    if (keysPressed[68] && isRotatedRight) {
       collidedLeft = true;
       model.position.z -= 2.5;
     }
-    if (keysPressed[65]) {
+    if (keysPressed[65] && !isRotatedRight) {
       collidedRight = true;
       model.position.z += 2.5;
     }
