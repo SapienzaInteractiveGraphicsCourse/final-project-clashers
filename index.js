@@ -64,9 +64,6 @@ function init() {
   container.appendChild(renderer.domElement);
 
   scene = new Physijs.Scene();
-  scene.addEventListener("update", function () {
-    scene.simulate();
-  });
 
   {
     const d = 100;
@@ -559,16 +556,16 @@ function init() {
 
   geometryMaterial = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0,
+    opacity: 0.5,
   });
   geometryMaterial1 = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0,
+    opacity: 0.5,
     color: 0xeb4034,
   });
   geometryMaterial2 = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0,
+    opacity: 0.5,
     color: 0x344feb,
   });
 

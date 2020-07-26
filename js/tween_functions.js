@@ -359,6 +359,8 @@ export function rotateTorso(direction) {
 
 export function jump(character) {
   isCoin = false;
+  collidedTopPipe = false;
+  collidedTopStairs = false;
   jumpSound.currentTime = 0;
   jumpSound.play();
   //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi

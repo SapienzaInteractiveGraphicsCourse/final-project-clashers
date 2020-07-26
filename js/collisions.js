@@ -212,6 +212,8 @@ export function onCharacterCollision(
       //per farlo rispostare quando sta in aria!
       collidedLeft = false;
       collidedRight = false;
+      //altrimenti dopo che ha sbattuto e sta ancora saltando non prende le monete!
+      groupCollision = false;
 
       scene.removeEventListener("update", checkTouch);
     };
@@ -347,7 +349,10 @@ export function onCoinCollision(
   contact_normal
 ) {
   setCharacterStuff();
-  if (other_object._physijs.id == boxId) {
+  if (
+    other_object._physijs.id == boxId ||
+    other_object._physijs.id == lowerBoxId
+  ) {
     var id = this._physijs.id;
     for (var i in coinContainerArray) {
       if (coinContainerArray[i]._physijs.id == id && !groupCollision) {
@@ -421,14 +426,14 @@ export function onStairsCollision(
     //console.log("Ciao mi sto buggando :D");
     console.log("Fixing the bug (?)");
     tweenJump.stop();
-    model.position.z -= 2.5;
+    //model.position.z -= 2.5;
     if (keysPressed[68] && !isFalling) {
       collidedLeft = true;
-      //model.position.z -= 2.5;
+      model.position.z -= 2.5;
     }
     if (keysPressed[65] && !isFalling) {
       collidedRight = true;
-      //model.position.z += 2.5;
+      model.position.z += 2.5;
     }
     //fall(model);
   }
