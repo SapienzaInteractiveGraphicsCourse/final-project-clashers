@@ -16,7 +16,7 @@
     <script src="build/Physijs/physi.js"></script>
   </head>
 
-  <body onload="loadingFunction()">
+  <body>
     <div class="container" id="loading">
       <div class="load-text">
         <p><font color="#009fde">L</font></p>
@@ -31,9 +31,13 @@
     <div class="canvas_three" id="game" style="display: none;"></div>
 
     <script>
+      setTimeout(loadingFunction.bind(null), 6000);
+
       function loadingFunction() {
         document.getElementById("loading").style.display = "none";
         document.getElementById("game").style.display = "initial";
+        levelSound.play();
+        levelSound.volume = 0.2;
       }
     </script>
 

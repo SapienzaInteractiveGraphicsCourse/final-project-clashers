@@ -79,6 +79,9 @@ export function onGroupContainerTopCollision1(
     collidedTop1 = true;
     collidedTop2 = false;
     isCoin = false;
+
+    collidedRight = false;
+    collidedLeft = false;
   }
 }
 
@@ -93,6 +96,9 @@ export function onGroupContainerTopCollision2(
     collidedTop2 = true;
     collidedTop1 = false;
     isCoin = false;
+
+    collidedRight = false;
+    collidedLeft = false;
   }
 }
 
@@ -111,19 +117,22 @@ export function onBottomCollision(
 
     tweenJump.stop();
 
-    if (!isFalling) {
+    /*if (!isFalling) {
       fall(model);
-    }
+    }*/
 
     var id = this._physijs.id;
 
-    if (other_object._physijs.id == upperBoxId) {
+    if (other_object._physijs.id == upperBoxId && !isFalling) {
       for (var i in questionBoxArray) {
         if (questionBoxArray[i]._physijs.id == id) {
           objectAnimation(objectArray[i], i);
-          //itemSound.play();
         }
       }
+    }
+
+    if (!isFalling) {
+      fall(model);
     }
   }
 }
@@ -194,11 +203,16 @@ export function onCharacterCollision(
 ) {
   setCharacterStuff();
 
-  if (contact_normal.z == 0) {
+  if (contact_normal.y == 0) {
     var checkTouch = function () {
       for (var i = 0; i < touchesBox.length; i++) {
         if (touchesBox[i] == other_object._physijs.id) return;
       }
+
+      //per farlo rispostare quando sta in aria!
+      collidedLeft = false;
+      collidedRight = false;
+
       scene.removeEventListener("update", checkTouch);
     };
     scene.addEventListener("update", checkTouch);
@@ -219,6 +233,7 @@ export function onCharacterLowerCollision(
         if (touchesLower[i] == other_object._physijs.id) return;
       }
       collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
+      collidedTop2 = false; //altrimenti si bugga quando collido con i box blu degli oggetti durante il jump (non jump back)
       collidedTopPipe = false;
       collidedTopStairs = false;
       isCoin = false;
@@ -335,7 +350,7 @@ export function onCoinCollision(
   if (other_object._physijs.id == boxId) {
     var id = this._physijs.id;
     for (var i in coinContainerArray) {
-      if (coinContainerArray[i]._physijs.id == id) {
+      if (coinContainerArray[i]._physijs.id == id && !groupCollision) {
         score += 1;
         scene.remove(coinArray[i]);
         scene.remove(coinContainerArray[i]);
@@ -400,6 +415,22 @@ export function onStairsCollision(
         currentPosition = model.position.z;
       }
     }
+  }
+
+  if (other_object._physijs.id == lowerBoxId) {
+    //console.log("Ciao mi sto buggando :D");
+    console.log("Fixing the bug (?)");
+    tweenJump.stop();
+    model.position.z -= 2.5;
+    if (keysPressed[68] && !isFalling) {
+      collidedLeft = true;
+      //model.position.z -= 2.5;
+    }
+    if (keysPressed[65] && !isFalling) {
+      collidedRight = true;
+      //model.position.z += 2.5;
+    }
+    //fall(model);
   }
 }
 
