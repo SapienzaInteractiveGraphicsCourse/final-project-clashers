@@ -107,6 +107,7 @@ export function fall(character) {
         character.position.y = 12;
         collidedTop1 = false;
       } else if (collidedTopStairs) {
+        character.position.y = stairsHeightGoal;
         tweenFall.stop(); //aggiunto per farlo fermare quando cade dalle scale ma si bugga lo stesso
       } else {
         character.position.y = tweenStartFall.y;

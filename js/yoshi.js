@@ -51,6 +51,7 @@ export function setYoshiGeometry() {
     yoshi.position.z
   );
   yoshiBox.setCcdMotionThreshold(1);
+  yoshiBox.setCcdSweptSphereRadius(0.2);
   scene.add(yoshiBox);
   yoshiBox.addEventListener("collision", collFunc.onCharacterCollision);
 
@@ -62,6 +63,7 @@ export function setYoshiGeometry() {
     yoshi.position.z
   );
   yoshiUpperBox.setCcdMotionThreshold(1);
+  yoshiUpperBox.setCcdSweptSphereRadius(0.2);
   scene.add(yoshiUpperBox);
   yoshiUpperBox.addEventListener(
     "collision",
@@ -76,6 +78,7 @@ export function setYoshiGeometry() {
     yoshi.position.z
   );
   yoshiLowerBox.setCcdMotionThreshold(1);
+  yoshiLowerBox.setCcdSweptSphereRadius(0.2);
   scene.add(yoshiLowerBox);
   yoshiLowerBox.addEventListener(
     "collision",
