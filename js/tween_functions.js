@@ -127,6 +127,7 @@ export function fall(character) {
           upperArm_left.rotation.z = tweenStartFall.rightArm_rotation_z;
           upperArm_right.rotation.z = tweenStartFall.rightArm_rotation_z;
         }
+        camera.position.y = (character.position.y - camera.position.y) * 0.7;
 
         handRight.rotation.y = tweenStartFall.rightHand_rotation_y;
         handLeft.rotation.y = tweenStartFall.rightHand_rotation_y;
@@ -513,6 +514,7 @@ export function jump(character) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
+      camera.position.y = (character.position.y - camera.position.y) * 0.7;
 
       upperLeg_right.rotation.x = tweenStartJump.upperLeg_right;
       upperLeg_left.rotation.x = tweenStartJump.upperLeg_left;
@@ -564,6 +566,7 @@ export function jump(character) {
         character.position.z -= 0.2;
         dirLight.position.z -= 0.2;
       }
+      camera.position.y = (character.position.y - camera.position.y) * 0.7;
 
       upperLeg_right.rotation.x = tweenStartJump.upperLeg_right;
       upperLeg_left.rotation.x = tweenStartJump.upperLeg_left;
@@ -837,6 +840,7 @@ export function gameOver(character) {
     .onUpdate(function () {
       character.position.y = tweenStartGameOver.y;
       torso.rotation.y = tweenStartGameOver.torso;
+      camera.position.y = (character.position.y - camera.position.y) * 0.7;
     })
     .start();
 
@@ -845,6 +849,10 @@ export function gameOver(character) {
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
       character.position.y = tweenStartGameOver.y;
+      camera.position.y = (character.position.y - camera.position.y) * 0.7;
+    })
+    .onComplete(function () {
+      keyboardDisabled = false;
     });
   tweenGameOver.chain(tweenGameOverBack);
 }
@@ -892,6 +900,10 @@ export function win(character) {
 
       handLeft.rotation.y = tweenStartWin.hand;
       torso.rotation.y = tweenStartWin.torso;
+      camera.position.y = (character.position.y - camera.position.y) * 0.7;
+    })
+    .onComplete(function () {
+      keyboardDisabled = false;
     })
     .start();
 }

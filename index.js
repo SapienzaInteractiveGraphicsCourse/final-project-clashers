@@ -441,49 +441,58 @@ function keyboard(character) {
     keysPressed[event.keyCode] = true;
     switch (event.which) {
       case 68:
-        //D
-        isWalking = true;
-        collidedRight = false;
-        if (!isRotatedRight) {
-          groupRun.removeAll();
-          groupRotate.removeAll();
-          tweenFunc.rotateTorso("right");
-          isRotatedRight = true;
+        if (!keyboardDisabled) {
+          //D
+          isWalking = true;
+          collidedRight = false;
+          if (!isRotatedRight) {
+            groupRun.removeAll();
+            groupRotate.removeAll();
+            tweenFunc.rotateTorso("right");
+            isRotatedRight = true;
+          }
+          if (!dPressed && isWalking) {
+            tweenFunc.performAnimation("right", character);
+          }
+          dPressed = true;
         }
-        if (!dPressed && isWalking) {
-          tweenFunc.performAnimation("right", character);
-        }
-        dPressed = true;
+
         break;
 
       case 65:
-        //A
-        isWalking = true;
-        collidedLeft = false;
-        if (isRotatedRight) {
-          groupRun.removeAll();
-          groupRotate.removeAll();
-          tweenFunc.rotateTorso("left");
-          isRotatedRight = false;
+        if (!keyboardDisabled) {
+          //A
+          isWalking = true;
+          collidedLeft = false;
+          if (isRotatedRight) {
+            groupRun.removeAll();
+            groupRotate.removeAll();
+            tweenFunc.rotateTorso("left");
+            isRotatedRight = false;
+          }
+          if (!aPressed && isWalking) {
+            tweenFunc.performAnimation("left", character);
+          }
+          aPressed = true;
         }
-        if (!aPressed && isWalking) {
-          tweenFunc.performAnimation("left", character);
-        }
-        aPressed = true;
+
         break;
 
       case 32:
-        //SPACE
-        if (isRotatedRight) {
-          isJumpingRight = true;
-        } else {
-          isJumpingLeft = true;
+        if (!keyboardDisabled) {
+          //SPACE
+          if (isRotatedRight) {
+            isJumpingRight = true;
+          } else {
+            isJumpingLeft = true;
+          }
+          if (!spacePressed && !isJumping && !isFalling) {
+            tweenFunc.jump(character);
+            isJumping = true;
+          }
+          spacePressed = true;
         }
-        if (!spacePressed && !isJumping && !isFalling) {
-          tweenFunc.jump(character);
-          isJumping = true;
-        }
-        spacePressed = true;
+
         break;
     }
   });
@@ -670,9 +679,6 @@ function loadModels() {
       goomba.receiveShadow = true;
 
       goomba.rotation.y = (-90 * Math.PI) / 180;
-
-      //blockFunc.createGroupPipes();
-      //blockFunc.createGroup3();
       goombaLoaded = true;
     });
   }
@@ -695,9 +701,6 @@ function loadModels() {
       });
       questionBox.castShadow = true;
       questionBox.receiveShadow = true;
-
-      //blockFunc.createGroup5();
-      //blockFunc.createGroup6();
       questionLoaded = true;
     });
   }
@@ -723,10 +726,6 @@ function loadModels() {
       powerUp.receiveShadow = true;
 
       powerUp.rotation.y = (180 * Math.PI) / 180;
-
-      //blockFunc.createGroup1();
-      //blockFunc.createGroup2();
-      //blockFunc.createGroup4();
       powerUpLoaded = true;
     });
   }
@@ -748,12 +747,6 @@ function loadModels() {
       });
       emptyBlock.castShadow = true;
       emptyBlock.receiveShadow = true;
-
-      /*blockFunc.createGroupStairs(-60, 4);
-      blockFunc.createGroupStairsReverse(-15, 4);
-      blockFunc.createGroupStairs(20, 4);
-      blockFunc.createGroupStairsReverse(55, 4);
-      blockFunc.createGroupStairs(220, 8);*/
       emptyBlockLoaded = true;
     });
   }
@@ -799,6 +792,11 @@ function animate() {
       localStorage.setItem("coinScore", score);
       levelSound.volume = 0;
       winSound.play();
+      groupRun.removeAll();
+      groupJump.removeAll();
+      groupRotate.removeAll();
+      yoshi.position.y = -14.3;
+      keyboardDisabled = true;
       tweenFunc.win(yoshi);
       setTimeout(loadWin.bind(null), 6000);
     }
@@ -810,6 +808,11 @@ function animate() {
       localStorage.setItem("coinScore", score);
       levelSound.volume = 0;
       winSound.play();
+      groupRun.removeAll();
+      groupJump.removeAll();
+      groupRotate.removeAll();
+      mario.position.y = -14.3;
+      keyboardDisabled = true;
       tweenFunc.win(mario);
       setTimeout(loadWin.bind(null), 6000);
     }
@@ -821,6 +824,11 @@ function animate() {
       localStorage.setItem("coinScore", score);
       levelSound.volume = 0;
       winSound.play();
+      groupRun.removeAll();
+      groupJump.removeAll();
+      groupRotate.removeAll();
+      luigi.position.y = -14.3;
+      keyboardDisabled = true;
       tweenFunc.win(luigi);
       setTimeout(loadWin.bind(null), 6000);
     }
@@ -904,7 +912,7 @@ function createLandscape() {
 }
 
 function createBgSky() {
-  var bgSky = new THREE.PlaneGeometry(1500, 150);
+  var bgSky = new THREE.PlaneGeometry(1500, 200);
   var skyTexture = THREE.ImageUtils.loadTexture("img/sky.png");
   skyTexture.wrapS = THREE.RepeatWrapping;
   skyTexture.wrapT = THREE.RepeatWrapping;
@@ -915,7 +923,7 @@ function createBgSky() {
     shading: THREE.FlatShading,
   });
   var bg = new THREE.Mesh(bgSky, bgSkyMaterial);
-  bg.position.set(25, 61, 0);
+  bg.position.set(25, 85, 0);
   bg.rotation.y = (-90 * Math.PI) / 180;
   scene.add(bg);
 }

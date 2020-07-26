@@ -309,6 +309,10 @@ export function onGoombaCollision(
         }
 
         levelSound.volume = 0;
+        groupRun.removeAll();
+        groupJump.removeAll();
+        groupRotate.removeAll();
+        keyboardDisabled = true;
         gameOver(model);
         levelSound.currentTime = 0;
       }

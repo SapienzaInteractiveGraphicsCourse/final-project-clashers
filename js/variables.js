@@ -221,3 +221,5 @@ var goombaLoaded = false;
 var powerUpLoaded = false;
 var emptyBlockLoaded = false;
 var castleLoaded = false;
+
+var keyboardDisabled = false;
