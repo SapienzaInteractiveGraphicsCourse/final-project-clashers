@@ -116,7 +116,6 @@ function init() {
   createBgSky();
   loadCharacters(character);
   loadModels();
-  //animate();
 }
 
 function loadCharacters(character) {
