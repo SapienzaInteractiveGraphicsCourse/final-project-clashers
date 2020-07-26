@@ -13,6 +13,7 @@ import * as luigiFunc from "./js/luigi.js";
 import * as marioFunc from "./js/mario.js";
 import { loadWin } from "./js/utils.js";
 import { setWallGeometry } from "./js/bricks.js";
+import { setStairsGeometry } from "./js/stairs.js";
 
 Physijs.scripts.worker = "physijs_worker.js";
 Physijs.scripts.ammo = "ammo.js";
@@ -44,7 +45,7 @@ function init() {
 
   const cameraX = -100;
   const cameraY = 0;
-  const cameraZ = -620;
+  const cameraZ = 150;
 
   controls = new OrbitControls(camera, renderer.domElement);
   camera.position.set(cameraX, cameraY, cameraZ);
@@ -113,7 +114,7 @@ function init() {
         gltfLoader.load(url_yoshi, (gltf) => {
           yoshi = gltf.scene;
           yoshi.name = "yoshi";
-          yoshi.position.set(0, -14.3, -620);
+          yoshi.position.set(0, -14.3, 150);
           yoshi.scale.set(0.3, 0.3, 0.3);
 
           yoshi.traverse(function (child) {
@@ -556,16 +557,16 @@ function init() {
 
   geometryMaterial = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0,
+    opacity: 0.5,
   });
   geometryMaterial1 = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0,
+    opacity: 0.5,
     color: 0xeb4034,
   });
   geometryMaterial2 = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0,
+    opacity: 0.5,
     color: 0x344feb,
   });
 
@@ -771,6 +772,7 @@ function init() {
         blockFunc.createGroupStairs(20, 4);
         blockFunc.createGroupStairsReverse(55, 4);
         blockFunc.createGroupStairs(220, 8);
+        //setStairsGeometry(300);
       });
     }
   }

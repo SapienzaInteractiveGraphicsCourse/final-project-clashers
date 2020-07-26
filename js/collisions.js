@@ -418,6 +418,7 @@ export function onStairsCollision(
     for (var i in emptyBlockContainerArray) {
       if (emptyBlockContainerArray[i]._physijs.id == id) {
         currentPosition = model.position.z;
+        //currentPosition = emptyBlockContainerArray[i] - 5.5 / 2;
       }
     }
   }
@@ -427,11 +428,11 @@ export function onStairsCollision(
     console.log("Fixing the bug (?)");
     tweenJump.stop();
     //model.position.z -= 2.5;
-    if (keysPressed[68] && !isFalling) {
+    if (keysPressed[68]) {
       collidedLeft = true;
       model.position.z -= 2.5;
     }
-    if (keysPressed[65] && !isFalling) {
+    if (keysPressed[65]) {
       collidedRight = true;
       model.position.z += 2.5;
     }

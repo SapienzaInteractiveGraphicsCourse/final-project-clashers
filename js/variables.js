@@ -208,3 +208,7 @@ var goombaSound;
 var winSound;
 
 var removeLife = 1;
+
+var stairsContainer;
+var stairsBackContainer;
+var stairsTopContainer;
