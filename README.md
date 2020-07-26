@@ -1,6 +1,8 @@
 # Interactive Graphics' Final Project - Super Mario
 *Developed by Clashers group: Mauro Ficorella, Valentina Sisti, Martina Turbessi*
 
+![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-clashers/blob/master/img/title.png)
+
 Game based on the famous Super Mario platform game. More precisely, the project recreates Super Mario Bros’ first level.
 The main goal of this game is to finish the level collecting as many coins as possible without losing life against enemies (goombas). 
 
