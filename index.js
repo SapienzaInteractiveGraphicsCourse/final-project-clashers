@@ -556,16 +556,16 @@ function init() {
 
   geometryMaterial = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0.5,
+    opacity: 0,
   });
   geometryMaterial1 = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0.5,
+    opacity: 0,
     color: 0xeb4034,
   });
   geometryMaterial2 = new THREE.MeshBasicMaterial({
     transparent: true,
-    opacity: 0.5,
+    opacity: 0,
     color: 0x344feb,
   });
 
