@@ -37,11 +37,11 @@ export function resetStartingPosition(character, i) {
 }
 
 export function loadGameOver() {
-  window.location.href = "./html/game_over.html";
+  window.location.href = "html/game_over.html";
 }
 
 export function loadWin() {
-  window.location.href = "./html/level_completed.html";
+  window.location.href = "html/level_completed.html";
 }
 
 //AUDIO ----------
