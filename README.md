@@ -30,7 +30,7 @@ If you cloned the repository, in order to play the game you need to open the "in
 
 ## Documentation
 
-For more details about how the project has been developed please refers to the [report file]().
+For more details about how the project has been developed please refers to the [report file](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-clashers/blob/master/Documentation%20Final%20Project.pdf).
 
 ## Known Issues
 
