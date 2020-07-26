@@ -580,6 +580,7 @@ function init() {
         });
         brick.castShadow = true;
         brick.receiveShadow = true;
+        brickLoaded = true;
       });
     }
 
@@ -607,6 +608,7 @@ function init() {
         castle.rotation.y = (-90 * Math.PI) / 180;
 
         scene.add(castle);
+        castleLoaded = true;
       });
     }
 
@@ -632,6 +634,7 @@ function init() {
         });
         pipe.castShadow = true;
         pipe.receiveShadow = true;
+        pipeLoaded = true;
       });
     }
 
@@ -657,6 +660,7 @@ function init() {
         coin.castShadow = true;
 
         coin.rotation.y = (90 * Math.PI) / 180;
+        coinLoaded = true;
       });
     }
 
@@ -682,8 +686,9 @@ function init() {
 
         goomba.rotation.y = (-90 * Math.PI) / 180;
 
-        blockFunc.createGroupPipes();
-        blockFunc.createGroup3();
+        //blockFunc.createGroupPipes();
+        //blockFunc.createGroup3();
+        goombaLoaded = true;
       });
     }
 
@@ -706,8 +711,9 @@ function init() {
         questionBox.castShadow = true;
         questionBox.receiveShadow = true;
 
-        blockFunc.createGroup5();
-        blockFunc.createGroup6();
+        //blockFunc.createGroup5();
+        //blockFunc.createGroup6();
+        questionLoaded = true;
       });
     }
 
@@ -733,9 +739,10 @@ function init() {
 
         powerUp.rotation.y = (180 * Math.PI) / 180;
 
-        blockFunc.createGroup1();
-        blockFunc.createGroup2();
-        blockFunc.createGroup4();
+        //blockFunc.createGroup1();
+        //blockFunc.createGroup2();
+        //blockFunc.createGroup4();
+        powerUpLoaded = true;
       });
     }
 
@@ -757,11 +764,12 @@ function init() {
         emptyBlock.castShadow = true;
         emptyBlock.receiveShadow = true;
 
-        blockFunc.createGroupStairs(-60, 4);
+        /*blockFunc.createGroupStairs(-60, 4);
         blockFunc.createGroupStairsReverse(-15, 4);
         blockFunc.createGroupStairs(20, 4);
         blockFunc.createGroupStairsReverse(55, 4);
-        blockFunc.createGroupStairs(220, 8);
+        blockFunc.createGroupStairs(220, 8);*/
+        emptyBlockLoaded = true;
       });
     }
   }
@@ -771,6 +779,21 @@ function init() {
   createBgSky();
   loadCharacters(character);
   loadModels();
+
+  function createLevel() {
+    blockFunc.createGroupPipes();
+    blockFunc.createGroup3();
+    blockFunc.createGroup5();
+    blockFunc.createGroup6();
+    blockFunc.createGroup1();
+    blockFunc.createGroup2();
+    blockFunc.createGroup4();
+    blockFunc.createGroupStairs(-60, 4);
+    blockFunc.createGroupStairsReverse(-15, 4);
+    blockFunc.createGroupStairs(20, 4);
+    blockFunc.createGroupStairsReverse(55, 4);
+    blockFunc.createGroupStairs(220, 8);
+  }
 
   function animate() {
     TWEEN.update();
@@ -822,6 +845,27 @@ function init() {
         tweenFunc.win(luigi);
         setTimeout(loadWin.bind(null), 6000);
       }
+    }
+
+    if (
+      questionLoaded &&
+      coinLoaded &&
+      brickLoaded &&
+      pipeLoaded &&
+      goombaLoaded &&
+      powerUpLoaded &&
+      emptyBlockLoaded &&
+      castleLoaded
+    ) {
+      createLevel();
+      questionLoaded = false;
+      coinLoaded = false;
+      brickLoaded = false;
+      pipeLoaded = false;
+      goombaLoaded = false;
+      powerUpLoaded = false;
+      emptyBlockLoaded = false;
+      castleLoaded = false;
     }
 
     scene.simulate();

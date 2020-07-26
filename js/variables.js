@@ -212,3 +212,12 @@ var goombaSound;
 var winSound;
 
 var removeLife = 1;
+
+var questionLoaded = false;
+var coinLoaded = false;
+var brickLoaded = false;
+var pipeLoaded = false;
+var goombaLoaded = false;
+var powerUpLoaded = false;
+var emptyBlockLoaded = false;
+var castleLoaded = false;
