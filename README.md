@@ -1,16 +1,14 @@
 # Interactive Graphics' Final Project - Super Mario
-Developed by Clashers group: Mauro Ficorella, Valentina Sisti, Martina Turbessi
+*Developed by Clashers group: Mauro Ficorella, Valentina Sisti, Martina Turbessi*
 
 Game based on the famous Super Mario platform game. More precisely, the project recreates Super Mario Bros’ first level.
 The main goal of this game is to finish the level collecting as many coins as possible without losing life against enemies (goombas). 
 
-## Getting Started
+## Launching the game
 
 In order to try the game, you just need to click on the following [link](https://sapienzainteractivegraphicscourse.github.io/final-project-clashers/index.html).
 
 If you want to launch the game locally on your pc, you need to run it on a local server (for example using IntelliJ, Visual Studio Code using Live Server extension, python command line).
-
-### Launching the game
 
 If you cloned the repository, in order to play the game you need to open the "index.html" file on an internet browser (Chrome, Firefox...) with a background local server running as explained before.
 
