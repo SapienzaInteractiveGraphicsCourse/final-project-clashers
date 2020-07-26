@@ -136,6 +136,9 @@ export function fall(character) {
       isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
       isFalling = false;
       groupCollision = false;
+
+      collidedLeft = false;
+      collidedRight = false;
     })
     .onComplete(function () {
       isJumping = false;
@@ -144,8 +147,8 @@ export function fall(character) {
       groupCollision = false;
 
       //VEDERE SE DANNNO PROBLEMI CON LE PIPE
-      //collidedLeft = false;
-      //collidedRight = false;
+      collidedLeft = false;
+      collidedRight = false;
     })
     .start();
 }
@@ -239,6 +242,7 @@ export function setAnimationParameters(character) {
 export function performAnimation(direction, character) {
   dir = direction;
   groupCollision = false;
+  isCoin = false;
   setAnimationParameters(character);
 
   tween = new TWEEN.Tween(tweenStartScale, groupRun)
@@ -354,6 +358,7 @@ export function rotateTorso(direction) {
 }
 
 export function jump(character) {
+  isCoin = false;
   jumpSound.currentTime = 0;
   jumpSound.play();
   //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi
