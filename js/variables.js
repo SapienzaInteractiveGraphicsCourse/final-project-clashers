@@ -1,3 +1,7 @@
+var gltfLoader;
+var renderer;
+var container;
+
 var head;
 var scene;
 var landscape;
@@ -208,7 +212,3 @@ var goombaSound;
 var winSound;
 
 var removeLife = 1;
-
-var stairsContainer;
-var stairsBackContainer;
-var stairsTopContainer;

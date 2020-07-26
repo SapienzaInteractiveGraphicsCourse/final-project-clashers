@@ -36,7 +36,7 @@ export function setBrickGeometry(brickElem) {
 }
 
 export function setGroupGeometry(groupWidth, y, z) {
-  var groupGeometry = new THREE.BoxGeometry(6.3, 3, groupWidth); //3.8
+  var groupGeometry = new THREE.BoxGeometry(6.3, 3, groupWidth);
   groupContainer = new Physijs.BoxMesh(groupGeometry, geometryMaterial, 0);
   groupContainer.position.set(0, y - 0.5, z);
   scene.add(groupContainer);
@@ -46,7 +46,7 @@ export function setGroupGeometry(groupWidth, y, z) {
     collFunc.onGroupContainerCollision
   );
 
-  var groupGeometryTop = new THREE.BoxGeometry(6.3, 3, groupWidth + 0.5); //-0.5
+  var groupGeometryTop = new THREE.BoxGeometry(6.3, 3, groupWidth + 0.5);
   groupContainerTop = new Physijs.BoxMesh(
     groupGeometryTop,
     geometryMaterial2,
@@ -56,14 +56,12 @@ export function setGroupGeometry(groupWidth, y, z) {
   scene.add(groupContainerTop);
   groupContainerTop.setCcdMotionThreshold(1);
   if (y == 9.5) {
-    //associo il listener relativo al "primo piano"
     groupContainerTop.addEventListener(
       "collision",
       collFunc.onGroupContainerTopCollision1
     );
   }
   if (y == 33.5) {
-    //associo il listener relativo al "secondo piano"
     groupContainerTop.addEventListener(
       "collision",
       collFunc.onGroupContainerTopCollision2
@@ -77,5 +75,5 @@ export function setWallGeometry() {
   wallContainer.position.set(0, 11, -650);
   scene.add(wallContainer);
   wallContainer.setCcdMotionThreshold(1);
-  //wallContainer.addEventListener("collision", collFunc.onwallCollision);
+  wallContainer.addEventListener("collision", collFunc.onWallCollision);
 }

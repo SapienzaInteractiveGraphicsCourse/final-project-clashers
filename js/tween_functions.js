@@ -108,7 +108,7 @@ export function fall(character) {
         collidedTop1 = false;
       } else if (collidedTopStairs) {
         character.position.y = stairsHeightGoal;
-        tweenFall.stop(); //aggiunto per farlo fermare quando cade dalle scale ma si bugga lo stesso
+        tweenFall.stop();
       } else {
         character.position.y = tweenStartFall.y;
         spine.rotation.x = tweenStartFall.spine;
@@ -134,7 +134,7 @@ export function fall(character) {
     })
     .onStop(function () {
       collidedBottom = false;
-      isJumping = false; //serve perché altrimenti quando sbatte da sotto su un blocco poi non salta più
+      isJumping = false;
       isFalling = false;
       groupCollision = false;
 
@@ -147,7 +147,6 @@ export function fall(character) {
       isFalling = false;
       groupCollision = false;
 
-      //VEDERE SE DANNNO PROBLEMI CON LE PIPE
       collidedLeft = false;
       collidedRight = false;
     })
@@ -284,7 +283,6 @@ export function performAnimation(direction, character) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += character.position.z - camera.position.z;
-      controls.update();
     })
     .start();
 
@@ -318,7 +316,6 @@ export function performAnimation(direction, character) {
         dirLight.position.z -= 0.2;
       }
       camera.position.z += character.position.z - camera.position.z;
-      controls.update();
     })
     .yoyo(true)
     .repeat(Infinity);
@@ -364,13 +361,11 @@ export function jump(character) {
   collidedTopStairs = false;
   jumpSound.currentTime = 0;
   jumpSound.play();
-  //perché se il tempo è troppo veloce quando riscende dal secondo livello a volte si bugga e passa attraverso i blocchi
   var timeJumpBack = 1000;
   if (character.position.y == 36) {
     timeJumpBack = 1500;
   }
   if (isCoin) {
-    //questo if serve perchè se salto da sopra la moneta e ci cado sopra, in questo modo non cade e rimane sul cubo
     timeJumpBack = 3000;
   }
   if (character == yoshi || character == luigi) {
@@ -510,8 +505,6 @@ export function jump(character) {
       character.position.y = tweenStartJump.y;
 
       if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
-        //collidedside serve per non farlo traslare quando collide di lato;
-        //collidedtop serve per non fargli fare lo speedboost quando atterra
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
       }
@@ -529,7 +522,7 @@ export function jump(character) {
       head.rotation.x = tweenStartJump.head;
     })
     .onStop(function () {
-      isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
+      isJumping = false;
 
       if (keysPressed[68]) {
         collidedRight = false;
@@ -544,19 +537,14 @@ export function jump(character) {
     .to(tweenGoalJumpBack, timeJumpBack)
     .easing(TWEEN.Easing.Quadratic.In)
     .onUpdate(function () {
-      //se collide al primo piano imposta la posizione del personaggio a 12
-      //(perché altrimenti rimarrebbe random in base a quando è stata rilevata la collisione)
-      //e stoppiamo il tween non appena impostiamo la posizione, altrimenti facendolo non appena rileva la collisione
-      //sarebbe potuto succedere che il tween si bloccava prima di poter fare il controllo qui dentro
-      //stessa cosa per l'else if solo che facciamo il controllo per il secondo piano
       if (collidedTop1) {
         character.position.y = 12;
         collidedTop1 = false;
-        tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+        tweenJump.stop();
       } else if (collidedTop2) {
         character.position.y = 36;
         collidedTop2 = false;
-        tweenJump.stop(); //questo serve per fare iniziare la camminata appena atterra sul cubo dopo il salto
+        tweenJump.stop();
       } else if (collidedTopPipe) {
         character.position.y = pipeHeightGoal;
         tweenJump.stop();
@@ -564,13 +552,10 @@ export function jump(character) {
         character.position.y = stairsHeightGoal;
         tweenJump.stop();
       } else {
-        // se non collide nè al primo piano né al secondo piano continua il salto normalmente
         character.position.y = tweenStartJump.y;
       }
 
       if (keysPressed[68] && !collidedLeft && !collidedTop1 && !collidedTop2) {
-        //collidedside serve per non farlo traslare quando collide di lato;
-        //collidedtop serve per non fargli fare lo speedboost quando atterra
         character.position.z += 0.2;
         dirLight.position.z += 0.2;
       }
@@ -588,7 +573,7 @@ export function jump(character) {
       head.rotation.x = tweenStartJump.head;
     })
     .onStop(function () {
-      isJumping = false; //serve perchè sennò non ti fa risaltare da sopra le cose
+      isJumping = false;
 
       if (keysPressed[68]) {
         collidedRight = false;

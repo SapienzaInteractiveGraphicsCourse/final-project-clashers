@@ -51,18 +51,17 @@ export function onGroupContainerCollision(
     groupCollision = true;
 
     if (keysPressed[68] && !isFalling) {
-      collidedLeft = true; //collide da sinistra sulla pipe
+      collidedLeft = true;
     }
     if (keysPressed[65] && !isFalling) {
-      collidedRight = true; //collide da destra sulla pipe
+      collidedRight = true;
     }
 
-    //per risolvere il problema che andava attraverso la pipe dopo che era sceso da sopra
     if (isRotatedRight && isFalling) {
-      collidedRight = true; //collide da sinistra sulla pipe
+      collidedRight = true;
     }
     if (!isRotatedRight && isFalling) {
-      collidedLeft = true; //collide da destra sulla pipe
+      collidedLeft = true;
     }
     currentPosition = model.position.z;
   }
@@ -114,12 +113,7 @@ export function onBottomCollision(
     other_object._physijs.id == boxId
   ) {
     collidedBottom = true;
-
     tweenJump.stop();
-
-    /*if (!isFalling) {
-      fall(model);
-    }*/
 
     var id = this._physijs.id;
 
@@ -148,21 +142,19 @@ export function onPipeCollision(
   if (other_object._physijs.id == boxId) {
     var increase;
     if (keysPressed[68] && !isFalling) {
-      collidedLeft = true; //collide da sinistra sulla pipe
+      collidedLeft = true;
       increase = -8.5;
     }
     if (keysPressed[65] && !isFalling) {
-      collidedRight = true; //collide da destra sulla pipe
+      collidedRight = true;
       increase = 9;
     }
-
-    //per risolvere il problema che andava attraverso la pipe dopo che era sceso da sopra
     if (isRotatedRight && isFalling) {
-      collidedRight = true; //collide da sinistra sulla pipe
+      collidedRight = true;
       increase = 9;
     }
     if (!isRotatedRight && isFalling) {
-      collidedLeft = true; //collide da destra sulla pipe
+      collidedLeft = true;
       increase = -8.5;
     }
 
@@ -208,11 +200,9 @@ export function onCharacterCollision(
       for (var i = 0; i < touchesBox.length; i++) {
         if (touchesBox[i] == other_object._physijs.id) return;
       }
-
-      //per farlo rispostare quando sta in aria!
       collidedLeft = false;
       collidedRight = false;
-      //altrimenti dopo che ha sbattuto e sta ancora saltando non prende le monete!
+
       groupCollision = false;
 
       scene.removeEventListener("update", checkTouch);
@@ -229,13 +219,12 @@ export function onCharacterLowerCollision(
 ) {
   setCharacterStuff();
   if (contact_normal.y <= 0) {
-    //abbiamo aggiunto il caso in cui è minore o uguale a 0 in modo da non farlo buggare quando collide con lo spigolo laterale durante il salto
     var checkTouch = function () {
       for (var i = 0; i < touchesLower.length; i++) {
         if (touchesLower[i] == other_object._physijs.id) return;
       }
-      collidedTop1 = false; //serve per non farlo passare attraverso il livello 1 quando scende dal livello 2
-      collidedTop2 = false; //altrimenti si bugga quando collido con i box blu degli oggetti durante il jump (non jump back)
+      collidedTop1 = false;
+      collidedTop2 = false;
       collidedTopPipe = false;
       collidedTopStairs = false;
       isCoin = false;
@@ -246,7 +235,6 @@ export function onCharacterLowerCollision(
         !collidedTopPipe &&
         other_object._physijs.id != ground._physijs.id
       ) {
-        //serve per non fare il fall appena salta e si stacca da terra
         fall(model);
       }
 
@@ -264,7 +252,6 @@ export function onCharacterUpperCollision(
 ) {
   setCharacterStuff();
   if (contact_normal.y <= 1) {
-    //abbiamo aggiunto il caso in cui è minore o uguale a 0 in modo da non farlo buggare quando collide con lo spigolo laterale durante il salto
     var checkTouch = function () {
       for (var i = 0; i < touchesUpper.length; i++) {
         if (touchesUpper[i] == other_object._physijs.id) return;
@@ -328,18 +315,17 @@ export function onGoombaCollision(
     }
     if (life == 0) {
       localStorage.setItem("coinScore", score);
-      //window.location.href = "./game_over.html";
+
       gameOverSound.play();
       setTimeout(loadGameOver.bind(null), 3000);
     }
     if (life > 0) {
       loseLifeSound.play();
-      //resetStartingPosition(model);
+
       setTimeout(resetStartingPosition.bind(null, model, i), 3000);
     }
     textLife.innerHTML = "x" + life;
   }
-  //}
 }
 
 export function onCoinCollision(
@@ -401,33 +387,29 @@ export function onStairsCollision(
 
   if (other_object._physijs.id == boxId) {
     if (keysPressed[68] && !isFalling) {
-      collidedLeft = true; //collide da sinistra sulla pipe
+      collidedLeft = true;
     }
     if (keysPressed[65] && !isFalling) {
-      collidedRight = true; //collide da destra sulla pipe
+      collidedRight = true;
     }
 
     if (isRotatedRight && isFalling) {
-      collidedRight = true; //collide da sinistra sulla pipe
+      collidedRight = true;
     }
     if (!isRotatedRight && isFalling) {
-      collidedLeft = true; //collide da destra sulla pipe
+      collidedLeft = true;
     }
 
     var id = this._physijs.id;
     for (var i in emptyBlockContainerArray) {
       if (emptyBlockContainerArray[i]._physijs.id == id) {
         currentPosition = model.position.z;
-        //currentPosition = emptyBlockContainerArray[i] - 5.5 / 2;
       }
     }
   }
 
   if (other_object._physijs.id == lowerBoxId) {
-    //console.log("Ciao mi sto buggando :D");
-    console.log("Fixing the bug (?)");
     tweenJump.stop();
-    //model.position.z -= 2.5;
     if (keysPressed[68]) {
       collidedLeft = true;
       model.position.z -= 2.5;
@@ -436,7 +418,6 @@ export function onStairsCollision(
       collidedRight = true;
       model.position.z += 2.5;
     }
-    //fall(model);
   }
 }
 
@@ -456,5 +437,22 @@ export function onStairsTopCollision(
         setStairsHeightGoal(emptyBlockContainerTopArray[i].position.y);
       }
     }
+  }
+}
+
+export function onWallCollision(
+  other_object,
+  relative_velocity,
+  relative_rotation,
+  contact_normal
+) {
+  if (other_object._physijs.id == boxId) {
+    if (keysPressed[68]) {
+      collidedLeft = true;
+    }
+    if (keysPressed[65]) {
+      collidedRight = true;
+    }
+    currentPosition = model.position.z;
   }
 }
