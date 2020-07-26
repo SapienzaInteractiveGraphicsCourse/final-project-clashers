@@ -34,9 +34,9 @@ For more details about how the project has been developed please refers to the [
 
 ## Known Issues
 
-*Sometimes it may happen, when the level is completely loaded, that the console shows an ammo error in output that prevents collision detection: in order to resolve this issue, you need to clean the browser cache and then to reload the page.
+* Sometimes it may happen, when the level is completely loaded, that the console shows an ammo error in output that prevents collision detection: in order to resolve this issue, you need to clean the browser cache and then to reload the page.
 
-*Audio doesn't work if the level page is simply refreshed; if the console outputs audio error, you need to go back to the start screen and reload the level.
+* Audio doesn't work if the level page is simply refreshed; if the console outputs audio error, you need to go back to the start screen and reload the level.
 
 ## Authors
 
