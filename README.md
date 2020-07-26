@@ -6,6 +6,8 @@
 Game based on the famous Super Mario platform game. More precisely, the project recreates Super Mario Bros’ first level.
 The main goal of this game is to finish the level collecting as many coins as possible without losing life against enemies (goombas). 
 
+![Alt text](https://github.com/SapienzaInteractiveGraphicsCourse/final-project-clashers/blob/master/img/previewGame.png)
+
 ## Launching the game
 
 In order to try the game, you just need to click on the following [link](https://sapienzainteractivegraphicscourse.github.io/final-project-clashers/index.html).
