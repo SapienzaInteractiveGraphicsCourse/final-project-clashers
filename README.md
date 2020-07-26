@@ -10,7 +10,7 @@ The main goal of this game is to finish the level collecting as many coins as po
 
 ## Launching the game
 
-In order to try the game, you just need to click on the following [LINK](https://sapienzainteractivegraphicscourse.github.io/final-project-clashers/index.html).
+In order to try the game, you just need to click on the following [**LINK**](https://sapienzainteractivegraphicscourse.github.io/final-project-clashers/index.html).
 
 If you want to launch the game locally on your pc, you need to run it on a local server (for example using IntelliJ, Visual Studio Code using Live Server extension, python command line).
 
