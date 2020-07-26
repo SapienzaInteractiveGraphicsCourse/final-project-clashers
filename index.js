@@ -857,6 +857,7 @@ function init() {
       emptyBlockLoaded &&
       castleLoaded
     ) {
+      console.log("ciao");
       createLevel();
       questionLoaded = false;
       coinLoaded = false;
