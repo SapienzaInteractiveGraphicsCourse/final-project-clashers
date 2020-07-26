@@ -690,8 +690,8 @@ function init() {
 
         goomba.rotation.y = (-90 * Math.PI) / 180;
 
-        //blockFunc.createGroupPipes();
-        //blockFunc.createGroup3();
+        blockFunc.createGroupPipes();
+        blockFunc.createGroup3();
       });
     }
 
@@ -714,8 +714,8 @@ function init() {
         questionBox.castShadow = true;
         questionBox.receiveShadow = true;
 
-        //blockFunc.createGroup5();
-        //blockFunc.createGroup6();
+        blockFunc.createGroup5();
+        blockFunc.createGroup6();
       });
     }
 
@@ -741,9 +741,9 @@ function init() {
 
         powerUp.rotation.y = (180 * Math.PI) / 180;
 
-        //blockFunc.createGroup1();
-        //blockFunc.createGroup2();
-        //blockFunc.createGroup4();
+        blockFunc.createGroup1();
+        blockFunc.createGroup2();
+        blockFunc.createGroup4();
       });
     }
 
@@ -766,11 +766,11 @@ function init() {
         emptyBlock.castShadow = true;
         emptyBlock.receiveShadow = true;
 
-        //blockFunc.createGroupStairs(-60, 4);
-        //blockFunc.createGroupStairsReverse(-15, 4);
-        //blockFunc.createGroupStairs(20, 4);
-        //blockFunc.createGroupStairsReverse(55, 4);
-        //blockFunc.createGroupStairs(220, 8);
+        blockFunc.createGroupStairs(-60, 4);
+        blockFunc.createGroupStairsReverse(-15, 4);
+        blockFunc.createGroupStairs(20, 4);
+        blockFunc.createGroupStairsReverse(55, 4);
+        blockFunc.createGroupStairs(220, 8);
       });
     }
   }
@@ -780,7 +780,7 @@ function init() {
   createBgSky();
   loadCharacters(character);
   loadModels();
-  setTimeout(blockFunc.createLevel.bind(null), 5000);
+  //setTimeout(blockFunc.createLevel.bind(null), 5000);
 
   function animate() {
     TWEEN.update();

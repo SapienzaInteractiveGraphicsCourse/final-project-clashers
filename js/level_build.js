@@ -733,6 +733,7 @@ export function createGroup6() {
   setGroupGeometry(6.1 * 4, 9.5, 145.3);
 }
 
+/*
 export function createLevel() {
   createGroup1();
   createGroupPipes();
@@ -746,4 +747,4 @@ export function createLevel() {
   createGroupStairsReverse(55, 4);
   createGroupStairs(220, 8);
   createGroup6();
-}
+} */
