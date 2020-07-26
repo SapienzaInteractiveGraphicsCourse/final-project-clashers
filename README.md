@@ -34,7 +34,7 @@ For more details about how the project has been developed please refers to the [
 
 ## Known Issues
 
-* Sometimes it may happen, that the collision with the top of an object will not be detected immediately when the character touches the object, causing the character accidentally fall down to the ground. Moreover, sometimes it may also happen that the character do not fall down from the stairs, remaining with its body floating in the air. However, these issues happens very rarely not prevent the game from continuing running correctly. 
+* Sometimes it may happen that the collision with the top of an object will not be detected immediately when the character touches the object, causing the character accidentally fall down to the ground. Moreover, sometimes it may also happen that the character do not fall down from the stairs, remaining with its body floating in the air. However, these issues happens very rarely and do not prevent the game from continuing running correctly. 
 
 * Audio doesn't work if the level page is simply refreshed; if the console outputs audio error, you need to go back to the start screen and reload the level.
 
