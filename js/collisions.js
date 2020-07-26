@@ -1,7 +1,7 @@
 import { fall, objectAnimation, gameOver } from "./tween_functions.js";
+import { resetStartingPosition, loadGameOver } from "./utils.js";
 import { setPipeHeightGoal } from "./pipe.js";
 import { setStairsHeightGoal } from "./stairs.js";
-import { resetStartingPosition, loadGameOver } from "./utils.js";
 import { goombaDelete } from "./goomba.js";
 
 export function setCharacterStuff() {
