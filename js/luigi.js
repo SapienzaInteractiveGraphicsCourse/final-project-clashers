@@ -35,12 +35,12 @@ export const luigi_dic = {
 };
 
 export function setLuigiGeometry() {
-  var luigiGeometry = new THREE.BoxGeometry(7.5, 4.5, 6.3);
+  var luigiGeometry = new THREE.BoxGeometry(7.5, 4.5, 5.5);
   luigiBox = new Physijs.BoxMesh(luigiGeometry, geometryMaterial, 50);
   luigiBox.position.set(
     luigi.position.x,
     luigi.position.y + 6,
-    luigi.position.z
+    luigi.position.z - 0.8
   );
   luigiBox.setCcdMotionThreshold(1);
   scene.add(luigiBox);
@@ -55,7 +55,7 @@ export function setLuigiGeometry() {
   luigiUpperBox.position.set(
     luigi.position.x,
     luigi.position.y + 13.3,
-    luigi.position.z
+    luigi.position.z - 0.8
   );
   luigiUpperBox.setCcdMotionThreshold(1);
   scene.add(luigiUpperBox);
@@ -87,12 +87,12 @@ export function updateLuigiBoxPosition() {
   luigiBox.position.set(
     luigi.position.x,
     luigi.position.y + 6,
-    luigi.position.z
+    luigi.position.z - 0.8
   );
   luigiUpperBox.position.set(
     luigi.position.x,
     luigi.position.y + 13.3,
-    luigi.position.z
+    luigi.position.z - 0.8
   );
   luigiLowerBox.position.set(
     luigi.position.x,
